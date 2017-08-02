@@ -1,7 +1,7 @@
 <template>
-    <div class="voting-page">
+    <div class="voting-page page">
         <proposal-filter />
-        <div class="main-content">
+        <div class="voting-content">
             <div class="container">
                 <div class="row-h">
                     <div class="column md-7">
@@ -29,3 +29,31 @@
       },
     }
 </script>
+
+<style lang="scss">
+    @import "/imports/core/ui/styles/mixins";
+
+    .voting-page {
+        @include flexbox;
+        @include flex-direction(column);
+    }
+    .voting-content {
+        @include flex-grow(1);
+        @include flexbox;
+        @include flex-direction(column);
+        .container {
+            position: relative;
+            @include flex-grow(1);
+            .row-h {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                > div {
+                    overflow-y: scroll;
+                }
+            }
+        }
+    }
+</style>

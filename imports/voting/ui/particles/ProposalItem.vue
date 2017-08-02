@@ -9,8 +9,8 @@
             <p>+{{proposal.agreed | sumFormat}}</p>
             <p>-{{proposal.doubt | sumFormat}}</p>
             <div class="ovrl">
-                <button>&#9660</button>
-                <button class="upvote">&#9650</button>
+                <button @click="toggleProposalModal">&#9660</button>
+                <button @click="toggleProposalModal" class="upvote">&#9650</button>
             </div>
         </div>
     </li>
@@ -19,14 +19,9 @@
 <script>
   export default {
     props: ['proposal'],
-    data() {
-      return {
-        editedTodo: null,
-      };
-    },
     methods: {
-      removeTodo(todo) {
-        console.log('yo');
+      toggleProposalModal() {
+        this.$store.commit('voting/toggleProposalModal');
       },
     },
   }
@@ -40,6 +35,10 @@
         position: relative;
         background: white;
         @include flexbox;
+        @include transform(translateZ(0));
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
         border-radius: $base-border-radius;
         margin-bottom: $gutter;
         box-shadow: $base-box-shadow;

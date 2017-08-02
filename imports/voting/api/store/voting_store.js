@@ -3,6 +3,7 @@ export default {
 
   state: () => ({
     filter: 'all',
+    proposalModalShown: false,
   }),
 
   getters: {
@@ -11,8 +12,10 @@ export default {
 
   mutations: {
     setFilter: (state, value) => {
-      console.log(value);
       state.filter = value;
+    },
+    toggleProposalModal: (state) => {
+      state.proposalModalShown = !state.proposalModalShown;
     },
   },
 
