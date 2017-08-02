@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
+import infiniteScroll from 'vue-infinite-scroll';
 import { injectSupply } from 'vue-supply';
 import MainLayout from '../../ui/layouts/MainLayout.vue';
 import routes from './routes';
