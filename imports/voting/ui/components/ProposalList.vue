@@ -1,7 +1,7 @@
 <template>
     <div class="list-proposals">
         <ul>
-          <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+          <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
             <proposal-item
               v-for="p in proposals"
               :key="p._id"
@@ -28,6 +28,7 @@
     data: () => ({
       proposal: '',
       proposals: [],
+      loading: false,
     }),
     created() {
       this.loadMore();
@@ -37,10 +38,12 @@
         Meteor.call('proposals.add', this.proposal);
       },
       loadMore() {
+        this.loading = true;
         Meteor.call('proposals.loadMore', this.proposals.length, 10, (err, res) => {
           if (err) {
             console.error(err);
           } else {
+            this.loading = false;
             this.proposals = this.proposals.concat(res);
           }
         })
