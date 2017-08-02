@@ -1,14 +1,12 @@
 <template>
     <div class="list-proposals">
-        <ul>
-          <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
-            <proposal-item
-              v-for="p in proposals"
-              :key="p._id"
-              :proposal="p"
-            ></proposal-item>
-          </div>
-        </ul>
+      <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
+        <proposal-item
+          v-for="p in proposals"
+          :key="p._id"
+          :proposal="p"
+        ></proposal-item>
+      </ul>
     </div>
 </template>
 
@@ -22,38 +20,28 @@
     components: {
       ProposalItem,
     },
-    'proposals.list'() {
-      return [this.$store.state.voting.filter];
-    },
-    created() {
-      this.handler = this.$subscribe('proposals.list', this.limit);
-    },
     meteor: {
       $subscribe: {
-        'proposals.list': []
+        'proposals.list'() {
+          return [
+            this.$store.state.voting.filter,
+            this.$store.state.voting.limit,
+          ];
+        },
       },
       proposals () {
         return Proposals.find();
       },
     },
     data: () => ({
-      proposal: '',
-      limit: 0,
       loading: false,
-      handler: null,
     }),
     methods: {
       addProposal() {
         Meteor.call('proposals.add', this.proposal);
       },
       loadMore: function() {
-        this.loading = true;
-        setTimeout(() => {
-          this.limit += 10;
-          this.handler.stop();
-          this.handler = this.$subscribe('proposals.list', this.limit);
-          this.loading = false;
-        }, 1000);
+        this.$store.commit('voting/incrementLimit');
       }
     },
   }

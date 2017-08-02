@@ -3,6 +3,7 @@ export default {
 
   state: () => ({
     filter: 'all',
+    limit: 10,
   }),
 
   getters: {
@@ -13,6 +14,10 @@ export default {
     setFilter: (state, value) => {
       console.log(value);
       state.filter = value;
+    },
+    incrementLimit: (state) => {
+      console.log('incrementing');
+      state.limit = state.limit + 10;
     },
   },
 
