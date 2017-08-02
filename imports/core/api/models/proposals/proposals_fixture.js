@@ -3,7 +3,7 @@ import _ from 'underscore';
 import { Proposals } from './proposals';
 
 Proposals.remove({});
-_.range(0, 10).forEach(i => {
+_.range(0, 100).forEach(i => {
   const total = _.random(1000, 10000000);
   const doubt = _.random(1, 100000);
   const agreed = total - doubt;
