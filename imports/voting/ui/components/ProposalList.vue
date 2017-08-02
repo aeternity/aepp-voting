@@ -38,7 +38,7 @@
     },
     data: () => ({
       proposal: '',
-      limit: 10,
+      limit: 0,
       loading: false,
       handler: null,
     }),
