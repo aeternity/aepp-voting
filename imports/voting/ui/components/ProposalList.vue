@@ -22,31 +22,38 @@
     components: {
       ProposalItem,
     },
-        'proposals.list'() {
-          return [this.$store.state.voting.filter];
-        }
+    'proposals.list'() {
+      return [this.$store.state.voting.filter];
+    },
+    created() {
+      this.handler = this.$subscribe('proposals.list', this.limit);
+    },
+    meteor: {
+      $subscribe: {
+        'proposals.list': []
+      },
+      proposals () {
+        return Proposals.find();
+      },
+    },
     data: () => ({
       proposal: '',
-      proposals: [],
+      limit: 10,
       loading: false,
+      handler: null,
     }),
-    created() {
-      this.loadMore();
-    },
     methods: {
       addProposal() {
         Meteor.call('proposals.add', this.proposal);
       },
-      loadMore() {
+      loadMore: function() {
         this.loading = true;
-        Meteor.call('proposals.loadMore', this.proposals.length, 10, (err, res) => {
-          if (err) {
-            console.error(err);
-          } else {
-            this.loading = false;
-            this.proposals = this.proposals.concat(res);
-          }
-        })
+        setTimeout(() => {
+          this.limit += 10;
+          this.handler.stop();
+          this.handler = this.$subscribe('proposals.list', this.limit);
+          this.loading = false;
+        }, 1000);
       }
     },
   }
