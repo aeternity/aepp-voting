@@ -1,0 +1,64 @@
+<template>
+    <header>
+        <div class="container">
+            <img class="logo" src="/images/logo_white.png" alt="logo" />
+            <div class="stripe"></div>
+            <h3>Voting</h3>
+            <button>SUBMIT PROPOSAL</button>
+        </div>
+    </header>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        editedTodo: null,
+      };
+    },
+    methods: {
+      removeTodo(todo) {
+        console.log('yo');
+      },
+    },
+  }
+</script>
+
+<style lang="scss" scoped>
+    @import "/imports/core/ui/styles/mixins";
+    @import "/imports/core/ui/styles/variables";
+
+    header {
+        position: relative;
+        @include flex-grow(0);
+        @include flex-shrink(0);
+        background: $brand-color;
+        .logo {
+            height: 40px;
+        }
+        .container {
+            @include flexbox;
+            @include align-items(center);
+        }
+    }
+    .stripe {
+        width: 1px;
+        height: 40px;
+        background: white;
+        margin: $gutter;
+    }
+    button {
+        color: white;
+        border-color: white;
+        &:hover {
+            background: white;
+            color: $brand-color;
+        }
+    }
+    h3 {
+        color: white;
+        font-family: 'Roboto Light';
+        letter-spacing: .1em;
+        @include flex-grow(1);
+    }
+</style>
