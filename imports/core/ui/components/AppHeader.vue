@@ -4,7 +4,7 @@
             <img class="logo" src="/images/logo_white.png" alt="logo" />
             <div class="stripe"></div>
             <h3>Voting</h3>
-            <button>SUBMIT PROPOSAL</button>
+            <button @click="toggleSubmitProposalModal">SUBMIT PROPOSAL</button>
         </div>
     </header>
 </template>
@@ -17,8 +17,8 @@
       };
     },
     methods: {
-      removeTodo(todo) {
-        console.log('yo');
+      toggleSubmitProposalModal() {
+        this.$store.commit('core/toggleProposalModal');
       },
     },
   }

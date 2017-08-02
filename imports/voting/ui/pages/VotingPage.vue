@@ -27,15 +27,5 @@
         ProposalList,
         HistoryList,
       },
-        data() {
-          return {
-            editedTodo: null,
-          };
-        },
-        methods: {
-          removeTodo(todo) {
-            console.log('yo');
-          },
-        },
     }
 </script>

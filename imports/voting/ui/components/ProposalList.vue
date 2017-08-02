@@ -20,10 +20,11 @@
     components: {
       ProposalItem,
     },
-
     meteor: {
       $subscribe: {
-        'proposals.list': []
+        'proposals.list'() {
+          return [this.$store.state.voting.filter];
+        }
       },
       proposals () {
         return Proposals.find();
@@ -36,7 +37,7 @@
       addProposal() {
         Meteor.call('proposals.add', this.proposal);
       }
-    }
+    },
   }
 </script>
 

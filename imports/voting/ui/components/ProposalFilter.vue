@@ -2,18 +2,50 @@
     <div class="proposals-filter">
         <div class="container">
             <nav>
-                <button class="active">All</button>
-                <button>Popular</button>
-                <button>Controversial</button>
-                <button>Decided</button>
-                <button>Valid</button>
-                <button>Invalid</button>
-                <button>Newest</button>
-                <button>Hidden</button>
+                <button
+                    v-for="f in filters"
+                    :key="f"
+                    :class="{active: isActive(f)}"
+                    @click="setFilter(f)"
+                >
+                    {{f}}
+                </button>
             </nav>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+      data() {
+        return {
+          filters: [
+              'all',
+              'popular',
+              'controversial',
+              'decided',
+              'valid',
+              'invalid',
+              'newest',
+              'hidden'
+            ],
+        };
+      },
+      computed: {
+        currentFilter() {
+          return this.$store.state.voting.filter;
+        },
+      },
+      methods: {
+        setFilter(value) {
+          this.$store.commit('voting/setFilter', value);
+        },
+        isActive(filter) {
+          return this.$store.state.voting.filter === filter;
+        }
+      }
+    }
+</script>
 
 <style lang="scss" scoped>
     @import "/imports/core/ui/styles/variables";
@@ -37,7 +69,9 @@
             font-size: 14px;
             color: lighten($base-text-color, 50%);
             padding: 5px 15px;
+            margin-right: 5px;
             font-family: $font-family-text;
+            text-transform: capitalize;
             @include transition(.4s);
             &:hover {
                 background: $gray-lighter;
