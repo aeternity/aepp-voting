@@ -17,7 +17,4 @@ Meteor.methods({
       doubt,
     });
   },
-  'proposals.loadMore'(skip, limit) {
-    return Proposals.find({}, { skip, limit }).fetch();
-  }
 });
