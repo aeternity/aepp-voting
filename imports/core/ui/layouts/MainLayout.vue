@@ -1,26 +1,33 @@
 <template>
-  <div>
+  <div class="main-layout">
     <app-header />
-    <router-view />
+    <SubmitProposalModal v-if="submitProposalModalShown" />
+    <modal v-if="proposalModalShown" />
+    <div class="main-content">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
   import { Proposals } from '/imports/core';
   import AppHeader from '../components/AppHeader.vue';
-
+  import Modal from '../components/Modal.vue';
+  import SubmitProposalModal from '../components/SubmitProposalModal.vue';
   export default {
     components: {
       AppHeader,
+      Modal,
+      SubmitProposalModal,
     },
-//    data: () => ({
-//      proposal: '',
-//    }),
-//    methods: {
-//      addProposal() {
-//        Meteor.call('proposals.add', this.proposal);
-//      }
-//    }
+    computed: {
+      proposalModalShown() {
+        return this.$store.state.core.proposalModalShown;
+      },
+      submitProposalModalShown() {
+        return this.$store.state.core.submitProposalModalShown;
+      }
+    },
   }
 </script>
 
@@ -51,7 +58,15 @@
     @include flexbox;
     @include flex-direction(column);
     .main-content {
+      position: relative;
       @include flex-grow(1);
+      .page {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
     }
   }
   .row-h {

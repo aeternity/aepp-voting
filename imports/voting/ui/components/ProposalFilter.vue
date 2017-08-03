@@ -52,9 +52,13 @@
     @import "/imports/core/ui/styles/mixins";
 
     .proposals-filter {
+        position: relative;
+        z-index: 2;
         background: white;
         padding: 10px 0;
         box-shadow: $base-box-shadow;
+        @include flex-grow(0);
+        @include flex-shrink(0);
         &:hover {
             nav {
                 button:not(.active) {

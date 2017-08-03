@@ -62,5 +62,8 @@
         padding: 0;
         padding-top: $gutter;
         margin: 0;
+        @include transform(translateZ(0));
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
     }
 </style>
