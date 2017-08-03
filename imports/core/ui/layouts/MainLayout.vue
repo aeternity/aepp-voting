@@ -25,7 +25,6 @@
         return this.$store.state.core.proposalModalShown;
       },
       submitProposalModalShown() {
-        console.log(2);
         return this.$store.state.core.submitProposalModalShown;
       }
     },

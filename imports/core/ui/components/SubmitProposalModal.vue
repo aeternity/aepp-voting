@@ -6,10 +6,10 @@
                 <button @click="toggleSubmitProposalModal">Close</button>
             </div>
             <div class="submit-proposal">
-                <form>
+                <form @submit.prevent="submitSubmitProposalForm">
                     <p>Please keep the statement short and simple, e. g. "God exists".</p>
                     <p>When users vote on it, the prefix "I believe that " or "I doubt that " will be added depending on their choice.</p>
-                    <input placeholder="Your statement"/>
+                    <input v-model="title" placeholder="Your statement"/>
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -19,11 +19,19 @@
 
 <script>
     export default {
-      methods: {
-        toggleSubmitProposalModal() {
-          this.$store.commit('core/toggleSubmitProposalModal');
+        data() {
+            return {
+                title: '',
+            }
+        },
+        methods: {
+            toggleSubmitProposalModal() {
+                this.$store.commit('core/toggleSubmitProposalModal');
+            },
+            submitSubmitProposalForm() {
+                this.$store.dispatch('core/submitSubmitProposalForm', this.title);
+            }
         }
-      }
     };
 </script>
 
