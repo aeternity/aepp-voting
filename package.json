@@ -7,6 +7,7 @@
   "dependencies": {
     "babel-runtime": "^6.20.0",
     "format-number": "^3.0.0",
+    "get-json-data": "^0.1.2",
     "meteor-node-stubs": "~0.2.4",
     "moment": "^2.18.1",
     "simpl-schema": "^0.3.2",
