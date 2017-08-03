@@ -51,7 +51,7 @@
                 top: 0;
                 left: 0;
                 > div {
-                    overflow-y: scroll;
+                    position: relative;
                 }
             }
         }

@@ -5,7 +5,9 @@
     "start": "meteor run",
     "lint": "eslint --fix . --ext .js,.vue src; exit 0"
   },
-  "pre-commit": [ "lint" ],
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "babel-runtime": "^6.25.0",
     "buffer": "^5.0.6",
@@ -15,8 +17,8 @@
     "simpl-schema": "^0.3.2",
     "underscore": "^1.8.3",
     "vue": "^2.4.2",
-    "vue-infinite-scroll": "^2.0.1",
     "vue-meteor-tracker": "^1.2.3",
+    "vue-mugen-scroll": "^0.2.5",
     "vue-router": "^2.7.0",
     "vue-supply": "^0.3.0",
     "vuex": "^2.3.1",

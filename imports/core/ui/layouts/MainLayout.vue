@@ -1,7 +1,7 @@
 <template>
   <div class="main-layout">
     <app-header />
-    <SubmitProposalModal v-if="submitProposalModalShown" />
+    <submit-proposal-modal v-if="submitProposalModalShown" />
     <modal v-if="proposalModalShown" />
     <div class="main-content">
       <router-view />

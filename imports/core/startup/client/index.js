@@ -3,7 +3,6 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
-import infiniteScroll from 'vue-infinite-scroll';
 import { injectSupply } from 'vue-supply';
 import MainLayout from '../../ui/layouts/MainLayout.vue';
 import routes from './routes';
@@ -12,7 +11,6 @@ import voting from '../../../voting/api/store/voting_store';
 import core from '../../api/store/core_store';
 
 Vue.use(VueMeteorTracker);
-Vue.use(infiniteScroll);
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
