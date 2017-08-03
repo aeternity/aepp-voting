@@ -2,6 +2,7 @@ export default {
   namespaced: true,
 
   state: () => ({
+    proposalModalShown: false,
     submitProposalModalShown: false,
   }),
 
@@ -11,6 +12,9 @@ export default {
 
   mutations: {
     toggleProposalModal: (state) => {
+      state.proposalModalShown = !state.proposalModalShown;
+    },
+    toggleSubmitProposalModal: (state) => {
       console.log(!state.submitProposalModalShown);
       state.submitProposalModalShown = !state.submitProposalModalShown;
     },

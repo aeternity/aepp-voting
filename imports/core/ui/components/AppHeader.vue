@@ -18,7 +18,7 @@
     },
     methods: {
       toggleSubmitProposalModal() {
-        this.$store.commit('core/toggleProposalModal');
+        this.$store.commit('core/toggleSubmitProposalModal');
       },
     },
   }
