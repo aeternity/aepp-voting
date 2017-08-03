@@ -1,25 +1,37 @@
 export default {
-  namespaced: true,
+    namespaced: true,
 
-  state: () => ({
-    submitProposalModalShown: false,
-  }),
+    state: () => ({
+        proposalModalShown: false,
+        submitProposalModalShown: false,
+    }),
 
-  getters: {
-    submitProposalModalShown: state => state.submitProposalModalShown,
-  },
-
-  mutations: {
-    toggleProposalModal: (state) => {
-      console.log(!state.submitProposalModalShown);
-      state.submitProposalModalShown = !state.submitProposalModalShown;
+    getters: {
+        submitProposalModalShown: state => state.submitProposalModalShown,
     },
-  },
 
-  actions: {
-    doSomething({ commit }, value) {
-      // Good place to call meteor methods
-      console.log('Async stuff');
-    }
-  },
+    mutations: {
+        toggleProposalModal: (state) => {
+            state.proposalModalShown = !state.proposalModalShown;
+        },
+        toggleSubmitProposalModal: (state) => {
+            state.submitProposalModalShown = !state.submitProposalModalShown;
+        },
+    },
+
+    actions: {
+        doSomething({ commit }, value) {
+            // Good place to call meteor methods
+            console.log('Async stuff');
+        },
+        submitSubmitProposalForm({ commit }, title) {
+            Meteor.call('proposals.add', title, (err, res) => {
+                if (err) {
+                    console.error(err);
+                } else {
+                    commit('toggleSubmitProposalModal');
+                }
+            })
+        }
+    },
 }

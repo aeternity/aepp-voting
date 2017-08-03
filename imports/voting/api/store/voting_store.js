@@ -14,6 +14,9 @@ export default {
     setFilter: (state, value) => {
       state.filter = value;
     },
+    toggleSubmitProposalModal: (state) => {
+      state.submitProposalModalShown = !state.submitProposalModalShown;
+    },
     toggleProposalModal: (state) => {
       state.proposalModalShown = !state.proposalModalShown;
     },
