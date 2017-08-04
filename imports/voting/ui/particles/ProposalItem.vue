@@ -1,17 +1,20 @@
 <template>
-    <li class="proposal-item">
+    <li
+        class="proposal-item"
+        :class="voteClass"
+    >
         <div class="proposal-content">
             <h3>Proposal name: {{proposal.title}}</h3>
             <p>{{proposal.updatedAt | dateFormat}}</p>
         </div>
         <div class="voted">
             <h3 class="main">{{proposal.total | sumFormat}}</h3>
-            <p>+{{proposal.agreed | sumFormat}}</p>
-            <p>-{{proposal.doubt | sumFormat}}</p>
-            <div class="ovrl">
-                <button @click="toggleProposalModal">&#9660</button>
-                <button @click="toggleProposalModal" class="upvote">&#9650</button>
-            </div>
+            <p class="agreed"><span>+</span> {{proposal.agreed | sumFormat}}</p>
+            <p class="doubt"><span>-</span> {{proposal.doubt | sumFormat}}</p>
+        </div>
+        <div class="controls">
+            <button @click="toggleProposalModal"><i class="fa fa-chevron-up" /></button>
+            <button @click="toggleProposalModal" class="upvote"><i class="fa fa-chevron-down" /></button>
         </div>
     </li>
 </template>
@@ -19,6 +22,13 @@
 <script>
   export default {
     props: ['proposal'],
+    computed: {
+        voteClass() {
+          return this.proposal.agreed > this.proposal.doubt
+            ? 'agreed'
+            : 'doubt'
+        },
+    },
     methods: {
       toggleProposalModal() {
         this.$store.commit('voting/toggleProposalModal');
@@ -55,6 +65,11 @@
             border-bottom-left-radius: $base-border-radius;
             background: $green;
         }
+        &.doubt {
+            &:after {
+                background: $red !important;
+            }
+        }
         .proposal-content {
             padding: $gutter * 1.5 $gutter $gutter * 1.5 $gutter * 2;
             @include flex-grow(1);
@@ -62,7 +77,7 @@
         .voted {
             position: relative;
             padding: $gutter * 1.5 $gutter $gutter * 1.5 $gutter * 2;
-            width: 150px;
+            width: 140px;
             padding-right: $gutter * 1.5;
             @include flex-grow(0);
             @include flex-shrink(0);
@@ -73,53 +88,42 @@
             p {
                 font-family: $font-family-header;
             }
-            &:hover {
-                .ovrl {
-                    opacity: 1;
-                    visibility: visible;
-                }
-            }
-            .ovrl {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                opacity: 0;
-                visibility: hidden;
-                text-align: center;
-                background: rgba(255, 255, 255, .8);
-                @include flexbox;
-                @include align-items(center);
-                @include justify-content(center);
-                @include transition();
-                button {
-                    width: 62px;
-                    height: 62px;
-                    margin: 5px;
-                    border-width: 2px;
-                    font-size: 18px;
-                    color: $red;
-                    border-color: $red;
-                    &:hover {
-                        background: $red;
-                        color: white;
-                    }
-                    &.upvote {
-                        color: $green;
-                        border-color: $green;
-                        &:hover {
-                            background: $green;
-                            color: white;
-                        }
-                    }
-                }
-            }
         }
         .controls {
+            @include flexbox;
             @include flex-grow(0);
             @include flex-shrink(0);
+            @include align-items(center);
             padding: $gutter / 2 $gutter;
+            button {
+                width: 62px;
+                height: 62px;
+                margin: 5px;
+                border-width: 2px;
+                font-size: 22px;
+                color: $red;
+                padding: 0;
+                border-color: $red;
+                i {
+                    position: relative;
+                    top: -2px;
+                }
+                &:hover {
+                    background: $red;
+                    color: white;
+                }
+                &.upvote {
+                    color: $green;
+                    border-color: $green;
+                    i {
+                        top: -3px;
+                    }
+                    &:hover {
+                        background: $green;
+                        color: white;
+                    }
+                }
+            }
         }
     }
 
@@ -135,5 +139,14 @@
         font-family: $font-family-accent;
         color: $gray-light;
         font-size: 14px;
+        &.agreed {
+            color: $green;
+        }
+        &.doubt {
+            color: $red;
+        }
+        span {
+            font-size: 18px;
+        }
     }
 </style>

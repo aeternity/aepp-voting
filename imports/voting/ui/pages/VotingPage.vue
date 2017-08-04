@@ -1,18 +1,7 @@
 <template>
     <div class="voting-page page">
         <proposal-filter />
-        <div class="voting-content">
-            <div class="container">
-                <div class="row-h">
-                    <div class="column md-7">
-                        <proposal-list />
-                    </div>
-                    <aside class="column md-3">
-                        <history-list />
-                    </aside>
-                </div>
-            </div>
-        </div>
+        <proposal-list />
     </div>
 </template>
 

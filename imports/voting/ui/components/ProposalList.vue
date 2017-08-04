@@ -1,24 +1,32 @@
 <template>
     <div class="list-proposals" ref="wrap">
-        <ul>
+        <ul class="container">
             <proposal-item
                     v-for="p in proposals"
                     :key="p._id"
                     :proposal="p"
             ></proposal-item>
             <mugen-scroll
+                    v-if="gotMore"
                     :handler="loadMore"
                     :should-handle="!loading"
                     scroll-container="wrap"
             >
-                loading...
-              </mugen-scroll>
+                <i class="fa fa-spinner fa-spin" /> loading
+            </mugen-scroll>
+            <div
+                    v-if="!gotMore"
+                    class="all-loaded"
+            >
+                All loaded
+            </div>
         </ul>
     </div>
 </template>
 
 <script>
   import Vue from 'vue';
+  import { Counts } from 'meteor/tmeasday:publish-counts';
   import MugenScroll from 'vue-mugen-scroll'
 
   import { Proposals } from '/imports/core';
@@ -30,9 +38,16 @@
       MugenScroll,
     },
     computed: {
+      gotMore() {
+        return this.proposals.length < this.proposalsCount
+      },
+      loaded() {
+        console.log(this.proposals.length);
+        return this.proposalsCount;
+      },
       loading() {
         return false;
-      }
+      },
     },
     meteor: {
       $subscribe: {
@@ -42,14 +57,17 @@
             this.$store.state.voting.limit,
           ];
         },
+        'proposals.count': [],
       },
       proposals () {
         return Proposals.find();
       },
+      proposalsCount () {
+        return Counts.get('proposals');
+      }
     },
     methods: {
       loadMore: function() {
-        console.log('loading more');
         this.$store.commit('voting/incrementLimit');
       }
     },
@@ -61,11 +79,6 @@
     @import "/imports/core/ui/styles/mixins";
 
     .list-proposals {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
         @include flexbox;
         @include flex-direction(column);
         @include flex-grow(1);
@@ -75,9 +88,15 @@
         list-style: none;
         padding: 0;
         padding-top: $gutter;
-        margin: 0;
         @include transform(translateZ(0));
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
+    }
+    .mugen-scroll, .all-loaded {
+        text-align: center;
+        padding-bottom: 10px;
+        text-transform: uppercase;
+        color: $gray-light;
+        font-family: $font-family-header;
     }
 </style>
