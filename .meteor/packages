@@ -19,3 +19,4 @@ shell-server@0.2.4            # Server-side component of the `meteor shell` comm
 akryum:vue-component
 aldeed:collection2-core
 akryum:vue-sass
+tmeasday:publish-counts

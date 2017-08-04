@@ -46,7 +46,7 @@
     color: $base-text-color;
   }
   .container {
-    width: $screen-md;
+    width: 880px;
     margin: 0 auto;
   }
   .main-layout {
@@ -66,49 +66,6 @@
         height: 100%;
         top: 0;
         left: 0;
-      }
-    }
-  }
-  .row-h {
-    @include flexbox;
-    >.column {
-      padding: 0 $gutter / 2;
-      @include flex-shrink(0);
-      &:first-child {
-        padding-left: 0;
-      }
-      &:last-child {
-        padding-right: 0;
-      }
-      &.md-1 {
-        width: 10%;
-      }
-      &.md-2 {
-        width: 20%;
-      }
-      &.md-3 {
-        width: 30%;
-      }
-      &.md-4 {
-        width: 40%;
-      }
-      &.md-5 {
-        width: 50%;
-      }
-      &.md-6 {
-        width: 60%;
-      }
-      &.md-7 {
-        width: 70%;
-      }
-      &.md-8 {
-        width: 80%;
-      }
-      &.md-9 {
-        width: 90%;
-      }
-      &.md-10 {
-        width: 100%;
       }
     }
   }

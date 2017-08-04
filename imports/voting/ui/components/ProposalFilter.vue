@@ -55,6 +55,7 @@
         position: relative;
         z-index: 2;
         background: white;
+        text-align: center;
         padding: 10px 0;
         box-shadow: $base-box-shadow;
         @include flex-grow(0);
