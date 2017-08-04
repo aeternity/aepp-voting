@@ -4,7 +4,7 @@
             <img class="logo" src="/images/logo_white.png" alt="logo" />
             <div class="stripe"></div>
             <h3>Voting</h3>
-            <button @click="toggleSubmitProposalModal">SUBMIT PROPOSAL</button>
+            <button @click="toggleSubmitProposalModal">Submit proposal</button>
         </div>
     </header>
 </template>
@@ -33,6 +33,9 @@
         @include flex-grow(0);
         @include flex-shrink(0);
         background: $brand-color;
+        @media screen and (max-width: $container-width){
+            padding: 10px;
+        }
         .logo {
             height: 40px;
         }

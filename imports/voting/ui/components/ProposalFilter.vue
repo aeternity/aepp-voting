@@ -60,6 +60,9 @@
         box-shadow: $base-box-shadow;
         @include flex-grow(0);
         @include flex-shrink(0);
+        @media screen and (max-width: $container-width) {
+            padding: 10px 0 0;
+        }
         &:hover {
             nav {
                 button:not(.active) {
@@ -67,8 +70,18 @@
                 }
             }
         }
+        .container {
+            @media screen and (max-width: $container-width) {
+                overflow-x: scroll;
+                padding-bottom: 10px;
+            }
+        }
     }
     nav {
+        white-space: nowrap;
+        @media screen and (max-width: $container-width){
+            padding: 0 10px;
+        }
         button {
             border: 0;
             font-size: 14px;

@@ -9,7 +9,7 @@
                 <div class="quote left">
                     <i class="fa fa-quote-left" />
                 </div>
-                <h2>{{proposal.title}}</h2>
+                <h2>I believe that {{proposal.title}}</h2>
                 <div class="quote right">
                     <i class="fa fa-quote-right" />
                 </div>
@@ -17,18 +17,18 @@
             <div class="voting-section" :class="proposalType">
                 <div class="tab-header">
                     <button
-                            class="doubt"
-                            :class="{active: isActive('doubt')}"
-                            @click="setProposalType('doubt')"
-                    >
-                        I DOUBT
-                    </button>
-                    <button
                             class="agree"
                             :class="{active: isActive('agree')}"
                             @click="setProposalType('agree')"
                     >
-                        I AGREE
+                        I agree
+                    </button>
+                    <button
+                            class="doubt"
+                            :class="{active: isActive('doubt')}"
+                            @click="setProposalType('doubt')"
+                    >
+                        I doubt
                     </button>
                 </div>
                 <div class="tab">
@@ -94,6 +94,9 @@
             @include flexbox;
             @include flex-direction(column);
             position: relative;
+            @media screen and (max-width: $container-width) {
+                max-width: 96vw;
+            }
             z-index: 2;
             width: 650px;
             height: auto;
@@ -106,7 +109,6 @@
                     float: right;
                     border: 0;
                     padding: 0;
-                    text-transform: uppercase;
                 }
             }
             .modal-header, .voting-section, .comments {
@@ -129,7 +131,6 @@
             h2 {
                 position: relative;
                 text-align: center;
-                text-transform: uppercase;
                 font-size: 28px;
                 z-index: 2;
                 margin: 0;
@@ -238,7 +239,6 @@
                     margin: 10px;
                     font-size: 24px;
                     padding: 5px 70px;
-                    text-transform: uppercase;
                     border: 2px solid $green;
                     &:hover {
                         background: transparent;
