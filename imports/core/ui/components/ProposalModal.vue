@@ -205,14 +205,14 @@
                 }
                 input {
                     display: block;
-                    background: white;
-                    width: 100%;
                     font-size: 22px;
                     padding: 10px;
                     font-family: 'Roboto Light';
                     color: white;
                     border: 2px solid white;
                     border-radius: $base-border-radius;
+                    width: 90%;
+                    margin: 0 auto;
                     background: transparent;
                     &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
                         color:    rgba(255, 255, 255, .7);

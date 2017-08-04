@@ -7,9 +7,9 @@
             </div>
             <div class="submit-proposal">
                 <form @submit.prevent="submitSubmitProposalForm">
-                    <p>Please keep the statement short and simple, e. g. "God exists".</p>
+                    <h3>Please keep the statement short and simple, e. g. "God exists".</h3>
                     <p>When users vote on it, the prefix "I believe that " or "I doubt that " will be added depending on their choice.</p>
-                    <input v-model="title" placeholder="Your statement"/>
+                    <input :class="{error: error}" v-model="title" placeholder="Your statement"/>
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -22,6 +22,7 @@
         data() {
             return {
                 title: '',
+                error: false,
             }
         },
         methods: {
@@ -29,7 +30,9 @@
                 this.$store.commit('core/toggleSubmitProposalModal');
             },
             submitSubmitProposalForm() {
-                this.$store.dispatch('core/submitSubmitProposalForm', this.title);
+                if (this.title) {
+                  this.$store.dispatch('core/submitSubmitProposalForm', this.title);
+                }
             }
         }
     };
@@ -59,6 +62,19 @@
             background: rgba(0, 0, 0, .7);
             z-index: 1;
         }
+        h3 {
+            text-transform: uppercase;
+            margin-top: 0;
+            padding: 0 40px;
+        }
+        p {
+            font-family: $font-family-accent;
+            font-size: 16px;
+            padding: 0 40px;
+        }
+        input.error {
+            border-color: $red;
+        }
         .modal-cont {
             @include flexbox;
             @include flex-direction(column);
@@ -86,7 +102,7 @@
                 @include flex-shrink(1);
             }
             .submit-proposal {
-                height: 300px;
+                padding-bottom: $gutter;
                 >form {
                     padding: 20px;
                     text-align: center;
@@ -104,6 +120,11 @@
                         text-transform: uppercase;
                         margin-top: 20px;
                         height: 50px;
+                        padding: 10px 50px;
+                        &:hover {
+                            background: $brand-color;
+                            color: white;
+                        }
                     }
                 }
             }
