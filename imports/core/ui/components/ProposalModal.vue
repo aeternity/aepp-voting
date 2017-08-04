@@ -38,32 +38,42 @@
                 </div>
             </div>
             <div class="comments">
-
+              <VueDisqus
+                shortname="aeternity-voting"
+                :identifier="proposal._id"
+                :url="url"></VueDisqus>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-      props: ['proposal',  'type'],
-      computed: {
-        proposalType() {
-          return this.$store.state.voting.proposalType;
-        },
+  import VueDisqus from 'vue-disqus/VueDisqus.vue'
+  export default {
+    props: ['proposal',  'type'],
+    computed: {
+      proposalType() {
+        return this.$store.state.voting.proposalType;
       },
-      methods: {
-        isActive(type) {
-          return this.$store.state.voting.proposalType === type;
-        },
-        toggleProposalModal() {
-          this.$store.commit('voting/toggleProposalModal');
-        },
-        setProposalType(type) {
-          this.$store.commit('voting/setProposalType', type);
-        }
+      url() {
+        return Meteor.absoluteUrl() + 'proposal/' + this.proposal._id;
       }
-    };
+    },
+    components: {
+      VueDisqus
+    },
+    methods: {
+      isActive(type) {
+        return this.$store.state.voting.proposalType === type;
+      },
+      toggleProposalModal() {
+        this.$store.commit('voting/toggleProposalModal');
+      },
+      setProposalType(type) {
+        this.$store.commit('voting/setProposalType', type);
+      }
+    }
+  };
 </script>
 
 <style lang="scss">
