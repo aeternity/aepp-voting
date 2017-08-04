@@ -1,0 +1,15 @@
+{
+    "galaxy.meteor.com": {
+        "env": {
+            "MONGO_URL": "",
+            "MAIL_URL": "",
+            "ROOT_URL": ""
+        }
+    },
+    "public": {
+
+    },
+    "private": {
+
+    }
+}
