@@ -4,7 +4,8 @@ export default {
   state: () => ({
     filter: 'all',
     limit: 10,
-    proposalModalShown: false,
+    proposalType: 'agree',
+    proposal: null,
   }),
 
   getters: {
@@ -22,8 +23,17 @@ export default {
     toggleSubmitProposalModal: (state) => {
       state.submitProposalModalShown = !state.submitProposalModalShown;
     },
-    toggleProposalModal: (state) => {
-      state.proposalModalShown = !state.proposalModalShown;
+    toggleProposalModal: (state, proposalOptions) => {
+      if (proposalOptions) {
+        const { proposal, type } = proposalOptions;
+        state.proposal = proposal;
+        state.proposalType = type;
+      } else {
+        state.proposal = null;
+      }
+    },
+    setProposalType: (state, type) => {
+      state.proposalType = type;
     },
   },
 

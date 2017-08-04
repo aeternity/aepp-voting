@@ -13,8 +13,8 @@
             <p class="doubt"><span>-</span> {{proposal.doubt | sumFormat}}</p>
         </div>
         <div class="controls">
-            <button @click="toggleProposalModal"><i class="fa fa-chevron-up" /></button>
-            <button @click="toggleProposalModal" class="upvote"><i class="fa fa-chevron-down" /></button>
+            <button @click="toggleProposalModal('doubt')"><i class="fa fa-chevron-up" /></button>
+            <button @click="toggleProposalModal('agree')" class="upvote"><i class="fa fa-chevron-down" /></button>
         </div>
     </li>
 </template>
@@ -30,8 +30,9 @@
         },
     },
     methods: {
-      toggleProposalModal() {
-        this.$store.commit('voting/toggleProposalModal');
+      toggleProposalModal(type) {
+        console.log(type);
+        this.$store.commit('voting/toggleProposalModal', {  proposal: this.proposal, type });
       },
     },
   }
@@ -116,7 +117,7 @@
                     color: $green;
                     border-color: $green;
                     i {
-                        top: -3px;
+                        top: -1px;
                     }
                     &:hover {
                         background: $green;
