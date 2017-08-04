@@ -9,7 +9,7 @@
                 <div class="quote left">
                     <i class="fa fa-quote-left" />
                 </div>
-                <h2>I believe that {{proposal.title}}</h2>
+                <h2>{{proposal.title}}</h2>
                 <div class="quote right">
                     <i class="fa fa-quote-right" />
                 </div>
