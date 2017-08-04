@@ -130,7 +130,7 @@
                 height: 300px;
             }
             .comments {
-                overflow-y: hidden;
+                overflow-y: scroll;
             }
         }
         .statement {
