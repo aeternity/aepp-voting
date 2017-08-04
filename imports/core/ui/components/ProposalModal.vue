@@ -160,6 +160,10 @@
                     button {
                         color: $red;
                         border: 2px solid $red;
+                        &:hover {
+                          border-color: lighten($red, 20%);
+                          color: lighten($red, 20%);
+                        }
                     }
                 }
             }
@@ -244,9 +248,8 @@
                     padding: 5px 70px;
                     border: 2px solid $green;
                     &:hover {
-                        background: transparent;
-                        color: white;
-                        border: 2px solid white;
+                      border-color: lighten($green, 20%);
+                      color: lighten($green, 20%);
                     }
                 }
             }
