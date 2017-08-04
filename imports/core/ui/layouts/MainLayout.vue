@@ -2,7 +2,10 @@
   <div class="main-layout">
     <app-header />
     <submit-proposal-modal v-if="submitProposalModalShown" />
-    <modal v-if="proposalModalShown" />
+    <proposal-modal
+            v-if="!!proposal"
+            :proposal="proposal"
+    />
     <div class="main-content">
       <router-view />
     </div>
@@ -12,17 +15,18 @@
 <script>
   import { Proposals } from '/imports/core';
   import AppHeader from '../components/AppHeader.vue';
-  import Modal from '../components/Modal.vue';
+  import ProposalModal from '../components/ProposalModal.vue';
   import SubmitProposalModal from '../components/SubmitProposalModal.vue';
+
   export default {
     components: {
       AppHeader,
-      Modal,
+      ProposalModal,
       SubmitProposalModal,
     },
     computed: {
-      proposalModalShown() {
-        return this.$store.state.core.proposalModalShown;
+      proposal() {
+        return this.$store.state.voting.proposal;
       },
       submitProposalModalShown() {
         return this.$store.state.core.submitProposalModalShown;
