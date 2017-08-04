@@ -38,7 +38,7 @@
     };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     @import "/imports/core/ui/styles/variables";
     @import "/imports/core/ui/styles/mixins";
 

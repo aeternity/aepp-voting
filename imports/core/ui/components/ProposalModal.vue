@@ -86,13 +86,11 @@
         left: 0;
         width: 100%;
         height: 100%;
-        @include flexbox;
-        @include justify-content(center);
-        @include align-items(center);
         z-index: 100;
-        overflow: hidden;
+        overflow-y: scroll;
+        padding: 40px 0;
         .overlay {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
@@ -101,9 +99,10 @@
             z-index: 1;
         }
         .modal-cont {
-            @include flexbox;
-            @include flex-direction(column);
             position: relative;
+            margin-bottom: 80px;
+            margin-left: auto;
+            margin-right: auto;
             @media screen and (max-width: $container-width) {
                 max-width: 96vw;
             }
@@ -113,7 +112,6 @@
             background: white;
             border-radius: $base-border-radius;
             box-shadow: $base-box-shadow;
-            max-height: 90vh;
             .modal-header {
                 button {
                     float: right;
@@ -125,14 +123,9 @@
                 padding: $gutter $gutter * 2;
             }
             .modal-header, .voting-section {
-                @include flex-grow(1);
-                @include flex-shrink(1);
             }
             .voting-section {
                 height: 300px;
-            }
-            .comments {
-                overflow-y: scroll;
             }
         }
         .statement {
