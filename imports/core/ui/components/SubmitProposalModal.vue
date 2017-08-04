@@ -1,6 +1,6 @@
 <template>
     <div class="modal">
-        <div class="overlay"></div>
+        <div class="overlay" @click="toggleSubmitProposalModal"></div>
         <div class="modal-cont">
             <div class="modal-header">
                 <button @click="toggleSubmitProposalModal">Close</button>
@@ -63,7 +63,6 @@
             z-index: 1;
         }
         h3 {
-            text-transform: uppercase;
             margin-top: 0;
             padding: 0 40px;
         }
@@ -86,12 +85,14 @@
             border-radius: $base-border-radius;
             box-shadow: $base-box-shadow;
             max-height: 90vh;
+            @media screen and (max-width: $container-width) {
+                max-width: 96vw;
+            }
             .modal-header {
                 button {
                     float: right;
                     border: 0;
                     padding: 0;
-                    text-transform: uppercase;
                 }
             }
             .modal-header {

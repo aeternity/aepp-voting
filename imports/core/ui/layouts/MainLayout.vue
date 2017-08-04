@@ -50,7 +50,8 @@
     color: $base-text-color;
   }
   .container {
-    width: 880px;
+    width: 100%;
+    max-width: $container-width;
     margin: 0 auto;
   }
   .main-layout {
@@ -61,9 +62,13 @@
     left: 0;
     @include flexbox;
     @include flex-direction(column);
+    overflow: hidden;
     .main-content {
       position: relative;
       @include flex-grow(1);
+      @media screen and (max-width: $container-width){
+        padding: 10px;
+      }
       .page {
         position: absolute;
         width: 100%;

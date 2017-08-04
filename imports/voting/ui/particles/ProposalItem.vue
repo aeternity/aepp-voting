@@ -2,20 +2,23 @@
     <li
         class="proposal-item"
         :class="voteClass"
+        @click="toggleProposalModal('agree')"
     >
         <div class="proposal-content">
-            <h3>Proposal name: {{proposal.title}}</h3>
+            <h3>{{proposal.title}}</h3>
             <p>{{proposal.updatedAt | dateFormat}}</p>
         </div>
-        <div class="voted">
-            <h3 class="main">{{proposal.total | sumFormat}}</h3>
-            <p class="agreed"><span>+</span> {{proposal.agreed | sumFormat}}</p>
-            <p class="doubt"><span>-</span> {{proposal.doubt | sumFormat}}</p>
-        </div>
-        <div class="controls">
-            <button @click="toggleProposalModal('doubt')"><i class="fa fa-chevron-up" /></button>
-            <button @click="toggleProposalModal('agree')" class="upvote"><i class="fa fa-chevron-down" /></button>
-        </div>
+        <aside>
+            <div class="voted">
+                <h3 class="main" :class="voteClass">{{proposal.total | sumFormat}}</h3>
+                <p class="agreed"><span>+</span> {{proposal.agreed | sumFormat}}</p>
+                <p class="doubt"><span>-</span> {{proposal.doubt | sumFormat}}</p>
+            </div>
+            <div class="controls">
+                <button @click="toggleProposalModal('agree')" class="upvote"><i class="fa fa-chevron-up" /></button>
+                <button @click.stop="toggleProposalModal('doubt')"><i class="fa fa-chevron-down" /></button>
+            </div>
+        </aside>
     </li>
 </template>
 
@@ -45,6 +48,7 @@
     .proposal-item {
         position: relative;
         background: white;
+        cursor: pointer;
         @include flexbox;
         @include transform(translateZ(0));
         will-change: transform;
@@ -53,7 +57,9 @@
         border-radius: $base-border-radius;
         margin-bottom: $gutter;
         box-shadow: $base-box-shadow;
-        text-transform: uppercase;
+        @media screen and (max-width: $container-width) {
+            @include flex-direction(column);
+        }
         &:after {
             content: "";
             display: block;
@@ -65,6 +71,10 @@
             border-top-left-radius: $base-border-radius;
             border-bottom-left-radius: $base-border-radius;
             background: $green;
+            @media screen and (max-width: $container-width) {
+                width: 100%;
+                height: 5px;
+            }
         }
         &.doubt {
             &:after {
@@ -83,12 +93,21 @@
             @include flex-grow(0);
             @include flex-shrink(0);
             text-align: right;
+            @media screen and (max-width: $container-width) {
+                text-align: left;
+            }
             h3 {
                 color: $green;
+                &.doubt {
+                    color: $red;
+                }
             }
             p {
                 font-family: $font-family-header;
             }
+        }
+        aside {
+            @include flexbox;
         }
         .controls {
             @include flexbox;

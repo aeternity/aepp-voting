@@ -12,7 +12,7 @@
                     :should-handle="!loading"
                     scroll-container="wrap"
             >
-                <i class="fa fa-spinner fa-spin" /> loading
+                <i class="fa fa-spinner fa-spin" /> Loading
             </mugen-scroll>
             <div
                     v-if="!gotMore"
@@ -60,7 +60,7 @@
         'proposals.count': [],
       },
       proposals () {
-        return Proposals.find();
+        return Proposals.find({}, { sort: { createdAt: -1 }});
       },
       proposalsCount () {
         return Counts.get('proposals');
@@ -83,6 +83,9 @@
         @include flex-direction(column);
         @include flex-grow(1);
         overflow-y: scroll;
+        @media screen and (max-width: $container-width){
+            padding: 10px;
+        }
     }
     ul {
         list-style: none;
@@ -95,7 +98,6 @@
     .mugen-scroll, .all-loaded {
         text-align: center;
         padding-bottom: 10px;
-        text-transform: uppercase;
         color: $gray-light;
         font-family: $font-family-header;
     }
