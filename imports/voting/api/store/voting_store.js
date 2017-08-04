@@ -5,6 +5,7 @@ export default {
     filter: 'all',
     limit: 10,
     proposalModalShown: false,
+    newsList: [],
   }),
 
   getters: {
@@ -25,11 +26,23 @@ export default {
     toggleProposalModal: (state) => {
       state.proposalModalShown = !state.proposalModalShown;
     },
+    fetchedNewsList: (state, value) => {
+      state.newsList = value;
+    },
   },
 
   actions: {
     doSomething({ commit }, value) {
       console.log('Async stuff');
+    },
+    fetchNewsList({ commit }) {
+      getJSONData('https://widgets.bitcoin.com/news.json', (err, res) => {
+        if (err) {
+          console.error(err)
+        } else {
+          commit('fetchedNewsList', res);
+        }
+      })
     }
   },
 }
