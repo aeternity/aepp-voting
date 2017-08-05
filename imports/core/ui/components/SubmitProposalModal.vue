@@ -8,7 +8,6 @@
             <div class="submit-proposal">
                 <form @submit.prevent="submitSubmitProposalForm">
                     <h3>Please keep the statement short and simple, e. g. "God exists".</h3>
-                    <p>When users vote on it, the prefix "I believe that " or "I doubt that " will be added depending on their choice.</p>
                     <input :class="{error: error}" v-model="title" placeholder="Your statement"/>
                     <button type="submit">Submit</button>
                 </form>
