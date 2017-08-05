@@ -35,10 +35,11 @@ contract ERC20Interface {
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 }
  
-contract FixedSupplyToken is ERC20Interface {
+contract ERC20Token is ERC20Interface {
     string public constant symbol = "FIXED";
     string public constant name = "Example Fixed Supply Token";
     uint8 public constant decimals = 18;
+    uint256 public constant initialBalance = 5;
     uint256 _totalSupply = 1000000;
     
     // Owner of this contract
@@ -59,7 +60,7 @@ contract FixedSupplyToken is ERC20Interface {
     }
  
     // Constructor
-    function FixedSupplyToken() {
+    function ERC20Token() {
         owner = msg.sender;
         balances[owner] = _totalSupply;
     }
@@ -70,12 +71,12 @@ contract FixedSupplyToken is ERC20Interface {
  
     // What is the balance of a particular account?
     function balanceOf(address _owner) constant returns (uint256 balance) {
-        return balances[_owner];
+        return balances[_owner] + initialBalance;
     }
  
     // Transfer the balance from owner's account to another account
     function transfer(address _to, uint256 _amount) returns (bool success) {
-        if (balances[msg.sender] >= _amount 
+        if (balances[msg.sender] + initialBalance >= _amount
             && _amount > 0
             && balances[_to] + _amount > balances[_to]) {
             balances[msg.sender] -= _amount;
@@ -98,7 +99,7 @@ contract FixedSupplyToken is ERC20Interface {
         address _to,
         uint256 _amount
     ) returns (bool success) {
-        if (balances[_from] >= _amount
+        if (balances[_from] + initialBalance >= _amount
             && allowed[_from][msg.sender] >= _amount
             && _amount > 0
             && balances[_to] + _amount > balances[_to]) {
