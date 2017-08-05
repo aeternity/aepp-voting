@@ -13,3 +13,7 @@ Accounts.schema = new SimpleSchema({
 });
 
 Accounts.attachSchema(Accounts.schema);
+
+Factory.define('account', Accounts, {
+  balance: () => Math.round(Math.random() * 500),
+});
