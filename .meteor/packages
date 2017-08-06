@@ -23,3 +23,4 @@ tmeasday:publish-counts
 aldeed:schema-deny
 matb33:collection-hooks
 dburles:factory
+practicalmeteor:mocha

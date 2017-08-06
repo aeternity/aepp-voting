@@ -9,7 +9,7 @@ export const onErc20ContractReceiving = callBack =>
   erc20contract ? callBack(erc20contract) : callBacks.push(callBack);
 
 const callBacks = [];
-const setupDevnet = Meteor.isDevelopment && !Meteor.settings.web3ProviderUrl;
+const setupDevnet = Meteor.isDevelopment && !Meteor.isTest && !Meteor.settings.web3ProviderUrl;
 const exec = promisify(cp.exec);
 
 const newContract = (contract, options) =>
