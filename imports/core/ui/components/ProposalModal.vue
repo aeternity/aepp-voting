@@ -9,7 +9,7 @@
         <div class="quote left">
           <i class="fa fa-quote-left" />
         </div>
-        <h2>{{proposal.title}}</h2>
+        <h2>{{proposal.statement}}</h2>
         <div class="quote right">
           <i class="fa fa-quote-right" />
         </div>
@@ -31,11 +31,11 @@
             I doubt
           </button>
         </div>
-        <div class="tab">
+        <form @submit.prevent="vote" class="tab">
           <h5>Please copy the above statement, sign it with your Ethereum address, and paste signature here</h5>
-          <input type="text" placeholder="Place signature here">
+          <input type="text" v-model="signature" placeholder="Place signature here">
           <button>Submit</button>
-        </div>
+        </form>
       </div>
       <div class="comments">
         <VueDisqus
@@ -51,6 +51,11 @@
   import VueDisqus from 'vue-disqus/VueDisqus.vue'
   export default {
     props: ['proposal',  'type'],
+    data() {
+      return {
+        signature: '',
+      }
+    },
     computed: {
       proposalType() {
         return this.$store.state.voting.proposalType;
@@ -71,6 +76,11 @@
       },
       setProposalType(type) {
         this.$store.commit('voting/setProposalType', type);
+      },
+      vote() {
+        if (this.signature) {
+          this.$store.dispatch('voting/vote', this.signature);
+        }
       }
     }
   };

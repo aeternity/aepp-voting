@@ -40,6 +40,13 @@ export default {
   actions: {
     doSomething({ commit }, value) {
       console.log('Async stuff');
-    }
+    },
+    vote({ commit, state }, signature) {
+      Meteor.call('proposals.vote', state.proposal._id, signature, state.proposalType === 'agree', (err) => {
+        if (err) {
+          console.error(err);
+        }
+      })
+    },
   },
 }
