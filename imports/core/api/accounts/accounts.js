@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { Factory } from 'meteor/dburles:factory';
 
 import { createdAt, updatedAt, ethereumAddressType } from '../schema-helpers';
 
@@ -13,6 +14,10 @@ Accounts.schema = new SimpleSchema({
 });
 
 Accounts.attachSchema(Accounts.schema);
+
+Factory.define('account', Accounts, {
+  balance: () => Math.round(Math.random() * 500),
+});
 
 Factory.define('account', Accounts, {
   balance: () => Math.round(Math.random() * 500),
