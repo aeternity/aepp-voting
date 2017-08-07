@@ -3,8 +3,8 @@ import { assert, expect } from 'meteor/practicalmeteor:chai';
 import { sinon } from 'meteor/practicalmeteor:sinon';
 import { Factory } from 'meteor/dburles:factory';
 import { Random } from 'meteor/random';
-import { onErc20ContractReceiving } from '../../ethereum';
 
+import { onErc20ContractReceiving } from '/imports/ethereum';
 import { Accounts } from '../../accounts/accounts';
 import { Proposals } from '../proposals';
 import './methods';

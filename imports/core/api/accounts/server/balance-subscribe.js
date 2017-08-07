@@ -1,4 +1,4 @@
-import { onErc20ContractReceiving } from '../../ethereum';
+import { onErc20ContractReceiving } from '/imports/ethereum';
 import { Accounts } from '../accounts';
 
 onErc20ContractReceiving(erc20contract =>

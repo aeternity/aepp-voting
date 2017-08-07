@@ -3,8 +3,7 @@ import { check } from 'meteor/check';
 
 import { Proposals } from '../proposals';
 import { Accounts } from '../../accounts/accounts';
-import { getEthereumAddress } from '../../utils';
-import { onErc20ContractReceiving } from '../../ethereum';
+import { getEthereumAddress, onErc20ContractReceiving } from '/imports/ethereum';
 
 const UP_VOTE = Symbol('up-vote');
 const DOWN_VOTE = Symbol('down-vote');
