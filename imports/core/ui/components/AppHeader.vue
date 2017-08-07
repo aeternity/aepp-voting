@@ -1,12 +1,12 @@
 <template>
-    <header>
-        <div class="container">
-            <img class="logo" src="/images/logo_white.png" alt="logo" />
-            <div class="stripe"></div>
-            <h3>Voting</h3>
-            <button @click="toggleSubmitProposalModal">Submit proposal</button>
-        </div>
-    </header>
+  <header>
+    <div class="container">
+      <img class="logo" src="/images/logo_white.png" alt="logo" />
+      <div class="stripe"></div>
+      <h3>Voting</h3>
+      <button @click="toggleSubmitProposalModal">Submit proposal</button>
+    </div>
+  </header>
 </template>
 
 <script>
@@ -25,43 +25,43 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "/imports/core/ui/styles/mixins";
-    @import "/imports/core/ui/styles/variables";
+  @import "/imports/core/ui/styles/mixins";
+  @import "/imports/core/ui/styles/variables";
 
-    header {
-        position: relative;
-        @include flex-grow(0);
-        @include flex-shrink(0);
-        background: $brand-color;
-        @media screen and (max-width: $container-width){
-            padding: 10px;
-        }
-        .logo {
-            height: 40px;
-        }
-        .container {
-            @include flexbox;
-            @include align-items(center);
-        }
+  header {
+    position: relative;
+    @include flex-grow(0);
+    @include flex-shrink(0);
+    background: $brand-color;
+    @media screen and (max-width: $container-width){
+      padding: 10px;
     }
-    .stripe {
-        width: 1px;
-        height: 40px;
-        background: white;
-        margin: $gutter;
+    .logo {
+      height: 40px;
     }
-    button {
-        color: white;
-        border-color: white;
-        &:hover {
-            background: white;
-            color: $brand-color;
-        }
+    .container {
+      @include flexbox;
+      @include align-items(center);
     }
-    h3 {
-        color: white;
-        font-family: 'Roboto Light';
-        letter-spacing: .1em;
-        @include flex-grow(1);
+  }
+  .stripe {
+    width: 1px;
+    height: 40px;
+    background: white;
+    margin: $gutter;
+  }
+  button {
+    color: white;
+    border-color: white;
+    &:hover {
+      background: white;
+      color: $brand-color;
     }
+  }
+  h3 {
+    color: white;
+    font-family: 'Roboto Light';
+    letter-spacing: .1em;
+    @include flex-grow(1);
+  }
 </style>
