@@ -184,11 +184,7 @@
         button {
           font-size: 28px;
           padding: 10px 30px;
-          border-top-left-radius: $base-border-radius;
-          border-top-right-radius: $base-border-radius;
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-          border-bottom: 0;
+          border-radius: $base-border-radius $base-border-radius 0 0;
           border-width: 0;
           &.doubt {
             color: $red;
