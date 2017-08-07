@@ -5,7 +5,7 @@ import { _ } from 'underscore';
 
 import {
   createdAt, updatedAt,
-} from '../schema-helpers';
+} from '../utils/schema-helpers';
 import { Accounts } from '/imports/accounts';
 
 export const Proposals = new Mongo.Collection('proposals');

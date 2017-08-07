@@ -1,4 +1,4 @@
-import { Proposals } from '../proposals';
+import { Proposals } from './proposals';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 Meteor.publish('proposals.list', function proposals(filter, limit) {

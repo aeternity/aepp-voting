@@ -6,8 +6,8 @@ import { Random } from 'meteor/random';
 
 import { onErc20ContractReceiving } from '/imports/ethereum';
 import { Accounts } from '/imports/accounts';
-import { Proposals } from '../proposals';
-import './methods';
+import { Proposals } from './proposals';
+import './proposals_methods_server';
 
 const message = 'test';
 const address = '0xfA491DF8780761853D127A9f7b2772D688A0E3B5';

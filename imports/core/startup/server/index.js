@@ -1,4 +1,4 @@
-import '../../api/proposals/methods';
-import '../../api/proposals/server/methods';
-import '../../api/proposals/server/publications';
-import '../../api/proposals/server/test-data';
+import '../../api/models/proposals_methods';
+import '../../api/models/proposals_methods_server';
+import '../../api/models/proposals_pubs';
+import './test-data';
