@@ -5,14 +5,16 @@
     @click="toggleProposalModal('agree')"
   >
     <div class="proposal-content">
-      <h3>{{proposal.title}}</h3>
+      <h3>{{proposal.statement}}</h3>
       <p>{{proposal.updatedAt | dateFormat}}</p>
     </div>
     <aside>
       <div class="voted">
-        <h3 class="main" :class="voteClass">{{proposal.total | sumFormat}}</h3>
-        <p class="agreed"><span>+</span> {{proposal.agreed | sumFormat}}</p>
-        <p class="doubt"><span>-</span> {{proposal.doubt | sumFormat}}</p>
+        <h3 class="main" :class="voteClass">
+          {{proposal.upVoteAmount + proposal.downVoteAmount | sumFormat}}
+        </h3>
+        <p class="agreed"><span>+</span> {{proposal.upVoteAmount | sumFormat}}</p>
+        <p class="doubt"><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
       </div>
       <div class="controls">
         <button @click="toggleProposalModal('agree')" class="upvote"><i class="fa fa-chevron-up" /></button>
@@ -27,7 +29,7 @@
     props: ['proposal'],
     computed: {
       voteClass() {
-        return this.proposal.agreed > this.proposal.doubt
+        return this.proposal.upVoteAmount > this.proposal.downVoteAmount
           ? 'agreed'
           : 'doubt'
       },

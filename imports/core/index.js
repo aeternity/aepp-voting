@@ -1,1 +1,1 @@
-export { Proposals } from './api/models/proposals/proposals';
+export { Proposals } from './api/models/proposals';
