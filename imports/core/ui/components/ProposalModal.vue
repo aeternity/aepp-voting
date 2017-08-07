@@ -32,7 +32,7 @@
           </button>
         </div>
         <div class="tab">
-          <h5>Please copy the above statement, sign it with your Etherium address, and paste signature here</h5>
+          <h5>Please copy the above statement, sign it with your Ethereum address, and paste signature here</h5>
           <input type="text" placeholder="Place signature here">
           <button>Submit</button>
         </div>
