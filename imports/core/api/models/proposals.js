@@ -3,9 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { Factory } from 'meteor/dburles:factory';
 import { _ } from 'underscore';
 
-import {
-  createdAt, updatedAt,
-} from '../utils/schema-helpers';
+import { createdAt, updatedAt } from '/imports/common';
 import { Accounts } from '/imports/accounts';
 
 export const Proposals = new Mongo.Collection('proposals');
