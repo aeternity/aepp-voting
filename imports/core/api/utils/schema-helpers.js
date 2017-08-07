@@ -1,5 +1,3 @@
-import SimpleSchema from 'simpl-schema';
-
 export const createdAt = {
   type: Date,
   autoValue() {
