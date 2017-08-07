@@ -123,6 +123,7 @@
       border-radius: $base-border-radius;
       box-shadow: $base-box-shadow;
       .modal-header {
+        overflow: hidden;
         button {
           float: right;
           border: 0;
