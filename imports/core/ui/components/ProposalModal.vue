@@ -133,9 +133,6 @@
       .modal-header, .voting-section, .comments {
         padding: $gutter $gutter * 2;
       }
-      .voting-section {
-        height: 300px;
-      }
     }
     .statement {
       position: relative;
