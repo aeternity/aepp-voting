@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import { Proposals } from '../proposals';
-import { Accounts } from '../../accounts/accounts';
+import { Accounts } from '/imports/accounts';
 import { getEthereumAddress, onErc20ContractReceiving } from '/imports/ethereum';
 
 const UP_VOTE = Symbol('up-vote');

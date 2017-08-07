@@ -1,5 +1,5 @@
 import { onErc20ContractReceiving } from '/imports/ethereum';
-import { Accounts } from '../accounts';
+import { Accounts } from '../../api/models/accounts';
 
 onErc20ContractReceiving(erc20contract =>
   erc20contract.Transfer({}, (err, event) => {

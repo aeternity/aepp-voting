@@ -5,7 +5,7 @@ import { Factory } from 'meteor/dburles:factory';
 import { Random } from 'meteor/random';
 
 import { onErc20ContractReceiving } from '/imports/ethereum';
-import { Accounts } from '../../accounts/accounts';
+import { Accounts } from '/imports/accounts';
 import { Proposals } from '../proposals';
 import './methods';
 

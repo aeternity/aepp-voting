@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import { createdAt, updatedAt, ethereumAddressType } from '../schema-helpers';
+import { createdAt, updatedAt, ethereumAddressType } from '../../../core/api/schema-helpers';
 
 export const Accounts = new Mongo.Collection('accounts');
 
