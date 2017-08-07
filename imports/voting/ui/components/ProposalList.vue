@@ -1,27 +1,27 @@
 <template>
-    <div class="list-proposals" ref="wrap">
-        <ul class="container">
-            <proposal-item
-                    v-for="p in proposals"
-                    :key="p._id"
-                    :proposal="p"
-            ></proposal-item>
-            <mugen-scroll
-                    v-if="gotMore"
-                    :handler="loadMore"
-                    :should-handle="!loading"
-                    scroll-container="wrap"
-            >
-                <i class="fa fa-spinner fa-spin" /> Loading
-            </mugen-scroll>
-            <div
-                    v-if="!gotMore"
-                    class="all-loaded"
-            >
-                All loaded
-            </div>
-        </ul>
-    </div>
+  <div class="list-proposals" ref="wrap">
+    <ul class="container">
+      <proposal-item
+        v-for="p in proposals"
+        :key="p._id"
+        :proposal="p"
+      ></proposal-item>
+      <mugen-scroll
+        v-if="gotMore"
+        :handler="loadMore"
+        :should-handle="!loading"
+        scroll-container="wrap"
+      >
+        <i class="fa fa-spinner fa-spin" /> Loading
+      </mugen-scroll>
+      <div
+        v-if="!gotMore"
+        class="all-loaded"
+      >
+        All loaded
+      </div>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -75,30 +75,30 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "/imports/core/ui/styles/variables";
-    @import "/imports/core/ui/styles/mixins";
+  @import "/imports/core/ui/styles/variables";
+  @import "/imports/core/ui/styles/mixins";
 
-    .list-proposals {
-        @include flexbox;
-        @include flex-direction(column);
-        @include flex-grow(1);
-        overflow-y: scroll;
-        @media screen and (max-width: $container-width){
-            padding: 10px;
-        }
+  .list-proposals {
+    @include flexbox;
+    @include flex-direction(column);
+    @include flex-grow(1);
+    overflow-y: scroll;
+    @media screen and (max-width: $container-width){
+      padding: 10px;
     }
-    ul {
-        list-style: none;
-        padding: 0;
-        padding-top: $gutter;
-        @include transform(translateZ(0));
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-    }
-    .mugen-scroll, .all-loaded {
-        text-align: center;
-        padding-bottom: 10px;
-        color: $gray-light;
-        font-family: $font-family-header;
-    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    padding-top: $gutter;
+    @include transform(translateZ(0));
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .mugen-scroll, .all-loaded {
+    text-align: center;
+    padding-bottom: 10px;
+    color: $gray-light;
+    font-family: $font-family-header;
+  }
 </style>
