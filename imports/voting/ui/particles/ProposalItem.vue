@@ -11,7 +11,7 @@
     <aside>
       <div class="voted">
         <h3 class="main" :class="voteClass">
-          {{proposal.upVoteAmount + proposal.downVoteAmount | sumFormat}}
+          <span>{{sumVoteAmount < 0 ? '-' : '+'}}</span> {{Math.abs(sumVoteAmount) | sumFormat}}
         </h3>
         <p class="agreed"><span>+</span> {{proposal.upVoteAmount | sumFormat}}</p>
         <p class="doubt"><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
@@ -32,6 +32,9 @@
         return this.proposal.upVoteAmount > this.proposal.downVoteAmount
           ? 'agreed'
           : 'doubt'
+      },
+      sumVoteAmount() {
+        return this.proposal.upVoteAmount - this.proposal.downVoteAmount;
       },
     },
     methods: {
