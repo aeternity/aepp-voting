@@ -9,4 +9,7 @@
     "public": {
 
     },
+    "web3ProviderUrl": "",
+    "erc20ContractAddress": "",
+    "showGethOutput": false
 }

@@ -1,3 +1,4 @@
-import '../../api/models/proposals/proposals_methods';
-import '../../api/models/proposals/proposals_pubs';
-import '../../api/models/proposals/proposals_fixture';
+import '../../api/models/proposals_methods';
+import '../../api/models/proposals_methods_server';
+import '../../api/models/proposals_pubs';
+import './test-data';
