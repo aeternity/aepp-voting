@@ -14,7 +14,15 @@
           <i class="fa fa-quote-right" />
         </div>
       </div>
-      <div class="voting-section" :class="proposalType">
+      <div class="voting-buttons" v-if="canSignByWeb3">
+        <button class="agree" @click="voteByWeb3(true)">
+          I agree
+        </button>
+        <button class="doubt" @click="voteByWeb3(false)">
+          I doubt
+        </button>
+      </div>
+      <div class="voting-section" :class="proposalType" v-else>
         <div class="tab-header">
           <button
             class="agree"
@@ -54,6 +62,7 @@
     data() {
       return {
         signature: '',
+        canSignByWeb3: window.web3 && window.web3.eth.defaultAccount,
       }
     },
     computed: {
@@ -81,7 +90,10 @@
         if (this.signature) {
           this.$store.dispatch('voting/vote', this.signature);
         }
-      }
+      },
+      voteByWeb3(upVote) {
+        this.$store.dispatch('voting/voteByWeb3', upVote);
+      },
     }
   };
 </script>
@@ -123,19 +135,15 @@
       border-radius: $base-border-radius;
       box-shadow: $base-box-shadow;
       .modal-header {
+        overflow: hidden;
         button {
           float: right;
           border: 0;
           padding: 0;
         }
       }
-      .modal-header, .voting-section, .comments {
+      .modal-header, .voting-buttons, .voting-section, .comments {
         padding: $gutter $gutter * 2;
-      }
-      .modal-header, .voting-section {
-      }
-      .voting-section {
-        height: 300px;
       }
     }
     .statement {
@@ -163,6 +171,27 @@
         }
       }
     }
+    .voting-buttons {
+      text-align: center;
+      button {
+        margin: 20px;
+        padding: 20px;
+        border-width: 2px;
+        &:hover {
+          color: white;
+        }
+      }
+      .agree {
+        color: $green;
+        border-color: $green;
+        &:hover {
+          background-color: $green;
+        }
+      }
+      .doubt:hover {
+        background-color: $red;
+      }
+    }
     .voting-section {
       &.doubt {
         .tab {
@@ -185,11 +214,7 @@
         button {
           font-size: 28px;
           padding: 10px 30px;
-          border-top-left-radius: $base-border-radius;
-          border-top-right-radius: $base-border-radius;
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-          border-bottom: 0;
+          border-radius: $base-border-radius $base-border-radius 0 0;
           border-width: 0;
           &.doubt {
             color: $red;

@@ -48,5 +48,14 @@ export default {
         }
       })
     },
+    voteByWeb3({ state }, upVote) {
+      const { eth: { sign, defaultAccount }, sha3 } = window.web3;
+      sign(defaultAccount, sha3(state.proposal.statement), (err, signature) => {
+        if (err) return console.error(err);
+        Meteor.call('proposals.vote', state.proposal._id, signature, upVote, (err) => {
+          if (err) console.error(err);
+        })
+      });
+    },
   },
 }
