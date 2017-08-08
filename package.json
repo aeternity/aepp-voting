@@ -9,11 +9,12 @@
     "lint"
   ],
   "dependencies": {
+    "autoprefixer": "^7.1.2",
     "babel-runtime": "^6.25.0",
     "buffer": "^5.0.6",
-    "format-number": "^3.0.0",
     "es6-promisify": "^5.0.0",
     "ethereumjs-util": "^5.1.2",
+    "format-number": "^3.0.0",
     "meteor-node-stubs": "~0.2.4",
     "moment": "^2.18.1",
     "simpl-schema": "^0.3.2",
@@ -32,5 +33,14 @@
     "eslint": "^4.3.0",
     "eslint-plugin-vue": "^3.8.0",
     "pre-commit": "^1.2.2"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
+    }
   }
 }

@@ -38,7 +38,6 @@
 <style lang="scss">
   @import "/imports/core/ui/styles/normalize";
   @import "/imports/core/ui/styles/fonts";
-  @import "/imports/core/ui/styles/mixins";
   @import "/imports/core/ui/styles/variables";
   * {
     outline: none !important;
@@ -60,12 +59,12 @@
     height: 100%;
     top: 0;
     left: 0;
-    @include flexbox;
-    @include flex-direction(column);
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     .main-content {
       position: relative;
-      @include flex-grow(1);
+      flex-grow: 1;
       @media screen and (max-width: $container-width){
         padding: 10px;
       }

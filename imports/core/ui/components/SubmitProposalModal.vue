@@ -39,7 +39,6 @@
 
 <style lang="scss" scoped>
   @import "/imports/core/ui/styles/variables";
-  @import "/imports/core/ui/styles/mixins";
 
   .modal {
     position: fixed;
@@ -47,9 +46,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    @include flexbox;
-    @include justify-content(center);
-    @include align-items(center);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 100;
     overflow: hidden;
     .overlay {
@@ -74,8 +73,8 @@
       border-color: $red;
     }
     .modal-cont {
-      @include flexbox;
-      @include flex-direction(column);
+      display: flex;
+      flex-direction: column;
       position: relative;
       z-index: 2;
       width: 650px;
@@ -98,8 +97,8 @@
         padding: $gutter $gutter * 2;
       }
       .modal-header {
-        @include flex-grow(1);
-        @include flex-shrink(1);
+        flex-grow: 1;
+        flex-shrink: 1;
       }
       .submit-proposal {
         padding-bottom: $gutter;
