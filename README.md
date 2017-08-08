@@ -24,6 +24,18 @@ Submit your vote
 
 ![alt text](https://photos-4.dropbox.com/t/2/AAAvdGRGFIUxPCW_0TahLMD_jvoLMwmlwj_DreSrOWpQTw/12/7363903/png/32x32/3/1502110800/0/2/Aeternity2.png/EMjVuwUYk8cEIAcoBw/eP8KCDVKjo5RTCEIs_cxIvwwBvYXiptWZKKeRIRhv0k?dl=0&size=2048x1536&size_mode=3)
 
+### Use cases current version
+- the aeternity community can decide if certain things should be done or not
+
+### Possible other use cases
+- The aeternity community can priorize tasks
+
+### Open questions
+- Should we also display how the voting would have been if each voter would have had the same voting weight to show how the opinions are within the community
+
+
+
+
 ## Tech stack
 
 Core technologies are:
