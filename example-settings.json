@@ -1,5 +1,15 @@
 {
-  "web3ProviderUrl": "",
-  "erc20ContractAddress": "",
-  "showGethOutput": false
+    "galaxy.meteor.com": {
+        "env": {
+            "MONGO_URL": "",
+            "MAIL_URL": "",
+            "ROOT_URL": ""
+        }
+    },
+    "public": {
+
+    },
+    "web3ProviderUrl": "",
+    "erc20ContractAddress": "",
+    "showGethOutput": false
 }
