@@ -45,14 +45,13 @@
 
 <style lang="scss" scoped>
   @import '/imports/core/ui/styles/variables';
-  @import '/imports/core/ui/styles/mixins';
 
   .proposal-item {
     position: relative;
     background: white;
     cursor: pointer;
-    @include flexbox;
-    @include transform(translateZ(0));
+    display: flex;
+    transform: translateZ(0);
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -60,7 +59,7 @@
     margin-bottom: $gutter;
     box-shadow: $base-box-shadow;
     @media screen and (max-width: $container-width) {
-      @include flex-direction(column);
+      flex-direction: column;
     }
     &:after {
       content: "";
@@ -85,15 +84,15 @@
     }
     .proposal-content {
       padding: $gutter * 1.5 $gutter $gutter * 1.5 $gutter * 2;
-      @include flex-grow(1);
+      flex-grow: 1;
     }
     .voted {
       position: relative;
       padding: $gutter * 1.5 $gutter $gutter * 1.5 $gutter * 2;
       width: 140px;
       padding-right: $gutter * 1.5;
-      @include flex-grow(0);
-      @include flex-shrink(0);
+      flex-grow: 0;
+      flex-shrink: 0;
       text-align: right;
       @media screen and (max-width: $container-width) {
         text-align: left;
@@ -109,13 +108,13 @@
       }
     }
     aside {
-      @include flexbox;
+      display: flex;
     }
     .controls {
-      @include flexbox;
-      @include flex-grow(0);
-      @include flex-shrink(0);
-      @include align-items(center);
+      display: flex;
+      flex-grow: 0;
+      flex-shrink: 0;
+      align-items: center;
       padding: $gutter / 2 $gutter;
       button {
         width: 62px;

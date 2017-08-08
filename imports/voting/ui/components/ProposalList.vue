@@ -76,12 +76,11 @@
 
 <style lang="scss" scoped>
   @import "/imports/core/ui/styles/variables";
-  @import "/imports/core/ui/styles/mixins";
 
   .list-proposals {
-    @include flexbox;
-    @include flex-direction(column);
-    @include flex-grow(1);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     overflow-y: scroll;
     @media screen and (max-width: $container-width){
       padding: 10px;
@@ -91,7 +90,7 @@
     list-style: none;
     padding: 0;
     padding-top: $gutter;
-    @include transform(translateZ(0));
+    transform: translateZ(0);
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }

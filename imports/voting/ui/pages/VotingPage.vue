@@ -20,19 +20,17 @@
 </script>
 
 <style lang="scss">
-  @import "/imports/core/ui/styles/mixins";
-
   .voting-page {
-    @include flexbox;
-    @include flex-direction(column);
+    display: flex;
+    flex-direction: column;
   }
   .voting-content {
-    @include flex-grow(1);
-    @include flexbox;
-    @include flex-direction(column);
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
     .container {
       position: relative;
-      @include flex-grow(1);
+      flex-grow: 1;
       .row-h {
         position: absolute;
         width: 100%;

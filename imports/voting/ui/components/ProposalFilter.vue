@@ -49,7 +49,6 @@
 
 <style lang="scss" scoped>
   @import "/imports/core/ui/styles/variables";
-  @import "/imports/core/ui/styles/mixins";
 
   .proposals-filter {
     position: relative;
@@ -58,8 +57,8 @@
     text-align: center;
     padding: 10px 0;
     box-shadow: $base-box-shadow;
-    @include flex-grow(0);
-    @include flex-shrink(0);
+    flex-grow: 0;
+    flex-shrink: 0;
     @media screen and (max-width: $container-width) {
       padding: 10px 0 0;
     }
@@ -90,7 +89,7 @@
       margin-right: 5px;
       font-family: $font-family-text;
       text-transform: capitalize;
-      @include transition(.4s);
+      transition: .4s;
       &:hover {
         background: $gray-lighter;
       }

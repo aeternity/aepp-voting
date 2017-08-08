@@ -25,13 +25,12 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/core/ui/styles/mixins";
   @import "/imports/core/ui/styles/variables";
 
   header {
     position: relative;
-    @include flex-grow(0);
-    @include flex-shrink(0);
+    flex-grow: 0;
+    flex-shrink: 0;
     background: $brand-color;
     @media screen and (max-width: $container-width){
       padding: 10px;
@@ -40,8 +39,8 @@
       height: 40px;
     }
     .container {
-      @include flexbox;
-      @include align-items(center);
+      display: flex;
+      align-items: center;
     }
   }
   .stripe {
@@ -62,6 +61,6 @@
     color: white;
     font-family: 'Roboto Light';
     letter-spacing: .1em;
-    @include flex-grow(1);
+    flex-grow: 1;
   }
 </style>

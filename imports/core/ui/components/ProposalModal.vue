@@ -100,7 +100,6 @@
 
 <style lang="scss">
   @import "/imports/core/ui/styles/variables";
-  @import "/imports/core/ui/styles/mixins";
 
   .modal {
     position: fixed;
@@ -257,22 +256,9 @@
           width: 90%;
           margin: 0 auto;
           background: transparent;
-          &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-            color:    rgba(255, 255, 255, .7);
-          }
-          &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-            color:    rgba(255, 255, 255, .7);
-            opacity:  1;
-          }
-          &::-moz-placeholder { /* Mozilla Firefox 19+ */
-            color:    rgba(255, 255, 255, .7);
-            opacity:  1;
-          }
-          &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-            color:    rgba(255, 255, 255, .7);
-          }
-          &::-ms-input-placeholder { /* Microsoft Edge */
-            color:    rgba(255, 255, 255, .7);
+          &::placeholder {
+            color: rgba(255, 255, 255, .7);
+            opacity: 1;
           }
         }
         button {
