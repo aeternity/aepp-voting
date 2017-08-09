@@ -38,21 +38,25 @@ export default {
   },
 
   actions: {
-    doSomething({ commit }, value) {
-      console.log('Async stuff');
-    },
-    vote({ commit, state }, signature) {
+    vote({ state }, signature) {
       Meteor.call('proposals.vote', state.proposal._id, signature, state.proposalType === 'agree', (err) => {
         if (err) {
           console.error(err);
         }
       })
     },
-    voteByWeb3({ state }, upVote) {
+    voteByWeb3({ state, commit }, upVote) {
       const { eth: { sign, defaultAccount }, sha3 } = window.web3;
       sign(defaultAccount, sha3(state.proposal.statement), (err, signature) => {
         if (err) return console.error(err);
         Meteor.call('proposals.vote', state.proposal._id, signature, upVote, (err) => {
+          commit('toggleProposalModal');
+          swal({
+            title: "Thank you!",
+            text: "Your vote received!",
+            type: "success",
+            timer: 2000,
+          });
           if (err) console.error(err);
         })
       });
