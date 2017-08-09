@@ -54,9 +54,10 @@ export default {
           commit('toggleProposalModal');
           swal({
             title: "Thank you!",
-            text: "Your vote received!",
+            text: "Your vote was received!",
             type: "success",
-            timer: 2000,
+            animation: false,
+            timer: 3000,
           });
         })
       });

@@ -19,7 +19,7 @@
           I agree
         </button>
         <button class="doubt" @click="voteByWeb3(false)">
-          I doubt
+          I disagree
         </button>
       </div>
       <div class="voting-section" :class="proposalType" v-else>
