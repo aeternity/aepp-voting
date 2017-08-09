@@ -172,10 +172,19 @@
     }
     .voting-buttons {
       text-align: center;
+      margin-bottom: $gutter * 2;
+      @media screen and (max-width: $screen-md) {
+        margin-top: $gutter;
+      }
       button {
-        margin: 20px;
-        padding: 20px;
+        margin: $gutter;
+        font-size: 28px;
+        padding: $gutter $gutter * 4;
         border-width: 2px;
+        @media screen and (max-width: $screen-md) {
+          width: 100%;
+          margin: $gutter 0;
+        }
         &:hover {
           color: white;
         }
