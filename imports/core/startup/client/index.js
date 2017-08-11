@@ -7,8 +7,8 @@ import { injectSupply } from 'vue-supply';
 import MainLayout from '../../ui/layouts/MainLayout.vue';
 import routes from './routes';
 import * as filters from '../../api/helpers/filters';
-import voting from '../../../voting/api/store/voting_store';
-import core from '../../api/store/core_store';
+import voting from '../../../voting/api/store/voting';
+import core from '../../api/store/core';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
