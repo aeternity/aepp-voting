@@ -9,7 +9,12 @@
         <div class="quote left">
           <i class="fa fa-quote-left" />
         </div>
-        <h2>{{proposal.statement}}</h2>
+        <h2>
+          <template v-if="!canSignByWeb3">
+            I {{isActive('agree') ? '' : 'dis'}}agree that
+          </template>
+          {{proposal.statement}}
+        </h2>
         <div class="quote right">
           <i class="fa fa-quote-right" />
         </div>
@@ -36,7 +41,7 @@
             :class="{active: isActive('doubt')}"
             @click="setProposalType('doubt')"
           >
-            I doubt
+            I disagree
           </button>
         </div>
         <form @submit.prevent="vote" class="tab">

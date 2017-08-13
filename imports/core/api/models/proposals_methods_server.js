@@ -20,7 +20,8 @@ onErc20ContractReceiving(erc20contract =>
 
       let accountId;
       try {
-        accountId = getEthereumAddress(proposal.statement, signature);
+        accountId = getEthereumAddress(
+          `I ${upVote ? '' : 'dis'}agree that ` + proposal.statement, signature);
       }
       catch (e) {
         throw new Meteor.Error('Something wrong with signature');

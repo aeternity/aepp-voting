@@ -65,7 +65,9 @@ export default {
     },
     voteByWeb3({ state, dispatch }) {
       const { eth: { sign, defaultAccount }, sha3 } = window.web3;
-      sign(defaultAccount, sha3(state.proposal.statement), (error, signature) => {
+      const statement = `I ${state.proposalType === 'agree' ? '' : 'dis'}agree that `
+        + state.proposal.statement;
+      sign(defaultAccount, sha3(statement), (error, signature) => {
         if (error) dispatch('handleError', error);
         else dispatch('vote', signature);
       });
