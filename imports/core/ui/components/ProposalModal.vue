@@ -92,7 +92,8 @@
         }
       },
       voteByWeb3(upVote) {
-        this.$store.dispatch('voting/voteByWeb3', upVote);
+        this.$store.commit('voting/setProposalType', upVote ? 'agree' : 'doubt');
+        this.$store.dispatch('voting/voteByWeb3');
       },
     }
   };

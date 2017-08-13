@@ -38,28 +38,36 @@ export default {
   },
 
   actions: {
-    vote({ state }, signature) {
-      Meteor.call('proposals.vote', state.proposal._id, signature, state.proposalType === 'agree', (err) => {
-        if (err) {
-          console.error(err);
-        }
-      })
+    handleError(unusedStore, error) {
+      swal({
+        title: 'Something went wrong!',
+        text: 'Your vote was not received!',
+        type: 'error',
+        animation: false,
+      });
+      console.error(error);
     },
-    voteByWeb3({ state, commit }, upVote) {
-      const { eth: { sign, defaultAccount }, sha3 } = window.web3;
-      sign(defaultAccount, sha3(state.proposal.statement), (err, signature) => {
-        if (err) return console.error(err);
-        Meteor.call('proposals.vote', state.proposal._id, signature, upVote, (error) => {
-          if (error) return console.error(error);
-          commit('toggleProposalModal');
+    vote({ state, commit, dispatch }, signature) {
+      const upVote = state.proposalType === 'agree';
+      Meteor.call('proposals.vote', state.proposal._id, signature, upVote, (error) => {
+        if (error) dispatch('handleError', error);
+        else {
           swal({
-            title: "Thank you!",
-            text: "Your vote was received!",
-            type: "success",
+            title: 'Thank you!',
+            text: 'Your vote was received!',
+            type: 'success',
             animation: false,
             timer: 3000,
           });
-        })
+          commit('toggleProposalModal');
+        }
+      });
+    },
+    voteByWeb3({ state, dispatch }) {
+      const { eth: { sign, defaultAccount }, sha3 } = window.web3;
+      sign(defaultAccount, sha3(state.proposal.statement), (error, signature) => {
+        if (error) dispatch('handleError', error);
+        else dispatch('vote', signature);
       });
     },
   },
