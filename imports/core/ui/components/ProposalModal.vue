@@ -20,10 +20,10 @@
         </div>
       </div>
       <div class="voting-buttons" v-if="canSignByWeb3">
-        <button class="agree" @click="voteByWeb3(true)">
+        <button class="up-vote" @click="voteByWeb3(true)">
           I agree
         </button>
-        <button class="doubt" @click="voteByWeb3(false)">
+        <button class="down-vote" @click="voteByWeb3(false)">
           I disagree
         </button>
       </div>
@@ -186,24 +186,10 @@
         margin: $gutter;
         font-size: 28px;
         padding: $gutter $gutter * 4;
-        border-width: 2px;
         @media screen and (max-width: $screen-sm) {
           width: 100%;
           margin: $gutter 0;
         }
-        &:hover {
-          color: white;
-        }
-      }
-      .agree {
-        color: $green;
-        border-color: $green;
-        &:hover {
-          background-color: $green;
-        }
-      }
-      .doubt:hover {
-        background-color: $red;
       }
     }
     .voting-section {
