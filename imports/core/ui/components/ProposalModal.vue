@@ -174,7 +174,7 @@
     .voting-buttons {
       text-align: center;
       margin-bottom: $gutter * 2;
-      @media screen and (max-width: $screen-md) {
+      @media screen and (max-width: $screen-sm) {
         margin-top: $gutter;
       }
       button {
@@ -182,7 +182,7 @@
         font-size: 28px;
         padding: $gutter $gutter * 4;
         border-width: 2px;
-        @media screen and (max-width: $screen-md) {
+        @media screen and (max-width: $screen-sm) {
           width: 100%;
           margin: $gutter 0;
         }
