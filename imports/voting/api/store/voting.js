@@ -8,10 +8,6 @@ export default {
     proposal: null,
   }),
 
-  getters: {
-    filter: state => state.filter,
-  },
-
   mutations: {
     setFilter: (state, value) => {
       state.filter = value;

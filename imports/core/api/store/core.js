@@ -6,10 +6,6 @@ export default {
     submitProposalModalShown: false,
   }),
 
-  getters: {
-    submitProposalModalShown: state => state.submitProposalModalShown,
-  },
-
   mutations: {
     toggleProposalModal: (state) => {
       state.proposalModalShown = !state.proposalModalShown;
@@ -20,10 +16,6 @@ export default {
   },
 
   actions: {
-    doSomething({ commit }, value) {
-      // Good place to call meteor methods
-      console.log('Async stuff');
-    },
     submitSubmitProposalForm({ commit }, title) {
       Meteor.call('proposals.add', title, (err, res) => {
         if (err) {

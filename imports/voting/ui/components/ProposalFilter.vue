@@ -5,7 +5,7 @@
         <button
           v-for="f in filters"
           :key="f"
-          :class="{active: isActive(f)}"
+          :class="{active: currentFilter === f}"
           @click="setFilter(f)"
         >
           {{f}}
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import { mapState, mapMutations } from 'vuex';
+
   export default {
     data() {
       return {
@@ -31,19 +33,12 @@
         ],
       };
     },
-    computed: {
-      currentFilter() {
-        return this.$store.state.voting.filter;
-      },
-    },
-    methods: {
-      setFilter(value) {
-        this.$store.commit('voting/setFilter', value);
-      },
-      isActive(filter) {
-        return this.$store.state.voting.filter === filter;
-      }
-    }
+    computed: mapState({
+      currentFilter: store => state.voting.filter,
+    }),
+    methods: mapMutations({
+      setFilter: 'voting/setFilter',
+    }),
   }
 </script>
 

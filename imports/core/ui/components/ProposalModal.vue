@@ -11,7 +11,7 @@
         </div>
         <h2>
           <template v-if="!canSignByWeb3">
-            I {{isActive('agree') ? '' : 'dis'}}agree that
+            I {{proposalType === 'agree' ? '' : 'dis'}}agree that
           </template>
           {{proposal.statement}}
         </h2>
@@ -31,14 +31,14 @@
         <div class="tab-header">
           <button
             class="agree"
-            :class="{active: isActive('agree')}"
+            :class="{active: proposalType === 'agree'}"
             @click="setProposalType('agree')"
           >
             I agree
           </button>
           <button
             class="doubt"
-            :class="{active: isActive('doubt')}"
+            :class="{active: proposalType === 'doubt'}"
             @click="setProposalType('doubt')"
           >
             I disagree
@@ -61,7 +61,9 @@
 </template>
 
 <script>
-  import VueDisqus from 'vue-disqus/VueDisqus.vue'
+  import VueDisqus from 'vue-disqus/VueDisqus.vue';
+  import { mapState, mapMutations } from 'vuex';
+
   export default {
     props: ['proposal',  'type'],
     data() {
@@ -71,26 +73,21 @@
       }
     },
     computed: {
-      proposalType() {
-        return this.$store.state.voting.proposalType;
-      },
+      ...mapState({
+        proposalType: state => state.voting.proposalType,
+      }),
       url() {
         return Meteor.absoluteUrl() + 'proposal/' + this.proposal._id;
       }
     },
     components: {
-      VueDisqus
+      VueDisqus,
     },
     methods: {
-      isActive(type) {
-        return this.$store.state.voting.proposalType === type;
-      },
-      toggleProposalModal() {
-        this.$store.commit('voting/toggleProposalModal');
-      },
-      setProposalType(type) {
-        this.$store.commit('voting/setProposalType', type);
-      },
+      ...mapMutations({
+        toggleProposalModal: 'voting/toggleProposalModal',
+        setProposalType: 'voting/setProposalType',
+      }),
       vote() {
         if (this.signature) {
           this.$store.dispatch('voting/vote', this.signature);

@@ -26,6 +26,7 @@
 
 <script>
   import Vue from 'vue';
+  import { mapMutations } from 'vuex';
   import { Counts } from 'meteor/tmeasday:publish-counts';
   import MugenScroll from 'vue-mugen-scroll'
 
@@ -66,11 +67,9 @@
         return Counts.get('proposals');
       }
     },
-    methods: {
-      loadMore: function() {
-        this.$store.commit('voting/incrementLimit');
-      }
-    },
+    methods: mapMutations({
+      loadMore: 'voting/incrementLimit',
+    }),
   }
 </script>
 

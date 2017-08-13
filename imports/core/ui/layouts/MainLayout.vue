@@ -13,6 +13,8 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+
   import { Proposals } from '/imports/core';
   import AppHeader from '../components/AppHeader.vue';
   import ProposalModal from '../components/ProposalModal.vue';
@@ -24,14 +26,10 @@
       ProposalModal,
       SubmitProposalModal,
     },
-    computed: {
-      proposal() {
-        return this.$store.state.voting.proposal;
-      },
-      submitProposalModalShown() {
-        return this.$store.state.core.submitProposalModalShown;
-      }
-    },
+    computed: mapState({
+      proposal: state => state.voting.proposal,
+      submitProposalModalShown: state => state.core.submitProposalModalShown,
+    }),
   }
 </script>
 

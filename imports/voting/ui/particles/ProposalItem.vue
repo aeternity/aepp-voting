@@ -39,7 +39,6 @@
     },
     methods: {
       toggleProposalModal(type) {
-        console.log(type);
         this.$store.commit('voting/toggleProposalModal', {  proposal: this.proposal, type });
       },
     },
