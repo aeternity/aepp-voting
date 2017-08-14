@@ -34,10 +34,30 @@ export default {
   },
 
   actions: {
-    handleError(unusedStore, error) {
-      swal({
+    handleError(unusedStore, { error, upVote }) {
+      const message = {
+        'invalid-signature': {
+          title: 'Your vote was not received!',
+          text: 'Something wrong with signature',
+        },
+        'no-tokens': {
+          title: 'Your vote was not received!',
+          text: 'You don\'t have Aeternity tokens',
+        },
+        'already-voted': {
+          title: 'Invalid vote!',
+          text: [
+            'You have already',
+            upVote? 'agreed to' : 'disagreed with',
+            'this proposal in the past'
+          ].join(' '),
+        },
+      }[error.error] || {
         title: 'Something went wrong!',
         text: 'Your vote was not received!',
+      };
+      swal({
+        ...message,
         type: 'error',
         animation: false,
       });
@@ -46,7 +66,7 @@ export default {
     vote({ state, commit, dispatch }, signature) {
       const upVote = state.proposalType === 'agree';
       Meteor.call('proposals.vote', state.proposal._id, signature, upVote, (error) => {
-        if (error) dispatch('handleError', error);
+        if (error) dispatch('handleError', { error, upVote });
         else {
           swal({
             title: 'Thank you!',
@@ -64,7 +84,7 @@ export default {
       const statement = `I ${state.proposalType === 'agree' ? '' : 'dis'}agree that `
         + state.proposal.statement;
       sign(defaultAccount, sha3(statement), (error, signature) => {
-        if (error) dispatch('handleError', error);
+        if (error) dispatch('handleError', { error });
         else dispatch('vote', signature);
       });
     },

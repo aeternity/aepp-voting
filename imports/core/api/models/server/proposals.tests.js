@@ -41,20 +41,20 @@ describe('proposals', () => {
     describe('proposals.vote', () => {
       it('throws exception if proposal not found', () => {
         expect(() => Meteor.call('proposals.vote', Random.id(), 'test', true))
-          .to.throw('Proposal not found');
+          .to.throw('proposal-not-found');
       });
 
       it('throws exception if signature is wrong', () => {
         const { _id: proposalId } = Factory.create('proposal');
         expect(() => Meteor.call('proposals.vote', proposalId, 'test', true))
-          .to.throw('Something wrong with signature');
+          .to.throw('invalid-signature');
       });
 
       it('throws exception if no tokens associated with account', () => {
         const { _id: proposalId } = Factory.create('proposal', { statement: message });
         sinon.stub(contract, 'balanceOf', () => 0);
         expect(() => Meteor.call('proposals.vote', proposalId, upVoteSignature, true))
-          .to.throw('You do not have aeternity tokens');
+          .to.throw('no-tokens');
         contract.balanceOf.restore();
       });
 
@@ -63,7 +63,7 @@ describe('proposals', () => {
         sinon.stub(contract, 'balanceOf', () => 5);
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         expect(() => Meteor.call('proposals.vote', proposalId, upVoteSignature, true))
-          .to.throw('Already voted in this proposal');
+          .to.throw('already-voted');
         contract.balanceOf.restore();
       });
 
