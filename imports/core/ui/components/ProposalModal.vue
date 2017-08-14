@@ -9,16 +9,21 @@
         <div class="quote left">
           <i class="fa fa-quote-left" />
         </div>
-        <h2>{{proposal.statement}}</h2>
+        <h2>
+          <template v-if="!canSignByWeb3">
+            I {{proposalType === 'agree' ? '' : 'dis'}}agree that
+          </template>
+          {{proposal.statement}}
+        </h2>
         <div class="quote right">
           <i class="fa fa-quote-right" />
         </div>
       </div>
       <div class="voting-buttons" v-if="canSignByWeb3">
-        <button class="agree" @click="voteByWeb3(true)">
+        <button class="up-vote" :class="isVotedClass(true)" @click="voteByWeb3(true)">
           I agree
         </button>
-        <button class="doubt" @click="voteByWeb3(false)">
+        <button class="down-vote" :class="isVotedClass(false)" @click="voteByWeb3(false)">
           I disagree
         </button>
       </div>
@@ -26,17 +31,17 @@
         <div class="tab-header">
           <button
             class="agree"
-            :class="{active: isActive('agree')}"
+            :class="{active: proposalType === 'agree'}"
             @click="setProposalType('agree')"
           >
             I agree
           </button>
           <button
             class="doubt"
-            :class="{active: isActive('doubt')}"
+            :class="{active: proposalType === 'doubt'}"
             @click="setProposalType('doubt')"
           >
-            I doubt
+            I disagree
           </button>
         </div>
         <form @submit.prevent="vote" class="tab">
@@ -45,18 +50,32 @@
           <button>Submit</button>
         </form>
       </div>
+      <div class="current-status" v-if="proposal.vote">
+        You {{proposal.vote.upVote ? 'agreed to' : 'disagreed with'}} this proposal on
+        {{proposal.vote.createdAt.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric'
+        })}}
+        with a voting weight of {{balance}} AE
+      </div>
       <div class="comments">
         <VueDisqus
           shortname="aeternity-voting"
           :identifier="proposal._id"
           :url="url"></VueDisqus>
       </div>
+      <div class="footer">
+        <a :href="`/proposals/${proposal._id}`">All signatures as JSON</a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import VueDisqus from 'vue-disqus/VueDisqus.vue'
+  import VueDisqus from 'vue-disqus/VueDisqus.vue';
+  import { mapState, mapMutations } from 'vuex';
+
+  import { Accounts } from '/imports/accounts';
+
   export default {
     props: ['proposal',  'type'],
     data() {
@@ -66,25 +85,34 @@
       }
     },
     computed: {
-      proposalType() {
-        return this.$store.state.voting.proposalType;
-      },
+      ...mapState({
+        proposalType: state => state.voting.proposalType,
+      }),
       url() {
         return Meteor.absoluteUrl() + 'proposal/' + this.proposal._id;
       }
     },
     components: {
-      VueDisqus
+      VueDisqus,
+    },
+    meteor: {
+      $subscribe: {
+        'accounts.balance'() {
+          return [ this.$store.state.core.accountId ];
+        },
+      },
+      balance () {
+        const account = Accounts.findOne(this.$store.state.core.accountId);
+        return account && account.balance;
+      },
     },
     methods: {
-      isActive(type) {
-        return this.$store.state.voting.proposalType === type;
-      },
-      toggleProposalModal() {
-        this.$store.commit('voting/toggleProposalModal');
-      },
-      setProposalType(type) {
-        this.$store.commit('voting/setProposalType', type);
+      ...mapMutations({
+        toggleProposalModal: 'voting/toggleProposalModal',
+        setProposalType: 'voting/setProposalType',
+      }),
+      isVotedClass(upVote) {
+        return this.proposal.vote && this.proposal.vote.upVote === upVote ? 'already' : '';
       },
       vote() {
         if (this.signature) {
@@ -92,7 +120,8 @@
         }
       },
       voteByWeb3(upVote) {
-        this.$store.dispatch('voting/voteByWeb3', upVote);
+        this.$store.commit('voting/setProposalType', upVote ? 'agree' : 'doubt');
+        this.$store.dispatch('voting/voteByWeb3');
       },
     }
   };
@@ -141,7 +170,7 @@
           padding: 0;
         }
       }
-      .modal-header, .voting-buttons, .voting-section, .comments {
+      .modal-header, .voting-buttons, .voting-section, .current-status, .comments, .footer {
         padding: $gutter $gutter * 2;
       }
     }
@@ -173,31 +202,17 @@
     .voting-buttons {
       text-align: center;
       margin-bottom: $gutter * 2;
-      @media screen and (max-width: $screen-md) {
+      @media screen and (max-width: $screen-sm) {
         margin-top: $gutter;
       }
       button {
         margin: $gutter;
         font-size: 28px;
         padding: $gutter $gutter * 4;
-        border-width: 2px;
-        @media screen and (max-width: $screen-md) {
+        @media screen and (max-width: $screen-sm) {
           width: 100%;
           margin: $gutter 0;
         }
-        &:hover {
-          color: white;
-        }
-      }
-      .agree {
-        color: $green;
-        border-color: $green;
-        &:hover {
-          background-color: $green;
-        }
-      }
-      .doubt:hover {
-        background-color: $red;
       }
     }
     .voting-section {
@@ -282,6 +297,16 @@
             color: lighten($green, 20%);
           }
         }
+      }
+    }
+    .current-status {
+      color: $gray;
+      text-align: center;
+    }
+    .footer {
+      text-align: right;
+      a {
+        color: $brand-color;
       }
     }
   }

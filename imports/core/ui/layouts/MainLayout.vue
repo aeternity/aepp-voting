@@ -13,6 +13,8 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+
   import { Proposals } from '/imports/core';
   import AppHeader from '../components/AppHeader.vue';
   import ProposalModal from '../components/ProposalModal.vue';
@@ -24,14 +26,10 @@
       ProposalModal,
       SubmitProposalModal,
     },
-    computed: {
-      proposal() {
-        return this.$store.state.voting.proposal;
-      },
-      submitProposalModalShown() {
-        return this.$store.state.core.submitProposalModalShown;
-      }
-    },
+    computed: mapState({
+      proposal: state => state.voting.proposal,
+      submitProposalModalShown: state => state.core.submitProposalModalShown,
+    }),
   }
 </script>
 
@@ -39,6 +37,7 @@
   @import "/imports/core/ui/styles/normalize";
   @import "/imports/core/ui/styles/fonts";
   @import "/imports/core/ui/styles/variables";
+  @import "/imports/core/ui/styles/vote-button";
   * {
     outline: none !important;
     -webkit-font-smoothing: antialiased;

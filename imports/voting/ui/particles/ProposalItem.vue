@@ -17,8 +17,20 @@
         <p class="doubt"><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
       </div>
       <div class="controls">
-        <button @click="toggleProposalModal('agree')" class="upvote"><i class="fa fa-chevron-up" /></button>
-        <button @click.stop="toggleProposalModal('doubt')"><i class="fa fa-chevron-down" /></button>
+        <button
+          @click="toggleProposalModal('agree')"
+          class="up-vote"
+          :class="isVotedClass(true)"
+        >
+          <i class="fa fa-chevron-up" />
+        </button>
+        <button
+          @click.stop="toggleProposalModal('doubt')"
+          class="down-vote"
+          :class="isVotedClass(false)"
+        >
+          <i class="fa fa-chevron-down" />
+        </button>
       </div>
     </aside>
   </li>
@@ -38,8 +50,10 @@
       },
     },
     methods: {
+      isVotedClass(upVote) {
+        return this.proposal.vote && this.proposal.vote.upVote === upVote ? 'already' : '';
+      },
       toggleProposalModal(type) {
-        console.log(type);
         this.$store.commit('voting/toggleProposalModal', {  proposal: this.proposal, type });
       },
     },
@@ -91,9 +105,8 @@
     }
     .voted {
       position: relative;
-      padding: $gutter * 1.5 $gutter $gutter * 1.5 $gutter * 2;
+      padding: $gutter * 1.5 $gutter * 1.5 $gutter * 1.5 $gutter * 2;
       width: 140px;
-      padding-right: $gutter * 1.5;
       flex-grow: 0;
       flex-shrink: 0;
       text-align: right;
@@ -123,29 +136,11 @@
         width: 62px;
         height: 62px;
         margin: 5px;
-        border-width: 2px;
         font-size: 22px;
-        color: $red;
         padding: 0;
-        border-color: $red;
         i {
           position: relative;
           top: -2px;
-        }
-        &:hover {
-          background: $red;
-          color: white;
-        }
-        &.upvote {
-          color: $green;
-          border-color: $green;
-          i {
-            top: -1px;
-          }
-          &:hover {
-            background: $green;
-            color: white;
-          }
         }
       }
     }

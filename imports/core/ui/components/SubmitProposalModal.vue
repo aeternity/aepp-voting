@@ -17,6 +17,8 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex';
+
   export default {
     data() {
       return {
@@ -25,9 +27,9 @@
       }
     },
     methods: {
-      toggleSubmitProposalModal() {
-        this.$store.commit('core/toggleSubmitProposalModal');
-      },
+      ...mapMutations({
+        toggleSubmitProposalModal: 'core/toggleSubmitProposalModal',
+      }),
       submitSubmitProposalForm() {
         if (this.title) {
           this.$store.dispatch('core/submitSubmitProposalForm', this.title);

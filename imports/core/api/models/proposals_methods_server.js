@@ -16,17 +16,18 @@ onErc20ContractReceiving(erc20contract =>
       check(upVote, Boolean);
 
       const proposal = Proposals.findOne(proposalId);
-      if (!proposal) throw new Meteor.Error('Proposal not found');
+      if (!proposal) throw new Meteor.Error('proposal-not-found');
 
       let accountId;
       try {
-        accountId = getEthereumAddress(proposal.statement, signature);
+        accountId = getEthereumAddress(
+          `I ${upVote ? '' : 'dis'}agree that ` + proposal.statement, signature);
       }
       catch (e) {
-        throw new Meteor.Error('Something wrong with signature');
+        throw new Meteor.Error('invalid-signature');
       }
       const balance = +erc20contract.balanceOf(accountId);
-      if (!balance) throw new Meteor.Error('You do not have aeternity tokens');
+      if (!balance) throw new Meteor.Error('no-tokens');
       if (Accounts.findOne(accountId)) Accounts.update(accountId, { balance });
       else Accounts.insert({ _id: accountId, balance });
 
@@ -37,7 +38,7 @@ onErc20ContractReceiving(erc20contract =>
         (upVote && previousVote === UP_VOTE) ||
         (!upVote && previousVote === DOWN_VOTE)
       ) {
-        throw new Meteor.Error('Already voted in this proposal');
+        throw new Meteor.Error('already-voted');
       }
 
       Proposals.update(proposalId, {
@@ -51,5 +52,7 @@ onErc20ContractReceiving(erc20contract =>
           [`votes.${accountId}`]: { signature, upVote, createdAt: new Date() },
         },
       });
+
+      return { accountId };
     },
   }));

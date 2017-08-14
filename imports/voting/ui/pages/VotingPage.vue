@@ -8,13 +8,11 @@
 <script>
   import ProposalFilter from '../components/ProposalFilter.vue';
   import ProposalList from '../components/ProposalList.vue';
-  import HistoryList from '../components/HistoryList.vue';
 
   export default {
     components: {
       ProposalFilter,
       ProposalList,
-      HistoryList,
     },
   }
 </script>

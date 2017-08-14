@@ -4,11 +4,8 @@ export default {
   state: () => ({
     proposalModalShown: false,
     submitProposalModalShown: false,
+    accountId: '',
   }),
-
-  getters: {
-    submitProposalModalShown: state => state.submitProposalModalShown,
-  },
 
   mutations: {
     toggleProposalModal: (state) => {
@@ -17,13 +14,12 @@ export default {
     toggleSubmitProposalModal: (state) => {
       state.submitProposalModalShown = !state.submitProposalModalShown;
     },
+    setAccountId: (state, accountId) => {
+      state.accountId = accountId;
+    },
   },
 
   actions: {
-    doSomething({ commit }, value) {
-      // Good place to call meteor methods
-      console.log('Async stuff');
-    },
     submitSubmitProposalForm({ commit }, title) {
       Meteor.call('proposals.add', title, (err, res) => {
         if (err) {

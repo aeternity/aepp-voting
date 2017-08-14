@@ -10,17 +10,12 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex';
+
   export default {
-    data() {
-      return {
-        editedTodo: null,
-      };
-    },
-    methods: {
-      toggleSubmitProposalModal() {
-        this.$store.commit('core/toggleSubmitProposalModal');
-      },
-    },
+    methods: mapMutations({
+      toggleSubmitProposalModal: 'core/toggleSubmitProposalModal',
+    }),
   }
 </script>
 

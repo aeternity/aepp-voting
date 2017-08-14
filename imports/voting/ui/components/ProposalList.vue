@@ -26,6 +26,7 @@
 
 <script>
   import Vue from 'vue';
+  import { mapMutations } from 'vuex';
   import { Counts } from 'meteor/tmeasday:publish-counts';
   import MugenScroll from 'vue-mugen-scroll'
 
@@ -55,22 +56,25 @@
           return [
             this.$store.state.voting.filter,
             this.$store.state.voting.limit,
+            this.$store.state.core.accountId,
           ];
         },
         'proposals.count': [],
       },
       proposals () {
-        return Proposals.find({}, { sort: { createdAt: -1 }});
+        return Proposals.find({}, { sort: { createdAt: -1 }})
+          .map(proposal => ({
+            ...proposal,
+            vote: proposal.votes[this.$store.state.core.accountId],
+          }));
       },
       proposalsCount () {
         return Counts.get('proposals');
       }
     },
-    methods: {
-      loadMore: function() {
-        this.$store.commit('voting/incrementLimit');
-      }
-    },
+    methods: mapMutations({
+      loadMore: 'voting/incrementLimit',
+    }),
   }
 </script>
 

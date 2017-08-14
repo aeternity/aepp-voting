@@ -1,0 +1,23 @@
+@import "/imports/core/ui/styles/variables";
+
+button {
+  @mixin colored-button-mixin($color) {
+    color: $color;
+    border: 2px solid $color;
+    &.already {
+      background-color: lighten($color, 30);
+    }
+    &:hover {
+      color: white;
+      background-color: $color;
+    }
+  }
+
+  &.up-vote {
+    @include colored-button-mixin($green);
+  }
+
+  &.down-vote {
+    @include colored-button-mixin($red);
+  }
+}
