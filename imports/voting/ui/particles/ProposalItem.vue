@@ -17,8 +17,20 @@
         <p class="doubt"><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
       </div>
       <div class="controls">
-        <button @click="toggleProposalModal('agree')" class="up-vote"><i class="fa fa-chevron-up" /></button>
-        <button @click.stop="toggleProposalModal('doubt')" class="down-vote"><i class="fa fa-chevron-down" /></button>
+        <button
+          @click="toggleProposalModal('agree')"
+          class="up-vote"
+          :class="isVotedClass(true)"
+        >
+          <i class="fa fa-chevron-up" />
+        </button>
+        <button
+          @click.stop="toggleProposalModal('doubt')"
+          class="down-vote"
+          :class="isVotedClass(false)"
+        >
+          <i class="fa fa-chevron-down" />
+        </button>
       </div>
     </aside>
   </li>
@@ -38,6 +50,9 @@
       },
     },
     methods: {
+      isVotedClass(upVote) {
+        return this.proposal.vote && this.proposal.vote.upVote === upVote ? 'already' : '';
+      },
       toggleProposalModal(type) {
         this.$store.commit('voting/toggleProposalModal', {  proposal: this.proposal, type });
       },

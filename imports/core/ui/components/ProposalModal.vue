@@ -20,10 +20,10 @@
         </div>
       </div>
       <div class="voting-buttons" v-if="canSignByWeb3">
-        <button class="up-vote" @click="voteByWeb3(true)">
+        <button class="up-vote" :class="isVotedClass(true)" @click="voteByWeb3(true)">
           I agree
         </button>
-        <button class="down-vote" @click="voteByWeb3(false)">
+        <button class="down-vote" :class="isVotedClass(false)" @click="voteByWeb3(false)">
           I disagree
         </button>
       </div>
@@ -50,6 +50,13 @@
           <button>Submit</button>
         </form>
       </div>
+      <div class="current-status" v-if="proposal.vote">
+        You {{proposal.vote.upVote ? 'agreed to' : 'disagreed with'}} this proposal on
+        {{proposal.vote.createdAt.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric'
+        })}}
+        with a voting weight of {{balance}} AE
+      </div>
       <div class="comments">
         <VueDisqus
           shortname="aeternity-voting"
@@ -63,6 +70,8 @@
 <script>
   import VueDisqus from 'vue-disqus/VueDisqus.vue';
   import { mapState, mapMutations } from 'vuex';
+
+  import { Accounts } from '/imports/accounts';
 
   export default {
     props: ['proposal',  'type'],
@@ -83,11 +92,25 @@
     components: {
       VueDisqus,
     },
+    meteor: {
+      $subscribe: {
+        'accounts.balance'() {
+          return [ this.$store.state.core.accountId ];
+        },
+      },
+      balance () {
+        const account = Accounts.findOne(this.$store.state.core.accountId);
+        return account && account.balance;
+      },
+    },
     methods: {
       ...mapMutations({
         toggleProposalModal: 'voting/toggleProposalModal',
         setProposalType: 'voting/setProposalType',
       }),
+      isVotedClass(upVote) {
+        return this.proposal.vote && this.proposal.vote.upVote === upVote ? 'already' : '';
+      },
       vote() {
         if (this.signature) {
           this.$store.dispatch('voting/vote', this.signature);
@@ -144,7 +167,7 @@
           padding: 0;
         }
       }
-      .modal-header, .voting-buttons, .voting-section, .comments {
+      .modal-header, .voting-buttons, .voting-section, .current-status, .comments {
         padding: $gutter $gutter * 2;
       }
     }
@@ -272,6 +295,10 @@
           }
         }
       }
+    }
+    .current-status {
+      color: $gray;
+      text-align: center;
     }
   }
 </style>

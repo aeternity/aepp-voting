@@ -52,5 +52,7 @@ onErc20ContractReceiving(erc20contract =>
           [`votes.${accountId}`]: { signature, upVote, createdAt: new Date() },
         },
       });
+
+      return { accountId };
     },
   }));

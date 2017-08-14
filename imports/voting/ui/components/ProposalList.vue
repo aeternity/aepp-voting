@@ -56,12 +56,17 @@
           return [
             this.$store.state.voting.filter,
             this.$store.state.voting.limit,
+            this.$store.state.core.accountId,
           ];
         },
         'proposals.count': [],
       },
       proposals () {
-        return Proposals.find({}, { sort: { createdAt: -1 }});
+        return Proposals.find({}, { sort: { createdAt: -1 }})
+          .map(proposal => ({
+            ...proposal,
+            vote: proposal.votes[this.$store.state.core.accountId],
+          }));
       },
       proposalsCount () {
         return Counts.get('proposals');

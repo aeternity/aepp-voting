@@ -65,9 +65,10 @@ export default {
     },
     vote({ state, commit, dispatch }, signature) {
       const upVote = state.proposalType === 'agree';
-      Meteor.call('proposals.vote', state.proposal._id, signature, upVote, (error) => {
+      Meteor.call('proposals.vote', state.proposal._id, signature, upVote, (error, result) => {
         if (error) dispatch('handleError', { error, upVote });
         else {
+          const { accountId } = result;
           swal({
             title: 'Thank you!',
             text: 'Your vote was received!',
@@ -76,6 +77,7 @@ export default {
             timer: 3000,
           });
           commit('toggleProposalModal');
+          commit('core/setAccountId', accountId, { root: true });
         }
       });
     },

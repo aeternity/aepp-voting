@@ -4,6 +4,7 @@ export default {
   state: () => ({
     proposalModalShown: false,
     submitProposalModalShown: false,
+    accountId: '',
   }),
 
   mutations: {
@@ -12,6 +13,9 @@ export default {
     },
     toggleSubmitProposalModal: (state) => {
       state.submitProposalModalShown = !state.submitProposalModalShown;
+    },
+    setAccountId: (state, accountId) => {
+      state.accountId = accountId;
     },
   },
 

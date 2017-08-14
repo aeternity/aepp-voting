@@ -4,6 +4,9 @@ button {
   @mixin colored-button-mixin($color) {
     color: $color;
     border: 2px solid $color;
+    &.already {
+      background-color: lighten($color, 30);
+    }
     &:hover {
       color: white;
       background-color: $color;
