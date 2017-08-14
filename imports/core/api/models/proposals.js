@@ -27,6 +27,15 @@ Proposals.attachSchema(new SimpleSchema({
   updatedAt,
 }));
 
+Proposals.publicFields = {
+  _id: 1,
+  statement: 1,
+  upVoteAmount: 1,
+  downVoteAmount: 1,
+  createdAt: 1,
+  updatedAt: 1,
+};
+
 Accounts.after.update(function(unusedUserId, doc) {
   if (!doc.balance && !this.previous.balance) return;
   const dBalance = doc.balance - this.previous.balance;

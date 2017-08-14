@@ -63,6 +63,9 @@
           :identifier="proposal._id"
           :url="url"></VueDisqus>
       </div>
+      <div class="footer">
+        <a :href="`/proposals/${proposal._id}`">All signatures as JSON</a>
+      </div>
     </div>
   </div>
 </template>
@@ -167,7 +170,7 @@
           padding: 0;
         }
       }
-      .modal-header, .voting-buttons, .voting-section, .current-status, .comments {
+      .modal-header, .voting-buttons, .voting-section, .current-status, .comments, .footer {
         padding: $gutter $gutter * 2;
       }
     }
@@ -299,6 +302,12 @@
     .current-status {
       color: $gray;
       text-align: center;
+    }
+    .footer {
+      text-align: right;
+      a {
+        color: $brand-color;
+      }
     }
   }
 </style>

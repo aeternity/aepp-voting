@@ -6,13 +6,8 @@ Meteor.publish('proposals.list', function proposals(filter, limit, accountId) {
     sort: { createdAt: -1 },
     limit,
     fields: {
-      _id: 1,
-      statement: 1,
-      upVoteAmount: 1,
-      downVoteAmount: 1,
+      ...Proposals.publicFields,
       [`votes.${accountId}`]: 1,
-      createdAt: 1,
-      updatedAt: 1,
     },
   });
 });
