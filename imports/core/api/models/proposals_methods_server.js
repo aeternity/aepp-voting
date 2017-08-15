@@ -41,15 +41,18 @@ onErc20ContractReceiving(erc20contract =>
         throw new Meteor.Error('already-voted');
       }
 
+      const { upVoteAmount: upVA, downVoteAmount: downVA } = proposal;
+      const dUpVA = upVote ? balance : (previousVote ? -balance : 0);
+      const dDownVA = !upVote ? balance : (previousVote ? -balance : 0);
+
       Proposals.update(proposalId, {
         $inc: {
-          [upVote ? 'upVoteAmount' : 'downVoteAmount']: balance,
-          ...previousVote && {
-            [upVote ? 'downVoteAmount' : 'upVoteAmount']: -balance,
-          },
+          upVoteAmount: dUpVA,
+          downVoteAmount: dDownVA,
         },
         $set: {
           [`votes.${accountId}`]: { signature, upVote, createdAt: new Date() },
+          upVoteRatio: (upVA + dUpVA) / (upVA + dUpVA + downVA + dDownVA),
         },
       });
 

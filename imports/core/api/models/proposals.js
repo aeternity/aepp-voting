@@ -13,6 +13,7 @@ Proposals.attachSchema(new SimpleSchema({
   statement: { type: String },
   upVoteAmount: { type: SimpleSchema.Integer, defaultValue: 0 },
   downVoteAmount: { type: SimpleSchema.Integer, defaultValue: 0 },
+  upVoteRatio: { type: Number, defaultValue: 0.5 },
   votes: { type: Object, blackbox: true, defaultValue: {} },
   /*
   votes: {
@@ -34,6 +35,15 @@ Proposals.publicFields = {
   downVoteAmount: 1,
   createdAt: 1,
   updatedAt: 1,
+};
+
+Proposals.filterTypes = {
+  ACTIVE: 'active',
+  CONTROVERSIAL: 'controversial',
+  DECIDED: 'decided',
+  VALID: 'valid',
+  INVALID: 'invalid',
+  NEWEST: 'newest',
 };
 
 Accounts.after.update(function(unusedUserId, doc) {

@@ -18,23 +18,16 @@
 <script>
   import { mapState, mapMutations } from 'vuex';
 
+  import { Proposals } from '/imports/core';
+
   export default {
     data() {
       return {
-        filters: [
-          'all',
-          'popular',
-          'controversial',
-          'decided',
-          'valid',
-          'invalid',
-          'newest',
-          'hidden'
-        ],
+        filters: Object.values(Proposals.filterTypes),
       };
     },
     computed: mapState({
-      currentFilter: store => state.voting.filter,
+      currentFilter: store => store.voting.filter,
     }),
     methods: mapMutations({
       setFilter: 'voting/setFilter',

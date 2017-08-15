@@ -1,8 +1,10 @@
+import { Proposals } from '/imports/core';
+
 export default {
   namespaced: true,
 
   state: () => ({
-    filter: 'all',
+    filter: Proposals.filterTypes.ACTIVE,
     limit: 10,
     proposalType: 'agree',
     proposal: null,

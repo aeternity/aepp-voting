@@ -1,6 +1,6 @@
 <template>
   <div class="voting-page page">
-    <!--<proposal-filter />-->
+    <proposal-filter />
     <proposal-list />
   </div>
 </template>
