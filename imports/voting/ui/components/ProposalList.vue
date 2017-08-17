@@ -49,6 +49,16 @@
       loading() {
         return false;
       },
+      proposals () {
+        const proposals = Proposals.find({}, { sort: { createdAt: -1 }}).fetch()
+          .map(proposal => ({
+            ...proposal,
+            sumToken: proposal.upVoteAmount + proposal.downVoteAmount,
+            vote: proposal.votes[this.$store.state.core.accountId],
+          }))
+        if (this.$store.state.voting.filter === 'popular') console.log(proposals)
+        return proposals
+      },
     },
     meteor: {
       $subscribe: {
@@ -60,13 +70,6 @@
           ];
         },
         'proposals.count': [],
-      },
-      proposals () {
-        return Proposals.find({}, { sort: { createdAt: -1 }})
-          .map(proposal => ({
-            ...proposal,
-            vote: proposal.votes[this.$store.state.core.accountId],
-          }));
       },
       proposalsCount () {
         return Counts.get('proposals');

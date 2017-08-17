@@ -39,6 +39,7 @@ Proposals.publicFields = {
 
 Proposals.filterTypes = {
   NEWEST: 'newest',
+  POPULAR: 'popular',
   ACTIVE: 'active',
   CONTROVERSIAL: 'controversial',
   DECIDED: 'decided',

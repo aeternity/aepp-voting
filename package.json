@@ -17,7 +17,6 @@
     "format-number": "^3.0.0",
     "meteor-node-stubs": "~0.2.4",
     "moment": "^2.18.1",
-    "semver": "^5.4.1",
     "simpl-schema": "^0.3.2",
     "underscore": "^1.8.3",
     "vue": "^2.4.2",
