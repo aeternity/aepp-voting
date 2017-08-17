@@ -38,12 +38,12 @@ Proposals.publicFields = {
 };
 
 Proposals.filterTypes = {
+  NEWEST: 'newest',
   ACTIVE: 'active',
   CONTROVERSIAL: 'controversial',
   DECIDED: 'decided',
   VALID: 'valid',
   INVALID: 'invalid',
-  NEWEST: 'newest',
 };
 
 Accounts.after.update(function(unusedUserId, doc) {
