@@ -2,19 +2,20 @@ import { Proposals } from './proposals';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 Meteor.publish('proposals.list', function proposals(filter, limit, accountId) {
-  const { ACTIVE, CONTROVERSIAL, DECIDED, VALID, INVALID, NEWEST } = Proposals.filterTypes;
-  const selector = {
-    [ACTIVE]: { updatedAt: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } },
-    [CONTROVERSIAL]: { $and: [{ upVoteRatio: { $gte: 0.25 } }, { upVoteRatio: { $lte: 0.75 }}] },
-    [DECIDED]: { $or: [{ upVoteRatio: { $lte: 0.25 } }, { upVoteRatio: { $gte: 0.75 }}] },
-    [VALID]: { upVoteRatio: { $gte: 0.75 } },
-    [INVALID]: { upVoteRatio: { $lte: 0.25 } },
-    [NEWEST]: {},
+  const { ACTIVE, CONTROVERSIAL, DECIDED, VALID, INVALID, NEWEST, POPULAR } = Proposals.filterTypes;
+  const [selector, sort = { createdAt: -1 }] = {
+    [ACTIVE]: [{ updatedAt: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } }],
+    [CONTROVERSIAL]: [{ $and: [{ upVoteRatio: { $gte: 0.25 } }, { upVoteRatio: { $lte: 0.75 }}] }],
+    [DECIDED]: [{ $or: [{ upVoteRatio: { $lte: 0.25 } }, { upVoteRatio: { $gte: 0.75 }}] }],
+    [VALID]: [{ upVoteRatio: { $gte: 0.75 } }],
+    [INVALID]: [{ upVoteRatio: { $lte: 0.25 } }],
+    [NEWEST]: [{}],
+    [POPULAR]: [{}, { totalVoteAmount: -1 }],
   }[filter];
   if (!selector) throw new Meteor.Error('invalid-filter');
 
   return Proposals.find(selector, {
-    sort: { createdAt: -1 },
+    sort,
     limit,
     fields: {
       ...Proposals.publicFields,

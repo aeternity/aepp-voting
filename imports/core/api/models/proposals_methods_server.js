@@ -49,6 +49,7 @@ onErc20ContractReceiving(erc20contract =>
         $inc: {
           upVoteAmount: dUpVA,
           downVoteAmount: dDownVA,
+          totalVoteAmount: dUpVA + dDownVA,
         },
         $set: {
           [`votes.${accountId}`]: { signature, upVote, createdAt: new Date() },

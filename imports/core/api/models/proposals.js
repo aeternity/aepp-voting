@@ -14,6 +14,7 @@ Proposals.attachSchema(new SimpleSchema({
   upVoteAmount: { type: SimpleSchema.Integer, defaultValue: 0 },
   downVoteAmount: { type: SimpleSchema.Integer, defaultValue: 0 },
   upVoteRatio: { type: Number, defaultValue: 0.5 },
+  totalVoteAmount: { type: SimpleSchema.Integer, defaultValue: 0 },
   votes: { type: Object, blackbox: true, defaultValue: {} },
   /*
   votes: {
@@ -44,6 +45,7 @@ Proposals.filterTypes = {
   VALID: 'valid',
   INVALID: 'invalid',
   NEWEST: 'newest',
+  POPULAR: 'popular',
 };
 
 Accounts.after.update(function(unusedUserId, doc) {

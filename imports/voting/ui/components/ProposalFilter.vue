@@ -23,7 +23,7 @@
   export default {
     data() {
       return {
-        filters: Object.values(Proposals.filterTypes),
+        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.POPULAR],
       };
     },
     computed: mapState({

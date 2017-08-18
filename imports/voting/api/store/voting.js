@@ -4,7 +4,7 @@ export default {
   namespaced: true,
 
   state: () => ({
-    filter: Proposals.filterTypes.ACTIVE,
+    filter: Proposals.filterTypes.NEWEST,
     limit: 10,
     proposalType: 'agree',
     proposal: null,
