@@ -62,7 +62,9 @@
         'proposals.count': [],
       },
       proposals () {
-        return Proposals.find({}, { sort: { createdAt: -1 }})
+        return Proposals.find({}, {
+          sort: Proposals.filterSort[this.$store.state.voting.filter] || { createdAt: -1 },
+        })
           .map(proposal => ({
             ...proposal,
             vote: proposal.votes[this.$store.state.core.accountId],

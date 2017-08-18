@@ -48,6 +48,10 @@ Proposals.filterTypes = {
   POPULAR: 'popular',
 };
 
+Proposals.filterSort = {
+  [Proposals.filterTypes.POPULAR]: { totalVoteAmount: -1 },
+};
+
 Accounts.after.update(function(unusedUserId, doc) {
   if (!doc.balance && !this.previous.balance) return;
   const dBalance = doc.balance - this.previous.balance;
