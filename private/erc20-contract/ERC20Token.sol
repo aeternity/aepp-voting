@@ -39,8 +39,8 @@ contract ERC20Token is ERC20Interface {
     string public constant symbol = "EAEV";
     string public constant name = "Example Aeternity Voting";
     uint8 public constant decimals = 18;
-    uint256 public constant initialBalance = 5;
-    uint256 _totalSupply = 1000000;
+    uint256 public constant initialBalance = 5 * uint256(10) ** decimals;
+    uint256 _totalSupply = 1000000 * uint256(10) ** decimals;
     
     // Owner of this contract
     address public owner;
