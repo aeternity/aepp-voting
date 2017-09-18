@@ -34,6 +34,7 @@ Proposals.publicFields = {
   statement: 1,
   upVoteAmount: 1,
   downVoteAmount: 1,
+  totalVoteAmount: 1,
   createdAt: 1,
   updatedAt: 1,
 };
