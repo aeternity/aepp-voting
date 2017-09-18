@@ -3,6 +3,7 @@ import { assert, expect } from 'meteor/practicalmeteor:chai';
 import { sinon } from 'meteor/practicalmeteor:sinon';
 import { Factory } from 'meteor/dburles:factory';
 import { Random } from 'meteor/random';
+import BigNumber from 'bignumber.js';
 
 import { onErc20ContractReceiving } from '/imports/ethereum';
 import { Accounts } from '/imports/accounts';
@@ -52,7 +53,7 @@ describe('proposals', () => {
 
       it('throws exception if no tokens associated with account', () => {
         const { _id: proposalId } = Factory.create('proposal', { statement: message });
-        sinon.stub(contract, 'balanceOf', () => 0);
+        sinon.stub(contract, 'balanceOf', () => new BigNumber(0));
         expect(() => Meteor.call('proposals.vote', proposalId, upVoteSignature, true))
           .to.throw('no-tokens');
         contract.balanceOf.restore();
@@ -60,7 +61,7 @@ describe('proposals', () => {
 
       it('throws exception if already voted with the same vote', () => {
         const { _id: proposalId } = Factory.create('proposal', { statement: message });
-        sinon.stub(contract, 'balanceOf', () => 5);
+        sinon.stub(contract, 'balanceOf', () => new BigNumber(5));
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         expect(() => Meteor.call('proposals.vote', proposalId, upVoteSignature, true))
           .to.throw('already-voted');
@@ -70,7 +71,7 @@ describe('proposals', () => {
       it('allows to vote', () => {
         const { _id: proposalId, upVoteAmount } =
           Factory.create('proposal', { statement: message });
-        sinon.stub(contract, 'balanceOf', () => 5);
+        sinon.stub(contract, 'balanceOf', () => new BigNumber(5).shift(contract.decimals()));
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         contract.balanceOf.restore();
         const proposal = Proposals.findOne(proposalId);
@@ -83,7 +84,7 @@ describe('proposals', () => {
       it('allows to change the decision', () => {
         const { _id: proposalId, upVoteAmount, downVoteAmount } =
           Factory.create('proposal', { statement: message });
-        sinon.stub(contract, 'balanceOf', () => 5);
+        sinon.stub(contract, 'balanceOf', () => new BigNumber(5).shift(contract.decimals()));
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         Meteor.call('proposals.vote', proposalId, downVoteSignature, false);
         contract.balanceOf.restore();

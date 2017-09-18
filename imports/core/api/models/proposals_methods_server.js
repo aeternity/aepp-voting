@@ -26,7 +26,7 @@ onErc20ContractReceiving(erc20contract =>
       catch (e) {
         throw new Meteor.Error('invalid-signature');
       }
-      const balance = +erc20contract.balanceOf(accountId);
+      const balance = +erc20contract.balanceOf(accountId).shift(erc20contract.decimals().neg());
       if (!balance) throw new Meteor.Error('no-tokens');
       if (Accounts.findOne(accountId)) Accounts.update(accountId, { balance });
       else Accounts.insert({ _id: accountId, balance });

@@ -53,7 +53,7 @@ const newContract = (contract, options) =>
   }
 
   erc20contract = web3.eth
-    .contract(JSON.parse(Assets.getText('erc20-contract/ERC20Interface.abi')))
+    .contract(JSON.parse(Assets.getText('erc20-contract/ERC20Token.abi')))
     .at(contractAddress);
   callBacks.forEach(cb => cb(erc20contract));
 })().catch(error => console.error(error.stack));
