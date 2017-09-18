@@ -61,14 +61,17 @@
         },
         'proposals.count': [],
       },
-      proposals () {
-        return Proposals.find({}, {
-          sort: Proposals.filterSort[this.$store.state.voting.filter] || { createdAt: -1 },
-        })
-          .map(proposal => ({
-            ...proposal,
-            vote: proposal.votes[this.$store.state.core.accountId],
-          }));
+      proposals: {
+        params() {
+          return {
+            filter: this.$store.state.voting.filter,
+            accountId: this.$store.state.core.accountId,
+          };
+        },
+        update: ({ filter, accountId }) =>
+          Proposals
+            .find({}, { sort: Proposals.filterSort[filter] || { createdAt: -1 } })
+            .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] })),
       },
       proposalsCount () {
         return Counts.get('proposals');
