@@ -34,6 +34,7 @@ Proposals.publicFields = {
   statement: 1,
   upVoteAmount: 1,
   downVoteAmount: 1,
+  totalVoteAmount: 1,
   createdAt: 1,
   updatedAt: 1,
 };
@@ -46,6 +47,10 @@ Proposals.filterTypes = {
   INVALID: 'invalid',
   NEWEST: 'newest',
   POPULAR: 'popular',
+};
+
+Proposals.filterSort = {
+  [Proposals.filterTypes.POPULAR]: { totalVoteAmount: -1 },
 };
 
 Accounts.after.update(function(unusedUserId, doc) {
