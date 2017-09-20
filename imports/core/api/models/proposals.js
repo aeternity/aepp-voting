@@ -11,10 +11,10 @@ export const Proposals = new Mongo.Collection('proposals');
 Proposals.attachSchema(new SimpleSchema({
   _id: { type: String, regEx: SimpleSchema.RegEx.Id },
   statement: { type: String },
-  upVoteAmount: { type: SimpleSchema.Integer, defaultValue: 0 },
-  downVoteAmount: { type: SimpleSchema.Integer, defaultValue: 0 },
+  upVoteAmount: { type: Number, defaultValue: 0 },
+  downVoteAmount: { type: Number, defaultValue: 0 },
   upVoteRatio: { type: Number, defaultValue: 0.5 },
-  totalVoteAmount: { type: SimpleSchema.Integer, defaultValue: 0 },
+  totalVoteAmount: { type: Number, defaultValue: 0 },
   votes: { type: Object, blackbox: true, defaultValue: {} },
   /*
   votes: {

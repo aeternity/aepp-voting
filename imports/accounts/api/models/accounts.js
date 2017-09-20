@@ -8,7 +8,7 @@ export const Accounts = new Mongo.Collection('accounts');
 
 Accounts.schema = new SimpleSchema({
   _id: ethereumAddressType,
-  balance: { type: SimpleSchema.Integer },
+  balance: { type: Number },
   createdAt,
   updatedAt,
 });
