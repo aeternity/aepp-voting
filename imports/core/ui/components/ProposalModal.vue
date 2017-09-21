@@ -75,13 +75,14 @@
   import { mapState, mapMutations } from 'vuex';
 
   import { Accounts } from '/imports/accounts';
+  import web3 from '/imports/ethereum/ui/utils/web3';
 
   export default {
     props: ['proposal',  'type'],
     data() {
       return {
         signature: '',
-        canSignByWeb3: window.web3 && window.web3.eth.defaultAccount,
+        canSignByWeb3: !!web3.eth.defaultAccount,
       }
     },
     computed: {
