@@ -85,10 +85,10 @@ export default {
       });
     },
     voteByWeb3({ state, dispatch }) {
-      const { eth: { sign, defaultAccount }, sha3 } = web3;
+      const { eth: { defaultAccount }, personal: { sign }, toHex } = web3;
       const statement = `I ${state.proposalType === 'agree' ? '' : 'dis'}agree that `
         + state.proposal.statement;
-      sign(defaultAccount, sha3(statement), (error, signature) => {
+      sign(toHex(statement), defaultAccount, (error, signature) => {
         if (error) dispatch('handleError', { error });
         else dispatch('vote', signature);
       });
