@@ -82,7 +82,7 @@
     data() {
       return {
         signature: '',
-        canSignByWeb3: !!web3.eth.defaultAccount,
+        canSignByWeb3: !!web3.eth.accounts[0],
       }
     },
     computed: {
