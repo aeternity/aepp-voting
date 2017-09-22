@@ -3,10 +3,6 @@
     <app-header />
     <app-header hidden />
     <submit-proposal-modal v-if="submitProposalModalShown" />
-    <proposal-modal
-      v-if="!!proposal"
-      :proposal="proposal"
-    />
     <div class="main-content">
       <router-view />
     </div>
@@ -18,13 +14,11 @@
 
   import { Proposals } from '/imports/core';
   import AppHeader from '../components/AppHeader.vue';
-  import ProposalModal from '../components/ProposalModal.vue';
   import SubmitProposalModal from '../components/SubmitProposalModal.vue';
 
   export default {
     components: {
       AppHeader,
-      ProposalModal,
       SubmitProposalModal,
     },
     computed: mapState({

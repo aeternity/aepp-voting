@@ -1,5 +1,19 @@
-import { Proposals } from './proposals';
+import { Meteor } from 'meteor/meteor';
 import { Counts } from 'meteor/tmeasday:publish-counts';
+
+import { Proposals } from './proposals';
+
+Meteor.publish('proposal', function proposal(id, accountId) {
+  return Proposals.find(
+    id,
+    {
+      fields: {
+       ...Proposals.publicFields,
+       [`votes.${accountId}`]: 1,
+      },
+    }
+  );
+});
 
 Meteor.publish('proposals.list', function proposals(filter, limit, accountId) {
   const { ACTIVE, CONTROVERSIAL, DECIDED, VALID, INVALID, NEWEST, POPULAR } = Proposals.filterTypes;
