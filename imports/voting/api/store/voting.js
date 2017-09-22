@@ -15,7 +15,6 @@ export default {
       state.filter = value;
     },
     incrementLimit: (state) => {
-      console.log('incrementing');
       state.limit = state.limit + 10;
     },
     toggleSubmitProposalModal: (state) => {

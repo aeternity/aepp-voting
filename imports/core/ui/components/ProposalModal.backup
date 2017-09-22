@@ -71,10 +71,9 @@
 </template>
 
 <script>
-  import VueDisqus from 'vue-disqus/VueDisqus.vue';
-  import { mapState, mapMutations } from 'vuex';
-
-  import { Accounts } from '/imports/accounts';
+  import VueDisqus from 'vue-disqus/VueDisqus.vue'
+  import { mapState, mapMutations } from 'vuex'
+  import { Accounts } from '/imports/accounts'
 
   export default {
     props: ['proposal',  'type'],

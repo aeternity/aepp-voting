@@ -1,7 +1,9 @@
 <template>
-  <li
+  <router-link
     class="proposal-item"
     :class="voteClass"
+    tag="li"
+    :to='`/proposal/${proposal._id}`'
     @click="toggleProposalModal('agree')"
   >
     <div class="proposal-content">
@@ -33,7 +35,7 @@
         </button>
       </div>
     </aside>
-  </li>
+  </router-link>
 </template>
 
 <script>

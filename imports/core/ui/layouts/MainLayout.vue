@@ -17,13 +17,13 @@
 
   import { Proposals } from '/imports/core';
   import AppHeader from '../components/AppHeader.vue';
-  import ProposalModal from '../components/ProposalModal.vue';
+  // import ProposalModal from '../components/ProposalModal.vue';
   import SubmitProposalModal from '../components/SubmitProposalModal.vue';
 
   export default {
     components: {
       AppHeader,
-      ProposalModal,
+      // ProposalModal,
       SubmitProposalModal,
     },
     computed: mapState({
@@ -60,13 +60,11 @@
     left: 0;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: scroll;
     .main-content {
       position: relative;
       flex-grow: 1;
-      @media screen and (max-width: $container-width){
-        padding: 10px;
-      }
+      padding: 10px;
       .page {
         position: absolute;
         width: 100%;
