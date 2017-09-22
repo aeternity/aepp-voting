@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="single-proposal" v-if="proposal">
+      <router-link to="/">
+        <i class="fa fa-fw fa-chevron-left" />Back
+      </router-link>
       <div class="statement">
         <div class="quote left">
           <i class="fa fa-quote-left" />
@@ -129,7 +132,18 @@
     border-radius: 15px;
     padding: 15px;
     background: white;
+    > a {
+      position: absolute;
+      right: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: black;
+      margin-bottom: 50px;
+      cursor: pointer;
+      text-decoration: none;
+    }
     .statement {
+      margin-top: 30px;
       position: relative;
       padding: 50px 70px;
       h2 {
