@@ -3,5 +3,6 @@ import SingleProposal from '/imports/voting/ui/pages/SingleProposal'
 
 export default [
   { path: '/', name: 'voting', component: VotingPage },
+  { path: '/sorting/popular', name: 'popular', component: VotingPage },
   { path: '/proposal/:id', name: 'single-vote', component: SingleProposal },
 ];

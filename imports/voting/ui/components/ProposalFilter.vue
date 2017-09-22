@@ -2,14 +2,20 @@
   <div class="proposals-filter">
     <div class="container">
       <nav>
-        <button
-          v-for="f in filters"
-          :key="f"
-          :class="{active: currentFilter === f}"
-          @click="setFilter(f)"
+        <router-link
+          to="/"
+          tag="button"
+          :class="$route.path === '/' && 'active'"
         >
-          {{f}}
-        </button>
+          Newest
+        </router-link>
+        <router-link
+          to="/sorting/popular"
+          tag="button"
+          :class="$route.path === '/sorting/popular' && 'active'"
+        >
+          Popular
+        </router-link>
       </nav>
     </div>
   </div>
@@ -21,16 +27,8 @@
   import { Proposals } from '/imports/core';
 
   export default {
-    data() {
-      return {
-        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.POPULAR],
-      };
-    },
     computed: mapState({
       currentFilter: store => store.voting.filter,
-    }),
-    methods: mapMutations({
-      setFilter: 'voting/setFilter',
     }),
   }
 </script>

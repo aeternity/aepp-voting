@@ -43,7 +43,6 @@
         return this.proposals.length < this.proposalsCount
       },
       loaded() {
-        console.log(this.proposals.length);
         return this.proposalsCount;
       },
       loading() {
@@ -53,8 +52,16 @@
     meteor: {
       $subscribe: {
         'proposals.list'() {
+          let filter = ''
+          switch (this.$route.path) {
+            case '/sorting/popular':
+              filter = 'popular'
+              break;
+            default: filter = 'newest'
+
+          }
           return [
-            this.$store.state.voting.filter,
+            filter,
             this.$store.state.voting.limit,
             this.$store.state.core.accountId,
           ];
