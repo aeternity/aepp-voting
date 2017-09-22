@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container">
-      <img class="logo" src="/images/logo_white.png" alt="logo" />
+      <router-link to="/" class="logo" src="/images/logo_white.png" alt="logo" tag="img"/>
       <div class="stripe"></div>
       <h3>Voting</h3>
       <button @click="toggleSubmitProposalModal">Submit proposal</button>
