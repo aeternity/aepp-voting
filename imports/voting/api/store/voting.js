@@ -5,18 +5,13 @@ export default {
   namespaced: true,
 
   state: () => ({
-    filter: Proposals.filterTypes.NEWEST,
     limit: 10,
     proposalType: 'agree',
     proposal: null,
   }),
 
   mutations: {
-    setFilter: (state, value) => {
-      state.filter = value;
-    },
     incrementLimit: (state) => {
-      console.log('incrementing');
       state.limit = state.limit + 10;
     },
     toggleSubmitProposalModal: (state) => {

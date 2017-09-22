@@ -9,14 +9,14 @@
       <button @click="toggleSubmitProposalModal">Submit proposal</button>
     </header>
     <nav class="proposals-filter">
-      <button
+      <router-link
         v-for="f in filters"
         :key="f"
         :class="{active: currentFilter === f}"
-        @click="setFilter(f)"
+        :to="`/sorting/${f}`"
       >
         {{f}}
-      </button>
+      </router-link>
     </nav>
   </div>
 </template>
@@ -42,9 +42,12 @@
       toggleSubmitProposalModal: 'core/toggleSubmitProposalModal',
       setFilter: 'voting/setFilter',
     }),
-    computed: mapState({
-      currentFilter: store => store.voting.filter,
-    }),
+    computed: {
+      currentFilter() {
+        if (!['root', 'proposal-list'].includes(this.$route.name)) return;
+        return this.$route.params.filter || Proposals.filterTypes.NEWEST;
+      }
+    },
   }
 </script>
 
@@ -105,7 +108,9 @@
       box-shadow: $base-box-shadow;
       text-align: center;
       padding: 10px;
-      button {
+      a {
+        text-decoration: none;
+        border-radius: 100px;
         border: 0;
         font-size: 14px;
         color: lighten($base-text-color, 50%);

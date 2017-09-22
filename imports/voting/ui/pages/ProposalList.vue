@@ -42,7 +42,6 @@
         return this.proposals.length < this.proposalsCount
       },
       loaded() {
-        console.log(this.proposals.length);
         return this.proposalsCount;
       },
       loading() {
@@ -53,7 +52,7 @@
       $subscribe: {
         'proposals.list'() {
           return [
-            this.$store.state.voting.filter,
+            this.$route.params.filter || Proposals.filterTypes.NEWEST,
             this.$store.state.voting.limit,
             this.$store.state.core.accountId,
           ];
