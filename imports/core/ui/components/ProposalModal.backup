@@ -1,9 +1,9 @@
 <template>
   <div class="modal">
-    <div class="overlay" @click="toggleProposalModal" />
+    <div class="overlay" @click="agreeOrDoubtProposal" />
     <div class="modal-cont">
       <div class="modal-header">
-        <button @click="toggleProposalModal">Close</button>
+        <button @click="agreeOrDoubtProposal">Close</button>
       </div>
       <div class="statement">
         <div class="quote left">
@@ -107,7 +107,7 @@
     },
     methods: {
       ...mapMutations({
-        toggleProposalModal: 'voting/toggleProposalModal',
+        agreeOrDoubtProposal: 'voting/agreeOrDoubtProposal',
         setProposalType: 'voting/setProposalType',
       }),
       isVotedClass(upVote) {

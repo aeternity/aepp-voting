@@ -7,7 +7,7 @@
         </div>
         <h2>
           <template v-if="!canSignByWeb3">
-            I agree that
+            I {{proposalType === 'agree' ? '' : 'dis'}}agree that
           </template>
           {{proposal.statement}}
         </h2>
@@ -92,7 +92,7 @@
     },
     methods: {
       ...mapMutations({
-        toggleProposalModal: 'voting/toggleProposalModal',
+        agreeOrDoubtProposal: 'voting/agreeOrDoubtProposal',
         setProposalType: 'voting/setProposalType',
       }),
       isVotedClass(upVote) {

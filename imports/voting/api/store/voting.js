@@ -20,7 +20,7 @@ export default {
     toggleSubmitProposalModal: (state) => {
       state.submitProposalModalShown = !state.submitProposalModalShown;
     },
-    toggleProposalModal: (state, proposalOptions) => {
+    agreeOrDoubtProposal: (state, proposalOptions) => {
       if (proposalOptions) {
         const { proposal, type } = proposalOptions;
         state.proposal = proposal;
@@ -77,7 +77,7 @@ export default {
             animation: false,
             timer: 3000,
           });
-          commit('toggleProposalModal');
+          commit('agreeOrDoubtProposal');
           commit('core/setAccountId', accountId, { root: true });
         }
       });

@@ -2,10 +2,6 @@
   <div class="main-layout">
     <app-header />
     <submit-proposal-modal v-if="submitProposalModalShown" />
-    <proposal-modal
-      v-if="!!proposal"
-      :proposal="proposal"
-    />
     <div class="main-content">
       <router-view />
     </div>
