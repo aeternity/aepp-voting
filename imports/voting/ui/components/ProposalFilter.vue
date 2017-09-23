@@ -3,18 +3,13 @@
     <div class="container">
       <nav>
         <router-link
-          to="/"
+          v-for="el in filters"
+          :key="el"
+          :to="el === 'newest' ? '/' : `/sorting/${el}`"
           tag="button"
-          :class="$route.path === '/' && 'active'"
+          :class="$route.params.filter === el || (el === 'newest' && !$route.params.filter ) ? 'active' : ''"
         >
-          Newest
-        </router-link>
-        <router-link
-          to="/sorting/popular"
-          tag="button"
-          :class="$route.path === '/sorting/popular' && 'active'"
-        >
-          Popular
+          {{ el }}
         </router-link>
       </nav>
     </div>
@@ -30,6 +25,11 @@
     computed: mapState({
       currentFilter: store => store.voting.filter,
     }),
+    data() {
+      return {
+        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.POPULAR]
+      }
+    }
   }
 </script>
 

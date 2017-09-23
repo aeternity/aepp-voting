@@ -52,14 +52,7 @@
     meteor: {
       $subscribe: {
         'proposals.list'() {
-          let filter = ''
-          switch (this.$route.path) {
-            case '/sorting/popular':
-              filter = 'popular'
-              break;
-            default: filter = 'newest'
-
-          }
+          let filter = this.$route.params.filter || 'newest'
           return [
             filter,
             this.$store.state.voting.limit,

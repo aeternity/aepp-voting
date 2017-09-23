@@ -9,12 +9,11 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
-
-  import { Proposals } from '/imports/core';
-  import AppHeader from '../components/AppHeader.vue';
-  // import ProposalModal from '../components/ProposalModal.vue';
-  import SubmitProposalModal from '../components/SubmitProposalModal.vue';
+  import { mapState } from 'vuex'
+  
+  import { Proposals } from '/imports/core'
+  import AppHeader from '../components/AppHeader.vue'
+  import SubmitProposalModal from '../components/SubmitProposalModal.vue'
 
   export default {
     components: {
