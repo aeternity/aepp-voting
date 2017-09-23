@@ -116,6 +116,7 @@
         'proposal'() {
           return [
             this.$route.params.id,
+            this.$store.state.core.accountId,
           ];
         },
       },
