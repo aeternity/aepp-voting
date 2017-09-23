@@ -2,7 +2,7 @@
   <div>
     <div class="single-proposal" v-if="proposal">
       <router-link to="/">
-        <i class="fa fa-fw fa-chevron-left" />Back
+        <i class="fa fa-fw fa-chevron-left" />To proposals
       </router-link>
       <div class="statement">
         <div class="quote left">
