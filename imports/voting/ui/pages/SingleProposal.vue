@@ -132,14 +132,14 @@
   .single-proposal {
     border-radius: 15px;
     padding: 15px;
+    max-width: 880px;
     background: white;
+    margin: 0 auto;
     > a {
-      position: absolute;
-      right: 30px;
+      float: right;
       font-size: 20px;
       font-weight: bold;
       color: black;
-      margin-bottom: 50px;
       cursor: pointer;
       text-decoration: none;
     }
