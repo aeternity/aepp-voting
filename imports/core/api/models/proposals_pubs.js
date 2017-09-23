@@ -1,9 +1,9 @@
-import { Meteor } from 'meteor/meteor'
-import { Proposals } from './proposals'
-import { Counts } from 'meteor/tmeasday:publish-counts'
+import { Meteor } from 'meteor/meteor';
+import { Proposals } from './proposals';
+import { Counts } from 'meteor/tmeasday:publish-counts';
 
 Meteor.publish('proposal', function proposal(id) {
-  return Proposals.find(id)
+  return Proposals.find(id);
 })
 
 Meteor.publish('proposals.list', function proposals(filter, limit, accountId) {
