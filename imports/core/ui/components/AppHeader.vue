@@ -1,9 +1,11 @@
 <template>
   <header>
     <div class="container">
-      <img class="logo" src="/images/logo_white.png" alt="logo" />
-      <div class="stripe"></div>
-      <h3>Voting</h3>
+      <router-link to="/">
+        <img class="logo" src="/images/logo_white.png" alt="logo" />
+        <div class="stripe"></div>
+        <h3>Voting</h3>
+      </router-link>
       <button @click="toggleSubmitProposalModal">Submit proposal</button>
     </div>
   </header>
@@ -33,9 +35,15 @@
     .logo {
       height: 40px;
     }
-    .container {
+    .container, a {
       display: flex;
       align-items: center;
+    }
+    .container {
+      justify-content: space-between;
+    }
+    a {
+      text-decoration: none;
     }
   }
   .stripe {
