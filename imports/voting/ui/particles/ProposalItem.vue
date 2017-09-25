@@ -2,7 +2,7 @@
   <li
     class="proposal-item"
     :class="voteClass"
-    @click="toggleProposalModal('agree')"
+    @click="agreeOrDoubtProposal('agree')"
   >
     <div class="proposal-content">
       <h3>{{proposal.statement}}</h3>
@@ -18,14 +18,14 @@
       </div>
       <div class="controls">
         <button
-          @click="toggleProposalModal('agree')"
+          @click="agreeOrDoubtProposal('agree')"
           class="up-vote"
           :class="isVotedClass(true)"
         >
           <i class="fa fa-chevron-up" />
         </button>
         <button
-          @click.stop="toggleProposalModal('doubt')"
+          @click.stop="agreeOrDoubtProposal('doubt')"
           class="down-vote"
           :class="isVotedClass(false)"
         >
@@ -53,8 +53,9 @@
       isVotedClass(upVote) {
         return this.proposal.vote && this.proposal.vote.upVote === upVote ? 'already' : '';
       },
-      toggleProposalModal(type) {
-        this.$store.commit('voting/toggleProposalModal', {  proposal: this.proposal, type });
+      agreeOrDoubtProposal(type) {
+        this.$router.push(`/proposal/${this.proposal._id}`)
+        this.$store.commit('voting/agreeOrDoubtProposal', {  proposal: this.proposal, type });
       },
     },
   }

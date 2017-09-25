@@ -1,10 +1,9 @@
 <template>
-  <div class="modal">
-    <div class="overlay" @click="toggleProposalModal" />
-    <div class="modal-cont">
-      <div class="modal-header">
-        <button @click="toggleProposalModal">Close</button>
-      </div>
+  <div>
+    <div class="single-proposal" v-if="proposal">
+      <router-link to="/">
+        <i class="fa fa-fw fa-chevron-left" />To proposals
+      </router-link>
       <div class="statement">
         <div class="quote left">
           <i class="fa fa-quote-left" />
@@ -67,17 +66,19 @@
         <a :href="`/proposals/${proposal._id}`">All signatures as JSON</a>
       </div>
     </div>
+    <p v-if="this.$subReady['proposal'] && !proposal">This proposal seems to be missing.</p>
   </div>
 </template>
 
 <script>
-  import VueDisqus from 'vue-disqus/VueDisqus.vue';
-  import { mapState, mapMutations } from 'vuex';
-
-  import { Accounts } from '/imports/accounts';
+  import { Proposals } from '/imports/core'
+  import { mapState, mapMutations } from 'vuex'
+  import VueDisqus from 'vue-disqus/VueDisqus'
 
   export default {
-    props: ['proposal',  'type'],
+    components: {
+      VueDisqus,
+    },
     data() {
       return {
         signature: '',
@@ -89,26 +90,12 @@
         proposalType: state => state.voting.proposalType,
       }),
       url() {
-        return Meteor.absoluteUrl() + 'proposal/' + this.proposal._id;
+        return Meteor.absoluteUrl() + 'proposal/' + this.$route.params.id;
       }
-    },
-    components: {
-      VueDisqus,
-    },
-    meteor: {
-      $subscribe: {
-        'accounts.balance'() {
-          return [ this.$store.state.core.accountId ];
-        },
-      },
-      balance () {
-        const account = Accounts.findOne(this.$store.state.core.accountId);
-        return account && account.balance;
-      },
     },
     methods: {
       ...mapMutations({
-        toggleProposalModal: 'voting/toggleProposalModal',
+        agreeOrDoubtProposal: 'voting/agreeOrDoubtProposal',
         setProposalType: 'voting/setProposalType',
       }),
       isVotedClass(upVote) {
@@ -123,58 +110,41 @@
         this.$store.commit('voting/setProposalType', upVote ? 'agree' : 'doubt');
         this.$store.dispatch('voting/voteByWeb3');
       },
-    }
-  };
+    },
+    meteor: {
+      $subscribe: {
+        'proposal'() {
+          return [
+            this.$route.params.id,
+            this.$store.state.core.accountId,
+          ];
+        },
+      },
+      proposal () {
+        return Proposals.findOne()
+      }
+    },
+  }
 </script>
 
 <style lang="scss">
   @import "/imports/core/ui/styles/variables";
-
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    overflow-y: scroll;
-    padding: 40px 0;
-    .overlay {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, .7);
-      z-index: 1;
-    }
-    .modal-cont {
-      position: relative;
-      margin-bottom: 80px;
-      margin-left: auto;
-      margin-right: auto;
-      @media screen and (max-width: $container-width) {
-        max-width: 96vw;
-      }
-      z-index: 2;
-      width: 650px;
-      height: auto;
-      background: white;
-      border-radius: $base-border-radius;
-      box-shadow: $base-box-shadow;
-      .modal-header {
-        overflow: hidden;
-        button {
-          float: right;
-          border: 0;
-          padding: 0;
-        }
-      }
-      .modal-header, .voting-buttons, .voting-section, .current-status, .comments, .footer {
-        padding: $gutter $gutter * 2;
-      }
+  .single-proposal {
+    border-radius: 15px;
+    padding: 15px;
+    max-width: $container-width;
+    background: white;
+    margin: 0 auto;
+    > a {
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      color: black;
+      cursor: pointer;
+      text-decoration: none;
     }
     .statement {
+      margin-top: 30px;
       position: relative;
       padding: 50px 70px;
       h2 {

@@ -2,14 +2,15 @@
   <div class="proposals-filter">
     <div class="container">
       <nav>
-        <button
-          v-for="f in filters"
-          :key="f"
-          :class="{active: currentFilter === f}"
-          @click="setFilter(f)"
+        <router-link
+          v-for="el in filters"
+          :key="el"
+          :to="el === 'newest' ? '/' : `/sorting/${el}`"
+          tag="a"
+          :class="$route.params.filter === el || (el === 'newest' && !$route.params.filter ) ? 'active' : ''"
         >
-          {{f}}
-        </button>
+          {{ el }}
+        </router-link>
       </nav>
     </div>
   </div>
@@ -21,17 +22,14 @@
   import { Proposals } from '/imports/core';
 
   export default {
-    data() {
-      return {
-        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.POPULAR],
-      };
-    },
     computed: mapState({
       currentFilter: store => store.voting.filter,
     }),
-    methods: mapMutations({
-      setFilter: 'voting/setFilter',
-    }),
+    data() {
+      return {
+        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.POPULAR]
+      }
+    }
   }
 </script>
 
@@ -69,7 +67,9 @@
     @media screen and (max-width: $container-width){
       padding: 0 10px;
     }
-    button {
+    a {
+      text-decoration: none;
+      border-radius: 100px;
       border: 0;
       font-size: 14px;
       color: lighten($base-text-color, 50%);
