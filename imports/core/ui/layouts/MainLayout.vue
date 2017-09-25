@@ -10,7 +10,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  
+
   import { Proposals } from '/imports/core'
   import AppHeader from '../components/AppHeader.vue'
   import SubmitProposalModal from '../components/SubmitProposalModal.vue'
@@ -55,7 +55,7 @@
     left: 0;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow: hidden;
     .main-content {
       position: relative;
       flex-grow: 1;
