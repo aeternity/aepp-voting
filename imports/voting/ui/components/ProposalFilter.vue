@@ -6,7 +6,7 @@
           v-for="el in filters"
           :key="el"
           :to="el === 'newest' ? '/' : `/sorting/${el}`"
-          tag="button"
+          tag="a"
           :class="$route.params.filter === el || (el === 'newest' && !$route.params.filter ) ? 'active' : ''"
         >
           {{ el }}
@@ -67,7 +67,9 @@
     @media screen and (max-width: $container-width){
       padding: 0 10px;
     }
-    button {
+    a {
+      text-decoration: none;
+      border-radius: 100px;
       border: 0;
       font-size: 14px;
       color: lighten($base-text-color, 50%);
