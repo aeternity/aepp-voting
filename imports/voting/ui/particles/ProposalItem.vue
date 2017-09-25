@@ -54,7 +54,7 @@
         return this.proposal.vote && this.proposal.vote.upVote === upVote ? 'already' : '';
       },
       agreeOrDoubtProposal(type) {
-        this.$route.push(`/proposal/${this.proposal._id}`)
+        this.$router.push(`/proposal/${this.proposal._id}`)
         this.$store.commit('voting/agreeOrDoubtProposal', {  proposal: this.proposal, type });
       },
     },
