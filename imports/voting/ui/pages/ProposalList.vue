@@ -1,5 +1,5 @@
 <template>
-  <div class="list-proposals" ref="wrap">
+  <div class="list-proposals">
     <ul class="container">
       <proposal-item
         v-for="p in proposals"
@@ -10,7 +10,6 @@
         v-if="gotMore"
         :handler="loadMore"
         :should-handle="!loading"
-        scroll-container="wrap"
       >
         <i class="fa fa-spinner fa-spin" /> Loading
       </mugen-scroll>
@@ -90,7 +89,6 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    overflow-y: scroll;
     @media screen and (max-width: $container-width){
       padding: 10px;
     }

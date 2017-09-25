@@ -1,6 +1,7 @@
 <template>
-  <div class="main-layout">
+  <div>
     <app-header />
+    <app-header hidden />
     <submit-proposal-modal v-if="submitProposalModalShown" />
     <proposal-modal
       v-if="!!proposal"
@@ -47,33 +48,11 @@
     font-family: $font-family-text;
     color: $base-text-color;
   }
-  .container {
-    width: 100%;
+  .main-content {
     max-width: $container-width;
     margin: 0 auto;
-  }
-  .main-layout {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    .main-content {
-      position: relative;
-      flex-grow: 1;
-      @media screen and (max-width: $container-width){
-        padding: 10px;
-      }
-      .page {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-      }
+    @media screen and (max-width: $container-width){
+      padding: 10px;
     }
   }
   button {

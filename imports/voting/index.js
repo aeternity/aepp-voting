@@ -1,1 +1,2 @@
-export { VotingPage } from './ui/pages/VotingPage.vue';
+export ProposalList from './ui/pages/ProposalList.vue';
+export store from './api/store/voting';

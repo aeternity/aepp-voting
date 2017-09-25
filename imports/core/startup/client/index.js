@@ -9,7 +9,7 @@ import createPersistedState from 'vuex-persistedstate';
 import MainLayout from '../../ui/layouts/MainLayout.vue';
 import routes from './routes';
 import * as filters from '../../api/helpers/filters';
-import voting from '../../../voting/api/store/voting';
+import { store as voting } from '/imports/voting';
 import core from '../../api/store/core';
 
 Vue.use(VueMeteorTracker);

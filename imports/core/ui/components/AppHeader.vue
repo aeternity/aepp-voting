@@ -1,22 +1,49 @@
 <template>
-  <header>
-    <div class="container">
+  <div :class="hidden ? 'hidden' : 'fixed'">
+    <header>
       <router-link to="/">
         <img class="logo" src="/images/logo_white.png" alt="logo" />
         <div class="stripe"></div>
         <h3>Voting</h3>
       </router-link>
       <button @click="toggleSubmitProposalModal">Submit proposal</button>
-    </div>
-  </header>
+    </header>
+    <nav class="proposals-filter">
+      <button
+        v-for="f in filters"
+        :key="f"
+        :class="{active: currentFilter === f}"
+        @click="setFilter(f)"
+      >
+        {{f}}
+      </button>
+    </nav>
+  </div>
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
+  import { mapState, mapMutations } from 'vuex';
+
+  import { Proposals } from '/imports/core';
 
   export default {
+    props: {
+      hidden: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    data() {
+      return {
+        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.POPULAR],
+      };
+    },
     methods: mapMutations({
       toggleSubmitProposalModal: 'core/toggleSubmitProposalModal',
+      setFilter: 'voting/setFilter',
+    }),
+    computed: mapState({
+      currentFilter: store => store.voting.filter,
     }),
   }
 </script>
@@ -24,46 +51,82 @@
 <style lang="scss" scoped>
   @import "/imports/core/ui/styles/variables";
 
-  header {
-    position: relative;
-    flex-grow: 0;
-    flex-shrink: 0;
+  .hidden, .fixed {
+    &.hidden {
+      visibility: hidden;
+    }
+    &.fixed {
+      position: fixed;
+      z-index: 1;
+      width: 100%;
+    }
     background: $brand-color;
-    @media screen and (max-width: $container-width){
-      padding: 10px;
-    }
-    .logo {
-      height: 40px;
-    }
-    .container, a {
-      display: flex;
-      align-items: center;
-    }
-    .container {
+
+    header {
+      margin: 0 auto;
+      max-width: $container-width;
       justify-content: space-between;
+      &, a {
+        display: flex;
+        align-items: center;
+      }
+      a {
+        text-decoration: none;
+      }
+      @media screen and (max-width: $container-width){
+        padding: 10px;
+      }
+      .logo {
+        height: 40px;
+      }
+      .stripe {
+        width: 1px;
+        height: 40px;
+        background: white;
+        margin: $gutter;
+      }
+      button {
+        color: white;
+        border-color: white;
+        &:hover {
+          background: white;
+          color: $brand-color;
+        }
+      }
+      h3 {
+        color: white;
+        font-family: 'Roboto Light';
+        letter-spacing: .1em;
+      }
     }
-    a {
-      text-decoration: none;
-    }
-  }
-  .stripe {
-    width: 1px;
-    height: 40px;
-    background: white;
-    margin: $gutter;
-  }
-  button {
-    color: white;
-    border-color: white;
-    &:hover {
+
+    nav {
       background: white;
-      color: $brand-color;
+      box-shadow: $base-box-shadow;
+      text-align: center;
+      padding: 10px;
+      button {
+        border: 0;
+        font-size: 14px;
+        color: lighten($base-text-color, 50%);
+        padding: 5px 15px;
+        margin-right: 5px;
+        font-family: $font-family-text;
+        text-transform: capitalize;
+        transition: .4s;
+        &:hover {
+          background: $gray-lighter;
+        }
+        &.active {
+          background: $brand-color;
+          color: white;
+        }
+      }
+      &:hover {
+        button:not(.active) {
+          color: $base-text-color;
+        }
+      }
     }
-  }
-  h3 {
-    color: white;
-    font-family: 'Roboto Light';
-    letter-spacing: .1em;
-    flex-grow: 1;
   }
 </style>
