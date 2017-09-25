@@ -132,7 +132,7 @@
   .single-proposal {
     border-radius: 15px;
     padding: 15px;
-    max-width: 880px;
+    max-width: $container-width;
     background: white;
     margin: 0 auto;
     > a {
