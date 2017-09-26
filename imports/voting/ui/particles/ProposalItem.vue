@@ -67,12 +67,7 @@
   .proposal-item {
     position: relative;
     background: white;
-    cursor: pointer;
     display: flex;
-    transform: translateZ(0);
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
     border-radius: $base-border-radius;
     margin-bottom: $gutter;
     box-shadow: $base-box-shadow;

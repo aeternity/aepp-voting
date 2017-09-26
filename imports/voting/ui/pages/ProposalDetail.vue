@@ -127,20 +127,13 @@
 
 <style lang="scss">
   @import "/imports/core/ui/styles/variables";
+
   .single-proposal {
     border-radius: 15px;
     padding: 15px;
     max-width: $container-width;
     background: white;
     margin: 0 auto;
-    > a {
-      float: right;
-      font-size: 20px;
-      font-weight: bold;
-      color: black;
-      cursor: pointer;
-      text-decoration: none;
-    }
     .statement {
       margin-top: 30px;
       position: relative;
