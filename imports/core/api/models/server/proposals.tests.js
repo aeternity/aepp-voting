@@ -12,8 +12,8 @@ import '../proposals_methods_server';
 
 const message = 'test';
 const address = '0xfa491df8780761853d127a9f7b2772d688a0e3b5';
-const upVoteSignature = '0xaa63a7cd38b8077ebbde453ba2dfc46c1c13b38b5cc2947cd55cd2cb343a70da31e04ff78f615a06437f6e21b52309f1782dfc8c5b5fa150ed7dbde817055dcf1c';
-const downVoteSignature = '0xd80e45944046a2e0401e2ba8aff33d07b3a1a5a11d24a9f351b9ea4c9656c396731067a7c3251cf107c8e9fc4c0aec64dbb8ad9a7eee65feea1b370a2027efe51c';
+const upVoteSignature = '0xede222564b846a123ed16446fc0bb9e59e8c3df98ac4883870c1ec5ab3220e6a3d98b4cbbbf4009145260966d8944d0514cf2425e2124e6fd5ebdfc3bb777dd01b';
+const downVoteSignature = '0x60c105f35e9e7acf17c1da2b1f87882c137736eaf79909e125c954265c0c58165c972e8151371504e130d7114c95ccb7abeba956e6d695d17f8b544a1843b37c1b';
 
 let contract;
 onErc20ContractReceiving((c) => { contract = c; });

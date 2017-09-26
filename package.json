@@ -29,7 +29,7 @@
     "vuex": "^2.3.1",
     "vuex-persistedstate": "^2.0.0",
     "vuex-router-sync": "^4.2.0",
-    "web3": "^0.20.1"
+    "web3": "^0.20.2"
   },
   "devDependencies": {
     "eslint": "^4.3.0",

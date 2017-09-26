@@ -1,4 +1,5 @@
 import { Proposals } from '/imports/core';
+import web3 from '/imports/ethereum/ui/utils/web3';
 
 export default {
   namespaced: true,
@@ -84,10 +85,10 @@ export default {
       });
     },
     voteByWeb3({ state, dispatch }) {
-      const { eth: { sign, defaultAccount }, sha3 } = window.web3;
+      const { eth: { accounts }, personal: { sign }, toHex } = web3;
       const statement = `I ${state.proposalType === 'agree' ? '' : 'dis'}agree that `
         + state.proposal.statement;
-      sign(defaultAccount, sha3(statement), (error, signature) => {
+      sign(toHex(statement), accounts[0], (error, signature) => {
         if (error) dispatch('handleError', { error });
         else dispatch('vote', signature);
       });
