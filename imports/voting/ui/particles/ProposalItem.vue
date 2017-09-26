@@ -1,8 +1,9 @@
 <template>
-  <li
+  <router-link
+    :to="`/proposal/${this.proposal._id}`"
     class="proposal-item"
     :class="voteClass"
-    @click="agreeOrDoubtProposal('agree')"
+    @click.native="agreeOrDoubtProposal('agree')"
   >
     <div class="proposal-content">
       <h3>{{proposal.statement}}</h3>
@@ -18,22 +19,22 @@
       </div>
       <div class="controls">
         <button
-          @click="agreeOrDoubtProposal('agree')"
           class="up-vote"
           :class="isVotedClass(true)"
         >
           <i class="fa fa-chevron-up" />
         </button>
-        <button
-          @click.stop="agreeOrDoubtProposal('doubt')"
-          class="down-vote"
+        <router-link
+          :to="`/proposal/${this.proposal._id}`"
+          @click.native.stop="agreeOrDoubtProposal('doubt')"
+          class="down-vote button"
           :class="isVotedClass(false)"
         >
           <i class="fa fa-chevron-down" />
-        </button>
+        </router-link>
       </div>
     </aside>
-  </li>
+  </router-link>
 </template>
 
 <script>
@@ -54,7 +55,6 @@
         return this.proposal.vote && this.proposal.vote.upVote === upVote ? 'already' : '';
       },
       agreeOrDoubtProposal(type) {
-        this.$router.push(`/proposal/${this.proposal._id}`)
         this.$store.commit('voting/agreeOrDoubtProposal', {  proposal: this.proposal, type });
       },
     },
@@ -76,6 +76,8 @@
     border-radius: $base-border-radius;
     margin-bottom: $gutter;
     box-shadow: $base-box-shadow;
+    text-decoration: none;
+    color: inherit;
     @media screen and (max-width: $container-width) {
       flex-direction: column;
     }
@@ -133,9 +135,10 @@
       flex-shrink: 0;
       align-items: center;
       padding: $gutter / 2 $gutter;
-      button {
+      button, .button {
         width: 62px;
         height: 62px;
+        line-height: 62px;
         margin: 5px;
         font-size: 22px;
         padding: 0;

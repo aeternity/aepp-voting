@@ -49,7 +49,7 @@
       padding: 10px;
     }
   }
-  button {
+  button, .button {
     background-color: transparent;
     border: 1px solid $brand-color;
     color: $brand-color;
@@ -57,5 +57,6 @@
     padding: 5px 20px;
     cursor: pointer;
     font-family: $font-family-header;
+    text-align: center;
   }
 </style>

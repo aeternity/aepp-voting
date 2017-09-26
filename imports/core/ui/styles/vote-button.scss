@@ -1,6 +1,6 @@
 @import "/imports/core/ui/styles/variables";
 
-button {
+button, .button {
   @mixin colored-button-mixin($color) {
     color: $color;
     border: 2px solid $color;
