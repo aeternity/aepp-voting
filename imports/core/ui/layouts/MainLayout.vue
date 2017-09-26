@@ -45,6 +45,7 @@
   .main-content {
     max-width: $container-width;
     margin: 0 auto;
+    padding-top: 10px;
     @media screen and (max-width: $container-width){
       padding: 10px;
     }
