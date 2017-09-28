@@ -1,5 +1,7 @@
-import VotingPage from '../../../voting/ui/pages/VotingPage.vue';
+import { ProposalList, ProposalDetail } from '/imports/voting';
 
 export default [
-  { path: '/', name: 'voting', component: VotingPage },
+  { path: '/', name: 'root', component: ProposalList },
+  { path: '/sorting/:filter', name: 'proposal-list', component: ProposalList },
+  { path: '/proposal/:id', component: ProposalDetail },
 ];

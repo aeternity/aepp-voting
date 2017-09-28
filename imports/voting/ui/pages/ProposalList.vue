@@ -1,26 +1,23 @@
 <template>
-  <div class="list-proposals" ref="wrap">
-    <ul class="container">
-      <proposal-item
-        v-for="p in proposals"
-        :key="p._id"
-        :proposal="p"
-      ></proposal-item>
-      <mugen-scroll
-        v-if="gotMore"
-        :handler="loadMore"
-        :should-handle="!loading"
-        scroll-container="wrap"
-      >
-        <i class="fa fa-spinner fa-spin" /> Loading
-      </mugen-scroll>
-      <div
-        v-if="!gotMore"
-        class="all-loaded"
-      >
-        All loaded
-      </div>
-    </ul>
+  <div>
+    <proposal-item
+      v-for="p in proposals"
+      :key="p._id"
+      :proposal="p"
+    ></proposal-item>
+    <mugen-scroll
+      v-if="gotMore"
+      :handler="loadMore"
+      :should-handle="!loading"
+    >
+      <i class="fa fa-spinner fa-spin" /> Loading
+    </mugen-scroll>
+    <div
+      v-if="!gotMore"
+      class="all-loaded"
+    >
+      All loaded
+    </div>
   </div>
 </template>
 
@@ -43,7 +40,6 @@
         return this.proposals.length < this.proposalsCount
       },
       loaded() {
-        console.log(this.proposals.length);
         return this.proposalsCount;
       },
       loading() {
@@ -54,7 +50,7 @@
       $subscribe: {
         'proposals.list'() {
           return [
-            this.$store.state.voting.filter,
+            this.$route.params.filter || Proposals.filterTypes.NEWEST,
             this.$store.state.voting.limit,
             this.$store.state.core.accountId,
           ];
@@ -86,23 +82,6 @@
 <style lang="scss" scoped>
   @import "/imports/core/ui/styles/variables";
 
-  .list-proposals {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    overflow-y: scroll;
-    @media screen and (max-width: $container-width){
-      padding: 10px;
-    }
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-    padding-top: $gutter;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
   .mugen-scroll, .all-loaded {
     text-align: center;
     padding-bottom: 10px;

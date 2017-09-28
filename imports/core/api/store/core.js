@@ -2,15 +2,11 @@ export default {
   namespaced: true,
 
   state: () => ({
-    proposalModalShown: false,
     submitProposalModalShown: false,
     accountId: '',
   }),
 
   mutations: {
-    toggleProposalModal: (state) => {
-      state.proposalModalShown = !state.proposalModalShown;
-    },
     toggleSubmitProposalModal: (state) => {
       state.submitProposalModalShown = !state.submitProposalModalShown;
     },

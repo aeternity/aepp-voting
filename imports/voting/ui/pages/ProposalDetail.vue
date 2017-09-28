@@ -1,73 +1,68 @@
 <template>
-  <div class="modal">
-    <div class="overlay" @click="toggleProposalModal" />
-    <div class="modal-cont">
-      <div class="modal-header">
-        <button @click="toggleProposalModal">Close</button>
+  <div class="single-proposal" v-if="proposal">
+    <div class="statement">
+      <div class="quote left">
+        <i class="fa fa-quote-left" />
       </div>
-      <div class="statement">
-        <div class="quote left">
-          <i class="fa fa-quote-left" />
-        </div>
-        <h2>
-          <template v-if="!canSignByWeb3">
-            I {{proposalType === 'agree' ? '' : 'dis'}}agree that
-          </template>
-          {{proposal.statement}}
-        </h2>
-        <div class="quote right">
-          <i class="fa fa-quote-right" />
-        </div>
+      <h2>
+        <template v-if="!canSignByWeb3">
+          I {{proposalType === 'agree' ? '' : 'dis'}}agree that
+        </template>
+        {{proposal.statement}}
+      </h2>
+      <div class="quote right">
+        <i class="fa fa-quote-right" />
       </div>
-      <div class="voting-buttons" v-if="canSignByWeb3">
-        <button class="up-vote" :class="isVotedClass(true)" @click="voteByWeb3(true)">
+    </div>
+    <div class="voting-buttons" v-if="canSignByWeb3">
+      <button class="up-vote" :class="isVotedClass(true)" @click="voteByWeb3(true)">
+        I agree
+      </button>
+      <button class="down-vote" :class="isVotedClass(false)" @click="voteByWeb3(false)">
+        I disagree
+      </button>
+    </div>
+    <div class="voting-section" :class="proposalType" v-else>
+      <div class="tab-header">
+        <button
+          class="agree"
+          :class="{active: proposalType === 'agree'}"
+          @click="setProposalType('agree')"
+        >
           I agree
         </button>
-        <button class="down-vote" :class="isVotedClass(false)" @click="voteByWeb3(false)">
+        <button
+          class="doubt"
+          :class="{active: proposalType === 'doubt'}"
+          @click="setProposalType('doubt')"
+        >
           I disagree
         </button>
       </div>
-      <div class="voting-section" :class="proposalType" v-else>
-        <div class="tab-header">
-          <button
-            class="agree"
-            :class="{active: proposalType === 'agree'}"
-            @click="setProposalType('agree')"
-          >
-            I agree
-          </button>
-          <button
-            class="doubt"
-            :class="{active: proposalType === 'doubt'}"
-            @click="setProposalType('doubt')"
-          >
-            I disagree
-          </button>
-        </div>
-        <form @submit.prevent="vote" class="tab">
-          <h5>Please copy the above statement, sign it with your Ethereum address, and paste signature here</h5>
-          <input type="text" v-model="signature" placeholder="Place signature here">
-          <button>Submit</button>
-        </form>
-      </div>
-      <div class="current-status" v-if="proposal.vote">
-        You {{proposal.vote.upVote ? 'agreed to' : 'disagreed with'}} this proposal on
-        {{proposal.vote.createdAt.toLocaleDateString('en-US', {
-          year: 'numeric', month: 'short', day: 'numeric'
-        })}}
-        with a voting weight of {{balance}} AE
-      </div>
-      <div class="comments">
-        <VueDisqus
-          shortname="aeternity-voting"
-          :identifier="proposal._id"
-          :url="url"></VueDisqus>
-      </div>
-      <div class="footer">
-        <a :href="`/proposals/${proposal._id}`">All signatures as JSON</a>
-      </div>
+      <form @submit.prevent="vote" class="tab">
+        <h5>Please copy the above statement, sign it with your Ethereum address, and paste signature here</h5>
+        <input type="text" v-model="signature" placeholder="Place signature here">
+        <button>Submit</button>
+      </form>
+    </div>
+    <div class="current-status" v-if="proposal.vote">
+      You {{proposal.vote.upVote ? 'agreed to' : 'disagreed with'}} this proposal on
+      {{proposal.vote.createdAt.toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    })}}
+      with a voting weight of {{balance}} AE
+    </div>
+    <div class="comments">
+      <VueDisqus
+        shortname="aeternity-voting"
+        :identifier="proposal._id"
+        :url="url"></VueDisqus>
+    </div>
+    <div class="footer">
+      <a :href="`/proposals/${proposal._id}`">All signatures as JSON</a>
     </div>
   </div>
+  <p v-else-if="$subReady['proposal'] && !proposal">This proposal seems to be missing.</p>
 </template>
 
 <script>
@@ -76,9 +71,9 @@
 
   import { Accounts } from '/imports/accounts';
   import web3 from '/imports/ethereum/ui/utils/web3';
+  import { Proposals } from '/imports/core';
 
   export default {
-    props: ['proposal',  'type'],
     data() {
       return {
         signature: '',
@@ -90,7 +85,7 @@
         proposalType: state => state.voting.proposalType,
       }),
       url() {
-        return Meteor.absoluteUrl() + 'proposal/' + this.proposal._id;
+        return Meteor.absoluteUrl() + 'proposal/' + this.$route.params.id;
       }
     },
     components: {
@@ -98,18 +93,20 @@
     },
     meteor: {
       $subscribe: {
-        'accounts.balance'() {
-          return [ this.$store.state.core.accountId ];
+        'proposal'() {
+          return [
+            this.$route.params.id,
+            this.$store.state.core.accountId,
+          ];
         },
       },
-      balance () {
-        const account = Accounts.findOne(this.$store.state.core.accountId);
-        return account && account.balance;
-      },
+      proposal () {
+        return Proposals.findOne()
+      }
     },
     methods: {
       ...mapMutations({
-        toggleProposalModal: 'voting/toggleProposalModal',
+        agreeOrDoubtProposal: 'voting/agreeOrDoubtProposal',
         setProposalType: 'voting/setProposalType',
       }),
       isVotedClass(upVote) {
@@ -124,58 +121,21 @@
         this.$store.commit('voting/setProposalType', upVote ? 'agree' : 'doubt');
         this.$store.dispatch('voting/voteByWeb3');
       },
-    }
+    },
   };
 </script>
 
 <style lang="scss">
   @import "/imports/core/ui/styles/variables";
 
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    overflow-y: scroll;
-    padding: 40px 0;
-    .overlay {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, .7);
-      z-index: 1;
-    }
-    .modal-cont {
-      position: relative;
-      margin-bottom: 80px;
-      margin-left: auto;
-      margin-right: auto;
-      @media screen and (max-width: $container-width) {
-        max-width: 96vw;
-      }
-      z-index: 2;
-      width: 650px;
-      height: auto;
-      background: white;
-      border-radius: $base-border-radius;
-      box-shadow: $base-box-shadow;
-      .modal-header {
-        overflow: hidden;
-        button {
-          float: right;
-          border: 0;
-          padding: 0;
-        }
-      }
-      .modal-header, .voting-buttons, .voting-section, .current-status, .comments, .footer {
-        padding: $gutter $gutter * 2;
-      }
-    }
+  .single-proposal {
+    border-radius: 15px;
+    padding: 15px;
+    max-width: $container-width;
+    background: white;
+    margin: 0 auto;
     .statement {
+      margin-top: 30px;
       position: relative;
       padding: 50px 70px;
       h2 {
