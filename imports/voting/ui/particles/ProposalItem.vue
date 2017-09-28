@@ -62,7 +62,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '/imports/core/ui/styles/variables';
+  @import '/imports/voting/ui/styles/variables';
 
   .proposal-item {
     position: relative;

@@ -1,4 +1,4 @@
-import { Proposals } from '/imports/core';
+import { Proposals } from '../models/proposals';
 import web3 from '/imports/ethereum/ui/utils/web3';
 
 export default {
@@ -8,14 +8,13 @@ export default {
     limit: 10,
     proposalType: 'agree',
     proposal: null,
+    submitProposalModalShown: false,
+    accountId: '',
   }),
 
   mutations: {
     incrementLimit: (state) => {
       state.limit = state.limit + 10;
-    },
-    toggleSubmitProposalModal: (state) => {
-      state.submitProposalModalShown = !state.submitProposalModalShown;
     },
     agreeOrDoubtProposal: (state, proposalOptions) => {
       if (proposalOptions) {
@@ -29,9 +28,24 @@ export default {
     setProposalType: (state, type) => {
       state.proposalType = type;
     },
+    toggleSubmitProposalModal: (state) => {
+      state.submitProposalModalShown = !state.submitProposalModalShown;
+    },
+    setAccountId: (state, accountId) => {
+      state.accountId = accountId;
+    },
   },
 
   actions: {
+    submitSubmitProposalForm({ commit }, title) {
+      Meteor.call('proposals.add', title, (err, res) => {
+        if (err) {
+          console.error(err);
+        } else {
+          commit('toggleSubmitProposalModal');
+        }
+      })
+    },
     handleError(unusedStore, { error, upVote }) {
       const message = {
         'invalid-signature': {
@@ -75,7 +89,7 @@ export default {
             timer: 3000,
           });
           commit('agreeOrDoubtProposal');
-          commit('core/setAccountId', accountId, { root: true });
+          commit('voting/setAccountId', accountId, { root: true });
         }
       });
     },

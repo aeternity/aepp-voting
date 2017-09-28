@@ -28,11 +28,11 @@
     },
     methods: {
       ...mapMutations({
-        toggleSubmitProposalModal: 'core/toggleSubmitProposalModal',
+        toggleSubmitProposalModal: 'voting/toggleSubmitProposalModal',
       }),
       submitSubmitProposalForm() {
         if (this.title) {
-          this.$store.dispatch('core/submitSubmitProposalForm', this.title);
+          this.$store.dispatch('voting/submitSubmitProposalForm', this.title);
         }
       }
     }
@@ -40,7 +40,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/core/ui/styles/variables";
+  @import "/imports/voting/ui/styles/variables";
 
   .modal {
     position: fixed;

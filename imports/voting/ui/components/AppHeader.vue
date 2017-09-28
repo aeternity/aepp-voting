@@ -24,7 +24,7 @@
 <script>
   import { mapState, mapMutations } from 'vuex';
 
-  import { Proposals } from '/imports/core';
+  import { Proposals } from '../../api/models/proposals';
 
   export default {
     props: {
@@ -39,7 +39,7 @@
       };
     },
     methods: mapMutations({
-      toggleSubmitProposalModal: 'core/toggleSubmitProposalModal',
+      toggleSubmitProposalModal: 'voting/toggleSubmitProposalModal',
       setFilter: 'voting/setFilter',
     }),
     computed: {
@@ -52,7 +52,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/core/ui/styles/variables";
+  @import "/imports/voting/ui/styles/variables";
 
   .hidden, .fixed {
     &.hidden {

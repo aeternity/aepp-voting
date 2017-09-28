@@ -1,4 +1,5 @@
-import { ProposalList, ProposalDetail } from '/imports/voting';
+import ProposalList from '../../ui/pages/ProposalList.vue';
+import ProposalDetail from '../../ui/pages/ProposalDetail.vue';
 
 export default [
   { path: '/', name: 'root', component: ProposalList },

@@ -71,7 +71,7 @@
 
   import { Accounts } from '/imports/accounts';
   import web3 from '/imports/ethereum/ui/utils/web3';
-  import { Proposals } from '/imports/core';
+  import { Proposals } from '../../api/models/proposals';
 
   export default {
     data() {
@@ -96,7 +96,7 @@
         'proposal'() {
           return [
             this.$route.params.id,
-            this.$store.state.core.accountId,
+            this.$store.state.voting.accountId,
           ];
         },
       },
@@ -126,7 +126,7 @@
 </script>
 
 <style lang="scss">
-  @import "/imports/core/ui/styles/variables";
+  @import "/imports/voting/ui/styles/variables";
 
   .single-proposal {
     border-radius: 15px;

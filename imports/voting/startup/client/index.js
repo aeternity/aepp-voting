@@ -9,8 +9,7 @@ import createPersistedState from 'vuex-persistedstate';
 import MainLayout from '../../ui/layouts/MainLayout.vue';
 import routes from './routes';
 import * as filters from '../../api/helpers/filters';
-import { store as voting } from '/imports/voting';
-import core from '../../api/store/core';
+import voting from '../../api/store/voting';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
@@ -26,10 +25,9 @@ const supplyCache = {};
 const storeOptions = {
   modules: {
     voting,
-    core,
   },
   plugins: [createPersistedState({
-    paths: ['core.accountId'],
+    paths: ['voting.accountId'],
   })],
 };
 const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);
