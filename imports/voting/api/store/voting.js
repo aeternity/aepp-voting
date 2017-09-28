@@ -8,7 +8,7 @@ export default {
     limit: 10,
     proposalType: 'agree',
     proposal: null,
-    submitProposalModalShown: false,
+    createProposalModalShown: false,
     accountId: '',
   }),
 
@@ -28,8 +28,8 @@ export default {
     setProposalType: (state, type) => {
       state.proposalType = type;
     },
-    toggleSubmitProposalModal: (state) => {
-      state.submitProposalModalShown = !state.submitProposalModalShown;
+    toggleCreateProposalModal: (state) => {
+      state.createProposalModalShown = !state.createProposalModalShown;
     },
     setAccountId: (state, accountId) => {
       state.accountId = accountId;
@@ -37,12 +37,12 @@ export default {
   },
 
   actions: {
-    submitSubmitProposalForm({ commit }, title) {
+    submitCreateProposalModal({ commit }, title) {
       Meteor.call('proposals.add', title, (err, res) => {
         if (err) {
           console.error(err);
         } else {
-          commit('toggleSubmitProposalModal');
+          commit('toggleCreateProposalModal');
         }
       })
     },

@@ -1,12 +1,12 @@
 <template>
   <div class="modal">
-    <div class="overlay" @click="toggleSubmitProposalModal"></div>
+    <div class="overlay" @click="toggleCreateProposalModal"></div>
     <div class="modal-cont">
       <div class="modal-header">
-        <button @click="toggleSubmitProposalModal">Close</button>
+        <button @click="toggleCreateProposalModal">Close</button>
       </div>
       <div class="submit-proposal">
-        <form @submit.prevent="submitSubmitProposalForm">
+        <form @submit.prevent="submitCreateProposalModal">
           <h3>Please keep the statement short and simple, e. g. "God exists".</h3>
           <input :class="{error: error}" v-model="title" placeholder="Your statement"/>
           <button type="submit">Submit</button>
@@ -28,11 +28,11 @@
     },
     methods: {
       ...mapMutations({
-        toggleSubmitProposalModal: 'voting/toggleSubmitProposalModal',
+        toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
       }),
-      submitSubmitProposalForm() {
+      submitCreateProposalModal() {
         if (this.title) {
-          this.$store.dispatch('voting/submitSubmitProposalForm', this.title);
+          this.$store.dispatch('voting/submitCreateProposalModal', this.title);
         }
       }
     }

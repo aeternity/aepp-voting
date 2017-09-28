@@ -6,7 +6,7 @@
         <div class="stripe"></div>
         <h3>Voting</h3>
       </router-link>
-      <button @click="toggleSubmitProposalModal">Submit proposal</button>
+      <button @click="toggleCreateProposalModal">Submit proposal</button>
     </header>
     <nav class="proposals-filter">
       <router-link
@@ -39,7 +39,7 @@
       };
     },
     methods: mapMutations({
-      toggleSubmitProposalModal: 'voting/toggleSubmitProposalModal',
+      toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
       setFilter: 'voting/setFilter',
     }),
     computed: {

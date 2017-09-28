@@ -2,7 +2,7 @@
   <div>
     <app-header />
     <app-header hidden />
-    <submit-proposal-modal v-if="submitProposalModalShown" />
+    <create-proposal-modal v-if="createProposalModalShown" />
     <div class="main-content">
       <router-view />
     </div>
@@ -14,16 +14,16 @@
 
   import { Proposals } from '../../api/models/proposals';
   import AppHeader from '../components/AppHeader.vue';
-  import SubmitProposalModal from '../components/SubmitProposalModal.vue';
+  import CreateProposalModal from '../components/CreateProposalModal.vue';
 
   export default {
     components: {
       AppHeader,
-      SubmitProposalModal,
+      CreateProposalModal,
     },
     computed: mapState({
       proposal: state => state.voting.proposal,
-      submitProposalModalShown: state => state.voting.submitProposalModalShown,
+      createProposalModalShown: state => state.voting.createProposalModalShown,
     }),
   }
 </script>
