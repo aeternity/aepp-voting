@@ -8,7 +8,7 @@
       <div class="submit-proposal">
         <form @submit.prevent="submitCreateProposalModal">
           <h3>Please keep the statement short and simple, e. g. "God exists".</h3>
-          <input :class="{error: error}" v-model="title" placeholder="Your statement"/>
+          <input v-focus="true" :class="{error: error}" v-model="title" placeholder="Your statement"/>
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -18,8 +18,10 @@
 
 <script>
   import { mapMutations } from 'vuex';
+  import { focus } from 'vue-focus';
 
   export default {
+    directives: { focus },
     data() {
       return {
         title: '',
