@@ -21,6 +21,7 @@
     "simpl-schema": "^0.3.2",
     "underscore": "^1.8.3",
     "vue": "^2.4.2",
+    "vue-autosize": "^1.0.2",
     "vue-disqus": "^2.0.3",
     "vue-focus": "^2.1.0",
     "vue-meteor-tracker": "^1.2.3",

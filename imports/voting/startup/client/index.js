@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
 import { injectSupply } from 'vue-supply';
+import VueAutosize from 'vue-autosize';
 import createPersistedState from 'vuex-persistedstate';
 
 import MainLayout from '../../ui/layouts/MainLayout.vue';
@@ -13,6 +14,7 @@ import voting from '../../api/store/voting';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
+Vue.use(VueAutosize);
 Vue.use(Vuex);
 
 // Register filters, that can be accessed inside templates

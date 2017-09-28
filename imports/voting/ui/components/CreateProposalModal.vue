@@ -6,11 +6,8 @@
         <button @click="toggleCreateProposalModal">Close</button>
       </div>
       <div class="submit-proposal">
-        <form @submit.prevent="submitCreateProposalModal">
-          <h3>Please keep the statement short and simple, e. g. "God exists".</h3>
-          <input v-focus="true" :class="{error: error}" v-model="title" placeholder="Your statement"/>
-          <button type="submit">Submit</button>
-        </form>
+        <h3>Please keep the statement short and simple, e. g. "God exists".</h3>
+        <sign-statement :signatureHandler="signatureHandler" />
       </div>
     </div>
   </div>
@@ -18,26 +15,22 @@
 
 <script>
   import { mapMutations } from 'vuex';
-  import { focus } from 'vue-focus';
+
+  import SignStatement from '../particles/SignStatement.vue';
 
   export default {
-    directives: { focus },
-    data() {
-      return {
-        title: '',
-        error: false,
-      }
+    components: {
+      SignStatement,
     },
     methods: {
       ...mapMutations({
         toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
       }),
-      submitCreateProposalModal() {
-        if (this.title) {
-          this.$store.dispatch('voting/submitCreateProposalModal', this.title);
-        }
-      }
-    }
+      signatureHandler({ statement, signature, upVote }) {
+        this.$store.dispatch('voting/createProposal', { statement, signature, upVote })
+          .then(proposalId => this.$router.push(`/proposal/${proposalId}`));
+      },
+    },
   };
 </script>
 
@@ -62,73 +55,38 @@
       top: 0;
       left: 0;
       background: rgba(0, 0, 0, .7);
-      z-index: 1;
-    }
-    h3 {
-      margin-top: 0;
-      padding: 0 40px;
-    }
-    p {
-      font-family: $font-family-accent;
-      font-size: 16px;
-      padding: 0 40px;
-    }
-    input.error {
-      border-color: $red;
     }
     .modal-cont {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      z-index: 2;
+      z-index: 1;
       width: 650px;
-      height: auto;
       background: white;
       border-radius: $base-border-radius;
       box-shadow: $base-box-shadow;
-      max-height: 90vh;
       @media screen and (max-width: $container-width) {
         max-width: 96vw;
       }
       .modal-header {
+        padding: $gutter $gutter * 2;
         button {
           float: right;
           border: 0;
           padding: 0;
         }
       }
-      .modal-header {
-        padding: $gutter $gutter * 2;
-      }
-      .modal-header {
-        flex-grow: 1;
-        flex-shrink: 1;
-      }
       .submit-proposal {
-        padding-bottom: $gutter;
-        >form {
-          padding: 20px;
-          text-align: center;
-          >input {
-            margin: 0 auto;
-            height: 30px;
-            width: 80%;
-            padding: 15px;
-            border-radius: 5px;
-            border: solid 1px #eaeaea;
-            box-shadow: none;
-            display: block;
-          }
-          > button {
-            text-transform: uppercase;
-            margin-top: 20px;
-            height: 50px;
-            padding: 10px 50px;
-            &:hover {
-              background: $brand-color;
-              color: white;
-            }
-          }
+        text-align: center;
+        > input {
+          margin: $gutter auto;
+          height: 30px;
+          width: 80%;
+          padding: 15px;
+          border-radius: 5px;
+          border: solid 1px #eaeaea;
+          box-shadow: none;
+          display: block;
+        }
+        > div {
+          margin: $gutter;
         }
       }
     }

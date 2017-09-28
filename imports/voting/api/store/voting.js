@@ -6,8 +6,6 @@ export default {
 
   state: () => ({
     limit: 10,
-    proposalType: 'agree',
-    proposal: null,
     createProposalModalShown: false,
     accountId: '',
   }),
@@ -15,18 +13,6 @@ export default {
   mutations: {
     incrementLimit: (state) => {
       state.limit = state.limit + 10;
-    },
-    agreeOrDoubtProposal: (state, proposalOptions) => {
-      if (proposalOptions) {
-        const { proposal, type } = proposalOptions;
-        state.proposal = proposal;
-        state.proposalType = type;
-      } else {
-        state.proposal = null;
-      }
-    },
-    setProposalType: (state, type) => {
-      state.proposalType = type;
     },
     toggleCreateProposalModal: (state) => {
       state.createProposalModalShown = !state.createProposalModalShown;
@@ -37,14 +23,20 @@ export default {
   },
 
   actions: {
-    submitCreateProposalModal({ commit }, title) {
-      Meteor.call('proposals.add', title, (err, res) => {
-        if (err) {
-          console.error(err);
-        } else {
-          commit('toggleCreateProposalModal');
-        }
-      })
+    createProposal({ dispatch, commit }, { statement, signature, upVote }) {
+      return new Promise((resolve, reject) => {
+        Meteor.call('proposals.add', statement, signature, upVote, (error, result) => {
+          if (error) {
+            dispatch('handleError', { error, upVote });
+            reject(error);
+          } else {
+            const { accountId, proposalId } = result;
+            commit('toggleCreateProposalModal');
+            commit('setAccountId', accountId);
+            resolve(proposalId);
+          }
+        });
+      });
     },
     handleError(unusedStore, { error, upVote }) {
       const message = {
@@ -60,7 +52,7 @@ export default {
           title: 'Invalid vote!',
           text: [
             'You have already',
-            upVote? 'agreed to' : 'disagreed with',
+            upVote ? 'agreed to' : 'disagreed with',
             'this proposal in the past'
           ].join(' '),
         },
@@ -75,9 +67,8 @@ export default {
       });
       console.error(error);
     },
-    vote({ state, commit, dispatch }, signature) {
-      const upVote = state.proposalType === 'agree';
-      Meteor.call('proposals.vote', state.proposal._id, signature, upVote, (error, result) => {
+    vote({ commit, dispatch }, { proposalId, signature, upVote }) {
+      Meteor.call('proposals.vote', proposalId, signature, upVote, (error, result) => {
         if (error) dispatch('handleError', { error, upVote });
         else {
           const { accountId } = result;
@@ -88,18 +79,8 @@ export default {
             animation: false,
             timer: 3000,
           });
-          commit('agreeOrDoubtProposal');
-          commit('voting/setAccountId', accountId, { root: true });
+          commit('setAccountId', accountId);
         }
-      });
-    },
-    voteByWeb3({ state, dispatch }) {
-      const { eth: { accounts }, personal: { sign }, toHex } = web3;
-      const statement = `I ${state.proposalType === 'agree' ? '' : 'dis'}agree that `
-        + state.proposal.statement;
-      sign(toHex(statement), accounts[0], (error, signature) => {
-        if (error) dispatch('handleError', { error });
-        else dispatch('vote', signature);
       });
     },
   },
