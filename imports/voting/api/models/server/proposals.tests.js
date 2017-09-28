@@ -18,6 +18,16 @@ const downVoteSignature = '0x60c105f35e9e7acf17c1da2b1f87882c137736eaf79909e125c
 let contract;
 onErc20ContractReceiving((c) => { contract = c; });
 
+const stubContract = ({ balanceOf, decimals = 18 }) => {
+  sinon.stub(contract, 'balanceOf', () => new BigNumber(balanceOf).shift(decimals));
+  sinon.stub(contract, 'decimals', () => new BigNumber(decimals));
+};
+
+const restoreContract = () => {
+  contract.balanceOf.restore();
+  contract.decimals.restore();
+};
+
 describe('proposals', () => {
   it('builds correctly from factory', () => {
     const proposal = Factory.create('proposal');
@@ -53,27 +63,27 @@ describe('proposals', () => {
 
       it('throws exception if no tokens associated with account', () => {
         const { _id: proposalId } = Factory.create('proposal', { statement: message });
-        sinon.stub(contract, 'balanceOf', () => new BigNumber(0));
+        stubContract({ balanceOf: 0 });
         expect(() => Meteor.call('proposals.vote', proposalId, upVoteSignature, true))
           .to.throw('no-tokens');
-        contract.balanceOf.restore();
+        restoreContract();
       });
 
       it('throws exception if already voted with the same vote', () => {
         const { _id: proposalId } = Factory.create('proposal', { statement: message });
-        sinon.stub(contract, 'balanceOf', () => new BigNumber(5));
+        stubContract({ balanceOf: 5 });
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         expect(() => Meteor.call('proposals.vote', proposalId, upVoteSignature, true))
           .to.throw('already-voted');
-        contract.balanceOf.restore();
+        restoreContract();
       });
 
       it('allows to vote', () => {
         const { _id: proposalId, upVoteAmount } =
           Factory.create('proposal', { statement: message });
-        sinon.stub(contract, 'balanceOf', () => new BigNumber(5).shift(contract.decimals()));
+        stubContract({ balanceOf: 5 });
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
-        contract.balanceOf.restore();
+        restoreContract();
         const proposal = Proposals.findOne(proposalId);
         expect(proposal.votes[address]).to.be.an('object');
         expect(proposal.votes[address].signature).to.equal(upVoteSignature);
@@ -84,10 +94,10 @@ describe('proposals', () => {
       it('allows to change the decision', () => {
         const { _id: proposalId, upVoteAmount, downVoteAmount } =
           Factory.create('proposal', { statement: message });
-        sinon.stub(contract, 'balanceOf', () => new BigNumber(5).shift(contract.decimals()));
+        stubContract({ balanceOf: 5 });
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         Meteor.call('proposals.vote', proposalId, downVoteSignature, false);
-        contract.balanceOf.restore();
+        restoreContract();
         const proposal = Proposals.findOne(proposalId);
         expect(proposal.votes[address].upVote).to.equal(false);
         expect(proposal.upVoteAmount).to.equal(upVoteAmount);
