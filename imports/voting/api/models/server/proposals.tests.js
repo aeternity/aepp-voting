@@ -49,6 +49,37 @@ describe('proposals', () => {
   });
 
   describe('methods', () => {
+    describe('proposals.add', () => {
+      it('throws exception if signature is wrong', () => {
+        expect(() => Meteor.call('proposals.add', 'test', 'test', true))
+          .to.throw('invalid-signature');
+      });
+
+      it('throws exception if no tokens associated with account', () => {
+        stubContract({ balanceOf: 0 });
+        expect(() => Meteor.call('proposals.add', message, upVoteSignature, true))
+          .to.throw('no-tokens');
+        restoreContract();
+      });
+
+      it('allows to create proposal', () => {
+        stubContract({ balanceOf: 5 });
+        const { accountId, proposalId } = Meteor.call('proposals.add', message, upVoteSignature, true);
+        restoreContract();
+        expect(accountId).to.equal(address);
+        const proposal = Proposals.findOne(proposalId);
+        expect(proposal).to.be.an('object');
+        expect(proposal.statement).to.equal(message);
+        expect(proposal.upVoteAmount).to.equal(5);
+        expect(proposal.downVoteAmount).to.equal(0);
+        expect(proposal.upVoteRatio).to.equal(1);
+        expect(proposal.totalVoteAmount).to.equal(5);
+        expect(proposal.votes[address]).to.be.an('object');
+        expect(proposal.votes[address].signature).to.equal(upVoteSignature);
+        expect(proposal.votes[address].upVote).to.equal(true);
+      });
+    });
+
     describe('proposals.vote', () => {
       it('throws exception if proposal not found', () => {
         expect(() => Meteor.call('proposals.vote', Random.id(), 'test', true))

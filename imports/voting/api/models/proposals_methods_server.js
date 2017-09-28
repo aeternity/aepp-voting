@@ -8,8 +8,46 @@ import { getEthereumAddress, onErc20ContractReceiving } from '/imports/ethereum/
 const UP_VOTE = Symbol('up-vote');
 const DOWN_VOTE = Symbol('down-vote');
 
-onErc20ContractReceiving(erc20contract =>
+onErc20ContractReceiving(erc20contract => {
+  const getAccountInfo = (statement, signature, upVote) => {
+    let accountId;
+    try {
+      accountId = getEthereumAddress(
+        `I ${upVote ? '' : 'dis'}agree that ` + statement, signature);
+    }
+    catch (e) {
+      throw new Meteor.Error('invalid-signature');
+    }
+    const balance = +erc20contract.balanceOf(accountId).shift(erc20contract.decimals().neg());
+    if (!balance) throw new Meteor.Error('no-tokens');
+
+    if (Accounts.findOne(accountId)) Accounts.update(accountId, { balance });
+    else Accounts.insert({ _id: accountId, balance });
+
+    return { accountId, balance };
+  };
+
   Meteor.methods({
+    'proposals.add'(statement, signature, upVote) {
+      check(statement, String);
+      check(signature, String);
+      check(upVote, Boolean);
+
+      const { accountId, balance } = getAccountInfo(statement, signature, upVote);
+
+      return {
+        accountId,
+        proposalId: Proposals.insert({
+          statement,
+          [`${upVote ? 'up' : 'down'}VoteAmount`]: balance,
+          totalVoteAmount: balance,
+          votes: {
+            [accountId]: { signature, upVote, createdAt: new Date() },
+          },
+          upVoteRatio: upVote ? 1 : 0,
+        }),
+      };
+    },
     'proposals.vote'(proposalId, signature, upVote) {
       check(proposalId, String);
       check(signature, String);
@@ -18,18 +56,7 @@ onErc20ContractReceiving(erc20contract =>
       const proposal = Proposals.findOne(proposalId);
       if (!proposal) throw new Meteor.Error('proposal-not-found');
 
-      let accountId;
-      try {
-        accountId = getEthereumAddress(
-          `I ${upVote ? '' : 'dis'}agree that ` + proposal.statement, signature);
-      }
-      catch (e) {
-        throw new Meteor.Error('invalid-signature');
-      }
-      const balance = +erc20contract.balanceOf(accountId).shift(erc20contract.decimals().neg());
-      if (!balance) throw new Meteor.Error('no-tokens');
-      if (Accounts.findOne(accountId)) Accounts.update(accountId, { balance });
-      else Accounts.insert({ _id: accountId, balance });
+      const { accountId, balance } = getAccountInfo(proposal.statement, signature, upVote);
 
       const previousVote = !!proposal.votes[accountId] &&
         (proposal.votes[accountId].upVote ? UP_VOTE : DOWN_VOTE);
@@ -59,4 +86,5 @@ onErc20ContractReceiving(erc20contract =>
 
       return { accountId };
     },
-  }));
+  });
+});
