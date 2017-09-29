@@ -35,7 +35,7 @@
     },
     data() {
       return {
-        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.POPULAR],
+        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.TOTAL_VOTES],
       };
     },
     methods: mapMutations({

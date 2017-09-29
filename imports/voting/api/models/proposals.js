@@ -46,11 +46,11 @@ Proposals.filterTypes = {
   VALID: 'valid',
   INVALID: 'invalid',
   NEWEST: 'newest',
-  POPULAR: 'popular',
+  TOTAL_VOTES: 'total votes',
 };
 
 Proposals.filterSort = {
-  [Proposals.filterTypes.POPULAR]: { totalVoteAmount: -1 },
+  [Proposals.filterTypes.TOTAL_VOTES]: { totalVoteAmount: -1 },
 };
 
 Accounts.after.update(function(unusedUserId, doc) {
