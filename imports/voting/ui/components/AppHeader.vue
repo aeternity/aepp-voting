@@ -6,7 +6,7 @@
         <div class="stripe"></div>
         <h3>Voting</h3>
       </router-link>
-      <button @click="toggleCreateProposalModal">Submit proposal</button>
+      <button @click="toggleCreateProposalModal">Submit statement</button>
     </header>
     <nav class="proposals-filter">
       <router-link

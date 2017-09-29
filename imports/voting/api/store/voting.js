@@ -53,7 +53,7 @@ export default {
           text: [
             'You have already',
             upVote ? 'agreed to' : 'disagreed with',
-            'this proposal in the past'
+            'this statement in the past'
           ].join(' '),
         },
       }[error.error] || {

@@ -5,18 +5,18 @@
 ### User stories
 
 - the user can look at the existing proposals and see their current voting status (right now dummy data)
-- the user can without logging in submit a new proposal
+- the user can without logging in submit a new statement
 - the user can vote on proposals and the weight of his vote is defined by his ERC20 tokens on the Etherum Rinkeby testnet (right now by default 5 tokens)
-- the user can post a comment to a proposal via disqus
+- the user can post a comment to a statement via disqus
 
 
 ### Screenshots
 
-Home - Proposal overview
+Home - Statement overview
 
 ![alt text](https://photos-1.dropbox.com/t/2/AAClgj42cO3n5FBzFsZ5ZdxqAkleVS4MJJa-4gU9XwPCGg/12/7363903/png/32x32/3/1502114400/0/2/Aeternity1.png/EMjVuwUYk8cEIAcoBw/FqT02InJ4XtIhtaHa7RpI0DASrN3iLNpVbBoiO1ku24?dl=0&size=2048x1536&size_mode=3)
 
-Submit new proposal
+Submit new statement
 
 ![alt text](https://photos-5.dropbox.com/t/2/AACo64tk41PDv5wxNBXr7OtTq-I--XeT8MrgIiQXj6BmCw/12/7363903/png/32x32/3/1502114400/0/2/Aeternity3.png/EMjVuwUYk8cEIAcoBw/KYPCO2VFVh97iMXjQgvB18XBIU75UmvkluQSCDtb8iI?dl=0&size=2048x1536&size_mode=3)
 

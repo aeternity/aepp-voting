@@ -70,7 +70,7 @@ let proposalCounter = 0;
 
 Factory.define('proposal', Proposals, {
   statement: () =>
-    `Proposal ${proposalCounter += 1}. Some long proposal text to be agreed or doubted`,
+    `Proposal ${proposalCounter += 1}. Some long statement to be agreed or doubted`,
   votes() {
     this.upVoteAmount = 0;
     this.downVoteAmount = 0;
