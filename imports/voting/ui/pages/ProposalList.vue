@@ -27,7 +27,7 @@
   import { Counts } from 'meteor/tmeasday:publish-counts';
   import MugenScroll from 'vue-mugen-scroll'
 
-  import { Proposals } from '/imports/core';
+  import { Proposals } from '../../api/models/proposals';
   import ProposalItem from '../particles/ProposalItem.vue';
 
   export default {
@@ -52,7 +52,7 @@
           return [
             this.$route.params.filter || Proposals.filterTypes.NEWEST,
             this.$store.state.voting.limit,
-            this.$store.state.core.accountId,
+            this.$store.state.voting.accountId,
           ];
         },
         'proposals.count': [],
@@ -61,7 +61,7 @@
         params() {
           return {
             filter: this.$store.state.voting.filter,
-            accountId: this.$store.state.core.accountId,
+            accountId: this.$store.state.voting.accountId,
           };
         },
         update: ({ filter, accountId }) =>
@@ -80,7 +80,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/core/ui/styles/variables";
+  @import "/imports/voting/ui/styles/variables";
 
   .mugen-scroll, .all-loaded {
     text-align: center;

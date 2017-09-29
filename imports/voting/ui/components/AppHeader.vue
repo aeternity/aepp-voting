@@ -6,7 +6,7 @@
         <div class="stripe"></div>
         <h3>Voting</h3>
       </router-link>
-      <button @click="toggleSubmitProposalModal">Submit proposal</button>
+      <button @click="toggleCreateProposalModal">Submit proposal</button>
     </header>
     <nav class="proposals-filter">
       <router-link
@@ -24,7 +24,7 @@
 <script>
   import { mapState, mapMutations } from 'vuex';
 
-  import { Proposals } from '/imports/core';
+  import { Proposals } from '../../api/models/proposals';
 
   export default {
     props: {
@@ -39,7 +39,7 @@
       };
     },
     methods: mapMutations({
-      toggleSubmitProposalModal: 'core/toggleSubmitProposalModal',
+      toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
       setFilter: 'voting/setFilter',
     }),
     computed: {
@@ -52,7 +52,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/core/ui/styles/variables";
+  @import "/imports/voting/ui/styles/variables";
 
   .hidden, .fixed {
     &.hidden {

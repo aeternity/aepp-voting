@@ -1,1 +1,1 @@
-import '/imports/core/startup/client';
+import '/imports/voting/startup/client';

@@ -3,7 +3,6 @@
     :to="`/proposal/${this.proposal._id}`"
     class="proposal-item"
     :class="voteClass"
-    @click.native="agreeOrDoubtProposal('agree')"
   >
     <div class="proposal-content">
       <h3>{{proposal.statement}}</h3>
@@ -20,15 +19,14 @@
       <div class="controls">
         <button
           class="up-vote"
-          :class="isVotedClass(true)"
+          :class="{ already: proposal.vote && proposal.vote.upVote }"
         >
           <i class="fa fa-chevron-up" />
         </button>
         <router-link
-          :to="`/proposal/${this.proposal._id}`"
-          @click.native.stop="agreeOrDoubtProposal('doubt')"
+          :to="`/proposal/${this.proposal._id}/doubt`"
           class="down-vote button"
-          :class="isVotedClass(false)"
+          :class="{ already: proposal.vote && proposal.vote.upVote === false }"
         >
           <i class="fa fa-chevron-down" />
         </router-link>
@@ -50,19 +48,11 @@
         return this.proposal.upVoteAmount - this.proposal.downVoteAmount;
       },
     },
-    methods: {
-      isVotedClass(upVote) {
-        return this.proposal.vote && this.proposal.vote.upVote === upVote ? 'already' : '';
-      },
-      agreeOrDoubtProposal(type) {
-        this.$store.commit('voting/agreeOrDoubtProposal', {  proposal: this.proposal, type });
-      },
-    },
   }
 </script>
 
 <style lang="scss" scoped>
-  @import '/imports/core/ui/styles/variables';
+  @import '/imports/voting/ui/styles/variables';
 
   .proposal-item {
     position: relative;

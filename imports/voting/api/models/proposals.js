@@ -3,8 +3,8 @@ import { Mongo } from 'meteor/mongo';
 import { Factory } from 'meteor/dburles:factory';
 import { _ } from 'underscore';
 
-import { createdAt, updatedAt } from '/imports/common';
-import { Accounts } from '/imports/accounts';
+import { createdAt, updatedAt } from '/imports/common/index';
+import { Accounts } from '/imports/accounts/index';
 
 export const Proposals = new Mongo.Collection('proposals');
 

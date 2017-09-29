@@ -2,7 +2,7 @@
   <div>
     <app-header />
     <app-header hidden />
-    <submit-proposal-modal v-if="submitProposalModalShown" />
+    <create-proposal-modal v-if="createProposalModalShown" />
     <div class="main-content">
       <router-view />
     </div>
@@ -12,27 +12,27 @@
 <script>
   import { mapState } from 'vuex';
 
-  import { Proposals } from '/imports/core';
+  import { Proposals } from '../../api/models/proposals';
   import AppHeader from '../components/AppHeader.vue';
-  import SubmitProposalModal from '../components/SubmitProposalModal.vue';
+  import CreateProposalModal from '../components/CreateProposalModal.vue';
 
   export default {
     components: {
       AppHeader,
-      SubmitProposalModal,
+      CreateProposalModal,
     },
     computed: mapState({
       proposal: state => state.voting.proposal,
-      submitProposalModalShown: state => state.core.submitProposalModalShown,
+      createProposalModalShown: state => state.voting.createProposalModalShown,
     }),
   }
 </script>
 
 <style lang="scss">
-  @import "/imports/core/ui/styles/normalize";
-  @import "/imports/core/ui/styles/fonts";
-  @import "/imports/core/ui/styles/variables";
-  @import "/imports/core/ui/styles/vote-button";
+  @import "/imports/voting/ui/styles/fonts";
+  @import "/imports/voting/ui/styles/normalize";
+  @import "/imports/voting/ui/styles/variables";
+  @import "/imports/voting/ui/styles/vote-button";
   * {
     outline: none !important;
     -webkit-font-smoothing: antialiased;

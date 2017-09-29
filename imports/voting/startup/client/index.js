@@ -4,16 +4,17 @@ import Vuex from 'vuex';
 import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
 import { injectSupply } from 'vue-supply';
+import VueAutosize from 'vue-autosize';
 import createPersistedState from 'vuex-persistedstate';
 
 import MainLayout from '../../ui/layouts/MainLayout.vue';
 import routes from './routes';
 import * as filters from '../../api/helpers/filters';
-import { store as voting } from '/imports/voting';
-import core from '../../api/store/core';
+import voting from '../../api/store/voting';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
+Vue.use(VueAutosize);
 Vue.use(Vuex);
 
 // Register filters, that can be accessed inside templates
@@ -26,10 +27,9 @@ const supplyCache = {};
 const storeOptions = {
   modules: {
     voting,
-    core,
   },
   plugins: [createPersistedState({
-    paths: ['core.accountId'],
+    paths: ['voting.accountId'],
   })],
 };
 const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);
