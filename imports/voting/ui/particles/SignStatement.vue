@@ -154,7 +154,7 @@
   .voting-section {
     &.doubt {
       .tab {
-        background: $red;
+        background: $red !important;
         button {
           color: $red;
           border: 2px solid $red;
@@ -195,10 +195,11 @@
     .tab {
       border-radius: $base-border-radius;
       padding: $gutter * 2 $gutter * 2 $gutter;
-      background: $green;
+      background: $green !important;
       text-align: center;
       h5 {
         font-family: $font-family-accent;
+        font-style: italic;
         text-align: center;
         font-size: 14px;
         margin: $gutter;
@@ -206,24 +207,23 @@
       }
       input {
         display: block;
-        font-size: 22px;
+        font-size: 18px;
         padding: 10px;
         font-family: 'Roboto Light';
-        color: white;
+        color: $gray;
         border: 2px solid white;
         border-radius: $base-border-radius;
         width: 90%;
         margin: 0 auto;
-        background: transparent;
+        background: white;
         &::placeholder {
-          color: rgba(255, 255, 255, .7);
-          opacity: 1;
+          color: $gray-lighter;
         }
       }
       button {
         background: white;
         color: $green;
-        margin: 10px;
+        margin: 30px 0 13px 0;
         font-size: 24px;
         padding: 5px 70px;
         border: 2px solid $green;
