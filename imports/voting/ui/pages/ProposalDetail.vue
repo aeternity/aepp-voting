@@ -6,6 +6,7 @@
       :desiredVote="vote !== 'doubt'"
       :selectedVote="vote"
       :signatureHandler="signatureHandler"
+      :proposalId="proposal._id"
     />
     <div class="current-status" v-if="proposal.vote">
       You {{proposal.vote.upVote ? 'agreed to' : 'disagreed with'}} this proposal on
@@ -107,6 +108,11 @@
       a {
         color: $brand-color;
       }
+    }
+    .btn-copy {
+      border: none;
+      text-decoration: underline;
+      color: $gray;
     }
   }
 </style>

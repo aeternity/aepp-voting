@@ -50,6 +50,14 @@
         <button>Submit</button>
       </form>
     </div>
+    <h5>Share this link</h5>
+    <span>{{`http://voting.aepps.com/proposal/${proposalId}`}}</span>
+    <button
+      class="btn-copy"
+      v-clipboard="`http://voting.aepps.com/proposal/${proposalId}`"
+      @success="onCopied"
+      @error="onCopyError"
+    >Copy</button>
   </div>
 </template>
 
@@ -68,6 +76,7 @@
       desiredVote: { type: Boolean, default: true },
       signatureHandler: { type: Function },
       statement: { type: String },
+      proposalId: { type: String },
     },
     data() {
       return {
