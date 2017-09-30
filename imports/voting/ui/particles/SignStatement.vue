@@ -1,14 +1,8 @@
 <template>
   <div>
     <div class="statement">
-      <div class="quote left">
-        <i class="fa fa-quote-left" />
-      </div>
       <h2>
-        <template v-if="!canSignByWeb3">
-          I {{upVote ? '' : 'dis'}}agree that
-        </template>
-        <template v-if="statement">{{statement}}</template>
+        <template v-if="statement">"{{statement}}"</template>
         <template v-else>
           <input
             v-focus="true"
@@ -24,9 +18,6 @@
         @success="onCopied"
         @error="onCopyError"
       >Copy</button>
-      <div class="quote right">
-        <i class="fa fa-quote-right" />
-      </div>
     </div>
     <div class="voting-buttons" v-if="canSignByWeb3">
       <button
@@ -142,19 +133,6 @@
       display: flex;
       text-decoration: underline;
       color: $gray;
-    }
-    .quote {
-      position: absolute;
-      font-size: 70px;
-      color: $gray-lighter;
-      &.left {
-        top: 0;
-        left: 30px;
-      }
-      &.right {
-        bottom: 0;
-        right: 30px;
-      }
     }
   }
   .voting-buttons {
