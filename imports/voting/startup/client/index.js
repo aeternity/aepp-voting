@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
+import VueClipboards from 'vue-clipboards';
 import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
 import { injectSupply } from 'vue-supply';
@@ -16,6 +17,7 @@ Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
 Vue.use(VueAutosize);
 Vue.use(Vuex);
+Vue.use(VueClipboards);
 
 // Register filters, that can be accessed inside templates
 for (const key in filters) {

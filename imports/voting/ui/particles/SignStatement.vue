@@ -18,6 +18,12 @@
           />
         </template>
       </h2>
+      <button
+        class="btn-copy"
+        v-clipboard="statement"
+        @success="onCopied"
+        @error="onCopyError"
+      >Copy</button>
       <div class="quote right">
         <i class="fa fa-quote-right" />
       </div>
@@ -81,6 +87,12 @@
       }
     },
     methods: {
+      onCopyError() {
+        e.trigger.innerHTML = 'Copy Error!'
+      },
+      onCopied(e) {
+        e.trigger.innerHTML = 'Copied'
+      },
       setUpVote(upVote) {
         this.upVote = upVote;
       },
@@ -123,6 +135,13 @@
           min-width: 200px;
         }
       }
+    }
+    .btn-copy {
+      border: none;
+      margin: 0 auto;
+      display: flex;
+      text-decoration: underline;
+      color: $gray;
     }
     .quote {
       position: absolute;
