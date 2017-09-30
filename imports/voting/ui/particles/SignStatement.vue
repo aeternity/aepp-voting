@@ -228,7 +228,7 @@
         padding: 5px 70px;
         border: 2px solid $green;
         &:hover {
-          border-color: lighten($green, 20%);
+          border-color: $gray-lighter;
           color: lighten($green, 20%);
         }
       }
