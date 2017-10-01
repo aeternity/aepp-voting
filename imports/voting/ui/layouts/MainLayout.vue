@@ -32,7 +32,6 @@
   @import "/imports/voting/ui/styles/fonts";
   @import "/imports/voting/ui/styles/normalize";
   @import "/imports/voting/ui/styles/variables";
-  @import "/imports/voting/ui/styles/vote-button";
   * {
     outline: none !important;
     -webkit-font-smoothing: antialiased;

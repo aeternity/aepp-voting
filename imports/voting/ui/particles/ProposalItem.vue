@@ -17,17 +17,16 @@
       </div>
       <div class="controls">
         <button
-          class="up-vote"
           :class="{ already: proposal.vote && proposal.vote.upVote }"
         >
-          <i class="fa fa-chevron-up" />
+          <i class="fa fa-thumbs-up" />
         </button>
         <router-link
           :to="`/proposal/${this.proposal._id}/doubt`"
-          class="down-vote button"
+          class="button"
           :class="{ already: proposal.vote && proposal.vote.upVote === false }"
         >
-          <i class="fa fa-chevron-down" />
+          <i class="fa fa-thumbs-down" />
         </router-link>
       </div>
     </aside>
@@ -107,6 +106,8 @@
       align-items: center;
       padding: $gutter / 2 $gutter;
       button, .button {
+        color: $gray-dark;
+        border: solid 2px $gray-light;
         width: 62px;
         height: 62px;
         line-height: 62px;
@@ -116,6 +117,9 @@
         i {
           position: relative;
           top: -2px;
+        }
+        &:hover {
+          background-color: $gray-light;
         }
       }
     }
