@@ -2,7 +2,6 @@
   <router-link
     :to="`/proposal/${this.proposal._id}`"
     class="proposal-item"
-    :class="voteClass"
   >
     <div class="proposal-content">
       <h3>{{proposal.statement}}</h3>
@@ -10,10 +9,10 @@
     </div>
     <aside>
       <div class="voted">
-        <h3 class="main" :class="voteClass">
+        <h3 class="main">
           <span>{{sumVoteAmount < 0 ? '-' : '+'}}</span> {{Math.abs(sumVoteAmount) | sumFormat}}
         </h3>
-        <p class="agreed"><span>+</span> {{proposal.upVoteAmount | sumFormat}}</p>
+        <p class="agreed">{{proposal.upVoteAmount | sumFormat}}</p>
         <p class="doubt"><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
       </div>
       <div class="controls">
@@ -39,11 +38,6 @@
   export default {
     props: ['proposal'],
     computed: {
-      voteClass() {
-        return this.proposal.upVoteAmount > this.proposal.downVoteAmount
-          ? 'agreed'
-          : 'doubt'
-      },
       sumVoteAmount() {
         return this.proposal.upVoteAmount - this.proposal.downVoteAmount;
       },
@@ -76,15 +70,10 @@
       height: 100%;
       border-top-left-radius: $base-border-radius;
       border-bottom-left-radius: $base-border-radius;
-      background: $green;
+      background: $brand-color;
       @media screen and (max-width: $container-width) {
         width: 100%;
         height: 5px;
-      }
-    }
-    &.doubt {
-      &:after {
-        background: $red !important;
       }
     }
     .proposal-content {
@@ -102,10 +91,7 @@
         text-align: left;
       }
       h3 {
-        color: $green;
-        &.doubt {
-          color: $red;
-        }
+        color: $gray-dark;
       }
       p {
         font-family: $font-family-header;
@@ -148,10 +134,10 @@
     color: $gray-light;
     font-size: 14px;
     &.agreed {
-      color: $green;
+      color: $gray;
     }
     &.doubt {
-      color: $red;
+      color: $gray;
     }
     span {
       font-size: 18px;
