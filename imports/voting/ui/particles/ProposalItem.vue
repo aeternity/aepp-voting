@@ -144,7 +144,7 @@
   }
 
   p {
-    font-family: $font-family-accent;
+    font-family: $base-font-sans-serif;
     color: $gray-light;
     font-size: 14px;
     &.agreed {

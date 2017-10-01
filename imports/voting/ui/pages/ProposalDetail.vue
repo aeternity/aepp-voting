@@ -109,6 +109,9 @@
         color: $brand-color;
       }
     }
+    h5 {
+      margin: 15px auto 5px;
+    }
     .btn-copy {
       border: none;
       text-decoration: underline;
