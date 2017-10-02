@@ -1,14 +1,8 @@
 <template>
   <div>
     <div class="statement">
-      <div class="quote left">
-        <i class="fa fa-quote-left" />
-      </div>
       <h2>
-        <template v-if="!canSignByWeb3">
-          I {{upVote ? '' : 'dis'}}agree that
-        </template>
-        <template v-if="statement">{{statement}}</template>
+        <template v-if="statement">"{{statement}}"</template>
         <template v-else>
           <input
             v-focus="true"
@@ -18,9 +12,13 @@
           />
         </template>
       </h2>
-      <div class="quote right">
-        <i class="fa fa-quote-right" />
-      </div>
+      <button
+        v-if="showCopy"
+        class="btn-copy"
+        v-clipboard="statement"
+        @success="onCopied"
+        @error="onCopyError"
+      >Copy</button>
     </div>
     <div class="voting-buttons" v-if="canSignByWeb3">
       <button
@@ -53,6 +51,15 @@
         <button>Submit</button>
       </form>
     </div>
+    <h5 v-if="showCopy">Share this link</h5>
+    <span v-if="showCopy">{{`http://voting.aepps.com/proposal/${proposalId}`}}</span>
+    <button
+      v-if="showCopy"
+      class="btn-copy"
+      v-clipboard="`http://voting.aepps.com/proposal/${proposalId}`"
+      @success="onCopied"
+      @error="onCopyError"
+    >Copy</button>
   </div>
 </template>
 
@@ -71,6 +78,8 @@
       desiredVote: { type: Boolean, default: true },
       signatureHandler: { type: Function },
       statement: { type: String },
+      proposalId: { type: String },
+      showCopy: { type: Boolean, default: true },
     },
     data() {
       return {
@@ -81,6 +90,12 @@
       }
     },
     methods: {
+      onCopyError(e) {
+        e.trigger.innerHTML = 'Copy Error!'
+      },
+      onCopied(e) {
+        e.trigger.innerHTML = 'Copied'
+      },
       setUpVote(upVote) {
         this.upVote = upVote;
       },
@@ -124,18 +139,12 @@
         }
       }
     }
-    .quote {
-      position: absolute;
-      font-size: 70px;
-      color: $gray-lighter;
-      &.left {
-        top: 0;
-        left: 30px;
-      }
-      &.right {
-        bottom: 0;
-        right: 30px;
-      }
+    .btn-copy {
+      border: none;
+      margin: 0 auto;
+      display: block;
+      text-decoration: underline;
+      color: $gray;
     }
   }
   .voting-buttons {
@@ -157,7 +166,7 @@
   .voting-section {
     &.doubt {
       .tab {
-        background: $red;
+        background: $red !important;
         button {
           color: $red;
           border: 2px solid $red;
@@ -198,10 +207,11 @@
     .tab {
       border-radius: $base-border-radius;
       padding: $gutter * 2 $gutter * 2 $gutter;
-      background: $green;
+      background: $green !important;
       text-align: center;
       h5 {
         font-family: $font-family-accent;
+        font-style: italic;
         text-align: center;
         font-size: 14px;
         margin: $gutter;
@@ -209,29 +219,28 @@
       }
       input {
         display: block;
-        font-size: 22px;
+        font-size: 18px;
         padding: 10px;
         font-family: 'Roboto Light';
-        color: white;
+        color: $gray;
         border: 2px solid white;
         border-radius: $base-border-radius;
         width: 90%;
         margin: 0 auto;
-        background: transparent;
+        background: white;
         &::placeholder {
-          color: rgba(255, 255, 255, .7);
-          opacity: 1;
+          color: $gray-lighter;
         }
       }
       button {
         background: white;
         color: $green;
-        margin: 10px;
+        margin: 30px 0 13px 0;
         font-size: 24px;
         padding: 5px 70px;
         border: 2px solid $green;
         &:hover {
-          border-color: lighten($green, 20%);
+          border-color: $gray-lighter;
           color: lighten($green, 20%);
         }
       }

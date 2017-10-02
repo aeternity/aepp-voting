@@ -7,7 +7,7 @@
       </div>
       <div class="submit-proposal">
         <h3>Please keep the statement short and simple, e. g. "God exists".</h3>
-        <sign-statement :signatureHandler="signatureHandler" />
+        <sign-statement :showCopy="false" :signatureHandler="signatureHandler" />
       </div>
     </div>
   </div>

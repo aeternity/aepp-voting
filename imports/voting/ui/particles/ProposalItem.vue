@@ -2,7 +2,6 @@
   <router-link
     :to="`/proposal/${this.proposal._id}`"
     class="proposal-item"
-    :class="voteClass"
   >
     <div class="proposal-content">
       <h3>{{proposal.statement}}</h3>
@@ -10,25 +9,24 @@
     </div>
     <aside>
       <div class="voted">
-        <h3 class="main" :class="voteClass">
+        <h3 class="main">
           <span>{{sumVoteAmount < 0 ? '-' : '+'}}</span> {{Math.abs(sumVoteAmount) | sumFormat}}
         </h3>
-        <p class="agreed"><span>+</span> {{proposal.upVoteAmount | sumFormat}}</p>
+        <p class="agreed">{{proposal.upVoteAmount | sumFormat}}</p>
         <p class="doubt"><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
       </div>
       <div class="controls">
         <button
-          class="up-vote"
           :class="{ already: proposal.vote && proposal.vote.upVote }"
         >
-          <i class="fa fa-chevron-up" />
+          <i class="fa fa-thumbs-up" />
         </button>
         <router-link
           :to="`/proposal/${this.proposal._id}/doubt`"
-          class="down-vote button"
+          class="button"
           :class="{ already: proposal.vote && proposal.vote.upVote === false }"
         >
-          <i class="fa fa-chevron-down" />
+          <i class="fa fa-thumbs-down" />
         </router-link>
       </div>
     </aside>
@@ -39,11 +37,6 @@
   export default {
     props: ['proposal'],
     computed: {
-      voteClass() {
-        return this.proposal.upVoteAmount > this.proposal.downVoteAmount
-          ? 'agreed'
-          : 'doubt'
-      },
       sumVoteAmount() {
         return this.proposal.upVoteAmount - this.proposal.downVoteAmount;
       },
@@ -76,15 +69,10 @@
       height: 100%;
       border-top-left-radius: $base-border-radius;
       border-bottom-left-radius: $base-border-radius;
-      background: $green;
+      background: $brand-color;
       @media screen and (max-width: $container-width) {
         width: 100%;
         height: 5px;
-      }
-    }
-    &.doubt {
-      &:after {
-        background: $red !important;
       }
     }
     .proposal-content {
@@ -102,10 +90,7 @@
         text-align: left;
       }
       h3 {
-        color: $green;
-        &.doubt {
-          color: $red;
-        }
+        color: $gray-dark;
       }
       p {
         font-family: $font-family-header;
@@ -121,6 +106,8 @@
       align-items: center;
       padding: $gutter / 2 $gutter;
       button, .button {
+        color: $gray-dark;
+        border: solid 2px $gray-light;
         width: 62px;
         height: 62px;
         line-height: 62px;
@@ -130,6 +117,9 @@
         i {
           position: relative;
           top: -2px;
+        }
+        &:hover {
+          background-color: $gray-light;
         }
       }
     }
@@ -144,14 +134,14 @@
   }
 
   p {
-    font-family: $font-family-accent;
+    font-family: $base-font-sans-serif;
     color: $gray-light;
     font-size: 14px;
     &.agreed {
-      color: $green;
+      color: $gray;
     }
     &.doubt {
-      color: $red;
+      color: $gray;
     }
     span {
       font-size: 18px;

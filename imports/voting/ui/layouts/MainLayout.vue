@@ -32,7 +32,6 @@
   @import "/imports/voting/ui/styles/fonts";
   @import "/imports/voting/ui/styles/normalize";
   @import "/imports/voting/ui/styles/variables";
-  @import "/imports/voting/ui/styles/vote-button";
   * {
     outline: none !important;
     -webkit-font-smoothing: antialiased;
@@ -45,9 +44,10 @@
   .main-content {
     max-width: $container-width;
     margin: 0 auto;
-    padding-top: 10px;
+    padding-top: 115px;
     @media screen and (max-width: $container-width){
       padding: 10px;
+      padding-top: 135px;
     }
   }
   button, .button {
