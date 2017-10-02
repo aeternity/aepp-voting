@@ -87,7 +87,7 @@
       }
     },
     methods: {
-      onCopyError() {
+      onCopyError(e) {
         e.trigger.innerHTML = 'Copy Error!'
       },
       onCopied(e) {
