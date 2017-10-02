@@ -139,7 +139,7 @@
     .btn-copy {
       border: none;
       margin: 0 auto;
-      display: flex;
+      display: block;
       text-decoration: underline;
       color: $gray;
     }
