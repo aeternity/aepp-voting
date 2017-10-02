@@ -13,6 +13,7 @@
         </template>
       </h2>
       <button
+        v-if="showCopy"
         class="btn-copy"
         v-clipboard="statement"
         @success="onCopied"
@@ -50,9 +51,10 @@
         <button>Submit</button>
       </form>
     </div>
-    <h5>Share this link</h5>
-    <span>{{`http://voting.aepps.com/proposal/${proposalId}`}}</span>
+    <h5 v-if="showCopy">Share this link</h5>
+    <span v-if="showCopy">{{`http://voting.aepps.com/proposal/${proposalId}`}}</span>
     <button
+      v-if="showCopy"
       class="btn-copy"
       v-clipboard="`http://voting.aepps.com/proposal/${proposalId}`"
       @success="onCopied"
@@ -77,6 +79,7 @@
       signatureHandler: { type: Function },
       statement: { type: String },
       proposalId: { type: String },
+      showCopy: { type: Boolean, default: true },
     },
     data() {
       return {
