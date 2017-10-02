@@ -7,6 +7,7 @@ import VueMeteorTracker from 'vue-meteor-tracker';
 import { injectSupply } from 'vue-supply';
 import VueAutosize from 'vue-autosize';
 import createPersistedState from 'vuex-persistedstate';
+
 import MainLayout from '../../ui/layouts/MainLayout.vue';
 import routes from './routes';
 import * as filters from '../../api/helpers/filters';
