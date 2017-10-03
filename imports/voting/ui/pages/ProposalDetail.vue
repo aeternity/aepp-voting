@@ -1,5 +1,6 @@
 <template>
   <div class="single-proposal" v-if="proposal">
+    <h2 class="statement">“{{proposal.statement}}”</h2>
     <sign-statement
       :statement="proposal.statement"
       :currentVote="proposal.vote && proposal.vote.upVote"
@@ -104,6 +105,11 @@
     overflow: hidden;
     > * {
       margin: $gutter $gutter * 2;
+    }
+    h2.statement {
+      padding: 40px 0;
+      text-align: center;
+      font-size: 28px;
     }
     .current-status {
       color: $gray;
