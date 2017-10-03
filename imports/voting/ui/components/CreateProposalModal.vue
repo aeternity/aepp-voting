@@ -27,6 +27,7 @@
   import { mapMutations } from 'vuex';
 
   import SignStatement from '../particles/SignStatement.vue';
+  import { Proposals } from '../../api/models/proposals';
 
   export default {
     data() {
@@ -41,7 +42,10 @@
       }),
       signatureHandler({ statement, signature, upVote }) {
         this.$store.dispatch('voting/createProposal', { statement, signature, upVote })
-          .then(proposalId => this.$router.push(`/proposal/${proposalId}`));
+          .then(proposalId => this.$router.push({
+            name: 'proposal-list',
+            params: { filter: Proposals.filterTypes.NEWEST },
+          }));
       },
     },
   };
