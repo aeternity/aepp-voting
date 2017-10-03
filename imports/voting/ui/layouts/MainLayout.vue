@@ -61,5 +61,15 @@
     cursor: pointer;
     font-family: $font-family-header;
     text-align: center;
+    &.vote {
+      color: $gray-dark;
+      border: solid 2px $gray-light;
+      &.already {
+        background-color: $gray-lighter;
+      }
+      &.checked, &:hover {
+        background-color: $gray-light;
+      }
+    }
   }
 </style>
