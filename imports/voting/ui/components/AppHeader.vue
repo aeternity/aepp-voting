@@ -98,7 +98,7 @@
       }
       h3 {
         color: white;
-        font-family: 'Roboto Light';
+        font-weight: lighter;
         letter-spacing: .1em;
       }
     }

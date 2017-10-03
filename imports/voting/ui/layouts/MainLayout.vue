@@ -29,7 +29,8 @@
 </script>
 
 <style lang="scss">
-  @import "/imports/voting/ui/styles/fonts";
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
+  @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
   @import "/imports/voting/ui/styles/normalize";
   @import "/imports/voting/ui/styles/variables";
   @import "/imports/voting/ui/styles/vote-button";
@@ -54,6 +55,7 @@
     background-color: transparent;
     border: 1px solid $brand-color;
     color: $brand-color;
+    font-weight: bold;
     border-radius: 100px;
     padding: 5px 20px;
     cursor: pointer;
