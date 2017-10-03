@@ -1,6 +1,3 @@
-import { Proposals } from '../models/proposals';
-import web3 from '/imports/ethereum/ui/utils/web3';
-
 export default {
   namespaced: true,
 
@@ -27,25 +24,34 @@ export default {
       return new Promise((resolve, reject) => {
         Meteor.call('proposals.add', statement, signature, upVote, (error, result) => {
           if (error) {
-            dispatch('handleError', { error, upVote });
+            dispatch('handleError', { error, upVote, voting: false });
             reject(error);
           } else {
             const { accountId, proposalId } = result;
             commit('toggleCreateProposalModal');
             commit('setAccountId', accountId);
             resolve(proposalId);
+            swal({
+              title: 'Thank you!',
+              text: 'Your statement was published!',
+              type: 'success',
+              animation: false,
+              timer: 3000,
+            });
           }
         });
       });
     },
-    handleError(unusedStore, { error, upVote }) {
+    handleError(unusedStore, { error, upVote, voting = true }) {
+      const errorMessage = `Your ${voting ? 'vote' : 'statement'}
+      was not ${voting ? 'received' : 'published'}!`;
       const message = {
         'invalid-signature': {
-          title: 'Your vote was not received!',
+          title: errorMessage,
           text: 'Something wrong with signature',
         },
         'no-tokens': {
-          title: 'Your vote was not received!',
+          title: errorMessage,
           text: 'You don\'t have Aeternity tokens',
         },
         'already-voted': {
@@ -58,7 +64,7 @@ export default {
         },
       }[error.error] || {
         title: 'Something went wrong!',
-        text: 'Your vote was not received!',
+        text: errorMessage,
       };
       swal({
         ...message,

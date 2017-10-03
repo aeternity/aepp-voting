@@ -2,7 +2,6 @@
   <router-link
     :to="`/proposal/${this.proposal._id}`"
     class="proposal-item"
-    :class="voteClass"
   >
     <div class="proposal-content">
       <h3>{{proposal.statement}}</h3>
@@ -10,25 +9,25 @@
     </div>
     <aside>
       <div class="voted">
-        <h3 class="main" :class="voteClass">
-          <span>{{sumVoteAmount < 0 ? '-' : '+'}}</span> {{Math.abs(sumVoteAmount) | sumFormat}}
+        <h3 class="main">
+          <span>{{sumVoteAmount < 0 ? '-' : ''}}</span> {{Math.abs(sumVoteAmount) | sumFormat}}
         </h3>
-        <p class="agreed"><span>+</span> {{proposal.upVoteAmount | sumFormat}}</p>
-        <p class="doubt"><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
+        <p>{{proposal.upVoteAmount | sumFormat}}</p>
+        <p><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
       </div>
       <div class="controls">
         <button
-          class="up-vote"
+          class="vote"
           :class="{ already: proposal.vote && proposal.vote.upVote }"
         >
-          <i class="fa fa-chevron-up" />
+          <i class="fa fa-thumbs-up" />
         </button>
         <router-link
           :to="`/proposal/${this.proposal._id}/doubt`"
-          class="down-vote button"
+          class="button vote"
           :class="{ already: proposal.vote && proposal.vote.upVote === false }"
         >
-          <i class="fa fa-chevron-down" />
+          <i class="fa fa-thumbs-down" />
         </router-link>
       </div>
     </aside>
@@ -39,11 +38,6 @@
   export default {
     props: ['proposal'],
     computed: {
-      voteClass() {
-        return this.proposal.upVoteAmount > this.proposal.downVoteAmount
-          ? 'agreed'
-          : 'doubt'
-      },
       sumVoteAmount() {
         return this.proposal.upVoteAmount - this.proposal.downVoteAmount;
       },
@@ -76,15 +70,10 @@
       height: 100%;
       border-top-left-radius: $base-border-radius;
       border-bottom-left-radius: $base-border-radius;
-      background: $green;
+      background: $brand-color;
       @media screen and (max-width: $container-width) {
         width: 100%;
         height: 5px;
-      }
-    }
-    &.doubt {
-      &:after {
-        background: $red !important;
       }
     }
     .proposal-content {
@@ -102,13 +91,11 @@
         text-align: left;
       }
       h3 {
-        color: $green;
-        &.doubt {
-          color: $red;
-        }
+        color: $gray-dark;
       }
       p {
         font-family: $font-family-header;
+        color: $gray;
       }
     }
     aside {
@@ -144,15 +131,8 @@
   }
 
   p {
-    font-family: $font-family-accent;
     color: $gray-light;
     font-size: 14px;
-    &.agreed {
-      color: $green;
-    }
-    &.doubt {
-      color: $red;
-    }
     span {
       font-size: 18px;
     }

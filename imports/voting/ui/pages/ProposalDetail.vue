@@ -1,5 +1,6 @@
 <template>
   <div class="single-proposal" v-if="proposal">
+    <h2 class="statement">“{{proposal.statement}}”</h2>
     <sign-statement
       :statement="proposal.statement"
       :currentVote="proposal.vote && proposal.vote.upVote"
@@ -14,11 +15,16 @@
     })}}
       with a voting weight of {{balance}} AE
     </div>
+    <div>
+      <b>Share this link</b><br/>
+      <span>{{proposalUrl}}</span>
+      <copy-button :contentToCopy="proposalUrl" />
+    </div>
     <div class="comments">
       <VueDisqus
         shortname="aeternity-voting"
         :identifier="proposal._id"
-        :url="disqusUrl"
+        :url="proposalUrl"
       />
     </div>
     <div class="footer">
@@ -36,12 +42,14 @@
   import web3 from '/imports/ethereum/ui/utils/web3';
   import { Proposals } from '../../api/models/proposals';
   import SignStatement from '../particles/SignStatement.vue';
+  import CopyButton from '../particles/CopyButton.vue';
 
   export default {
     props: ['id', 'vote'],
     components: {
       VueDisqus,
       SignStatement,
+      CopyButton,
     },
     meteor: {
       $subscribe: {
@@ -72,7 +80,7 @@
       },
     },
     computed: {
-      disqusUrl() {
+      proposalUrl() {
         return Meteor.absoluteUrl() + 'proposal/' + this.$route.params.id;
       }
     },
@@ -97,6 +105,11 @@
     overflow: hidden;
     > * {
       margin: $gutter $gutter * 2;
+    }
+    h2.statement {
+      padding: 40px 0;
+      text-align: center;
+      font-size: 28px;
     }
     .current-status {
       color: $gray;
