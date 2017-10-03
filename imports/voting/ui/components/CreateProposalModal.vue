@@ -3,11 +3,21 @@
     <div class="overlay" @click="toggleCreateProposalModal"></div>
     <div class="modal-cont">
       <div class="modal-header">
-        <button @click="toggleCreateProposalModal">Close</button>
+        <button @click="toggleCreateProposalModal">
+          <i class="fa fa-close" />
+        </button>
       </div>
       <div class="submit-proposal">
-        <h3>Please keep the statement short and simple, e. g. "God exists".</h3>
-        <sign-statement :signatureHandler="signatureHandler" />
+        <h3>
+          Enter your statement and agree or disagree
+          <span>(please keep it short)</span>
+        </h3>
+        <label for="statement">Your statement</label>
+        <input id="statement" placeholder="Saturdays are great" v-model="statement" />
+        <sign-statement
+          :statement="statement || 'Saturdays are great'"
+          :signatureHandler="signatureHandler"
+        ></sign-statement>
       </div>
     </div>
   </div>
@@ -19,6 +29,9 @@
   import SignStatement from '../particles/SignStatement.vue';
 
   export default {
+    data() {
+      return { statement: '' };
+    },
     components: {
       SignStatement,
     },
@@ -62,31 +75,40 @@
       background: white;
       border-radius: $base-border-radius;
       box-shadow: $base-box-shadow;
+      padding: $gutter;
       @media screen and (max-width: $container-width) {
         max-width: 96vw;
       }
       .modal-header {
-        padding: $gutter $gutter * 2;
         button {
           float: right;
           border: 0;
           padding: 0;
+          color: black;
         }
       }
       .submit-proposal {
-        text-align: center;
-        > input {
+        h3 {
+          text-align: center;
+          margin-bottom: $gutter * 3;
+          span {
+            display: block;
+            font-weight: normal;
+            font-size: 0.9em;
+          }
+        }
+        > label, > input {
           margin: $gutter auto;
-          height: 30px;
           width: 80%;
-          padding: 15px;
-          border-radius: 5px;
-          border: solid 1px #eaeaea;
-          box-shadow: none;
           display: block;
         }
-        > div {
-          margin: $gutter;
+        > input {
+          height: 30px;
+          padding: 7px;
+          border-radius: 4px;
+          font-size: 24px;
+          border: solid 1px $gray-light;
+          box-shadow: none;
         }
       }
     }
