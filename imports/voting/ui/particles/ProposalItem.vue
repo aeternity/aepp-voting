@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="`/proposal/${this.proposal._id}`"
+    :to="{ name: 'proposal', params: { id: this.proposal._id } }"
     class="proposal-item"
   >
     <div class="proposal-content">
@@ -23,7 +23,7 @@
           <i class="fa fa-thumbs-up" />
         </button>
         <router-link
-          :to="`/proposal/${this.proposal._id}/doubt`"
+          :to="{ name: 'proposal', params: { id: this.proposal._id, vote: 'doubt' } }"
           class="button vote"
           :class="{ already: proposal.vote && proposal.vote.upVote === false }"
         >

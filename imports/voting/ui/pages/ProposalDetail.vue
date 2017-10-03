@@ -28,7 +28,7 @@
       />
     </div>
     <div class="footer">
-      <a :href="`/proposals/${proposal._id}`">All signatures as JSON</a>
+      <a :href="`/statements/${proposal._id}/json`">All signatures as JSON</a>
     </div>
   </div>
   <p v-else-if="$subReady['proposal']">This statement seems to be missing.</p>
@@ -81,7 +81,7 @@
     },
     computed: {
       proposalUrl() {
-        return Meteor.absoluteUrl() + 'proposal/' + this.$route.params.id;
+        return Meteor.absoluteUrl() + 'statements/' + this.$route.params.id;
       }
     },
     methods: {

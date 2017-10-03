@@ -2,8 +2,9 @@ import { WebApp } from 'meteor/webapp';
 
 import { Proposals } from '../../api/models/proposals';
 
-WebApp.connectHandlers.use('/proposals', ({ url }, res) => {
-  const proposal = Proposals.findOne(url.slice(1), { fields: {
+WebApp.connectHandlers.use('/statements', ({ url }, res, next) => {
+  if (!url.endsWith('/json')) return next();
+  const proposal = Proposals.findOne(url.slice(1, -5), { fields: {
     ...Proposals.publicFields,
     votes: 1,
   } });
