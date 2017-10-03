@@ -60,7 +60,7 @@
       proposals: {
         params() {
           return {
-            filter: this.$store.state.voting.filter,
+            filter: this.$route.params.filter,
             accountId: this.$store.state.voting.accountId,
           };
         },

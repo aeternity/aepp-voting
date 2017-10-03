@@ -46,11 +46,11 @@ Proposals.filterTypes = {
   VALID: 'valid',
   INVALID: 'invalid',
   NEWEST: 'newest',
-  POPULAR: 'popular',
+  TOTAL_VOTES: 'total votes',
 };
 
 Proposals.filterSort = {
-  [Proposals.filterTypes.POPULAR]: { totalVoteAmount: -1 },
+  [Proposals.filterTypes.TOTAL_VOTES]: { totalVoteAmount: -1 },
 };
 
 Accounts.after.update(function(unusedUserId, doc) {
@@ -70,7 +70,7 @@ let proposalCounter = 0;
 
 Factory.define('proposal', Proposals, {
   statement: () =>
-    `Proposal ${proposalCounter += 1}. Some long proposal text to be agreed or doubted`,
+    `Proposal ${proposalCounter += 1}. Some long statement to be agreed or doubted`,
   votes() {
     this.upVoteAmount = 0;
     this.downVoteAmount = 0;

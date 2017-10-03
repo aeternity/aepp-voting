@@ -8,7 +8,7 @@
       :signatureHandler="signatureHandler"
     />
     <div class="current-status" v-if="proposal.vote">
-      You {{proposal.vote.upVote ? 'agreed to' : 'disagreed with'}} this proposal on
+      You {{proposal.vote.upVote ? 'agreed to' : 'disagreed with'}} this statement on
       {{proposal.vote.createdAt.toLocaleDateString('en-US', {
       year: 'numeric', month: 'short', day: 'numeric'
     })}}
@@ -25,7 +25,7 @@
       <a :href="`/proposals/${proposal._id}`">All signatures as JSON</a>
     </div>
   </div>
-  <p v-else-if="$subReady['proposal']">This proposal seems to be missing.</p>
+  <p v-else-if="$subReady['proposal']">This statement seems to be missing.</p>
 </template>
 
 <script>
