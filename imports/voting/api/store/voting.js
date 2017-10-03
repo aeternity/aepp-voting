@@ -1,6 +1,3 @@
-import { Proposals } from '../models/proposals';
-import web3 from '/imports/ethereum/ui/utils/web3';
-
 export default {
   namespaced: true,
 
