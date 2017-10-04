@@ -15,7 +15,7 @@
     })}}
       with a voting weight of {{balance}} AE
     </div>
-    <div>
+    <div class="share-link">
       <b>Share this link</b><br/>
       <span>{{proposalUrl}}</span>
       <copy-button :contentToCopy="proposalUrl" />
@@ -114,6 +114,10 @@
     .current-status {
       color: $gray;
       text-align: center;
+    }
+    .share-link {
+      margin-top: 80px;
+      margin-bottom: 50px;
     }
     .footer {
       text-align: right;

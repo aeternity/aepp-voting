@@ -23,7 +23,7 @@
       </button>
     </div>
     <template v-if="!canSignByWeb3">
-      <div class="center">
+      <div class="center first">
         Copy this message and sign it with your Ethereum address:
       </div>
       <div class="center">
@@ -103,7 +103,7 @@
 
     button.vote {
       font-size: 24px;
-      padding: $gutter $gutter * 2;
+      padding: $gutter 40px;
     }
 
     .buttons {
@@ -111,6 +111,10 @@
       flex-direction: row;
       justify-content: space-evenly;
       margin: $gutter * 3 auto;
+    }
+
+    .first {
+      margin-top: 60px;
     }
 
     .center {
