@@ -57,9 +57,12 @@
     box-shadow: $base-box-shadow;
     margin-bottom: $gutter;
     overflow: hidden;
+    transition: max-height .3s, opacity .5s;
+    max-height: 400px;
 
     &.hidden {
-      display: none;
+      max-height: 0;
+      opacity: 0;
     }
 
     header, main {
