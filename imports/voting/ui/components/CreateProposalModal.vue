@@ -5,10 +5,9 @@
         Enter your statement and agree or disagree
         <span>(please keep it short)</span>
       </h3>
-      <label for="statement">Your statement</label>
-      <input id="statement" placeholder="Saturdays are great" v-model="statement" />
+      <input placeholder="Your statement" v-model="statement" />
       <sign-statement
-        :statement="statement || 'Saturdays are great'"
+        :statement="statement"
         :signatureHandler="signatureHandler"
       ></sign-statement>
     </div>
