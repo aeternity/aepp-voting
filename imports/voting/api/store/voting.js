@@ -4,6 +4,8 @@ export default {
   state: () => ({
     limit: 10,
     createProposalModalShown: false,
+    explanationBlockShown: true,
+    youtubeVideoId: '',
     accountId: '',
   }),
 
@@ -13,6 +15,12 @@ export default {
     },
     toggleCreateProposalModal: (state) => {
       state.createProposalModalShown = !state.createProposalModalShown;
+    },
+    toggleExplanationBlock: (state) => {
+      state.explanationBlockShown = !state.explanationBlockShown;
+    },
+    setYoutubeVideoId: (state, youtubeVideoId) => {
+      state.youtubeVideoId = youtubeVideoId;
     },
     setAccountId: (state, accountId) => {
       state.accountId = accountId;

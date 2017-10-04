@@ -3,7 +3,9 @@
     <app-header />
     <app-header hidden />
     <create-proposal-modal v-if="createProposalModalShown" />
+    <youtube-video-modal v-if="youtubeVideoId" :videoId="youtubeVideoId" />
     <div class="main-content">
+      <explanation-block :display="explanationBlockShown" />
       <router-view />
     </div>
   </div>
@@ -15,15 +17,21 @@
   import { Proposals } from '../../api/models/proposals';
   import AppHeader from '../components/AppHeader.vue';
   import CreateProposalModal from '../components/CreateProposalModal.vue';
+  import ExplanationBlock from '../components/ExplanationBlock.vue';
+  import YoutubeVideoModal from '../components/YoutubeVideoModal.vue';
 
   export default {
     components: {
       AppHeader,
       CreateProposalModal,
+      ExplanationBlock,
+      YoutubeVideoModal,
     },
     computed: mapState({
       proposal: state => state.voting.proposal,
       createProposalModalShown: state => state.voting.createProposalModalShown,
+      explanationBlockShown: state => state.voting.explanationBlockShown,
+      youtubeVideoId: state => state.voting.youtubeVideoId,
     }),
   }
 </script>

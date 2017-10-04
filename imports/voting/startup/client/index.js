@@ -31,7 +31,7 @@ const storeOptions = {
     voting,
   },
   plugins: [createPersistedState({
-    paths: ['voting.accountId'],
+    paths: ['voting.accountId', 'voting.explanationBlockShown'],
   })],
 };
 const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);

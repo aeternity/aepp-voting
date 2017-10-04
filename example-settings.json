@@ -7,7 +7,13 @@
         }
     },
     "public": {
-
+        "explanationVideo": [{
+            "title": "With your wallet",
+            "youtubeId": "MnRVK_9CEYI"
+        }, {
+            "title": "With Metamask",
+            "youtubeId": "F9cqkdx1Llo"
+        }]
     },
     "web3ProviderUrl": "",
     "erc20ContractAddress": "",

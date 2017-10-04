@@ -6,7 +6,12 @@
         <div class="stripe"></div>
         <h3>Voting</h3>
       </router-link>
-      <button @click="toggleCreateProposalModal">Submit statement</button>
+      <div>
+        <button @click="toggleExplanationBlock" class="icon">
+          <i class="fa fa-info" />
+        </button>
+        <button @click="toggleCreateProposalModal">Submit statement</button>
+      </div>
     </header>
     <nav class="proposals-filter">
       <router-link
@@ -40,7 +45,7 @@
     },
     methods: mapMutations({
       toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
-      setFilter: 'voting/setFilter',
+      toggleExplanationBlock: 'voting/toggleExplanationBlock',
     }),
     computed: {
       currentFilter() {
@@ -94,6 +99,11 @@
         &:hover {
           background: white;
           color: $brand-color;
+        }
+        &.icon {
+          padding-left: $gutter;
+          padding-right: $gutter;
+          margin-right: $gutter;
         }
       }
       h3 {
