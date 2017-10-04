@@ -40,7 +40,6 @@
     },
     methods: mapMutations({
       toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
-      setFilter: 'voting/setFilter',
     }),
     computed: {
       currentFilter() {
