@@ -69,7 +69,7 @@
     font-family: $font-family-header;
     text-align: center;
     &.vote {
-      color: $gray-dark;
+      color: gray;
       border: solid 2px $gray-light;
       &.already {
         background-color: $gray-lighter;
