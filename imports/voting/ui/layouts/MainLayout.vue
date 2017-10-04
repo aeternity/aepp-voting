@@ -75,7 +75,7 @@
         background-color: $gray-lighter;
       }
       &.checked, &:hover {
-        background-color: $gray-light;
+        background-color: lightgray;
       }
     }
   }
