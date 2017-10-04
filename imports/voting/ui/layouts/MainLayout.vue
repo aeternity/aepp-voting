@@ -68,6 +68,7 @@
     cursor: pointer;
     font-family: $font-family-header;
     text-align: center;
+    box-sizing: border-box;
     &.vote {
       color: gray;
       border: solid 2px $gray-light;
