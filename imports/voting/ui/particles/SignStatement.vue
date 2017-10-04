@@ -103,7 +103,7 @@
 
     button.vote {
       font-size: 24px;
-      padding: $gutter $gutter * 2;
+      padding: $gutter 40px;
     }
 
     .buttons {
