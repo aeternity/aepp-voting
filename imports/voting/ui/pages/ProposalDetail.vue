@@ -98,10 +98,10 @@
   @import "/imports/voting/ui/styles/variables";
 
   .single-proposal {
-    border-radius: 15px;
-    max-width: $container-width;
+    border-radius: $base-border-radius;
+    box-shadow: $base-box-shadow;
     background: white;
-    margin: 0 auto;
+    margin: $gutter 0;
     overflow: hidden;
     > * {
       margin: $gutter $gutter * 2;
