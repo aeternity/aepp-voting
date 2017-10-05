@@ -135,10 +135,4 @@
       box-shadow: none;
     }
   }
-
-  form {
-    input {
-      display: block;
-    }
-  }
 </style>
