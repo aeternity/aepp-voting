@@ -30,7 +30,7 @@
         <strong>{{messageToSign}}</strong><br/>
         <copy-button :contentToCopy="messageToSign"></copy-button>
       </div>
-      <label for="signature">Then paste your signature here</label>
+      <label class="center" for="signature">Then paste your signature here</label>
       <input id="signature" v-model="signature">
       <button class="vote">Submit</button>
     </template>
@@ -125,9 +125,6 @@
       text-align: center;
     }
 
-    label {
-      width: 80%;
-    }
     input {
       height: 30px;
       width: 80%;
