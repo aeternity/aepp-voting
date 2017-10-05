@@ -129,7 +129,7 @@
       width: 80%;
       padding: 7px;
       border-radius: 4px;
-      font-size: 24px;
+      font-size: 16px;
       border: solid 1px $gray-light;
       box-shadow: none;
     }
