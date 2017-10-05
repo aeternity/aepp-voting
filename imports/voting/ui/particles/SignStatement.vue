@@ -109,8 +109,12 @@
     .buttons {
       display: flex;
       flex-direction: row;
-      justify-content: space-evenly;
+      justify-content: space-between;
       margin: $gutter * 3 auto;
+
+      &::before, &::after {
+        content: '';
+      }
     }
 
     .first {
