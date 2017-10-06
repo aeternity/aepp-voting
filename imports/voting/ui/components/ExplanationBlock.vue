@@ -9,10 +9,9 @@
     <main>
       <div
         v-for="video in videos"
-        :style="getVideoStyle(video.youtubeId)"
         @click="setYoutubeVideoId(video.youtubeId)"
       >
-        {{video.title}}
+        <div>{{video.title}}</div>
         <i class="fa fa-play" />
       </div>
     </main>
@@ -39,11 +38,6 @@
         toggleExplanationBlock: 'voting/toggleExplanationBlock',
         setYoutubeVideoId: 'voting/setYoutubeVideoId',
       }),
-      getVideoStyle(youtubeVideoId) {
-        return {
-          backgroundImage: `url(https://img.youtube.com/vi/${youtubeVideoId}/maxresdefault.jpg)`,
-        };
-      },
     },
   };
 </script>
@@ -58,7 +52,7 @@
     margin-bottom: $gutter;
     overflow: hidden;
     transition: max-height .3s, opacity .5s;
-    max-height: 400px;
+    max-height: 600px;
 
     &.hidden {
       max-height: 0;
@@ -87,43 +81,60 @@
     main {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-around;
-      $video-height: 238px;
+
       > * {
         flex-grow: 1;
-        height: $video-height;
         cursor: pointer;
         position: relative;
         box-sizing: border-box;
-        padding: $gutter;
-        background: no-repeat center;
+        background: no-repeat center lightgray;
         background-size: contain;
         font-size: 1.2em;
         margin-left: $gutter;
         &:nth-child(1) {
-          margin-left: 0;
+          margin: 0;
         }
-        &, i {
+        &::before {
+          content: "";
+          width: 1px;
+          margin-left: -1px;
+          float: left;
+          height: 0;
+          padding-top: percentage(9 / 16);
+        }
+        &::after {
+          content: "";
+          clear: left;
+        }
+        div {
+          margin: $gutter;
+        }
+        div, i {
           text-shadow: 0 0 2px white;
         }
         i {
           color: $brand-color;
           position: absolute;
-          line-height: $video-height;
-          text-align: center;
           top: 0;
           left: 0;
           width: 100%;
+          height: 100%;
           font-size: 30px;
+          display: flex;
+          &::before {
+            margin: auto;
+          }
         }
         &:hover i {
           color: white;
           text-shadow: 0 0 2px black;
         }
-      }
-      @media screen and (max-width: $container-width){
-        > *:nth-child(2) {
-          display: none;
+        @media screen and (max-width: $screen-xs){
+          margin: $gutter 0 0 0;
+          flex-shrink: 0;
+          width: 100%;
         }
       }
     }
