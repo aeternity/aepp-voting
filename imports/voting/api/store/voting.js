@@ -7,6 +7,7 @@ export default {
     explanationBlockShown: true,
     youtubeVideoId: '',
     accountId: '',
+    canSignByWeb3: false,
   }),
 
   mutations: {
@@ -24,6 +25,9 @@ export default {
     },
     setAccountId: (state, accountId) => {
       state.accountId = accountId;
+    },
+    setCanSignByWeb3: (state, canSignByWeb3) => {
+      state.canSignByWeb3 = canSignByWeb3;
     },
   },
 

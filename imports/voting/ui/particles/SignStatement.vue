@@ -64,7 +64,6 @@
     data() {
       return {
         signature: '',
-        canSignByWeb3: !!(web3.currentProvider && web3.eth.accounts[0]),
         upVote: this.desiredVote,
       }
     },
@@ -74,8 +73,8 @@
         if (this.canSignByWeb3) {
           const statement = this.statement;
           if (!statement) return;
-          const { eth: { accounts }, personal: { sign }, toHex } = web3;
-          sign(toHex(this.messageToSign), accounts[0], (error, signature) => {
+          const { personal: { sign }, toHex } = web3;
+          sign(toHex(this.messageToSign), this.accountId, (error, signature) => {
             if (error) this.$store.dispatch('handleError', { error, upVote });
             else this.signatureHandler({ statement, signature, upVote });
           });
@@ -91,6 +90,10 @@
       },
     },
     computed: {
+      ...mapState({
+        accountId: state => state.voting.accountId,
+        canSignByWeb3: state => state.voting.canSignByWeb3,
+      }),
       messageToSign() {
         return `I ${this.upVote ? '' : 'dis'}agree that ${this.statement}`;
       },

@@ -12,6 +12,7 @@ import MainLayout from '../../ui/layouts/MainLayout.vue';
 import routes from './routes';
 import * as filters from '../../api/helpers/filters';
 import voting from '../../api/store/voting';
+import web3SyncPlugin from '../../api/store/web3SyncPlugin';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
@@ -30,9 +31,12 @@ const storeOptions = {
   modules: {
     voting,
   },
-  plugins: [createPersistedState({
-    paths: ['voting.accountId', 'voting.explanationBlockShown'],
-  })],
+  plugins: [
+    createPersistedState({
+      paths: ['voting.accountId', 'voting.explanationBlockShown'],
+    }),
+    web3SyncPlugin,
+  ],
 };
 const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);
 const store = new Vuex.Store(suppliedStoreOptions);
