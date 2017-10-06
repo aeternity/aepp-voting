@@ -9,6 +9,7 @@ export default {
     accountId: '',
     canSignByWeb3: false,
     possibleAdmin: false,
+    loggedIn: false,
   }),
 
   mutations: {
@@ -38,6 +39,9 @@ export default {
   actions: {
     login() {
 
+    },
+    removeProposal(store, proposalId) {
+      Meteor.call('proposals.remove', proposalId);
     },
     createProposal({ dispatch, commit }, { statement, signature, upVote }) {
       return new Promise((resolve, reject) => {
