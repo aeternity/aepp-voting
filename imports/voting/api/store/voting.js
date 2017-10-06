@@ -8,6 +8,7 @@ export default {
     youtubeVideoId: '',
     accountId: '',
     canSignByWeb3: false,
+    possibleAdmin: false,
   }),
 
   mutations: {
@@ -29,9 +30,15 @@ export default {
     setCanSignByWeb3: (state, canSignByWeb3) => {
       state.canSignByWeb3 = canSignByWeb3;
     },
+    setPossibleAdmin: (state, possibleAdmin) => {
+      state.possibleAdmin = possibleAdmin;
+    },
   },
 
   actions: {
+    login() {
+
+    },
     createProposal({ dispatch, commit }, { statement, signature, upVote }) {
       return new Promise((resolve, reject) => {
         Meteor.call('proposals.add', statement, signature, upVote, (error, result) => {

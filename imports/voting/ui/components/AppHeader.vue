@@ -7,6 +7,9 @@
         <h3>Voting</h3>
       </router-link>
       <div>
+        <button v-if="showLoginButton" @click="login" title="Login as admin" class="icon">
+          <i class="fa fa-sign-in" />
+        </button>
         <button @click="toggleExplanationBlock" class="icon">
           <i class="fa fa-info" />
         </button>
@@ -30,7 +33,7 @@
 </template>
 
 <script>
-  import { mapState, mapMutations } from 'vuex';
+  import { mapState, mapMutations, mapActions } from 'vuex';
 
   import { Proposals } from '../../api/models/proposals';
 
@@ -46,11 +49,20 @@
         filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.TOTAL_VOTES],
       };
     },
-    methods: mapMutations({
-      toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
-      toggleExplanationBlock: 'voting/toggleExplanationBlock',
-    }),
+    methods: {
+      ...mapMutations({
+        toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
+        toggleExplanationBlock: 'voting/toggleExplanationBlock',
+      }),
+      ...mapActions({
+        login: 'voting/login',
+      }),
+    },
     computed: {
+      ...mapState({
+        showLoginButton: ({ voting: { possibleAdmin, canSignByWeb3 } }) =>
+          possibleAdmin && canSignByWeb3,
+      }),
       currentFilter() {
         if (!['root', 'proposal-list'].includes(this.$route.name)) return;
         return this.$route.params.filter || Proposals.filterTypes.NEWEST;
