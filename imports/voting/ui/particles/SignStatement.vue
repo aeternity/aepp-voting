@@ -64,9 +64,15 @@
     data() {
       return {
         signature: '',
-        canSignByWeb3: !!(web3.currentProvider && web3.eth.accounts[0]),
+        canSignByWeb3: false,
         upVote: this.desiredVote,
       }
+    },
+    mounted() {
+      web3.eth.getAccounts((err, accounts) => {
+        if (err) return;
+        else this.canSignByWeb3 = accounts.length > 0
+      });
     },
     methods: {
       setUpVote(upVote) {
@@ -74,10 +80,17 @@
         if (this.canSignByWeb3) {
           const statement = this.statement;
           if (!statement) return;
-          const { eth: { accounts }, personal: { sign }, toHex } = web3;
-          sign(toHex(this.messageToSign), accounts[0], (error, signature) => {
-            if (error) this.$store.dispatch('handleError', { error, upVote });
-            else this.signatureHandler({ statement, signature, upVote });
+          web3.eth.getAccounts((err, accounts) => {
+            if (err) {
+              this.$store.dispatch('handleError', { error, upVote });
+              return;
+            }
+            const { personal: { sign }, toHex } = web3;
+
+            sign(toHex(this.messageToSign), accounts[0], (error, signature) => {
+              if (error) this.$store.dispatch('handleError', { error, upVote });
+              else this.signatureHandler({ statement, signature, upVote });
+            });
           });
         }
       },
