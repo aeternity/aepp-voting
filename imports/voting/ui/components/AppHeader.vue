@@ -7,8 +7,13 @@
         <h3>Voting</h3>
       </router-link>
       <div>
-        <button v-if="showLoginButton" @click="login" title="Login as admin" class="icon">
-          <i class="fa fa-sign-in" />
+        <button
+          v-if="showLoginButton || loggedIn"
+          :title="loggedIn ? 'Logout' : 'Login as admin'"
+          @click="toggleAuth"
+          class="icon"
+        >
+          <i class="fa" :class="`fa-sign-${loggedIn ? 'out' : 'in'}`" />
         </button>
         <button @click="toggleExplanationBlock" class="icon">
           <i class="fa fa-info" />
@@ -55,13 +60,14 @@
         toggleExplanationBlock: 'voting/toggleExplanationBlock',
       }),
       ...mapActions({
-        login: 'voting/login',
+        toggleAuth: 'voting/toggleAuth',
       }),
     },
     computed: {
       ...mapState({
         showLoginButton: ({ voting: { possibleAdmin, canSignByWeb3 } }) =>
           possibleAdmin && canSignByWeb3,
+        loggedIn: state => state.voting.loggedIn,
       }),
       currentFilter() {
         if (!['root', 'proposal-list'].includes(this.$route.name)) return;

@@ -1,3 +1,8 @@
+import { Accounts } from 'meteor/accounts-base';
+
+import web3 from '/imports/ethereum/ui/utils/web3';
+import getAdminLoginStatement from '/imports/ethereum/api/utils/genAdminLoginStatement';
+
 export default {
   namespaced: true,
 
@@ -34,11 +39,28 @@ export default {
     setPossibleAdmin: (state, possibleAdmin) => {
       state.possibleAdmin = possibleAdmin;
     },
+    setLoggedIn: (state, loggedIn) => {
+      state.loggedIn = loggedIn;
+    },
   },
 
   actions: {
-    login() {
-
+    toggleAuth({ state, commit }) {
+      if (state.loggedIn) {
+        Meteor.logout();
+      } else {
+        const { personal: { sign }, toHex } = web3;
+        const message = getAdminLoginStatement();
+        sign(toHex(message), state.accountId, (error, signature) => {
+          if (error) throw error;
+          else Accounts.callLoginMethod({
+            methodArguments: [{ message, signature }],
+            userCallback(error) {
+              if (error) throw error;
+            },
+          });
+        });
+      }
     },
     removeProposal(store, proposalId) {
       Meteor.call('proposals.remove', proposalId);
