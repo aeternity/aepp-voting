@@ -5,7 +5,7 @@
         Enter your statement and agree or disagree
         <span>(please keep it short)</span>
       </h3>
-      <input placeholder="Your statement" v-model="statement" />
+      <input placeholder="Your statement" v-model="statement" v-focus="true" />
       <sign-statement
         :statement="statement"
         :signatureHandler="signatureHandler"
@@ -16,6 +16,7 @@
 
 <script>
   import { mapMutations } from 'vuex';
+  import { focus } from 'vue-focus';
 
   import Modal from '../particles/Modal.vue';
   import SignStatement from '../particles/SignStatement.vue';
@@ -29,6 +30,7 @@
       Modal,
       SignStatement,
     },
+    directives: { focus },
     methods: {
       ...mapMutations({
         toggleCreateProposalModal: 'voting/toggleCreateProposalModal',

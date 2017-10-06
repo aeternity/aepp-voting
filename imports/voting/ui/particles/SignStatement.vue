@@ -39,7 +39,6 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
-  import { focus } from 'vue-focus';
 
   import { Accounts } from '/imports/accounts';
   import web3 from '/imports/ethereum/ui/utils/web3';
@@ -48,7 +47,6 @@
 
   export default {
     components: { CopyButton },
-    directives: { focus },
     props: {
       currentVote: { type: Boolean, default: undefined },
       desiredVote: { type: Boolean, default: true },
