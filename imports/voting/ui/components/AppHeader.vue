@@ -10,7 +10,10 @@
         <button @click="toggleExplanationBlock" class="icon">
           <i class="fa fa-info" />
         </button>
-        <button @click="toggleCreateProposalModal">Submit statement</button>
+        <button @click="toggleCreateProposalModal" class="primary icon-mobile">
+          <i class="fa fa-pencil" />
+          <span class="hidden-mobile">Submit statement</span>
+        </button>
       </div>
     </header>
     <nav class="proposals-filter">
@@ -94,16 +97,39 @@
         margin: $gutter;
       }
       button {
-        color: white;
-        border-color: white;
-        &:hover {
+        margin-left: $gutter;
+        &, &.primary:hover {
+          background-color: transparent;
+          color: white;
+          border-color: white;
+        }
+        &:hover, &.primary {
           background: white;
           color: $brand-color;
         }
+        i {
+          margin-right: 5px;
+        }
+        @mixin icon {
+          width: 31px;
+          height: 31px;
+          line-height: 31px;
+          text-align: center;
+          padding: 0;
+          i {
+            margin-right: 0;
+          }
+        }
         &.icon {
-          padding-left: $gutter;
-          padding-right: $gutter;
-          margin-right: $gutter;
+          @include icon;
+        }
+        @media screen and (max-width: $container-width){
+          .hidden-mobile {
+            display: none;
+          }
+          &.icon-mobile {
+            @include icon;
+          }
         }
       }
       h3 {
