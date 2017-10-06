@@ -3,4 +3,4 @@ import format from 'format-number';
 
 export const dateFormat = (value) => moment(value).calendar();
 
-export const sumFormat = (value) => format({prefix: 'Æ ',})(value);
+export const sumFormat = (value) => format({ suffix: ' Æ' })(value);

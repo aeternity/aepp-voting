@@ -7,39 +7,41 @@
       <h3>{{proposal.statement}}</h3>
       <p>{{proposal.updatedAt | dateFormat}}</p>
     </div>
-    <aside>
-      <div class="voted">
-        <h3 class="main">
-          <span>{{sumVoteAmount < 0 ? '-' : ''}}</span> {{Math.abs(sumVoteAmount) | sumFormat}}
-        </h3>
-        <p>{{proposal.upVoteAmount | sumFormat}}</p>
-        <p><span>-</span> {{proposal.downVoteAmount | sumFormat}}</p>
-      </div>
-      <div class="controls">
-        <button
-          class="vote"
-          :class="{ already: proposal.vote && proposal.vote.upVote }"
-        >
-          <i class="fa fa-thumbs-up" />
-        </button>
-        <router-link
-          :to="{ name: 'proposal', params: { id: this.proposal._id, vote: 'doubt' } }"
-          class="button vote"
-          :class="{ already: proposal.vote && proposal.vote.upVote === false }"
-        >
-          <i class="fa fa-thumbs-down" />
-        </router-link>
-      </div>
-    </aside>
+
+    <div class="voted">
+      {{proposal.upVoteAmount | sumFormat}} agreed ({{getProcent(true)}}%)<br />
+      {{proposal.downVoteAmount | sumFormat}} disagreed ({{getProcent(false)}}%)
+    </div>
+
+    <div class="controls">
+      <button
+        class="vote"
+        :class="{ already: proposal.vote && proposal.vote.upVote }"
+      >
+        <i class="fa fa-thumbs-up" />
+      </button>
+      <router-link
+        :to="{ name: 'proposal', params: { id: this.proposal._id, vote: 'doubt' } }"
+        class="button vote"
+        :class="{ already: proposal.vote && proposal.vote.upVote === false }"
+      >
+        <i class="fa fa-thumbs-down" />
+      </router-link>
+    </div>
   </router-link>
 </template>
 
 <script>
   export default {
     props: ['proposal'],
-    computed: {
-      sumVoteAmount() {
-        return this.proposal.upVoteAmount - this.proposal.downVoteAmount;
+    methods: {
+      getProcent(upVote) {
+        return this.proposal.totalVoteAmount
+          ? Math.round(
+            this.proposal[`${upVote ? 'up' : 'down'}VoteAmount`]
+            / this.proposal.totalVoteAmount * 100
+          )
+          : 0;
       },
     },
   }
@@ -52,14 +54,14 @@
     position: relative;
     background: white;
     display: flex;
+    flex-direction: row;
     border-radius: $base-border-radius;
     margin-bottom: $gutter;
     box-shadow: $base-box-shadow;
     text-decoration: none;
     color: inherit;
-    @media screen and (max-width: $container-width) {
-      flex-direction: column;
-    }
+    padding: 0 0 15px;
+
     &:after {
       content: "";
       display: block;
@@ -71,36 +73,34 @@
       border-top-left-radius: $base-border-radius;
       border-bottom-left-radius: $base-border-radius;
       background: $brand-color;
-      @media screen and (max-width: $container-width) {
-        width: 100%;
-        height: 5px;
-      }
     }
+
     .proposal-content {
       padding: $gutter * 1.5 $gutter $gutter * 1.5 $gutter * 2;
       flex-grow: 1;
+
+      h3 {
+        margin: 0 0 5px 0;
+      }
+      p {
+        color: $gray-light;
+        font-size: 14px;
+        margin: 0;
+      }
     }
+
     .voted {
       position: relative;
       padding: $gutter * 1.5 $gutter * 1.5 $gutter * 1.5 $gutter * 2;
-      width: 140px;
-      flex-grow: 0;
+      flex-grow: 1;
       flex-shrink: 0;
       text-align: right;
-      @media screen and (max-width: $container-width) {
-        text-align: left;
-      }
-      h3 {
-        color: $gray-dark;
-      }
-      p {
-        font-family: $font-family-header;
-        color: $gray;
-      }
+      font-family: $font-family-header;
+      color: black;
+      font-size: 16px;
+      line-height: 26px;
     }
-    aside {
-      display: flex;
-    }
+
     .controls {
       display: flex;
       flex-grow: 0;
@@ -120,21 +120,24 @@
         }
       }
     }
-  }
 
-  h3, p {
-    margin: 0;
-  }
+    @media screen and (max-width: $container-width) {
+      flex-wrap: wrap;
 
-  h3 {
-    margin-bottom: 5px;
-  }
+      &:after {
+        width: 100%;
+        height: 5px;
+      }
 
-  p {
-    color: $gray-light;
-    font-size: 14px;
-    span {
-      font-size: 18px;
+      .proposal-content {
+        flex-shrink: 0;
+        box-sizing: border-box;
+        width: 100%;
+      }
+
+      .voted {
+        text-align: left;
+      }
     }
   }
 </style>
