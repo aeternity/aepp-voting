@@ -79,4 +79,7 @@
       }
     }
   }
+  input, input[type=text] {
+    appearance: none;
+  }
 </style>

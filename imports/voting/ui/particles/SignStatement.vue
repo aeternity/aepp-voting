@@ -1,26 +1,34 @@
 <template>
   <form class="sign-statement" @submit.prevent="vote">
     <div class="buttons">
-      <button
-        class="vote"
-        :class="{
-          already: currentVote,
-          checked: !canSignByWeb3 && upVote
-        }"
-        @click="setUpVote(true)"
-      >
-        <i class="fa fa-thumbs-up" /> I agree
-      </button>
-      <button
-        class="vote"
-        :class="{
-          already: currentVote === false,
-          checked: !canSignByWeb3 && !upVote
-        }"
-        @click="setUpVote(false)"
-      >
-        <i class="fa fa-thumbs-down" /> I disagree
-      </button>
+      <div>
+        <button
+          class="vote"
+          :class="{
+            already: currentVote,
+            checked: !canSignByWeb3 && upVote
+          }"
+          @click="setUpVote(true)"
+          :id="`${_uid}-agree`"
+        >
+          <i class="fa fa-thumbs-up" />
+        </button>
+        <label :for="`${_uid}-agree`">I agree</label>
+      </div>
+      <div>
+        <button
+          class="vote"
+          :class="{
+            already: currentVote === false,
+            checked: !canSignByWeb3 && !upVote
+          }"
+          @click="setUpVote(false)"
+          :id="`${_uid}-disagree`"
+        >
+          <i class="fa fa-thumbs-down" />
+        </button>
+        <label :for="`${_uid}-disagree`">I disagree</label>
+      </div>
     </div>
     <template v-if="!canSignByWeb3">
       <div class="center first">
@@ -30,7 +38,7 @@
         <strong>{{messageToSign}}</strong><br/>
         <copy-button :contentToCopy="messageToSign"></copy-button>
       </div>
-      <label for="signature">Then paste your signature here</label>
+      <label class="center" for="signature">Then paste your signature here</label>
       <input id="signature" v-model="signature">
       <button class="vote">Submit</button>
     </template>
@@ -107,8 +115,26 @@
     .buttons {
       display: flex;
       flex-direction: row;
-      justify-content: space-evenly;
+      justify-content: space-between;
       margin: $gutter * 3 auto;
+
+      &::before, &::after {
+        content: '';
+      }
+
+      label {
+        display: block;
+        text-align: center;
+        margin-top: 8px;
+        cursor: pointer;
+      }
+
+      .vote {
+        width: 85px;
+        height: 85px;
+        line-height: 85px;
+        padding: 0;
+      }
     }
 
     .first {
@@ -119,9 +145,6 @@
       text-align: center;
     }
 
-    label {
-      width: 80%;
-    }
     input {
       height: 30px;
       width: 80%;
@@ -130,12 +153,6 @@
       font-size: 16px;
       border: solid 1px $gray-light;
       box-shadow: none;
-    }
-  }
-
-  form {
-    input {
-      display: block;
     }
   }
 </style>
