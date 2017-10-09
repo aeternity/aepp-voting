@@ -118,6 +118,7 @@
     .share-link {
       margin-top: 80px;
       margin-bottom: 50px;
+      word-break: break-all;
     }
     .footer {
       text-align: right;
