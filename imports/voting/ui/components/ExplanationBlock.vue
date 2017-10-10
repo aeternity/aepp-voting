@@ -9,6 +9,7 @@
     <main>
       <div
         v-for="video in videos"
+        :style="getVideoStyle(video.thumbnailUrl)"
         @click="setYoutubeVideoId(video.youtubeId)"
       >
         <div>{{video.title}}</div>
@@ -29,7 +30,15 @@
     },
     data() {
       return {
-        videos: Meteor.settings.public.explanationVideo,
+        videos: [{
+          title: 'With your wallet',
+          youtubeId: 'a6cTTcUePAc',
+          thumbnailUrl: '/images/sign-with-wallet.jpg',
+        }, {
+          title: 'With Metamask',
+          youtubeId: 'bwaDtur-SI0',
+          thumbnailUrl: '/images/sign-with-metamask.jpg',
+        }],
         modalVideoId: '',
       };
     },
@@ -38,6 +47,7 @@
         toggleExplanationBlock: 'voting/toggleExplanationBlock',
         setYoutubeVideoId: 'voting/setYoutubeVideoId',
       }),
+      getVideoStyle: url => ({ backgroundImage: `url(${url})` }),
     },
   };
 </script>
@@ -112,10 +122,10 @@
           margin: $gutter;
         }
         div, i {
+          color: white;
           text-shadow: 0 0 2px white;
         }
         i {
-          color: $brand-color;
           position: absolute;
           top: 0;
           left: 0;
@@ -128,7 +138,7 @@
           }
         }
         &:hover i {
-          color: white;
+          color: lightgray;
           text-shadow: 0 0 2px black;
         }
         @media screen and (max-width: $screen-xs){

@@ -6,15 +6,6 @@
             "ROOT_URL": ""
         }
     },
-    "public": {
-        "explanationVideo": [{
-            "title": "With your wallet",
-            "youtubeId": "a6cTTcUePAc"
-        }, {
-            "title": "With Metamask",
-            "youtubeId": "bwaDtur-SI0"
-        }]
-    },
     "web3ProviderUrl": "",
     "erc20ContractAddress": "",
     "showGethOutput": false
