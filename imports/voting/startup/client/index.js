@@ -13,6 +13,8 @@ import routes from './routes';
 import * as filters from '../../api/helpers/filters';
 import voting from '../../api/store/voting';
 import web3SyncPlugin from '../../api/store/web3SyncPlugin';
+import checkPossibleAdminPlugin from '../../api/store/checkPossibleAdminPlugin';
+import syncAuthState from '../../api/store/syncAuthState';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
@@ -36,6 +38,8 @@ const storeOptions = {
       paths: ['voting.accountId', 'voting.explanationBlockShown'],
     }),
     web3SyncPlugin,
+    checkPossibleAdminPlugin,
+    syncAuthState,
   ],
 };
 const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);

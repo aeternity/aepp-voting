@@ -1,5 +1,8 @@
 <template>
   <div class="single-proposal" v-if="proposal">
+    <button @click="removeProposal" v-if="loggedIn" class="remove" title="Remove this statement">
+      <i class="fa fa-trash" />
+    </button>
     <h2 class="statement">“{{proposal.statement}}”</h2>
     <sign-statement
       :statement="proposal.statement"
@@ -80,6 +83,9 @@
       },
     },
     computed: {
+      ...mapState({
+        loggedIn: state => state.voting.loggedIn,
+      }),
       proposalUrl() {
         return Meteor.absoluteUrl() + 'statements/' + this.$route.params.id;
       }
@@ -89,6 +95,11 @@
         this.$store.dispatch('voting/vote', {
           proposalId: this.id, signature, upVote,
         });
+      },
+      removeProposal() {
+        if (confirm(`Are you sure want to remove "${this.proposal.statement}" statement?`)) {
+          this.$store.dispatch('voting/removeProposal', this.proposal._id);
+        }
       },
     },
   };
@@ -105,6 +116,12 @@
     overflow: hidden;
     > * {
       margin: $gutter $gutter * 2;
+    }
+    button.remove {
+      border: 0;
+      padding: 0;
+      color: black;
+      float: right;
     }
     h2.statement {
       padding: 40px 0;

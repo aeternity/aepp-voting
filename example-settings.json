@@ -8,5 +8,8 @@
     },
     "web3ProviderUrl": "",
     "erc20ContractAddress": "",
-    "showGethOutput": false
+    "showGethOutput": false,
+    "adminsAddresses": [
+      "0xfa491df8780761853d127a9f7b2772d688a0e3b5"
+    ]
 }
