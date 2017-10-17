@@ -16,7 +16,7 @@
       {{proposal.vote.createdAt.toLocaleDateString('en-US', {
       year: 'numeric', month: 'short', day: 'numeric'
     })}}
-      with a voting weight of {{balance}} AE
+      with a voting weight of {{balance}} Æ
     </div>
     <div class="share-link">
       <b>Share this link</b><br/>

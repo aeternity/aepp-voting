@@ -97,7 +97,7 @@ export default {
         },
         'no-tokens': {
           title: errorMessage,
-          text: 'You don\'t have Aeternity tokens',
+          text: 'You don\'t have Æternity tokens',
         },
         'already-voted': {
           title: 'Invalid vote!',
