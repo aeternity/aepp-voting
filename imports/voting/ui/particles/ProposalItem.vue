@@ -40,8 +40,8 @@
       ['up', 'down'].reduce((p, d) => ({
         ...p,
         [`${d}VoteAmount`]() {
-          const amount = this.proposal[`${d}VoteAmount`];
-          return format({ suffix: ' Æ' })(amount.toFixed(amount % 1 ? 2 : 0));
+          return format({ suffix: ' Æ' })(
+            this.proposal[`${d}VoteAmount`].toFixed(0));
         },
         [`${d}VoteProcent`]() {
           return this.proposal.totalVoteAmount
