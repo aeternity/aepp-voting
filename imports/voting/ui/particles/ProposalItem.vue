@@ -9,8 +9,8 @@
     </div>
 
     <div class="voted">
-      {{proposal.upVoteAmount | sumFormat}} agreed ({{getProcent(true)}}%)<br />
-      {{proposal.downVoteAmount | sumFormat}} disagreed ({{getProcent(false)}}%)
+      {{upVoteAmount}} agreed ({{upVoteProcent}}%)<br />
+      {{downVoteAmount}} disagreed ({{downVoteProcent}}%)
     </div>
 
     <div class="controls">
@@ -32,18 +32,26 @@
 </template>
 
 <script>
+  import format from 'format-number';
+
   export default {
     props: ['proposal'],
-    methods: {
-      getProcent(upVote) {
-        return this.proposal.totalVoteAmount
-          ? Math.round(
-            this.proposal[`${upVote ? 'up' : 'down'}VoteAmount`]
-            / this.proposal.totalVoteAmount * 100
-          )
-          : 0;
-      },
-    },
+    computed:
+      ['up', 'down'].reduce((p, d) => ({
+        ...p,
+        [`${d}VoteAmount`]() {
+          return format({ suffix: ' Æ' })(
+            this.proposal[`${d}VoteAmount`].toFixed(0));
+        },
+        [`${d}VoteProcent`]() {
+          return this.proposal.totalVoteAmount
+            ? Math.round(
+              this.proposal[`${d}VoteAmount`]
+              / this.proposal.totalVoteAmount * 100
+            )
+            : 0;
+        },
+      }), {}),
   }
 </script>
 
