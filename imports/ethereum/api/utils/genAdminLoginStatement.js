@@ -1,2 +1,2 @@
 export default () =>
-  `I want to login the Aeternity Voting as admin on ${(new Date()).toISOString()}`;
+  `I want to login the Æternity Voting as admin on ${(new Date()).toISOString()}`;
