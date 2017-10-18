@@ -1,4 +1,5 @@
 import { Accounts } from 'meteor/accounts-base';
+import utf8 from 'utf8';
 
 import web3 from '/imports/ethereum/ui/utils/web3';
 import getAdminLoginStatement from '/imports/ethereum/api/utils/genAdminLoginStatement';
@@ -51,7 +52,7 @@ export default {
       } else {
         const { personal: { sign }, toHex } = web3;
         const message = getAdminLoginStatement();
-        sign(toHex(message), state.accountId, (error, signature) => {
+        sign(toHex(utf8.encode(message)), state.accountId, (error, signature) => {
           if (error) throw error;
           else Accounts.callLoginMethod({
             methodArguments: [{ message, signature }],

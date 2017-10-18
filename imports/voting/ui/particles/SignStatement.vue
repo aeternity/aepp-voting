@@ -47,6 +47,7 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
+  import utf8 from 'utf8';
 
   import { Accounts } from '/imports/accounts';
   import web3 from '/imports/ethereum/ui/utils/web3';
@@ -74,7 +75,7 @@
           const statement = this.statement;
           if (!statement) return;
           const { personal: { sign }, toHex } = web3;
-          sign(toHex(this.messageToSign), this.accountId, (error, signature) => {
+          sign(toHex(utf8.encode(this.messageToSign)), this.accountId, (error, signature) => {
             if (error) this.$store.dispatch('handleError', { error, upVote });
             else this.signatureHandler({ statement, signature, upVote });
           });

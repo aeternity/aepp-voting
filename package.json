@@ -20,6 +20,7 @@
     "moment": "^2.18.1",
     "simpl-schema": "^0.3.2",
     "underscore": "^1.8.3",
+    "utf8": "^2.1.2",
     "vue": "^2.4.2",
     "vue-autosize": "^1.0.2",
     "vue-clipboards": "^1.1.0",
