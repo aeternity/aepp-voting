@@ -23,13 +23,7 @@
       <span>{{proposalUrl}}</span>
       <copy-button :contentToCopy="proposalUrl" />
     </div>
-    <div class="comments">
-      <VueDisqus
-        shortname="aeternity-voting"
-        :identifier="proposal._id"
-        :url="proposalUrl"
-      />
-    </div>
+    <comments :id="proposal._id" />
   </div>
   <p v-else-if="$subReady['proposal']">This statement seems to be missing.</p>
 </template>
@@ -43,6 +37,7 @@
   import { Proposals } from '../../api/models/proposals';
   import SignStatement from '../particles/SignStatement.vue';
   import CopyButton from '../particles/CopyButton.vue';
+  import Comments from '../components/Comments.vue';
 
   export default {
     props: ['id', 'vote'],
@@ -50,6 +45,7 @@
       VueDisqus,
       SignStatement,
       CopyButton,
+      Comments,
     },
     meteor: {
       $subscribe: {

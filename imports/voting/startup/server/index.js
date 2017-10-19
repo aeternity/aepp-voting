@@ -5,3 +5,4 @@ import './test-data';
 import './dump-proposal-route';
 import './migrations';
 import './update-scores';
+import '../comments';

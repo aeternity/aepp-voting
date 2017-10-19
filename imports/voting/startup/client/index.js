@@ -15,6 +15,7 @@ import voting from '../../api/store/voting';
 import web3SyncPlugin from '../../api/store/web3SyncPlugin';
 import checkPossibleAdminPlugin from '../../api/store/checkPossibleAdminPlugin';
 import syncAuthState from '../../api/store/syncAuthState';
+import '../comments';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
