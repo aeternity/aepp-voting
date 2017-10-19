@@ -2,7 +2,7 @@ import { Accounts } from 'meteor/accounts-base';
 import utf8 from 'utf8';
 
 import web3 from '/imports/ethereum/ui/utils/web3';
-import getAdminLoginStatement from '/imports/ethereum/api/utils/genAdminLoginStatement';
+import { adminLoginStatement } from '/imports/ethereum/api/utils/genStatement';
 
 export default {
   namespaced: true,
@@ -51,7 +51,7 @@ export default {
         Meteor.logout();
       } else {
         const { personal: { sign }, toHex } = web3;
-        const message = getAdminLoginStatement();
+        const message = adminLoginStatement();
         sign(toHex(utf8.encode(message)), state.accountId, (error, signature) => {
           if (error) throw error;
           else Accounts.callLoginMethod({

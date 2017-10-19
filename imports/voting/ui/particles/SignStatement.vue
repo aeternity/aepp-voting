@@ -53,6 +53,7 @@
   import web3 from '/imports/ethereum/ui/utils/web3';
   import { Proposals } from '../../api/models/proposals';
   import CopyButton from '../particles/CopyButton.vue';
+  import { voteStatement } from '/imports/ethereum/api/utils/genStatement';
 
   export default {
     components: { CopyButton },
@@ -96,7 +97,7 @@
         canSignByWeb3: state => state.voting.canSignByWeb3,
       }),
       messageToSign() {
-        return `I ${this.upVote ? '' : 'dis'}agree that ${this.statement}`;
+        return voteStatement(this.upVote, this.statement);
       },
     },
   };

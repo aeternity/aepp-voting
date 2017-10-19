@@ -2,10 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 import { getEthereumAddress } from './signature';
-import getAdminLoginStatement from './genAdminLoginStatement';
+import { adminLoginStatement } from './genStatement';
 
 const suffixLength = (new Date()).toISOString().length;
-const prefix = getAdminLoginStatement().slice(0, -suffixLength);
+const prefix = adminLoginStatement().slice(0, -suffixLength);
 
 Accounts.registerLoginHandler('ethereum', ({ message, signature }) => {
   let address;
