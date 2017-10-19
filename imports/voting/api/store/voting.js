@@ -46,20 +46,24 @@ export default {
   },
 
   actions: {
-    toggleAuth({ state, commit }) {
+    signMessage: async ({ state }, message) => new Promise((resolve, reject) => {
+      const { personal: { sign }, toHex } = web3;
+      sign(toHex(utf8.encode(message)), state.accountId, (error, signature) => {
+        if (error) reject(error);
+        else resolve(signature);
+      });
+    }),
+    async toggleAuth({ state, dispatch }) {
       if (state.loggedIn) {
         Meteor.logout();
       } else {
-        const { personal: { sign }, toHex } = web3;
         const message = adminLoginStatement();
-        sign(toHex(utf8.encode(message)), state.accountId, (error, signature) => {
-          if (error) throw error;
-          else Accounts.callLoginMethod({
-            methodArguments: [{ message, signature }],
-            userCallback(error) {
-              if (error) throw error;
-            },
-          });
+        const signature = await dispatch('signMessage', message);
+        Accounts.callLoginMethod({
+          methodArguments: [{ message, signature }],
+          userCallback(error) {
+            if (error) throw error;
+          },
         });
       }
     },

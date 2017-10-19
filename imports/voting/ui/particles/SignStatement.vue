@@ -47,10 +47,8 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
-  import utf8 from 'utf8';
 
   import { Accounts } from '/imports/accounts';
-  import web3 from '/imports/ethereum/ui/utils/web3';
   import { Proposals } from '../../api/models/proposals';
   import CopyButton from '../particles/CopyButton.vue';
   import { voteStatement } from '/imports/ethereum/api/utils/genStatement';
@@ -70,16 +68,18 @@
       }
     },
     methods: {
-      setUpVote(upVote) {
+      async setUpVote(upVote) {
         this.upVote = upVote;
-        if (this.canSignByWeb3) {
-          const statement = this.statement;
-          if (!statement) return;
-          const { personal: { sign }, toHex } = web3;
-          sign(toHex(utf8.encode(this.messageToSign)), this.accountId, (error, signature) => {
-            if (error) this.$store.dispatch('handleError', { error, upVote });
-            else this.signatureHandler({ statement, signature, upVote });
-          });
+        if (this.canSignByWeb3 && this.statement) {
+          try {
+            this.signatureHandler({
+              statement: this.statement,
+              signature: await this.$store.dispatch('voting/signMessage', this.messageToSign),
+              upVote,
+            });
+          } catch (error) {
+            this.$store.dispatch('voting/handleError', { error, upVote });
+          }
         }
       },
       vote() {
