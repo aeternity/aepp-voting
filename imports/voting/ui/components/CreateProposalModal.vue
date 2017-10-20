@@ -39,7 +39,7 @@
         this.$store.dispatch('voting/createProposal', { statement, signature, upVote })
           .then(proposalId => this.$router.push({
             name: 'proposal-list',
-            params: { filter: Proposals.filterTypes.NEWEST },
+            params: { sort: 'newest' },
           }));
       },
     },

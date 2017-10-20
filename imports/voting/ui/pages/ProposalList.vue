@@ -35,6 +35,9 @@
       ProposalItem,
       MugenScroll,
     },
+    props: {
+      sort: { type: String, default: Proposals.defaultSort },
+    },
     computed: {
       gotMore() {
         return this.proposals.length < this.proposalsCount
@@ -50,7 +53,7 @@
       $subscribe: {
         'proposals.list'() {
           return [
-            this.$route.params.filter || Proposals.filterTypes.NEWEST,
+            this.sort,
             this.$store.state.voting.limit,
             this.$store.state.voting.accountId,
           ];
@@ -60,13 +63,13 @@
       proposals: {
         params() {
           return {
-            filter: this.$route.params.filter,
+            sort: this.sort,
             accountId: this.$store.state.voting.accountId,
           };
         },
-        update: ({ filter, accountId }) =>
+        update: ({ sort, accountId }) =>
           Proposals
-            .find({}, { sort: Proposals.filterSort[filter] || { createdAt: -1 } })
+            .find({}, { sort: Proposals.sortTypes[sort] })
             .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] })),
       },
       proposalsCount () {

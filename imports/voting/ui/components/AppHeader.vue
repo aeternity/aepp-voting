@@ -24,14 +24,14 @@
         </button>
       </div>
     </header>
-    <nav class="proposals-filter">
+    <nav>
       <router-link
-        v-for="f in filters"
-        :key="f"
-        :class="{active: currentFilter === f}"
-        :to="`/sorting/${f}`"
+        v-for="s in sorts"
+        :key="s"
+        :class="{active: currentSort === s}"
+        :to="`/sorting/${s}`"
       >
-        {{f}}
+        {{s}}
       </router-link>
     </nav>
   </div>
@@ -51,7 +51,7 @@
     },
     data() {
       return {
-        filters: [Proposals.filterTypes.NEWEST, Proposals.filterTypes.TOTAL_VOTES],
+        sorts: Object.keys(Proposals.sortTypes),
       };
     },
     methods: {
@@ -69,9 +69,9 @@
           possibleAdmin && canSignByWeb3,
         loggedIn: state => state.voting.loggedIn,
       }),
-      currentFilter() {
+      currentSort() {
         if (!['root', 'proposal-list'].includes(this.$route.name)) return;
-        return this.$route.params.filter || Proposals.filterTypes.NEWEST;
+        return this.$route.params.sort || Proposals.defaultSort;
       }
     },
   }

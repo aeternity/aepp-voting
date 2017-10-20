@@ -4,3 +4,4 @@ import '../../api/models/proposals_pubs';
 import './test-data';
 import './dump-proposal-route';
 import './migrations';
+import './update-scores';
