@@ -1,6 +1,6 @@
 <template>
   <div class="single-proposal" v-if="proposal">
-    <button @click="removeProposal" v-if="loggedIn" class="remove" title="Remove this statement">
+    <button @click="removeProposal" v-if="admin" class="remove" title="Remove this statement">
       <i class="fa fa-trash" />
     </button>
     <h2 class="statement">“{{proposal.statement}}”</h2>
@@ -77,7 +77,7 @@
     },
     computed: {
       ...mapState({
-        loggedIn: state => state.voting.loggedIn,
+        admin: state => state.voting.admin,
       }),
       proposalUrl() {
         return Meteor.absoluteUrl() + 'statements/' + this.$route.params.id;

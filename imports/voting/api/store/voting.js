@@ -14,7 +14,7 @@ export default {
     youtubeVideoId: '',
     accountId: '',
     canSignByWeb3: false,
-    possibleAdmin: false,
+    admin: false,
     loggedIn: false,
     messageToSign: false,
   }),
@@ -38,8 +38,8 @@ export default {
     setCanSignByWeb3: (state, canSignByWeb3) => {
       state.canSignByWeb3 = canSignByWeb3;
     },
-    setPossibleAdmin: (state, possibleAdmin) => {
-      state.possibleAdmin = possibleAdmin;
+    setAdmin: (state, admin) => {
+      state.admin = admin;
     },
     setLoggedIn: (state, loggedIn) => {
       state.loggedIn = loggedIn;
@@ -71,7 +71,32 @@ export default {
         Accounts.callLoginMethod({
           methodArguments: [{ message, signature }],
           userCallback(error) {
-            if (error) throw error;
+            if (error) {
+              const errorMessage = 'Sorry, you are unable to log in';
+              const text = {
+                'invalid-signature': 'Something wrong with signature',
+                'no-tokens': 'You don\'t have Æternity tokens',
+                'invalid-message': 'Message that you signed is different',
+                timeout: 'Signed message has expired, please try again',
+              }[error.error];
+              swal({
+                ...text
+                  ? {title: errorMessage, text}
+                  : console.error(error) || {
+                  title: 'Something went wrong!',
+                  text: errorMessage,
+                },
+                type: 'error',
+                animation: false,
+              });
+            } else {
+              swal({
+                title: 'You have successfully logged in!',
+                type: 'success',
+                animation: false,
+                timer: 3000,
+              });
+            }
           },
         });
       }
