@@ -73,7 +73,6 @@
         if (this.canSignByWeb3 && this.statement) {
           try {
             this.signatureHandler({
-              statement: this.statement,
               signature: await this.$store.dispatch('voting/signMessage', this.messageToSign),
               upVote,
             });
@@ -85,7 +84,6 @@
       vote() {
         if (!this.signature) return;
         this.signatureHandler({
-          statement: this.statement,
           signature: this.signature,
           upVote: this.upVote,
         });

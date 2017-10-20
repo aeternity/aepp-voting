@@ -35,12 +35,16 @@
       ...mapMutations({
         toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
       }),
-      signatureHandler({ statement, signature, upVote }) {
-        this.$store.dispatch('voting/createProposal', { statement, signature, upVote })
-          .then(proposalId => this.$router.push({
-            name: 'proposal-list',
-            params: { sort: 'newest' },
-          }));
+      async signatureHandler({ signature, upVote }) {
+        await this.$store.dispatch('voting/createProposal', {
+          statement: this.statement,
+          signature,
+          upVote,
+        });
+        this.$router.push({
+          name: 'proposal-list',
+          params: { sort: 'newest' },
+        });
       },
     },
   };
