@@ -32,6 +32,18 @@ Migrations.add({
   },
 });
 
+Migrations.add({
+  version: 3,
+  name: 'proposals: Reset `updateAt` field',
+  up() {
+    Proposals.find({}).forEach(({ _id, votes, createdAt }) =>
+      Proposals.update(_id, { $set: {
+        updatedAt: Math.max(createdAt, ...Object.values(votes).map(v => v.createdAt)),
+      } }, { getAutoValues: false }));
+  },
+  down() {},
+});
+
 Meteor.startup(() => {
   Migrations.migrateTo('latest');
 });
