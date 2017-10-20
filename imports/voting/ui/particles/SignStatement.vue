@@ -1,5 +1,5 @@
 <template>
-  <form class="sign-statement" @submit.prevent="vote">
+  <div class="sign-statement">
     <div class="buttons">
       <div>
         <button
@@ -30,19 +30,12 @@
         <label :for="`${_uid}-disagree`">I disagree</label>
       </div>
     </div>
-    <template v-if="!canSignByWeb3">
-      <div class="center first">
-        Copy this message and sign it with your Ethereum address:
-      </div>
-      <div class="center">
-        <strong>{{messageToSign}}</strong><br/>
-        <copy-button :contentToCopy="messageToSign"></copy-button>
-      </div>
-      <label class="center" for="signature">Then paste your signature here</label>
-      <input id="signature" v-model="signature">
-      <button class="vote">Submit</button>
-    </template>
-  </form>
+    <sign-message
+      v-if="!canSignByWeb3"
+      :message="messageToSign"
+      :signatureHandler="this.vote"
+    />
+  </div>
 </template>
 
 <script>
@@ -52,9 +45,10 @@
   import { Proposals } from '../../api/models/proposals';
   import CopyButton from '../particles/CopyButton.vue';
   import { voteStatement } from '/imports/ethereum/api/utils/genStatement';
+  import SignMessage from './SignMessage.vue';
 
   export default {
-    components: { CopyButton },
+    components: { CopyButton, SignMessage },
     props: {
       currentVote: { type: Boolean, default: undefined },
       desiredVote: { type: Boolean, default: true },
@@ -81,10 +75,9 @@
           }
         }
       },
-      vote() {
-        if (!this.signature) return;
+      vote(signature) {
         this.signatureHandler({
-          signature: this.signature,
+          signature,
           upVote: this.upVote,
         });
       },
@@ -140,22 +133,8 @@
       }
     }
 
-    .first {
+    .sign-message {
       margin-top: 60px;
-    }
-
-    .center {
-      text-align: center;
-    }
-
-    input {
-      height: 30px;
-      width: 80%;
-      padding: 7px;
-      border-radius: 4px;
-      font-size: 16px;
-      border: solid 1px $gray-light;
-      box-shadow: none;
     }
   }
 </style>

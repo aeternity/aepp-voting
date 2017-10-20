@@ -4,6 +4,7 @@
     <app-header hidden />
     <create-proposal-modal v-if="createProposalModalShown" />
     <youtube-video-modal v-if="youtubeVideoId" :videoId="youtubeVideoId" />
+    <sign-message-modal />
     <div class="main-content">
       <explanation-block :display="explanationBlockShown" />
       <router-view />
@@ -19,6 +20,7 @@
   import CreateProposalModal from '../components/CreateProposalModal.vue';
   import ExplanationBlock from '../components/ExplanationBlock.vue';
   import YoutubeVideoModal from '../components/YoutubeVideoModal.vue';
+  import SignMessageModal from '../components/SignMessageModal.vue';
 
   export default {
     components: {
@@ -26,6 +28,7 @@
       CreateProposalModal,
       ExplanationBlock,
       YoutubeVideoModal,
+      SignMessageModal,
     },
     computed: mapState({
       proposal: state => state.voting.proposal,

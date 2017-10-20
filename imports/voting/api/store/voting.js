@@ -16,6 +16,7 @@ export default {
     canSignByWeb3: false,
     possibleAdmin: false,
     loggedIn: false,
+    messageToSign: false,
   }),
 
   mutations: {
@@ -43,15 +44,23 @@ export default {
     setLoggedIn: (state, loggedIn) => {
       state.loggedIn = loggedIn;
     },
+    setMessageToSign: (state, options) => {
+      state.messageToSign = options;
+    },
   },
 
   actions: {
-    signMessage: async ({ state }, message) => new Promise((resolve, reject) => {
-      const { personal: { sign }, toHex } = web3;
-      sign(toHex(utf8.encode(message)), state.accountId, (error, signature) => {
+    signMessage: async ({ state, commit }, message) => new Promise((resolve, reject) => {
+      const handler = (error, signature) => {
         if (error) reject(error);
         else resolve(signature);
-      });
+      };
+      if (state.canSignByWeb3) {
+        const { personal: { sign }, toHex } = web3;
+        sign(toHex(utf8.encode(message)), state.accountId, handler);
+      } else {
+        commit('setMessageToSign', { message, handler });
+      }
     }),
     async toggleAuth({ state, dispatch }) {
       if (state.loggedIn) {
