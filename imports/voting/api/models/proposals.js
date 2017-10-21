@@ -15,6 +15,7 @@ Proposals.attachSchema(new SimpleSchema({
   downVoteAmount: { type: Number, defaultValue: 0 },
   upVoteRatio: { type: Number, defaultValue: 0.5 },
   totalVoteAmount: { type: Number, defaultValue: 0 },
+  popularScore: { type: Number, defaultValue: 0 },
   votes: { type: Object, blackbox: true, defaultValue: {} },
   /*
   votes: {
@@ -35,23 +36,17 @@ Proposals.publicFields = {
   upVoteAmount: 1,
   downVoteAmount: 1,
   totalVoteAmount: 1,
+  popularScore: 1,
   createdAt: 1,
   updatedAt: 1,
 };
 
-Proposals.filterTypes = {
-  ACTIVE: 'active',
-  CONTROVERSIAL: 'controversial',
-  DECIDED: 'decided',
-  VALID: 'valid',
-  INVALID: 'invalid',
-  NEWEST: 'newest',
-  TOTAL_VOTES: 'total votes',
+Proposals.sortTypes = {
+  popular: { popularScore: -1 },
+  newest: { createdAt: -1 },
 };
 
-Proposals.filterSort = {
-  [Proposals.filterTypes.TOTAL_VOTES]: { totalVoteAmount: -1 },
-};
+Proposals.defaultSort = 'popular';
 
 Accounts.after.update(function(unusedUserId, doc) {
   if (!doc.balance && !this.previous.balance) return;
