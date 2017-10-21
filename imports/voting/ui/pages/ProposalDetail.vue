@@ -30,9 +30,6 @@
         :url="proposalUrl"
       />
     </div>
-    <div class="footer">
-      <a :href="`/statements/${proposal._id}/json`">All signatures as JSON</a>
-    </div>
   </div>
   <p v-else-if="$subReady['proposal']">This statement seems to be missing.</p>
 </template>
@@ -136,12 +133,6 @@
       margin-top: 80px;
       margin-bottom: 50px;
       word-break: break-all;
-    }
-    .footer {
-      text-align: right;
-      a {
-        color: $brand-color;
-      }
     }
   }
 </style>
