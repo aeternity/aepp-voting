@@ -6,6 +6,7 @@
         <span>(please keep it short)</span>
       </h3>
       <input placeholder="Your statement" v-model="statement" v-focus="true" />
+      <tags-select v-model="tags" />
       <sign-statement
         :statement="statement"
         :signatureHandler="signatureHandler"
@@ -21,14 +22,19 @@
   import Modal from '../particles/Modal.vue';
   import SignStatement from '../particles/SignStatement.vue';
   import { Proposals } from '../../api/models/proposals';
+  import TagsSelect from '../particles/TagsSelect.vue';
 
   export default {
     data() {
-      return { statement: '' };
+      return {
+        statement: '',
+        tags: [],
+      };
     },
     components: {
       Modal,
       SignStatement,
+      TagsSelect,
     },
     directives: { focus },
     methods: {
@@ -40,6 +46,7 @@
           statement: this.statement,
           signature,
           upVote,
+          tags: this.tags,
         });
         this.$router.push({
           name: 'proposal-list',

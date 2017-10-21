@@ -15,10 +15,15 @@ Meteor.publish('proposal', function proposal(id, accountId) {
   );
 });
 
-Meteor.publish('proposals.list', function proposals(sort, limit, accountId) {
+Meteor.publish('proposals.list', function proposals(sort, tag, limit, accountId) {
   if (!Proposals.sortTypes[sort]) throw new Meteor.Error('invalid-sort');
+  if (![Proposals.defaultTag, ...Proposals.tags].includes(tag)) {
+    throw new Meteor.Error('invalid-tag');
+  }
 
-  return Proposals.find({}, {
+  return Proposals.find({
+    ...tag === Proposals.defaultTag ? {} : { tags: tag },
+  }, {
     sort: Proposals.sortTypes[sort],
     limit,
     fields: {

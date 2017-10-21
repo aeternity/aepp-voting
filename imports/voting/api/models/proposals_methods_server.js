@@ -29,10 +29,11 @@ onErc20ContractReceiving(erc20contract => {
   };
 
   Meteor.methods({
-    'proposals.add'(statement, signature, upVote) {
+    'proposals.add'(statement, signature, upVote, tags) {
       check(statement, String);
       check(signature, String);
       check(upVote, Boolean);
+      check(tags, [String]);
 
       const { accountId, balance } = getAccountInfo(statement, signature, upVote);
 
@@ -42,6 +43,7 @@ onErc20ContractReceiving(erc20contract => {
           statement,
           [`${upVote ? 'up' : 'down'}VoteAmount`]: balance,
           totalVoteAmount: balance,
+          tags,
           votes: {
             [accountId]: { signature, upVote, createdAt: new Date() },
           },

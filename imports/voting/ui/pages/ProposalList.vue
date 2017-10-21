@@ -37,6 +37,7 @@
     },
     props: {
       sort: { type: String, default: Proposals.defaultSort },
+      tag: { type: String, default: Proposals.defaultTag },
     },
     computed: {
       gotMore() {
@@ -54,6 +55,7 @@
         'proposals.list'() {
           return [
             this.sort,
+            this.tag,
             this.$store.state.voting.limit,
             this.$store.state.voting.accountId,
           ];
@@ -64,12 +66,15 @@
         params() {
           return {
             sort: this.sort,
+            tag: this.tag,
             accountId: this.$store.state.voting.accountId,
           };
         },
-        update: ({ sort, accountId }) =>
+        update: ({ sort, tag, accountId }) =>
           Proposals
-            .find({}, { sort: Proposals.sortTypes[sort] })
+            .find({
+              ...tag === Proposals.defaultTag ? {} : { tags: tag },
+            }, { sort: Proposals.sortTypes[sort] })
             .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] })),
       },
       proposalsCount () {

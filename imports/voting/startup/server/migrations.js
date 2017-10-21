@@ -44,6 +44,17 @@ Migrations.add({
   down() {},
 });
 
+Migrations.add({
+  version: 4,
+  name: 'proposals: Add `tags` field',
+  modify(up) {
+    Proposals.update({}, { [up ? '$set' : '$unset']: { tags: [] } },
+      { multi: true, validate: false, getAutoValues: false });
+  },
+  up() { this.modify(true); },
+  down() { this.modify(false); },
+});
+
 Meteor.startup(() => {
   Migrations.migrateTo('latest');
 });

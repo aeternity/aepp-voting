@@ -16,6 +16,15 @@ Proposals.attachSchema(new SimpleSchema({
   upVoteRatio: { type: Number, decimal: true, defaultValue: 0.5 },
   totalVoteAmount: { type: Number, decimal: true, defaultValue: 0 },
   popularScore: { type: Number, decimal: true, defaultValue: 0 },
+  tags: {
+    type: [String],
+    autoValue() {
+      return this.value
+        ? Array.from(new Set(this.value.filter(t => Proposals.tags.includes(t))))
+          .sort((a, b) => Proposals.tags.indexOf(a) - Proposals.tags.indexOf(b))
+        : undefined;
+    }
+  },
   votes: { type: Object, blackbox: true, defaultValue: {} },
   /*
   votes: {
@@ -37,6 +46,7 @@ Proposals.publicFields = {
   downVoteAmount: 1,
   totalVoteAmount: 1,
   popularScore: 1,
+  tags: 1,
   createdAt: 1,
   updatedAt: 1,
 };
@@ -47,6 +57,10 @@ Proposals.sortTypes = {
 };
 
 Proposals.defaultSort = 'popular';
+
+Proposals.tags = ['æternity', 'technical', 'design', 'politics', 'other'];
+
+Proposals.defaultTag = 'all';
 
 Accounts.after.update(function(unusedUserId, doc) {
   if (!doc.balance && !this.previous.balance) return;
@@ -66,6 +80,7 @@ let proposalCounter = 0;
 Factory.define('proposal', Proposals, {
   statement: () =>
     `Proposal ${proposalCounter += 1}. Some long statement to be agreed or doubted`,
+  tags: () => _.sample(Proposals.tags, _.random(0, 3)),
   votes() {
     this.upVoteAmount = 0;
     this.downVoteAmount = 0;
