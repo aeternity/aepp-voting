@@ -16,17 +16,21 @@
     padding: 0;
     .comments {
       padding-top: 0;
+    }
+    .comments.ui {
+      display: flex;
+      flex-direction: column;
       .sorting {
         display: none;
       }
-      .message.warning, textarea {
+      .message, textarea {
         border-radius: 4px;
         border: solid 1px $gray-light;
         padding: 7px;
         width: 100%;
         box-sizing: border-box;
       }
-      .message.warning {
+      .message {
         background-color: #fffaf3;
         color: #573a08;
         border-color: #c9ba9b;
@@ -36,23 +40,38 @@
         resize: vertical;
         height: 60px;
       }
-      button, .button {
-        margin-top: $gutter / 2;
-        border-width: 2px;
-        &:hover {
-          background: $brand-color;
-          color: white;
+      form {
+        overflow: hidden;
+        &.comment-form {
+          order: 1;
+          margin-top: .5em;
+        }
+        button, .button {
+          margin-top: $gutter / 2;
+          border-width: 2px;
+          float: right;
+          &:hover {
+            background: $brand-color;
+            color: white;
+          }
         }
       }
       .comment {
-        margin-top: 1em;
-        margin-bottom: 1em;
+        margin-top: .5em;
+        margin-bottom: .5em;
+        .comments .comment {
+          margin-top: 1em;
+          margin-bottom: 1em;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
         .avatar {
           display: none;
         }
         .content {
           .author {
-            font-weight: bold;
+            color: gray;
           }
           .metadata, .actions {
             color: lightgray;

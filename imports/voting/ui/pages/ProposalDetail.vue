@@ -18,12 +18,12 @@
     })}}
       with a voting weight of {{balance}} Æ
     </div>
-    <div class="share-link">
-      <b>Share this link</b><br/>
+    <div class="space-around share-link">
+      <h3>Share this link</h3>
       <span>{{proposalUrl}}</span>
       <copy-button :contentToCopy="proposalUrl" />
     </div>
-    <comments :id="proposal._id" />
+    <comments class="space-around" :id="proposal._id" />
   </div>
   <p v-else-if="$subReady['proposal']">This statement seems to be missing.</p>
 </template>
@@ -125,9 +125,14 @@
       color: $gray;
       text-align: center;
     }
+    .space-around {
+      margin-top: 60px;
+      margin-bottom: 60px;
+      h3 {
+        margin: 0;
+      }
+    }
     .share-link {
-      margin-top: 80px;
-      margin-bottom: 50px;
       word-break: break-all;
     }
   }

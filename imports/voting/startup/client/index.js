@@ -14,7 +14,7 @@ import * as filters from '../../api/helpers/filters';
 import voting from '../../api/store/voting';
 import web3SyncPlugin from '../../api/store/web3SyncPlugin';
 import syncAuthState from '../../api/store/syncAuthState';
-import '../comments';
+import './comments';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
