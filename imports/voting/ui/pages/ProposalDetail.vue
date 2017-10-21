@@ -91,7 +91,7 @@
       },
       removeProposal() {
         if (confirm(`Are you sure want to remove "${this.proposal.statement}" statement?`)) {
-          this.$store.dispatch('voting/removeProposal', this.proposal._id);
+          Meteor.call('proposals.remove', this.proposal._id);
         }
       },
     },
