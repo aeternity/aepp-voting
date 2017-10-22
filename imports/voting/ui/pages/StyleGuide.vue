@@ -1,0 +1,87 @@
+<template>
+  <div class="style-guide">
+    <button class="button large pink">
+      close
+    </button>
+    <button class="button medium pink">
+      button
+    </button>
+    <button class="button normal pink">
+      button
+    </button>
+    <button class="button large grey">
+      close
+    </button>
+    <button class="button large white">
+      close
+    </button>
+    <button class="button large lightgrey">
+      close
+    </button>
+    <button class="button label inactive purple">
+      close
+    </button>
+    <button class="button label active purple">
+      close
+    </button>
+  </div>
+</template>
+
+<style lang="scss">
+  @import "/imports/voting/ui/styles/common-variables";
+
+  body {
+    font-family: 'Roboto';
+    font-weight: 500;
+    button.button {
+      display: block;
+      border: none;
+      border-radius: 100px;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.11);
+      color: #fff;
+      &.normal {
+        font-size: 16px;
+        height: 40px;
+        width: 100px;
+      }
+      &.medium {
+        font-size: 16px;
+        height: 45px;
+        width: 141px;
+      }
+      &.large {
+        font-size: 17px;
+        height: 50px;
+        width: 305px;
+      }
+      &.pink {
+        background-color: $maegenta;
+      }
+      &.purple {
+        background-color: $eggplant;
+      }
+      &.lightgrey {
+        background-color: $silver;
+        color: #000;
+      }
+      &.white {
+        background-color: #fff;
+        color: #000;
+      }
+      &.grey {
+        background-color: $grey;
+      }
+      &.inactive {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      &.label {
+        width: 100px;
+        height: 30px;
+        font-size: 12px;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+      }
+    }
+  }
+</style>
