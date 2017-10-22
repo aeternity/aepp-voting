@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import { Proposals } from './proposals';
 import { Accounts } from '/imports/accounts/index';
 import { getEthereumAddress, onErc20ContractReceiving } from '/imports/ethereum/index';
+import { voteStatement } from '/imports/ethereum/api/utils/genStatement';
 
 const UP_VOTE = Symbol('up-vote');
 const DOWN_VOTE = Symbol('down-vote');
@@ -12,8 +13,7 @@ onErc20ContractReceiving(erc20contract => {
   const getAccountInfo = (statement, signature, upVote) => {
     let accountId;
     try {
-      accountId = getEthereumAddress(
-        `I ${upVote ? '' : 'dis'}agree that ` + statement, signature);
+      accountId = getEthereumAddress(voteStatement(upVote, statement), signature);
     }
     catch (e) {
       throw new Meteor.Error('invalid-signature');

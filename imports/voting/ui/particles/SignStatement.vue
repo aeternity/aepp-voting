@@ -1,5 +1,5 @@
 <template>
-  <form class="sign-statement" @submit.prevent="vote">
+  <div class="sign-statement">
     <div class="buttons">
       <div>
         <button
@@ -30,32 +30,25 @@
         <label :for="`${_uid}-disagree`">I disagree</label>
       </div>
     </div>
-    <template v-if="!canSignByWeb3">
-      <div class="center first">
-        Copy this message and sign it with your Ethereum address:
-      </div>
-      <div class="center">
-        <strong>{{messageToSign}}</strong><br/>
-        <copy-button :contentToCopy="messageToSign"></copy-button>
-      </div>
-      <label class="center" for="signature">Then paste your signature here</label>
-      <input id="signature" v-model="signature">
-      <button class="vote">Submit</button>
-    </template>
-  </form>
+    <sign-message
+      v-if="!canSignByWeb3"
+      :message="messageToSign"
+      :signatureHandler="this.vote"
+    />
+  </div>
 </template>
 
 <script>
   import { mapState, mapMutations } from 'vuex';
-  import utf8 from 'utf8';
 
   import { Accounts } from '/imports/accounts';
-  import web3 from '/imports/ethereum/ui/utils/web3';
   import { Proposals } from '../../api/models/proposals';
   import CopyButton from '../particles/CopyButton.vue';
+  import { voteStatement } from '/imports/ethereum/api/utils/genStatement';
+  import SignMessage from './SignMessage.vue';
 
   export default {
-    components: { CopyButton },
+    components: { CopyButton, SignMessage },
     props: {
       currentVote: { type: Boolean, default: undefined },
       desiredVote: { type: Boolean, default: true },
@@ -69,23 +62,22 @@
       }
     },
     methods: {
-      setUpVote(upVote) {
+      async setUpVote(upVote) {
         this.upVote = upVote;
-        if (this.canSignByWeb3) {
-          const statement = this.statement;
-          if (!statement) return;
-          const { personal: { sign }, toHex } = web3;
-          sign(toHex(utf8.encode(this.messageToSign)), this.accountId, (error, signature) => {
-            if (error) this.$store.dispatch('handleError', { error, upVote });
-            else this.signatureHandler({ statement, signature, upVote });
-          });
+        if (this.canSignByWeb3 && this.statement) {
+          try {
+            this.signatureHandler({
+              signature: await this.$store.dispatch('voting/signMessage', this.messageToSign),
+              upVote,
+            });
+          } catch (error) {
+            this.$store.dispatch('voting/handleError', { error, upVote });
+          }
         }
       },
-      vote() {
-        if (!this.signature) return;
+      vote(signature) {
         this.signatureHandler({
-          statement: this.statement,
-          signature: this.signature,
+          signature,
           upVote: this.upVote,
         });
       },
@@ -96,7 +88,7 @@
         canSignByWeb3: state => state.voting.canSignByWeb3,
       }),
       messageToSign() {
-        return `I ${this.upVote ? '' : 'dis'}agree that ${this.statement}`;
+        return voteStatement(this.upVote, this.statement);
       },
     },
   };
@@ -141,22 +133,8 @@
       }
     }
 
-    .first {
+    .sign-message {
       margin-top: 60px;
-    }
-
-    .center {
-      text-align: center;
-    }
-
-    input {
-      height: 30px;
-      width: 80%;
-      padding: 7px;
-      border-radius: 4px;
-      font-size: 16px;
-      border: solid 1px $gray-light;
-      box-shadow: none;
     }
   }
 </style>

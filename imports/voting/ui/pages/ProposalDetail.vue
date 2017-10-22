@@ -1,6 +1,6 @@
 <template>
   <div class="single-proposal" v-if="proposal">
-    <button @click="removeProposal" v-if="loggedIn" class="remove" title="Remove this statement">
+    <button @click="removeProposal" v-if="admin" class="remove" title="Remove this statement">
       <i class="fa fa-trash" />
     </button>
     <h2 class="statement">“{{proposal.statement}}”</h2>
@@ -18,18 +18,12 @@
     })}}
       with a voting weight of {{balance}} Æ
     </div>
-    <div class="share-link">
-      <b>Share this link</b><br/>
+    <div class="space-around share-link">
+      <h3>Share this link</h3>
       <span>{{proposalUrl}}</span>
       <copy-button :contentToCopy="proposalUrl" />
     </div>
-    <div class="comments">
-      <VueDisqus
-        shortname="aeternity-voting"
-        :identifier="proposal._id"
-        :url="proposalUrl"
-      />
-    </div>
+    <comments class="space-around" :id="proposal._id" />
   </div>
   <p v-else-if="$subReady['proposal']">This statement seems to be missing.</p>
 </template>
@@ -43,6 +37,7 @@
   import { Proposals } from '../../api/models/proposals';
   import SignStatement from '../particles/SignStatement.vue';
   import CopyButton from '../particles/CopyButton.vue';
+  import Comments from '../components/Comments.vue';
 
   export default {
     props: ['id', 'vote'],
@@ -50,6 +45,7 @@
       VueDisqus,
       SignStatement,
       CopyButton,
+      Comments,
     },
     meteor: {
       $subscribe: {
@@ -81,7 +77,7 @@
     },
     computed: {
       ...mapState({
-        loggedIn: state => state.voting.loggedIn,
+        admin: state => state.voting.admin,
       }),
       proposalUrl() {
         return Meteor.absoluteUrl() + 'statements/' + this.$route.params.id;
@@ -129,9 +125,14 @@
       color: $gray;
       text-align: center;
     }
+    .space-around {
+      margin-top: 60px;
+      margin-bottom: 60px;
+      h3 {
+        margin: 0;
+      }
+    }
     .share-link {
-      margin-top: 80px;
-      margin-bottom: 50px;
       word-break: break-all;
     }
   }

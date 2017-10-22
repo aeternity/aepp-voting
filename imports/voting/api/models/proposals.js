@@ -1,5 +1,5 @@
-import SimpleSchema from 'simpl-schema';
 import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 import { _ } from 'underscore';
 
@@ -9,13 +9,13 @@ import { Accounts } from '/imports/accounts/index';
 export const Proposals = new Mongo.Collection('proposals');
 
 Proposals.attachSchema(new SimpleSchema({
-  _id: { type: String, regEx: SimpleSchema.RegEx.Id },
+  _id: { type: String, optional: true, regEx: SimpleSchema.RegEx.Id },
   statement: { type: String },
-  upVoteAmount: { type: Number, defaultValue: 0 },
-  downVoteAmount: { type: Number, defaultValue: 0 },
-  upVoteRatio: { type: Number, defaultValue: 0.5 },
-  totalVoteAmount: { type: Number, defaultValue: 0 },
-  popularScore: { type: Number, defaultValue: 0 },
+  upVoteAmount: { type: Number, decimal: true, defaultValue: 0 },
+  downVoteAmount: { type: Number, decimal: true, defaultValue: 0 },
+  upVoteRatio: { type: Number, decimal: true, defaultValue: 0.5 },
+  totalVoteAmount: { type: Number, decimal: true, defaultValue: 0 },
+  popularScore: { type: Number, decimal: true, defaultValue: 0 },
   votes: { type: Object, blackbox: true, defaultValue: {} },
   /*
   votes: {

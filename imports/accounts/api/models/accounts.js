@@ -1,5 +1,5 @@
 import { Mongo } from 'meteor/mongo';
-import SimpleSchema from 'simpl-schema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
 import { createdAt, updatedAt, ethereumAddressType } from '/imports/common';
@@ -8,7 +8,7 @@ export const Accounts = new Mongo.Collection('accounts');
 
 Accounts.schema = new SimpleSchema({
   _id: ethereumAddressType,
-  balance: { type: Number },
+  balance: { type: Number, decimal: true },
   createdAt,
   updatedAt,
 });

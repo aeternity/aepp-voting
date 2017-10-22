@@ -8,8 +8,7 @@
       </router-link>
       <div>
         <button
-          v-if="showLoginButton || loggedIn"
-          :title="loggedIn ? 'Logout' : 'Login as admin'"
+          :title="loggedIn ? 'Logout' : 'Login'"
           @click="toggleAuth"
           class="icon"
         >
@@ -65,8 +64,6 @@
     },
     computed: {
       ...mapState({
-        showLoginButton: ({ voting: { possibleAdmin, canSignByWeb3 } }) =>
-          possibleAdmin && canSignByWeb3,
         loggedIn: state => state.voting.loggedIn,
       }),
       currentSort() {

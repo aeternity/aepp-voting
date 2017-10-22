@@ -16,10 +16,8 @@ es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers
 ecmascript@0.8.3              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.2.4            # Server-side component of the `meteor shell` command
 akryum:vue-component
-aldeed:collection2-core
 akryum:vue-sass
 tmeasday:publish-counts
-aldeed:schema-deny
 matb33:collection-hooks
 dburles:factory
 practicalmeteor:mocha
@@ -27,3 +25,7 @@ juliancwirko:postcss
 kevohagan:sweetalert
 percolate:migrations
 accounts-base
+arkham:comments-ui
+vuejs:blaze-integration
+aldeed:simple-schema
+aldeed:collection2
