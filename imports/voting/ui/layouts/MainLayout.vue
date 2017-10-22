@@ -40,8 +40,8 @@
 </script>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Roboto');
-  @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+  // @import url('https://fonts.googleapis.com/css?family=Roboto:300,500|Roboto+Mono:400,500');
+  // @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
   @import "/imports/voting/ui/styles/normalize";
   @import "/imports/voting/ui/styles/variables";
   * {
@@ -61,28 +61,28 @@
       padding: 10px;
     }
   }
-  button, .button {
-    background-color: transparent;
-    border: 1px solid $brand-color;
-    color: $brand-color;
-    font-weight: bold;
-    border-radius: 100px;
-    padding: 5px 20px;
-    cursor: pointer;
-    font-family: $font-family-header;
-    text-align: center;
-    box-sizing: border-box;
-    &.vote {
-      color: gray;
-      border: solid 2px $gray-light;
-      &.already {
-        background-color: $gray-lighter;
-      }
-      &.checked, &:hover {
-        background-color: lightgray;
-      }
-    }
-  }
+  // button, .button {
+  //   background-color: transparent;
+  //   border: 1px solid $brand-color;
+  //   color: $brand-color;
+  //   font-weight: bold;
+  //   border-radius: 100px;
+  //   padding: 5px 20px;
+  //   cursor: pointer;
+  //   font-family: $font-family-header;
+  //   text-align: center;
+  //   box-sizing: border-box;
+  //   &.vote {
+  //     color: gray;
+  //     border: solid 2px $gray-light;
+  //     &.already {
+  //       background-color: $gray-lighter;
+  //     }
+  //     &.checked, &:hover {
+  //       background-color: lightgray;
+  //     }
+  //   }
+  // }
   input, input[type=text] {
     appearance: none;
   }
