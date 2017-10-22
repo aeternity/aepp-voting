@@ -18,6 +18,7 @@
     })}}
       with a voting weight of {{balance}} Æ
     </div>
+    <tags-select v-if="admin" :value="proposal.tags" @input="updateTags" />
     <div class="space-around share-link">
       <h3>Share this link</h3>
       <span>{{proposalUrl}}</span>
@@ -38,6 +39,7 @@
   import SignStatement from '../particles/SignStatement.vue';
   import CopyButton from '../particles/CopyButton.vue';
   import Comments from '../components/Comments.vue';
+  import TagsSelect from '../particles/TagsSelect.vue';
 
   export default {
     props: ['id', 'vote'],
@@ -46,6 +48,7 @@
       SignStatement,
       CopyButton,
       Comments,
+      TagsSelect,
     },
     meteor: {
       $subscribe: {
@@ -91,8 +94,11 @@
       },
       removeProposal() {
         if (confirm(`Are you sure want to remove "${this.proposal.statement}" statement?`)) {
-          this.$store.dispatch('voting/removeProposal', this.proposal._id);
+          Meteor.call('proposals.remove', this.proposal._id);
         }
+      },
+      updateTags(tags) {
+        Meteor.call('proposals.updateTags', this.proposal._id, tags);
       },
     },
   };

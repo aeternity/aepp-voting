@@ -27,11 +27,22 @@
       <router-link
         v-for="s in sorts"
         :key="s"
-        :class="{active: currentSort === s}"
-        :to="`/sorting/${s}`"
+        :class="{active: proposalList && currentSort === s}"
+        :to="{ name: 'proposal-list', params: { sort: s, tag: currentTag } }"
       >
         {{s}}
       </router-link>
+      <span class="hidden-tablet">
+        <span class="stripe" />
+        <router-link
+          v-for="t in tags"
+          :key="t"
+          :class="{active: proposalList && currentTag === t}"
+          :to="{ name: 'proposal-list', params: { sort: currentSort, tag: t } }"
+        >
+          {{t}}
+        </router-link>
+      </span>
     </nav>
   </div>
 </template>
@@ -51,6 +62,7 @@
     data() {
       return {
         sorts: Object.keys(Proposals.sortTypes),
+        tags: [Proposals.defaultTag, ...Proposals.tags],
       };
     },
     methods: {
@@ -66,10 +78,15 @@
       ...mapState({
         loggedIn: state => state.voting.loggedIn,
       }),
+      proposalList() {
+        return this.$route.name === 'proposal-list';
+      },
       currentSort() {
-        if (!['root', 'proposal-list'].includes(this.$route.name)) return;
         return this.$route.params.sort || Proposals.defaultSort;
-      }
+      },
+      currentTag() {
+        return this.$route.params.tag || Proposals.defaultTag;
+      },
     },
   }
 </script>
@@ -178,9 +195,20 @@
           color: white;
         }
       }
+      .stripe {
+        padding: 5px 1px;
+        margin-left: 10px;
+        margin-right: 15px;
+        background-color: $gray-lighter;
+      }
       &:hover {
         button:not(.active) {
           color: $base-text-color;
+        }
+      }
+      @media screen and (max-width: $screen-tablet){
+        .hidden-tablet {
+          display: none;
         }
       }
     }

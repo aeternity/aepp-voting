@@ -5,7 +5,10 @@
   >
     <div class="proposal-content">
       <h3>{{proposal.statement}}</h3>
-      <p>{{proposal.updatedAt | dateFormat}}</p>
+      <p>
+        {{proposal.updatedAt | dateFormat}}
+        <badge v-for="t in proposal.tags" :key="t">{{t}}</badge>
+      </p>
     </div>
 
     <div class="voted">
@@ -34,7 +37,10 @@
 <script>
   import format from 'format-number';
 
+  import Badge from './Badge.vue';
+
   export default {
+    components: { Badge },
     props: ['proposal'],
     computed:
       ['up', 'down'].reduce((p, d) => ({

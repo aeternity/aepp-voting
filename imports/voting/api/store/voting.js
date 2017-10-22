@@ -101,12 +101,9 @@ export default {
         });
       }
     },
-    removeProposal(store, proposalId) {
-      Meteor.call('proposals.remove', proposalId);
-    },
-    createProposal({ dispatch, commit }, { statement, signature, upVote }) {
+    createProposal({ dispatch, commit }, { statement, signature, upVote, tags }) {
       return new Promise((resolve, reject) => {
-        Meteor.call('proposals.add', statement, signature, upVote, (error, result) => {
+        Meteor.call('proposals.add', statement, signature, upVote, tags, (error, result) => {
           if (error) {
             dispatch('handleError', { error, upVote, voting: false });
             reject(error);
