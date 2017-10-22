@@ -24,6 +24,22 @@
     <button class="button label active purple">
       close
     </button>
+    <div class="amount">
+      <button class="subtract">-</button>
+      <div class="value">
+        200
+        <div class="unit">Æ</div>
+      </div>
+      <button class="add">+</button>
+    </div>
+    <div class="amount full-width">
+      <button class="subtract">-</button>
+      <div class="value">
+        200
+        <div class="unit">Æ</div>
+      </div>
+      <button class="add">+</button>
+    </div>
   </div>
 </template>
 
@@ -81,6 +97,48 @@
         font-size: 12px;
         letter-spacing: 0.2px;
         text-transform: uppercase;
+      }
+    }
+    div.amount {
+      width: 310px;
+      border-radius: 10px;
+      border: solid 2px $smoke;
+      height: 70px;
+      background-color: #fff;
+      display: block;
+      position: relative;
+      &.full-width {
+        width: 100%;
+      }
+      button {
+        position: absolute;
+        background: none;
+        border: none;
+        width: 62px;
+        height: 70px;
+        float: left;
+        font-size: 40px;
+        font-weight: 300;
+        &.add {
+          right: 0;
+        }
+        &.subtract {
+          left: 0;
+        }
+      }
+      div.value {
+        line-height: 70px;
+        float: left;
+        width: calc(100% - 124px);
+        font-size: 40px;
+        font-weight: 300;
+        text-align: center;
+        position: absolute;
+        left: 62px;
+        div.unit {
+          font-size: 14px;
+          display: inline;
+        }
       }
     }
   }
