@@ -40,6 +40,18 @@
       </div>
       <button class="add">+</button>
     </div>
+    <div class="balance med white">
+      0.50
+      <div class="unit">Æ</div>
+    </div>
+    <div class="balance large grey">
+      0.50
+      <div class="unit">Æ</div>
+    </div>
+    <div class="balance large dark">
+      0.50
+      <div class="unit">Æ</div>
+    </div>
   </div>
 </template>
 
@@ -138,6 +150,37 @@
         div.unit {
           font-size: 14px;
           display: inline;
+        }
+      }
+    }
+    div.balance {
+      text-align: right;
+      &.grey {
+        color: $grey;
+        background-color: #fff;
+      }
+      &.dark {
+        color: #000;
+        background-color: #fff;
+      }
+      &.white {
+        color: #fff;
+        background-color: #000;
+      }
+      &.med {
+        width: 180px;
+        font-size: 40px;
+        .unit {
+          display: inline;
+          font-size: 14px;
+        }
+      }
+      &.large {
+        width: 250px;
+        font-size: 60px;
+        .unit {
+          display: inline;
+          font-size: 20px;
         }
       }
     }
