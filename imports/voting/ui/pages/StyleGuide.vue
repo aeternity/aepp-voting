@@ -52,10 +52,31 @@
       0.50
       <div class="unit">Æ</div>
     </div>
+    <div class="card large">
+      <div class="top">
+        <div class="code"></div>
+        <div class="balance large transparent">
+          124.0
+          <div class="unit">Æ</div>
+        </div>
+      </div>
+      <div class="middle">
+        <span>Public Identity</span>
+        <p>0x2D3B9B763D0107FC0x2D3B9B763D0107FC</p>
+      </div>
+      <div class="bottom">
+        <button class="copy">copy address</button>
+        <button class="active">active</button>
+      </div>
+    </div>
+    <div class="card minified">
+
+    </div>
   </div>
 </template>
 
 <style lang="scss">
+  @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500|Roboto:300,500|');
   @import "/imports/voting/ui/styles/common-variables";
 
   body {
@@ -155,6 +176,7 @@
     }
     div.balance {
       text-align: right;
+      font-weight: 300;
       &.grey {
         color: $grey;
         background-color: #fff;
@@ -162,6 +184,10 @@
       &.dark {
         color: #000;
         background-color: #fff;
+      }
+      &.transparent {
+        color: #fff;
+        background: none;
       }
       &.white {
         color: #fff;
@@ -181,6 +207,79 @@
         .unit {
           display: inline;
           font-size: 20px;
+        }
+      }
+    }
+    div.card {
+      padding: 10px 22px;
+      &.large {
+        width: 266px;
+        height: 188px;
+        border-radius: 10px;
+        border: none;
+        background-image: linear-gradient(to bottom, #f03c6e, #ff96a0);
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+        .top {
+          display: inline-block;
+          .code {
+            margin-top: 12px;
+            float: left;
+            width: 48px;
+            height: 48px;
+            background-color: #000;
+            border-radius: 100px;
+            border: solid 1px $grey;
+          }
+          .balance {
+            float: right;
+            width: 200px;
+          }
+        }
+        .middle {
+          span {
+            opacity: 0.5;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.9px;
+            color: #fff;
+            width: 100%;
+          }
+          p {
+            width: 202px;
+          	height: 19px;
+          	font-family: 'Roboto Mono';
+          	font-size: 16px;
+          	font-weight: 500;
+          	letter-spacing: 1px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          	color: #fff;
+            margin-top: 3px;
+          }
+        }
+        .bottom {
+          button {
+            text-transform: uppercase;
+            width: 125px;
+            height: 31px;
+            border-radius: 100px;
+            border: none;
+            font-size: 12px;
+          	font-weight: 500;
+          	line-height: 2.0;
+          	letter-spacing: 0.2px;
+            &.copy {
+              float: left;
+              color: #000;
+              background-color: #fff;
+            }
+            &.active {
+              float: right;
+              color: #fff;
+              background: rgba(255, 255, 255, 0.2);
+            }
+          }
         }
       }
     }

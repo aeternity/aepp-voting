@@ -37,8 +37,8 @@
 </script>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300');
-  @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+  // @import url('https://fonts.googleapis.com/css?family=Roboto:300,500|Roboto+Mono:400,500');
+  // @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
   @import "/imports/voting/ui/styles/normalize";
   @import "/imports/voting/ui/styles/variables";
   * {
