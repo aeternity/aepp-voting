@@ -70,7 +70,13 @@
       </div>
     </div>
     <div class="card minified">
-
+      <div class="top">
+        <div class="code"></div>
+        <div class="balance med transparent">
+          124.0
+          <div class="unit">Æ</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -212,15 +218,16 @@
     }
     div.card {
       padding: 10px 22px;
+      width: 266px;
       &.large {
-        width: 266px;
-        height: 188px;
+        height: 168px;
         border-radius: 10px;
         border: none;
         background-image: linear-gradient(to bottom, #f03c6e, #ff96a0);
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
         .top {
           display: inline-block;
+          width: 100%;
           .code {
             margin-top: 12px;
             float: left;
@@ -279,6 +286,28 @@
               color: #fff;
               background: rgba(255, 255, 255, 0.2);
             }
+          }
+        }
+      }
+      &.minified {
+        border-top-left-radius: 9px;
+        border-top-right-radius: 9px;
+      	height: 40px;
+      	background-image: linear-gradient(to bottom, #f03c6e, #ff96a0);
+        .top {
+          display: inline-block;
+          width: 100%;
+          .code {
+            margin-top: 4px;
+            float: left;
+            width: 32px;
+            height: 32px;
+            background-color: #000;
+            border-radius: 100px;
+            border: solid 1px $grey;
+          }
+          .balance {
+            float: right;
           }
         }
       }
