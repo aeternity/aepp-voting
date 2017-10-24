@@ -56,5 +56,11 @@ Migrations.add({
 });
 
 Meteor.startup(() => {
+  if (Meteor.isDevelopment && Migrations.getVersion() === 0) {
+    Migrations._setControl({
+      version: Migrations._list[Migrations._list.length - 1].version,
+      locked: false,
+    });
+  }
   Migrations.migrateTo('latest');
 });

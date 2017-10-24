@@ -84,7 +84,7 @@ Factory.define('proposal', Proposals, {
   votes() {
     this.upVoteAmount = 0;
     this.downVoteAmount = 0;
-    return _.times(_.random(10, 100), () => undefined).reduce((p) => {
+    const votes = _.times(_.random(10, 100), () => undefined).reduce((p) => {
       const { _id: accountId, balance } = Factory.create('account');
       const upVote = Math.random() >= 0.5;
       this[upVote ? 'upVoteAmount' : 'downVoteAmount'] += balance;
@@ -94,5 +94,8 @@ Factory.define('proposal', Proposals, {
         createdAt: new Date(),
       }});
     }, {});
+    this.totalVoteAmount = this.upVoteAmount + this.downVoteAmount;
+    this.upVoteRatio = this.upVoteAmount / this.totalVoteAmount;
+    return votes;
   },
 });
