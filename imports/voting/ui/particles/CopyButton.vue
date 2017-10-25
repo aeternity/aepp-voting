@@ -1,18 +1,22 @@
 <template>
-  <button
+  <ae-button
     v-clipboard="contentToCopy"
     :key="contentToCopy"
     @success="label = 'Copied!'"
     @error="label = 'Copy Error!'"
     type="button"
+    secondary
   >
     {{label}}
-  </button>
+  </ae-button>
 </template>
 
 <script>
+  import AeButton from '../../../components/AeButton.vue';
+
   export default {
     props: ['contentToCopy'],
+    components: { AeButton },
     data() {
       return {
         label: 'Copy',
@@ -20,13 +24,3 @@
     },
   };
 </script>
-
-<style lang="scss" scoped>
-  @import "/imports/voting/ui/styles/variables";
-
-  button {
-    border: none;
-    text-decoration: underline;
-    color: $gray;
-  }
-</style>

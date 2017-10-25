@@ -1,23 +1,24 @@
 <template>
   <form class="sign-message" @submit.prevent="sign">
-    <div class="center">
+    <div>
       Copy this message and sign it with your Ethereum address:
     </div>
-    <div class="center">
+    <div>
       <strong>{{message}}</strong><br/>
-      <copy-button :contentToCopy="message"></copy-button>
     </div>
-    <label class="center" for="signature">Then paste your signature here</label>
+    <copy-button :contentToCopy="message" />
+    <label for="signature">Then paste your signature here</label>
     <input required id="signature" v-model="signature" autocomplete="off">
-    <button class="vote">Submit</button>
+    <ae-button>Submit</ae-button>
   </form>
 </template>
 
 <script>
+  import AeButton from '../../../components/AeButton.vue';
   import CopyButton from '../particles/CopyButton.vue';
 
   export default {
-    components: { CopyButton },
+    components: { AeButton, CopyButton },
     props: {
       signatureHandler: { type: Function },
       message: { type: String },
@@ -36,21 +37,14 @@
 </script>
 
 <style lang="scss">
-  @import "/imports/voting/ui/styles/variables";
+  @import "../../../components/variables";
 
   .sign-message {
+    text-align: center;
+
     > * {
       display: block;
-      margin: $gutter auto;
-    }
-
-    button.vote {
-      font-size: 24px;
-      padding: $gutter 40px;
-    }
-
-    .center {
-      text-align: center;
+      margin: 12px auto;
     }
 
     input {
@@ -59,7 +53,7 @@
       padding: 7px;
       border-radius: 4px;
       font-size: 16px;
-      border: solid 1px $gray-light;
+      border: solid 1px $grey;
       box-shadow: none;
     }
   }

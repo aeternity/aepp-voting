@@ -1,6 +1,5 @@
 <template>
   <div class="tags-select">
-    <div>Choose one or multiple categories</div>
     <span v-for="t in tags" :key="t">
       <input
         type="checkbox"
@@ -8,20 +7,20 @@
         :value="t"
         v-model="checkedTags"
       />
-      <label :for="t"><badge>{{t}}</badge></label>
+      <label :for="t"><ae-category>{{t}}</ae-category></label>
     </span>
   </div>
 </template>
 
 <script>
   import { Proposals } from '../../api/models/proposals';
-  import Badge from './Badge.vue';
+  import AeCategory from '../../../components/AeCategory.vue';
 
   export default {
     props: {
       value: { type: Array, default: () => [] },
     },
-    components: { Badge },
+    components: { AeCategory },
     data() {
       return {
         tags: Proposals.tags,
@@ -41,15 +40,11 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/voting/ui/styles/variables";
+  @import '../../../components/variables';
 
   .tags-select {
     text-align: center;
-    margin: $gutter * 2;
-
-    div {
-      margin-bottom: $gutter;
-    }
+    margin: -10px;
 
     input {
       display: none;
@@ -57,12 +52,19 @@
 
     label {
       display: inline-block;
-      margin: 5px 0;
       cursor: pointer;
     }
 
-    input:not(:checked) + label > * {
-      background-color: gray;
+    input:not(:checked) + label > .ae-category {
+      background-color: $grey;
+    }
+
+    .ae-category {
+      height: 33px;
+      line-height: 33px;
+      font-size: 14px;
+      min-width: 90px;
+      margin: 10px;
     }
   }
 </style>

@@ -1,34 +1,20 @@
 <template>
   <div class="sign-statement">
     <div class="buttons">
-      <div>
-        <button
-          class="vote"
-          :class="{
-            already: currentVote,
-            checked: !canSignByWeb3 && upVote
-          }"
-          @click="setUpVote(true)"
-          :id="`${_uid}-agree`"
-        >
-          <i class="fa fa-thumbs-up" />
-        </button>
-        <label :for="`${_uid}-agree`">I agree</label>
-      </div>
-      <div>
-        <button
-          class="vote"
-          :class="{
-            already: currentVote === false,
-            checked: !canSignByWeb3 && !upVote
-          }"
-          @click="setUpVote(false)"
-          :id="`${_uid}-disagree`"
-        >
-          <i class="fa fa-thumbs-down" />
-        </button>
-        <label :for="`${_uid}-disagree`">I disagree</label>
-      </div>
+      <vote-button
+        label="I agree"
+        @click="setUpVote(true)"
+        :active="currentVote || !canSignByWeb3 && upVote"
+      >
+        <i class="fa fa-thumbs-up" />
+      </vote-button>
+      <vote-button
+        label="I disagree"
+        @click="setUpVote(false)"
+        :active="currentVote === false || !canSignByWeb3 && !upVote"
+      >
+        <i class="fa fa-thumbs-down" />
+      </vote-button>
     </div>
     <sign-message
       v-if="!canSignByWeb3"
@@ -46,9 +32,10 @@
   import CopyButton from '../particles/CopyButton.vue';
   import { voteStatement } from '/imports/ethereum/api/utils/genStatement';
   import SignMessage from './SignMessage.vue';
+  import VoteButton from './VoteButton.vue';
 
   export default {
-    components: { CopyButton, SignMessage },
+    components: { CopyButton, SignMessage, VoteButton },
     props: {
       currentVote: { type: Boolean, default: undefined },
       desiredVote: { type: Boolean, default: true },
@@ -95,41 +82,24 @@
 </script>
 
 <style lang="scss">
-  @import "/imports/voting/ui/styles/variables";
-
   .sign-statement {
     > * {
       display: block;
-      margin: $gutter auto;
+      margin: 12px auto;
     }
 
     button.vote {
       font-size: 24px;
-      padding: $gutter 40px;
+      padding: 12px 40px;
     }
 
     .buttons {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      margin: $gutter * 3 auto;
+      justify-content: center;
 
-      &::before, &::after {
-        content: '';
-      }
-
-      label {
-        display: block;
-        text-align: center;
-        margin-top: 8px;
-        cursor: pointer;
-      }
-
-      .vote {
-        width: 85px;
-        height: 85px;
-        line-height: 85px;
-        padding: 0;
+      .vote-button {
+        margin: 0 22px;
       }
     }
 

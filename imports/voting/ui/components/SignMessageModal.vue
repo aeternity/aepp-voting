@@ -1,21 +1,21 @@
 <template>
-  <modal v-if="show" :closeHandler="closeHandler">
+  <ae-modal v-if="show" @close="closeHandler">
     <sign-message
       :message="message"
       :signatureHandler="signatureHandler"
     />
-  </modal>
+  </ae-modal>
 </template>
 
 <script>
-  import { mapMutations, mapState } from 'vuex';
+  import { mapState } from 'vuex';
 
-  import Modal from '../particles/Modal.vue';
+  import AeModal from '../../../components/AeModal.vue';
   import SignMessage from '../particles/SignMessage.vue';
 
   export default {
     components: {
-      Modal,
+      AeModal,
       SignMessage,
     },
     computed: mapState({

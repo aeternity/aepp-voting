@@ -1,21 +1,19 @@
 <template>
-  <div>
+  <ae-main>
     <app-header />
-    <app-header hidden />
-    <create-proposal-modal v-if="createProposalModalShown" />
-    <youtube-video-modal v-if="youtubeVideoId" :videoId="youtubeVideoId" />
+    <explanation-block />
+    <router-view />
+    <create-proposal-modal />
     <sign-message-modal />
-    <div class="main-content">
-      <explanation-block :display="explanationBlockShown" />
-      <router-view />
-    </div>
-  </div>
+    <youtube-video-modal />
+  </ae-main>
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapState, mapMutations, mapActions } from 'vuex';
 
-  import { Proposals } from '../../api/models/proposals';
+  import AeMain from '../../../components/AeMain.vue';
+
   import AppHeader from '../components/AppHeader.vue';
   import CreateProposalModal from '../components/CreateProposalModal.vue';
   import ExplanationBlock from '../components/ExplanationBlock.vue';
@@ -24,65 +22,11 @@
 
   export default {
     components: {
+      AeMain,
       AppHeader,
       CreateProposalModal,
-      ExplanationBlock,
-      YoutubeVideoModal,
+      ExplanationBlock, YoutubeVideoModal,
       SignMessageModal,
     },
-    computed: mapState({
-      proposal: state => state.voting.proposal,
-      createProposalModalShown: state => state.voting.createProposalModalShown,
-      explanationBlockShown: state => state.voting.explanationBlockShown,
-      youtubeVideoId: state => state.voting.youtubeVideoId,
-    }),
   }
 </script>
-
-<style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Roboto');
-  @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
-  @import "/imports/voting/ui/styles/variables";
-  * {
-    outline: none !important;
-    -webkit-font-smoothing: antialiased;
-  }
-  body {
-    background: $gray-lighter;
-    font-family: $font-family-text;
-    color: $base-text-color;
-  }
-  .main-content {
-    max-width: $container-width;
-    margin: 0 auto;
-    padding-top: 10px;
-    @media screen and (max-width: $container-width){
-      padding: 10px;
-    }
-  }
-  button, .button {
-    background-color: transparent;
-    border: 1px solid $brand-color;
-    color: $brand-color;
-    font-weight: bold;
-    border-radius: 100px;
-    padding: 5px 20px;
-    cursor: pointer;
-    font-family: $font-family-header;
-    text-align: center;
-    box-sizing: border-box;
-    &.vote {
-      color: gray;
-      border: solid 2px $gray-light;
-      &.already {
-        background-color: $gray-lighter;
-      }
-      &.checked, &:hover {
-        background-color: lightgray;
-      }
-    }
-  }
-  input, input[type=text] {
-    appearance: none;
-  }
-</style>

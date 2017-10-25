@@ -1,25 +1,30 @@
 <template>
-  <modal :closeHandler="toggleCreateProposalModal">
-    <div class="submit-proposal">
-      <h3>
-        Enter your statement and agree or disagree
-        <span>(please keep it short)</span>
-      </h3>
-      <input placeholder="Your statement" v-model="statement" v-focus="true" />
+  <ae-modal v-if="visible" title="Create statement" @close="closeHandler">
+    <div class="create-proposal-modal">
+      <label :for="_uid">Statement</label>
+      <input
+        placeholder="Enter a short statement text ..."
+        v-model="statement" :id="_uid" v-focus.lazy="true"
+      />
+
+      <p>Choose one or multiple categories</p>
       <tags-select v-model="tags" />
+
+      <p>Agree or disagree and sign your vote</p>
       <sign-statement
         :statement="statement"
         :signatureHandler="signatureHandler"
-      ></sign-statement>
+      />
     </div>
-  </modal>
+  </ae-modal>
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
+  import { mapState, mapMutations } from 'vuex';
   import { focus } from 'vue-focus';
 
-  import Modal from '../particles/Modal.vue';
+  import AeModal from '../../../components/AeModal.vue';
+
   import SignStatement from '../particles/SignStatement.vue';
   import { Proposals } from '../../api/models/proposals';
   import TagsSelect from '../particles/TagsSelect.vue';
@@ -32,14 +37,17 @@
       };
     },
     components: {
-      Modal,
+      AeModal,
       SignStatement,
       TagsSelect,
     },
     directives: { focus },
+    computed: mapState({
+      visible: state => state.voting.createProposalModalShown,
+    }),
     methods: {
       ...mapMutations({
-        toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
+        closeHandler: 'voting/toggleCreateProposalModal',
       }),
       async signatureHandler({ signature, upVote }) {
         await this.$store.dispatch('voting/createProposal', {
@@ -58,30 +66,33 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/voting/ui/styles/variables";
+  @import "../../../components/variables";
 
-  .submit-proposal {
-    h3 {
-      text-align: center;
-      margin-bottom: $gutter * 3;
-      span {
-        display: block;
-        font-weight: normal;
-        font-size: 0.9em;
-      }
+  .create-proposal-modal {
+    > * {
+      margin: 15px 0;
     }
+
+    p, label {
+      font-weight: 500;
+    }
+
+    p {
+      margin-top: 50px;
+    }
+
     > label, > input {
-      margin: $gutter auto;
-      width: 80%;
       display: block;
     }
     > input {
-      height: 30px;
+      height: 44px;
       padding: 7px;
       border-radius: 4px;
       font-size: 24px;
-      border: solid 1px $gray-light;
+      border: solid 1px $grey;
       box-shadow: none;
+      width: 100%;
+      box-sizing: border-box;
     }
   }
 </style>

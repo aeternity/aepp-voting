@@ -1,53 +1,49 @@
 <template>
-  <router-link
+  <ae-panel
     :to="{ name: 'proposal', params: { id: this.proposal._id } }"
-    class="proposal-item"
+    :ratio="ratio"
   >
-    <div class="proposal-content">
-      <h3>{{proposal.statement}}</h3>
-      <p>
-        {{proposal.updatedAt | dateFormat}}
-        <badge v-for="t in proposal.tags" :key="t">{{t}}</badge>
-      </p>
+    <div class="proposal-item">
+      <div class="content">
+        <h2>{{proposal.statement}}</h2>
+        <proposal-secondary :proposal="proposal" />
+        <table>
+          <tr>
+            <td>{{upVoteProcent}}%</td>
+            <td><i class="fa fa-thumbs-up" /></td>
+            <td>Agreed</td>
+            <td>{{upVoteAmount}}&nbsp;Æ</td>
+          </tr>
+          <tr>
+            <td>{{downVoteProcent}}%</td>
+            <td><i class="fa fa-thumbs-down" /></td>
+            <td>Disagreed</td>
+            <td>{{downVoteAmount}}&nbsp;Æ</td>
+          </tr>
+        </table>
+      </div>
+      <div class="arrow">
+        <i class="fa fa-angle-right" />
+      </div>
     </div>
-
-    <div class="voted">
-      {{upVoteAmount}} agreed ({{upVoteProcent}}%)<br />
-      {{downVoteAmount}} disagreed ({{downVoteProcent}}%)
-    </div>
-
-    <div class="controls">
-      <button
-        class="vote"
-        :class="{ already: proposal.vote && proposal.vote.upVote }"
-      >
-        <i class="fa fa-thumbs-up" />
-      </button>
-      <router-link
-        :to="{ name: 'proposal', params: { id: this.proposal._id, vote: 'doubt' } }"
-        class="button vote"
-        :class="{ already: proposal.vote && proposal.vote.upVote === false }"
-      >
-        <i class="fa fa-thumbs-down" />
-      </router-link>
-    </div>
-  </router-link>
+  </ae-panel>
 </template>
 
 <script>
   import format from 'format-number';
 
-  import Badge from './Badge.vue';
+  import AePanel from '../../../components/AePanel.vue';
+  import AeCategory from '../../../components/AeCategory.vue';
+  import ProposalSecondary from './ProposalSecondary.vue';
 
   export default {
-    components: { Badge },
+    components: { AePanel, AeCategory, ProposalSecondary },
     props: ['proposal'],
     computed:
       ['up', 'down'].reduce((p, d) => ({
         ...p,
         [`${d}VoteAmount`]() {
-          return format({ suffix: ' Æ' })(
-            this.proposal[`${d}VoteAmount`].toFixed(0));
+          return format()(this.proposal[`${d}VoteAmount`].toFixed(0));
         },
         [`${d}VoteProcent`]() {
           return this.proposal.totalVoteAmount
@@ -57,100 +53,79 @@
             )
             : 0;
         },
-      }), {}),
+      }), {
+      ratio() {
+        return this.proposal.upVoteAmount / this.proposal.totalVoteAmount;
+      },
+      }),
   }
 </script>
 
 <style lang="scss" scoped>
-  @import '/imports/voting/ui/styles/variables';
+  @import '../../../components/variables';
 
   .proposal-item {
-    position: relative;
-    background: white;
     display: flex;
     flex-direction: row;
-    border-radius: $base-border-radius;
-    margin-bottom: $gutter;
-    box-shadow: $base-box-shadow;
-    text-decoration: none;
-    color: inherit;
-    padding: 0 0 15px;
 
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 5px;
-      left: 0;
-      top: 0;
-      height: 100%;
-      border-top-left-radius: $base-border-radius;
-      border-bottom-left-radius: $base-border-radius;
-      background: $brand-color;
-    }
-
-    .proposal-content {
-      padding: $gutter * 1.5 $gutter $gutter * 1.5 $gutter * 2;
+    .content {
       flex-grow: 1;
 
-      h3 {
-        margin: 0 0 5px 0;
-      }
-      p {
-        color: $gray-light;
-        font-size: 14px;
+      h2 {
         margin: 0;
+        font-size: 27px;
+        font-weight: 500;
       }
-    }
 
-    .voted {
-      position: relative;
-      padding: $gutter * 1.5 $gutter * 1.5 $gutter * 1.5 $gutter * 2;
-      flex-grow: 1;
-      flex-shrink: 0;
-      text-align: right;
-      font-family: $font-family-header;
-      color: black;
-      font-size: 16px;
-      line-height: 26px;
-    }
+      table {
+        margin-top: 25px;
+        tr {
+          &:first-child {
+            td {
+              padding-top: 0;
+            }
+            td:nth-child(3) {
+              color: $maegenta;
+            }
+          }
+          &:last-child {
+            td {
+              padding-bottom: 0;
+            }
+          }
+          td {
+            font-size: 16px;
+            padding: 5px;
 
-    .controls {
-      display: flex;
-      flex-grow: 0;
-      flex-shrink: 0;
-      align-items: center;
-      padding: $gutter / 2 $gutter;
-      button, .button {
-        width: 62px;
-        height: 62px;
-        line-height: 62px;
-        margin: 5px;
-        font-size: 22px;
-        padding: 0;
-        i {
-          position: relative;
-          top: -2px;
+            &:first-child {
+              font-size: 18px;
+              padding-left: 0;
+            }
+            &:nth-child(2) {
+              color: #f5b826;
+              font-size: 20px;
+            }
+            &:nth-child(3) {
+              font-weight: bold;
+              color: $aubergine;
+            }
+            &:last-child {
+              color: $grey;
+              padding-left: 80px;
+            }
+          }
         }
       }
     }
 
-    @media screen and (max-width: $container-width) {
-      flex-wrap: wrap;
+    .arrow {
+      color: $dark;
+      font-size: 28px;
+      display: flex;
+      margin-left: 30px;
 
-      &:after {
-        width: 100%;
-        height: 5px;
-      }
-
-      .proposal-content {
-        flex-shrink: 0;
-        box-sizing: border-box;
-        width: 100%;
-      }
-
-      .voted {
-        text-align: left;
+      i {
+        margin: auto;
       }
     }
   }
