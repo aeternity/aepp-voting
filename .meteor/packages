@@ -30,3 +30,4 @@ aldeed:simple-schema
 aldeed:collection2
 practicalmeteor:chai
 practicalmeteor:sinon
+meteortesting:mocha
