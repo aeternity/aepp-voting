@@ -86,7 +86,6 @@
       header {
         display: flex;
         flex-direction: row;
-        align-items: center;
 
         h1 {
           font-size: 28px;
