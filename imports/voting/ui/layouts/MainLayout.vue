@@ -42,7 +42,6 @@
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Roboto');
   @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
-  @import "/imports/voting/ui/styles/normalize";
   @import "/imports/voting/ui/styles/variables";
   * {
     outline: none !important;
