@@ -1,7 +1,5 @@
 <template>
-  <button class="ae-close-button" @click="click">
-    <i class="fa" />
-  </button>
+  <button class="ae-close-button" @click="click" />
 </template>
 
 <script>
@@ -15,20 +13,34 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "variables";
+
   .ae-close-button {
     border: 0;
     padding: 0;
-    font-size: 40px;
     background: transparent;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
+    position: relative;
 
-    i {
-      margin-top: -10px;
+    &:before, &:after {
+      content: '';
       display: block;
-      &:before {
-        content: '\00d7';
-      }
+      background-color: $anthracite;
+      position: absolute;
+      $width: 2px;
+      width: $width;
+      left: calc(50% - #{$width / 2});
+      $sqrtOf2: 1.414213562;
+      height: calc(100% * #{$sqrtOf2});
+      top: calc(100% * #{(1 - $sqrtOf2) / 2});
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
     }
   }
 </style>
