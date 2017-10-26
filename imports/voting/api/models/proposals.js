@@ -63,8 +63,8 @@ Proposals.tags = ['core tech', 'æpps', 'marketing', 'community'];
 Proposals.defaultTag = 'all';
 
 Accounts.after.update(function(unusedUserId, doc) {
-  if (!doc.balance && !this.previous.balance) return;
   const dBalance = doc.balance - this.previous.balance;
+  if (!dBalance) return;
   Proposals
     .find({ [`votes.${doc._id}`]: { $exists: true } })
     .map(({ _id, votes, upVoteAmount, totalVoteAmount }) => {
