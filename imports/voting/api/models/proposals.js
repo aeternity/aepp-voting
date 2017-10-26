@@ -67,12 +67,20 @@ Accounts.after.update(function(unusedUserId, doc) {
   const dBalance = doc.balance - this.previous.balance;
   Proposals
     .find({ [`votes.${doc._id}`]: { $exists: true } })
-    .map(({ _id, votes }) =>
+    .map(({ _id, votes, upVoteAmount, totalVoteAmount }) => {
+      const { upVote } = votes[doc._id];
       Proposals.update(_id, {
         $inc: {
-          [`${votes[doc._id].upVote ? 'up' : 'down'}VoteAmount`]: dBalance,
+          [`${upVote ? 'up' : 'down'}VoteAmount`]: dBalance,
+          totalVoteAmount: dBalance,
         },
-      }));
+        $set: {
+          upVoteRatio: totalVoteAmount + dBalance
+            ? (upVoteAmount + (upVote ? dBalance : 0)) / (totalVoteAmount + dBalance)
+            : 0.5,
+        },
+      });
+    });
 });
 
 let proposalCounter = 0;

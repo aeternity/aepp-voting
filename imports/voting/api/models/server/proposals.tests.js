@@ -39,12 +39,19 @@ describe('proposals', () => {
   describe('collection', () => {
     it('updates vote amounts on account balance change', () => {
       const account = Factory.create('account', { balance: 5 });
-      const proposal = Factory.create('proposal', {
+      const { _id: proposalId } = Factory.create('proposal', {
         upVoteAmount: 5,
+        downVoteAmount: 5,
+        upVoteRatio: 0.5,
+        totalVoteAmount: 10,
         votes: { [account._id]: { upVote: true } },
       });
       Accounts.update(account._id, { $set: { balance: 10 } });
-      expect(Proposals.findOne(proposal._id).upVoteAmount).to.equal(10);
+
+      const proposal = Proposals.findOne(proposalId);
+      expect(proposal.upVoteAmount).to.equal(10);
+      expect(proposal.upVoteRatio).to.equal(10 / 15);
+      expect(proposal.totalVoteAmount).to.equal(15);
     });
   });
 
