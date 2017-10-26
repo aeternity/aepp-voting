@@ -84,7 +84,7 @@
             td {
               padding-top: 0;
             }
-            td:nth-child(3) {
+            td:nth-child(1), td:nth-child(3) {
               color: $maegenta;
             }
           }
