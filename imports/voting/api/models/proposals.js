@@ -93,11 +93,12 @@ Factory.define('proposal', Proposals, {
     this.upVoteAmount = 0;
     this.downVoteAmount = 0;
     const votes = _.times(_.random(10, 100), () => undefined).reduce((p) => {
-      const { _id: accountId, balance } = Factory.create('account');
+      const accountId = `0x${''.padStart(40, Math.random().toString(16).slice(2))}`;
+      const { balance } = Factory.create('account', { _id: accountId });
       const upVote = Math.random() >= 0.5;
       this[upVote ? 'upVoteAmount' : 'downVoteAmount'] += balance;
       return ({ ...p, [accountId]: {
-        signature: () => '0x' + Math.floor(Math.random() * Math.pow(2, 520)).toString(16).slice(0, 130),
+        signature: `0x${''.padStart(130, Math.random().toString(16).slice(2))}`,
         upVote,
         createdAt: new Date(),
       }});
