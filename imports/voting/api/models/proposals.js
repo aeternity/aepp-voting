@@ -54,6 +54,7 @@ Proposals.publicFields = {
 Proposals.sortTypes = {
   popular: { popularScore: -1 },
   newest: { createdAt: -1 },
+  'total votes': { totalVoteAmount: -1 },
 };
 
 Proposals.defaultSort = 'popular';
