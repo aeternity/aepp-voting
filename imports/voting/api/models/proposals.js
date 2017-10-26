@@ -92,7 +92,7 @@ Factory.define('proposal', Proposals, {
   votes() {
     this.upVoteAmount = 0;
     this.downVoteAmount = 0;
-    const votes = _.times(_.random(10, 100), () => undefined).reduce((p) => {
+    const votes = _.times(_.random(1, 10), () => undefined).reduce((p) => {
       const accountId = `0x${''.padStart(40, Math.random().toString(16).slice(2))}`;
       const { balance } = Factory.create('account', { _id: accountId });
       const upVote = Math.random() >= 0.5;
