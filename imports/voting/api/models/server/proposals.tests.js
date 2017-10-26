@@ -65,7 +65,7 @@ describe('proposals', () => {
       it('allows to create proposal', () => {
         stubContract({ balanceOf: 5 });
         const { accountId, proposalId } =
-          Meteor.call('proposals.add', message, upVoteSignature, true, ['technical']);
+          Meteor.call('proposals.add', message, upVoteSignature, true, [Proposals.tags[0]]);
         restoreContract();
         expect(accountId).to.equal(address);
         const proposal = Proposals.findOne(proposalId);
@@ -75,7 +75,7 @@ describe('proposals', () => {
         expect(proposal.downVoteAmount).to.equal(0);
         expect(proposal.upVoteRatio).to.equal(1);
         expect(proposal.totalVoteAmount).to.equal(5);
-        expect(proposal.tags).to.eql(['technical']);
+        expect(proposal.tags).to.eql([Proposals.tags[0]]);
         expect(proposal.votes[address]).to.be.an('object');
         expect(proposal.votes[address].signature).to.equal(upVoteSignature);
         expect(proposal.votes[address].upVote).to.equal(true);

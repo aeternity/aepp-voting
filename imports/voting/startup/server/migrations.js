@@ -55,6 +55,15 @@ Migrations.add({
   down() { this.modify(false); },
 });
 
+Migrations.add({
+  version: 5,
+  name: 'proposals: Reset `tags` field',
+  up() {
+    Proposals.update({}, { $set: { tags: [] } }, { multi: true, getAutoValues: false });
+  },
+  down() {},
+});
+
 Meteor.startup(() => {
   if (Meteor.isDevelopment && Migrations.getVersion() === 0) {
     Migrations._setControl({
