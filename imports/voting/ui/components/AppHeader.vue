@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-header">
     <ae-header name="Voting">
       <ae-header-button
         icon
@@ -33,7 +33,8 @@
         <i class="fa fa-pencil" />
       </ae-header-button>
     </ae-header>
-    <ae-filter-list v-if="proposalList">
+
+    <ae-filter-list class="desktop" v-if="proposalList">
       <ae-filter-item
         v-for="s in sorts"
         :key="s"
@@ -43,6 +44,28 @@
         {{s}}
       </ae-filter-item>
       <ae-filter-separator />
+      <ae-filter-item
+        v-for="t in tags"
+        :key="t"
+        :active="currentTag === t"
+        :to="{ name: 'proposal-list', params: { sort: currentSort, tag: t } }"
+      >
+        {{t}}
+      </ae-filter-item>
+    </ae-filter-list>
+
+    <ae-filter-list class="mobile" v-if="proposalList">
+      <ae-filter-item
+        v-for="s in sorts"
+        :key="s"
+        :active="currentSort === s"
+        :to="{ name: 'proposal-list', params: { sort: s, tag: currentTag } }"
+      >
+        {{s}}
+      </ae-filter-item>
+    </ae-filter-list>
+
+    <ae-filter-list class="mobile" v-if="proposalList">
       <ae-filter-item
         v-for="t in tags"
         :key="t"
@@ -108,3 +131,21 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+  @import "../../../components/variables";
+
+  .app-header .ae-filter-list {
+    @media (max-width: $screen-phone) {
+      &.desktop {
+        display: none;
+      }
+    }
+
+    @media (min-width: $screen-phone + 1) {
+      &.mobile {
+        display: none;
+      }
+    }
+  }
+</style>
