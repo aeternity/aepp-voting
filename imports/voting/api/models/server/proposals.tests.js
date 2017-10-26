@@ -142,6 +142,7 @@ describe('proposals', () => {
         expect(proposal.votes[address].upVote).to.equal(false);
         expect(proposal.upVoteAmount).to.equal(upVoteAmount);
         expect(proposal.downVoteAmount).to.equal(downVoteAmount + 5);
+        expect(proposal.upVoteRatio).to.equal(proposal.upVoteAmount / proposal.totalVoteAmount);
       });
 
       it('change the decision with balance change', () => {
@@ -157,6 +158,7 @@ describe('proposals', () => {
         expect(proposal.votes[address].upVote).to.equal(true);
         expect(proposal.downVoteAmount).to.equal(downVoteAmount);
         expect(proposal.upVoteAmount).to.equal(upVoteAmount + 10);
+        expect(proposal.upVoteRatio).to.equal(proposal.upVoteAmount / proposal.totalVoteAmount);
       });
     });
   });
