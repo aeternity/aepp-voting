@@ -143,6 +143,21 @@ describe('proposals', () => {
         expect(proposal.upVoteAmount).to.equal(upVoteAmount);
         expect(proposal.downVoteAmount).to.equal(downVoteAmount + 5);
       });
+
+      it('change the decision with balance change', () => {
+        const { _id: proposalId, upVoteAmount, downVoteAmount } =
+          Factory.create('proposal', { statement: message });
+        stubContract({ balanceOf: 5 });
+        Meteor.call('proposals.vote', proposalId, downVoteSignature, false);
+        restoreContract();
+        stubContract({ balanceOf: 10 });
+        Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
+        restoreContract();
+        const proposal = Proposals.findOne(proposalId);
+        expect(proposal.votes[address].upVote).to.equal(true);
+        expect(proposal.downVoteAmount).to.equal(downVoteAmount);
+        expect(proposal.upVoteAmount).to.equal(upVoteAmount + 10);
+      });
     });
   });
 });

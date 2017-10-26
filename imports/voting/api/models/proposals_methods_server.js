@@ -22,7 +22,7 @@ onErc20ContractReceiving(erc20contract => {
     if (!balance) throw new Meteor.Error('no-tokens');
 
     const account = Accounts.findOne(accountId);
-    if (account && account.balance !== balance) Accounts.update(accountId, { balance });
+    if (account && account.balance !== balance) Accounts.update(accountId, { $set: { balance } });
     if (!account) Accounts.insert({ _id: accountId, balance });
 
     return { accountId, balance };
