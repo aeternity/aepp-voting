@@ -6,19 +6,15 @@
     <ae-header v-else name="Voting">
       <ae-header-button
         icon
-        @click="toggleAuth"
-        :title="loggedIn ? 'Logout' : 'Login'"
-      >
-        <i :class="`fa fa-sign-${loggedIn ? 'out' : 'in'}`" />
-      </ae-header-button>
-      <ae-header-button
-        icon
         @click="toggleExplanationBlock"
       >
         <i class="fa fa-question" />
       </ae-header-button>
       <ae-header-button @click="toggleCreateProposalModal">
         <i class="fa fa-pencil" /> Create New
+      </ae-header-button>
+      <ae-header-button @click="toggleAuth" secondary>
+        {{loggedIn ? 'Log out' : 'Log in'}}
       </ae-header-button>
 
       <ae-header-button

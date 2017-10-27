@@ -12,12 +12,14 @@
     props: {
       to: { type: [String, Object], required: false },
       icon: { type: Boolean, default: false },
+      secondary: { type: Boolean, default: false },
     },
     computed: {
       className() {
         return {
           'ae-header-button': true,
           icon: this.icon,
+          secondary: this.secondary,
         };
       }
     },
@@ -46,6 +48,10 @@
     color: $white;
     font-weight: 500;
     font-size: 16px;
+
+    &.secondary {
+      background-color: $grey;
+    }
 
     &:last-child {
       margin-right: 0;
