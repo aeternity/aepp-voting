@@ -39,12 +39,19 @@ describe('proposals', () => {
   describe('collection', () => {
     it('updates vote amounts on account balance change', () => {
       const account = Factory.create('account', { balance: 5 });
-      const proposal = Factory.create('proposal', {
+      const { _id: proposalId } = Factory.create('proposal', {
         upVoteAmount: 5,
+        downVoteAmount: 5,
+        upVoteRatio: 0.5,
+        totalVoteAmount: 10,
         votes: { [account._id]: { upVote: true } },
       });
       Accounts.update(account._id, { $set: { balance: 10 } });
-      expect(Proposals.findOne(proposal._id).upVoteAmount).to.equal(10);
+
+      const proposal = Proposals.findOne(proposalId);
+      expect(proposal.upVoteAmount).to.equal(10);
+      expect(proposal.upVoteRatio).to.equal(10 / 15);
+      expect(proposal.totalVoteAmount).to.equal(15);
     });
   });
 
@@ -65,7 +72,7 @@ describe('proposals', () => {
       it('allows to create proposal', () => {
         stubContract({ balanceOf: 5 });
         const { accountId, proposalId } =
-          Meteor.call('proposals.add', message, upVoteSignature, true, ['technical']);
+          Meteor.call('proposals.add', message, upVoteSignature, true, [Proposals.tags[0]]);
         restoreContract();
         expect(accountId).to.equal(address);
         const proposal = Proposals.findOne(proposalId);
@@ -75,7 +82,7 @@ describe('proposals', () => {
         expect(proposal.downVoteAmount).to.equal(0);
         expect(proposal.upVoteRatio).to.equal(1);
         expect(proposal.totalVoteAmount).to.equal(5);
-        expect(proposal.tags).to.eql(['technical']);
+        expect(proposal.tags).to.eql([Proposals.tags[0]]);
         expect(proposal.votes[address]).to.be.an('object');
         expect(proposal.votes[address].signature).to.equal(upVoteSignature);
         expect(proposal.votes[address].upVote).to.equal(true);
@@ -135,6 +142,23 @@ describe('proposals', () => {
         expect(proposal.votes[address].upVote).to.equal(false);
         expect(proposal.upVoteAmount).to.equal(upVoteAmount);
         expect(proposal.downVoteAmount).to.equal(downVoteAmount + 5);
+        expect(proposal.upVoteRatio).to.equal(proposal.upVoteAmount / proposal.totalVoteAmount);
+      });
+
+      it('change the decision with balance change', () => {
+        const { _id: proposalId, upVoteAmount, downVoteAmount } =
+          Factory.create('proposal', { statement: message });
+        stubContract({ balanceOf: 5 });
+        Meteor.call('proposals.vote', proposalId, downVoteSignature, false);
+        restoreContract();
+        stubContract({ balanceOf: 10 });
+        Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
+        restoreContract();
+        const proposal = Proposals.findOne(proposalId);
+        expect(proposal.votes[address].upVote).to.equal(true);
+        expect(proposal.downVoteAmount).to.equal(downVoteAmount);
+        expect(proposal.upVoteAmount).to.equal(upVoteAmount + 10);
+        expect(proposal.upVoteRatio).to.equal(proposal.upVoteAmount / proposal.totalVoteAmount);
       });
     });
   });

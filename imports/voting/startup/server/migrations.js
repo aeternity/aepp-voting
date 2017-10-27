@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Migrations } from 'meteor/percolate:migrations';
 
 import { Proposals } from '../../api/models/proposals';
+import { reComputeProposalsUpdatedAt, reComputeProposalsAmounts } from '../../api/models/server/utils';
 
 Migrations.add({
   version: 1,
@@ -36,10 +37,7 @@ Migrations.add({
   version: 3,
   name: 'proposals: Reset `updateAt` field',
   up() {
-    Proposals.find({}).forEach(({ _id, votes, createdAt }) =>
-      Proposals.update(_id, { $set: {
-        updatedAt: Math.max(createdAt, ...Object.values(votes).map(v => v.createdAt)),
-      } }, { getAutoValues: false }));
+    reComputeProposalsUpdatedAt();
   },
   down() {},
 });
@@ -55,6 +53,30 @@ Migrations.add({
   down() { this.modify(false); },
 });
 
+Migrations.add({
+  version: 5,
+  name: 'proposals: Reset `tags` field',
+  up() {
+    Proposals.update({}, { $set: { tags: [] } }, { multi: true, getAutoValues: false });
+  },
+  down() {},
+});
+
+Migrations.add({
+  version: 6,
+  name: 'proposals: Recompute amount fields',
+  up() {
+    reComputeProposalsAmounts();
+  },
+  down() {},
+});
+
 Meteor.startup(() => {
+  if (Meteor.isDevelopment && Migrations.getVersion() === 0) {
+    Migrations._setControl({
+      version: Migrations._list[Migrations._list.length - 1].version,
+      locked: false,
+    });
+  }
   Migrations.migrateTo('latest');
 });

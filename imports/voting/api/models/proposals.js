@@ -58,41 +58,53 @@ Proposals.sortTypes = {
 
 Proposals.defaultSort = 'popular';
 
-Proposals.tags = ['æternity', 'technical', 'design', 'politics', 'other'];
+Proposals.tags = ['core tech', 'æpps', 'marketing', 'community'];
 
 Proposals.defaultTag = 'all';
 
 Accounts.after.update(function(unusedUserId, doc) {
-  if (!doc.balance && !this.previous.balance) return;
   const dBalance = doc.balance - this.previous.balance;
+  if (!dBalance) return;
   Proposals
     .find({ [`votes.${doc._id}`]: { $exists: true } })
-    .map(({ _id, votes }) =>
+    .map(({ _id, votes, upVoteAmount, totalVoteAmount }) => {
+      const { upVote } = votes[doc._id];
       Proposals.update(_id, {
         $inc: {
-          [`${votes[doc._id].upVote ? 'up' : 'down'}VoteAmount`]: dBalance,
+          [`${upVote ? 'up' : 'down'}VoteAmount`]: dBalance,
+          totalVoteAmount: dBalance,
         },
-      }));
+        $set: {
+          upVoteRatio: totalVoteAmount + dBalance
+            ? (upVoteAmount + (upVote ? dBalance : 0)) / (totalVoteAmount + dBalance)
+            : 0.5,
+        },
+      });
+    });
 });
 
 let proposalCounter = 0;
 
 Factory.define('proposal', Proposals, {
   statement: () =>
-    `Proposal ${proposalCounter += 1}. Some long statement to be agreed or doubted`,
+    `Some long statement to be agreed or disagreed #${proposalCounter += 1}`,
   tags: () => _.sample(Proposals.tags, _.random(0, 3)),
   votes() {
     this.upVoteAmount = 0;
     this.downVoteAmount = 0;
-    return _.times(_.random(10, 100), () => undefined).reduce((p) => {
-      const { _id: accountId, balance } = Factory.create('account');
+    const votes = _.times(_.random(1, 10), () => undefined).reduce((p) => {
+      const accountId = `0x${''.padStart(40, Math.random().toString(16).slice(2))}`;
+      const { balance } = Factory.create('account', { _id: accountId });
       const upVote = Math.random() >= 0.5;
       this[upVote ? 'upVoteAmount' : 'downVoteAmount'] += balance;
       return ({ ...p, [accountId]: {
-        signature: () => '0x' + Math.floor(Math.random() * Math.pow(2, 520)).toString(16).slice(0, 130),
+        signature: `0x${''.padStart(130, Math.random().toString(16).slice(2))}`,
         upVote,
         createdAt: new Date(),
       }});
     }, {});
+    this.totalVoteAmount = this.upVoteAmount + this.downVoteAmount;
+    this.upVoteRatio = this.upVoteAmount / this.totalVoteAmount;
+    return votes;
   },
 });

@@ -22,7 +22,7 @@ onErc20ContractReceiving(erc20contract => {
     if (!balance) throw new Meteor.Error('no-tokens');
 
     const account = Accounts.findOne(accountId);
-    if (account && account.balance !== balance) Accounts.update(accountId, { balance });
+    if (account && account.balance !== balance) Accounts.update(accountId, { $set: { balance } });
     if (!account) Accounts.insert({ _id: accountId, balance });
 
     return { accountId, balance };
@@ -56,10 +56,11 @@ onErc20ContractReceiving(erc20contract => {
       check(signature, String);
       check(upVote, Boolean);
 
-      const proposal = Proposals.findOne(proposalId);
-      if (!proposal) throw new Meteor.Error('proposal-not-found');
+      const { statement } = Proposals.findOne(proposalId) ||
+        (() => { throw new Meteor.Error('proposal-not-found') })();
 
-      const { accountId, balance } = getAccountInfo(proposal.statement, signature, upVote);
+      const { accountId, balance } = getAccountInfo(statement, signature, upVote);
+      const proposal = Proposals.findOne(proposalId);
 
       const previousVote = !!proposal.votes[accountId] &&
         (proposal.votes[accountId].upVote ? UP_VOTE : DOWN_VOTE);
