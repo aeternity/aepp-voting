@@ -65,7 +65,7 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../../components/variables";
 
   .create-proposal-modal {
@@ -73,18 +73,19 @@
       margin: 15px 0;
     }
 
-    p, label {
+    label, p, .sign-message > div:first-child, .sign-message > label {
       font-weight: 500;
     }
 
-    p {
+    p, .sign-message > div:first-child, .sign-message > label {
       margin-top: 50px;
+      text-align: left;
     }
 
     > label, > input {
       display: block;
     }
-    > input {
+    > input, .sign-message > input {
       height: 44px;
       padding: 7px;
       border-radius: 4px;

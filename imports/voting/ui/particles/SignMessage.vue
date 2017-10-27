@@ -1,7 +1,7 @@
 <template>
   <form class="sign-message" @submit.prevent="sign">
     <div>
-      Copy this message and sign it with your Ethereum address:
+      Copy this message and sign it with your Ethereum address
     </div>
     <div>
       <strong>{{message}}</strong><br/>
