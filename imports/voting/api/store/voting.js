@@ -83,7 +83,7 @@ export default {
                 ...text
                   ? {title: errorMessage, text}
                   : console.error(error) || {
-                  title: 'Something went wrong!',
+                  title: 'Something went wrong',
                   text: errorMessage,
                 },
                 type: 'error',
@@ -91,7 +91,7 @@ export default {
               });
             } else {
               swal({
-                title: 'You have successfully logged in!',
+                title: 'You have successfully logged in',
                 type: 'success',
                 animation: false,
                 timer: 3000,
@@ -113,8 +113,8 @@ export default {
             commit('setAccountId', accountId);
             resolve(proposalId);
             swal({
-              title: 'Thank you!',
-              text: 'Your statement was published!',
+              title: 'Thank you',
+              text: 'Your statement was published',
               type: 'success',
               animation: false,
               timer: 3000,
@@ -125,7 +125,7 @@ export default {
     },
     handleError(unusedStore, { error, upVote, voting = true }) {
       const errorMessage = `Your ${voting ? 'vote' : 'statement'}
-      was not ${voting ? 'received' : 'published'}!`;
+      was not ${voting ? 'received' : 'published'}`;
       const message = {
         'invalid-signature': {
           title: errorMessage,
@@ -136,7 +136,7 @@ export default {
           text: 'You don\'t have Æternity tokens',
         },
         'already-voted': {
-          title: 'Invalid vote!',
+          title: 'Invalid vote',
           text: [
             'You have already',
             upVote ? 'agreed to' : 'disagreed with',
@@ -144,7 +144,7 @@ export default {
           ].join(' '),
         },
       }[error.error] || {
-        title: 'Something went wrong!',
+        title: 'Something went wrong',
         text: errorMessage,
       };
       swal({
@@ -160,8 +160,8 @@ export default {
         else {
           const { accountId } = result;
           swal({
-            title: 'Thank you!',
-            text: 'Your vote was received!',
+            title: 'Thank you',
+            text: 'Your vote was received',
             type: 'success',
             animation: false,
             timer: 3000,
