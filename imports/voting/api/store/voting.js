@@ -17,6 +17,7 @@ export default {
     admin: false,
     loggedIn: false,
     messageToSign: false,
+    alert: '',
   }),
 
   mutations: {
@@ -47,9 +48,18 @@ export default {
     setMessageToSign: (state, options) => {
       state.messageToSign = options;
     },
+    setAlert: (state, alert) => {
+      state.alert = alert;
+    },
   },
 
   actions: {
+    setAlert({ commit }, options) {
+      window.scrollTo(0, 0);
+      const { text, autoClose } = options.text ? options : { text: options };
+      commit('setAlert', text);
+      if (autoClose) setTimeout(() => commit('setAlert'), 3000);
+    },
     signMessage: async ({ state, commit }, message) => new Promise((resolve, reject) => {
       const handler = (error, signature) => {
         if (error) reject(error);
@@ -72,29 +82,20 @@ export default {
           methodArguments: [{ message, signature }],
           userCallback(error) {
             if (error) {
-              const errorMessage = 'Sorry, you are unable to log in';
+              const errorMessage = 'Sorry, you are unable to log in.';
               const text = {
                 'invalid-signature': 'Something wrong with signature',
                 'no-tokens': 'You don\'t have Æternity tokens',
                 'invalid-message': 'Message that you signed is different',
                 timeout: 'Signed message has expired, please try again',
               }[error.error];
-              swal({
-                ...text
-                  ? {title: errorMessage, text}
-                  : console.error(error) || {
-                  title: 'Something went wrong',
-                  text: errorMessage,
-                },
-                type: 'error',
-                animation: false,
-              });
+              dispatch('setAlert', text
+                ? `${errorMessage} ${text}`
+                : console.error(error) || `Something went wrong. ${errorMessage}`);
             } else {
-              swal({
-                title: 'You have successfully logged in',
-                type: 'success',
-                animation: false,
-                timer: 3000,
+              dispatch('setAlert', {
+                text: 'You have successfully logged in',
+                autoClose: true,
               });
             }
           },
@@ -112,59 +113,36 @@ export default {
             commit('toggleCreateProposalModal');
             commit('setAccountId', accountId);
             resolve(proposalId);
-            swal({
-              title: 'Thank you',
-              text: 'Your statement was published',
-              type: 'success',
-              animation: false,
-              timer: 3000,
+            dispatch('setAlert', {
+              text: 'Thank you! Your statement was published',
+              autoClose: true,
             });
           }
         });
       });
     },
-    handleError(unusedStore, { error, upVote, voting = true }) {
+    handleError({ dispatch }, { error, upVote, voting = true }) {
       const errorMessage = `Your ${voting ? 'vote' : 'statement'}
-      was not ${voting ? 'received' : 'published'}`;
+      was not ${voting ? 'received' : 'published'}.`;
       const message = {
-        'invalid-signature': {
-          title: errorMessage,
-          text: 'Something wrong with signature',
-        },
-        'no-tokens': {
-          title: errorMessage,
-          text: 'You don\'t have Æternity tokens',
-        },
-        'already-voted': {
-          title: 'Invalid vote',
-          text: [
-            'You have already',
-            upVote ? 'agreed to' : 'disagreed with',
-            'this statement in the past'
-          ].join(' '),
-        },
-      }[error.error] || {
-        title: 'Something went wrong',
-        text: errorMessage,
-      };
-      swal({
-        ...message,
-        type: 'error',
-        animation: false,
-      });
-      console.error(error);
+        'invalid-signature': `${errorMessage} Something wrong with signature`,
+        'no-tokens': `${errorMessage} You don't have Æternity tokens`,
+        'already-voted': [
+          'Invalid vote. You have already',
+          upVote ? 'agreed to' : 'disagreed with',
+          'this statement in the past'
+        ].join(' '),
+      }[error.error] || console.error(error) || `Something went wrong. ${errorMessage}`;
+      dispatch('setAlert', message);
     },
     vote({ commit, dispatch }, { proposalId, signature, upVote }) {
       Meteor.call('proposals.vote', proposalId, signature, upVote, (error, result) => {
         if (error) dispatch('handleError', { error, upVote });
         else {
           const { accountId } = result;
-          swal({
-            title: 'Thank you',
-            text: 'Your vote was received',
-            type: 'success',
-            animation: false,
-            timer: 3000,
+          dispatch('setAlert', {
+            text: 'Thank you! Your vote was received',
+            autoClose: true,
           });
           commit('setAccountId', accountId);
         }

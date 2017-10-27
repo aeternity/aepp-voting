@@ -1,6 +1,9 @@
 <template>
   <div class="app-header">
-    <ae-header name="Voting">
+    <ae-header-alert v-if="alert" @close="closeAlert">
+      {{alert}}
+    </ae-header-alert>
+    <ae-header v-else name="Voting">
       <ae-header-button
         icon
         @click="toggleAuth"
@@ -82,6 +85,7 @@
   import { mapState, mapMutations, mapActions } from 'vuex';
 
   import AeHeader from '../../../components/AeHeader.vue';
+  import AeHeaderAlert from '../../../components/AeHeaderAlert.vue';
   import AeHeaderButton from '../../../components/AeHeaderButton.vue';
   import AeFilterList from '../../../components/AeFilterList.vue';
   import AeFilterItem from '../../../components/AeFilterItem.vue';
@@ -97,7 +101,7 @@
       },
     },
     components: {
-      AeHeader, AeHeaderButton,
+      AeHeader, AeHeaderButton, AeHeaderAlert,
       AeFilterList, AeFilterItem, AeFilterSeparator,
     },
     data() {
@@ -111,6 +115,9 @@
         toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
         toggleExplanationBlock: 'voting/toggleExplanationBlock',
       }),
+      closeAlert() {
+        this.$store.commit('voting/setAlert');
+      },
       ...mapActions({
         toggleAuth: 'voting/toggleAuth',
       }),
@@ -118,6 +125,7 @@
     computed: {
       ...mapState({
         loggedIn: state => state.voting.loggedIn,
+        alert: state => state.voting.alert,
       }),
       proposalList() {
         return this.$route.name === 'proposal-list';
