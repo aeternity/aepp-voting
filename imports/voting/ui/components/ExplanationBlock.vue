@@ -1,12 +1,10 @@
 <template>
-  <div class="explanation-video" :class="{ hidden: !display }">
-    <header>
-      <h3>How to sign your vote</h3>
-      <button @click="toggleExplanationBlock">
-        <i class="fa fa-close" />
-      </button>
-    </header>
-    <main>
+  <ae-panel
+    title="How to sign your vote"
+    :closeHandler="closeHandler"
+    :class="{ hidden: !display }"
+  >
+    <div class="explanation-block">
       <div
         v-for="video in videos"
         :style="getVideoStyle(video.thumbnailUrl)"
@@ -15,19 +13,17 @@
         <div>{{video.title}}</div>
         <i class="fa fa-play" />
       </div>
-    </main>
-  </div>
+    </div>
+  </ae-panel>
 </template>
 
 <script>
-  import { Meteor } from 'meteor/meteor';
+  import { mapState, mapMutations } from 'vuex';
 
-  import { mapMutations } from 'vuex';
+  import AePanel from '../../../components/AePanel.vue';
 
   export default {
-    props: {
-      display: { type: Boolean },
-    },
+    components: { AePanel },
     data() {
       return {
         videos: [{
@@ -39,12 +35,14 @@
           youtubeId: 'bwaDtur-SI0',
           thumbnailUrl: '/images/sign-with-metamask.jpg',
         }],
-        modalVideoId: '',
       };
     },
+    computed: mapState({
+      display: state => state.voting.explanationBlockShown,
+    }),
     methods: {
       ...mapMutations({
-        toggleExplanationBlock: 'voting/toggleExplanationBlock',
+        closeHandler: 'voting/toggleExplanationBlock',
         setYoutubeVideoId: 'voting/setYoutubeVideoId',
       }),
       getVideoStyle: url => ({ backgroundImage: `url(${url})` }),
@@ -53,100 +51,87 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/voting/ui/styles/variables";
+  @import "../../../components/variables";
 
-  .explanation-video {
-    background: white;
-    border-radius: $base-border-radius;
-    box-shadow: $base-box-shadow;
-    margin-bottom: $gutter;
+  .ae-panel {
     overflow: hidden;
-    transition: max-height .3s, opacity .5s;
+    transition: max-height .3s, opacity .5s, margin .5s;
     max-height: 600px;
 
     &.hidden {
       max-height: 0;
       opacity: 0;
+      margin-top: 0;
+      margin-bottom: 0;
     }
+  }
 
-    header, main {
-      margin: $gutter;
-    }
+  .explanation-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
-    header {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      h3 {
-        margin: unset;
+    > * {
+      flex-grow: 1;
+      cursor: pointer;
+      position: relative;
+      box-sizing: border-box;
+      background: no-repeat center lightgray;
+      background-size: contain;
+      font-size: 1.2em;
+      margin-left: 30px;
+      &:nth-child(1) {
+        margin: 0;
       }
-      button {
-        color: black;
-        border: none;
-        padding: 0;
+      &::before {
+        content: "";
+        width: 1px;
+        margin-left: -1px;
+        float: left;
+        height: 0;
+        padding-top: percentage(9 / 16);
       }
-    }
-
-    main {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-around;
-
-      > * {
-        flex-grow: 1;
-        cursor: pointer;
-        position: relative;
-        box-sizing: border-box;
-        background: no-repeat center lightgray;
-        background-size: contain;
-        font-size: 1.2em;
-        margin-left: $gutter;
-        &:nth-child(1) {
-          margin: 0;
-        }
+      &::after {
+        content: "";
+        clear: left;
+      }
+      div {
+        margin: 10px;
+      }
+      div, i {
+        color: white;
+        text-shadow: 0 0 2px white;
+      }
+      i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        font-size: 30px;
+        display: flex;
         &::before {
-          content: "";
-          width: 1px;
-          margin-left: -1px;
-          float: left;
-          height: 0;
-          padding-top: percentage(9 / 16);
-        }
-        &::after {
-          content: "";
-          clear: left;
-        }
-        div {
-          margin: $gutter;
-        }
-        div, i {
-          color: white;
-          text-shadow: 0 0 2px white;
-        }
-        i {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          font-size: 30px;
-          display: flex;
-          &::before {
-            margin: auto;
-          }
-        }
-        &:hover i {
-          color: lightgray;
-          text-shadow: 0 0 2px black;
-        }
-        @media screen and (max-width: $screen-xs){
-          margin: $gutter 0 0 0;
-          flex-shrink: 0;
-          width: 100%;
+          margin: auto;
         }
       }
+      &:hover i {
+        color: lightgray;
+        text-shadow: 0 0 2px black;
+      }
+      @media (max-width: $screen-phone){
+        margin: 30px 0 0 0;
+        flex-shrink: 0;
+        width: 100%;
+      }
+    }
+  }
+</style>
+
+<style lang="scss">
+  .ae-panel.hidden {
+    & + *, & + * > :first-child {
+      margin-top: 0 !important;
     }
   }
 </style>

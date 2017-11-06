@@ -88,12 +88,11 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "/imports/voting/ui/styles/variables";
+  @import "../../../components/variables";
 
   .mugen-scroll, .all-loaded {
     text-align: center;
     padding-bottom: 10px;
-    color: $gray-light;
-    font-family: $font-family-header;
+    color: $grey;
   }
 </style>

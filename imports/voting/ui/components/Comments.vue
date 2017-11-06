@@ -9,7 +9,7 @@
 </script>
 
 <style lang="scss">
-  @import "/imports/voting/ui/styles/variables";
+  @import '../../../components/variables';
 
   .comments-box {
     max-width: none;
@@ -24,36 +24,48 @@
         display: none;
       }
       .message, textarea {
-        border-radius: 4px;
-        border: solid 1px $gray-light;
-        padding: 7px;
+        border-radius: 10px;
+        border: solid 2px $smoke;
+        padding: 5px 50px;
         width: 100%;
         box-sizing: border-box;
+        font-size: 16px;
+        line-height: 26px;
       }
       .message {
         background-color: #fffaf3;
         color: #573a08;
         border-color: #c9ba9b;
-        margin: $gutter 0;
+        margin: 15px 0;
       }
       textarea {
         resize: vertical;
-        height: 60px;
+        height: 50px;
+        font-family: inherit;
+
+        ::placeholder {
+          color: $grey;
+        }
       }
       form {
         overflow: hidden;
         &.comment-form {
           order: 1;
-          margin-top: .5em;
+          margin-top: 20px;
         }
         button, .button {
-          margin-top: $gutter / 2;
-          border-width: 2px;
+          margin-top: 15px;
+          min-width: 150px;
+          padding: 0 15px;
+          height: 30px;
+          line-height: 30px;
+          border-radius: 15px;
+          background-color: $maegenta;
+          text-transform: uppercase;
+          font-size: 14px;
+          color: $white;
           float: right;
-          &:hover {
-            background: $brand-color;
-            color: white;
-          }
+          border: none;
         }
       }
       .comment {
@@ -71,18 +83,22 @@
         }
         .content {
           .author {
-            color: gray;
+            color: $maegenta;
+            font-size: 12px;
+            text-transform: uppercase;
           }
           .metadata, .actions {
-            color: lightgray;
-            font-size: .9em;
+            color: $grey;
+            font-size: 12px;
           }
           .metadata {
             display: inline-block;
             margin-left: .5em;
           }
           .comment-content {
-            margin: $gutter / 2 0;
+            margin: 6px 0;
+            line-height: 26px;
+            font-size: 16px;
             a {
               color: #4183c4;
             }
@@ -109,7 +125,7 @@
             }
           }
           .create-reply .reply-form {
-            margin-top: $gutter;
+            margin-top: 12px;
           }
           .reply-wrapper {
             margin-left: 3em;
