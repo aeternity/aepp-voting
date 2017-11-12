@@ -26,7 +26,6 @@
   import AeModal from '../../../components/AeModal.vue';
 
   import SignStatement from '../particles/SignStatement.vue';
-  import { Proposals } from '../../api/models/proposals';
   import TagsSelect from '../particles/TagsSelect.vue';
 
   export default {

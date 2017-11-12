@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
@@ -6,6 +7,7 @@ import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
 import { injectSupply } from 'vue-supply';
 import VueAutosize from 'vue-autosize';
+// eslint-disable-next-line import/no-unresolved
 import createPersistedState from 'vuex-persistedstate';
 
 import MainLayout from '../../ui/layouts/MainLayout.vue';
@@ -23,9 +25,7 @@ Vue.use(Vuex);
 Vue.use(VueClipboards);
 
 // Register filters, that can be accessed inside templates
-for (const key in filters) {
-  Vue.filter(key, filters[key]);
-}
+Object.keys(filters).forEach(key => Vue.filter(key, filters[key]));
 
 // Create store
 const supplyCache = {};
@@ -56,7 +56,7 @@ sync(store, router);
 
 // Initialize the app
 Meteor.startup(() => {
-  const app = new Vue({
+  new Vue({
     router,
     store,
     supplyCache,

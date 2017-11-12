@@ -25,12 +25,10 @@
 </template>
 
 <script>
-  import { mapState, mapMutations } from 'vuex';
+  import { mapState } from 'vuex';
 
-  import { Accounts } from '/imports/accounts';
-  import { Proposals } from '../../api/models/proposals';
-  import CopyButton from '../particles/CopyButton.vue';
   import { voteStatement } from '/imports/ethereum/api/utils/genStatement';
+  import CopyButton from '../particles/CopyButton.vue';
   import SignMessage from './SignMessage.vue';
   import VoteButton from './VoteButton.vue';
 
@@ -46,7 +44,7 @@
       return {
         signature: '',
         upVote: this.desiredVote,
-      }
+      };
     },
     methods: {
       async setUpVote(upVote) {

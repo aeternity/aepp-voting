@@ -1,22 +1,25 @@
+/* global Assets */
+/* eslint-disable no-console */
+
 import { Meteor } from 'meteor/meteor';
 import cp from 'child_process';
 import Web3 from 'web3';
 import promisify from 'es6-promisify';
 
 let erc20contract;
+const callBacks = [];
 
 export const onErc20ContractReceiving = callBack =>
-  erc20contract ? callBack(erc20contract) : callBacks.push(callBack);
+  (erc20contract ? callBack(erc20contract) : callBacks.push(callBack));
 
-const callBacks = [];
 const setupDevnet = Meteor.isDevelopment && !Meteor.isTest && !Meteor.settings.web3ProviderUrl;
 const exec = promisify(cp.exec);
 
 const newContract = (contract, options) =>
   new Promise((resolve, reject) => {
     contract.new(options, (err, contractInstance) => {
-      if (err) return reject(err);
-      if (contractInstance.address) resolve(contractInstance.address);
+      if (err) reject(err);
+      else if (contractInstance.address) resolve(contractInstance.address);
     });
   });
 
@@ -43,11 +46,12 @@ const newContract = (contract, options) =>
   if (setupDevnet) {
     const contractAbi = JSON.parse(Assets.getText('erc20-contract/ERC20Token.abi'));
     const contractBin = Assets.getText('erc20-contract/ERC20Token.bin');
-    const coinbase = web3.eth.coinbase;
+    const { coinbase } = web3.eth;
     web3.personal.unlockAccount(coinbase, '');
     const address = await newContract(
       web3.eth.contract(contractAbi),
-      { data: '0x' + contractBin, from: coinbase, gas: 1000000 });
+      { data: `0x${contractBin}`, from: coinbase, gas: 1000000 },
+    );
     console.log(`Contract deployed in devnet with address: ${address}`);
     contractAddress = contractAddress || address;
   }

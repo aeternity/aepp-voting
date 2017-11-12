@@ -1,5 +1,5 @@
 import { describe, it } from 'meteor/practicalmeteor:mocha';
-import { assert, expect } from 'meteor/practicalmeteor:chai';
+import { expect } from 'meteor/practicalmeteor:chai';
 import { Factory } from 'meteor/dburles:factory';
 
 describe('accounts', () => {

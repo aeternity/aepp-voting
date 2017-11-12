@@ -23,7 +23,7 @@ Proposals.attachSchema(new SimpleSchema({
         ? Array.from(new Set(this.value.filter(t => Proposals.tags.includes(t))))
           .sort((a, b) => Proposals.tags.indexOf(a) - Proposals.tags.indexOf(b))
         : undefined;
-    }
+    },
   },
   votes: { type: Object, blackbox: true, defaultValue: {} },
   /*
@@ -63,12 +63,14 @@ Proposals.tags = ['core tech', 'æpps', 'marketing', 'community', 'hackathon'];
 
 Proposals.defaultTag = 'all';
 
-Accounts.after.update(function(unusedUserId, doc) {
+Accounts.after.update(function accountsAfterUpdate(unusedUserId, doc) {
   const dBalance = doc.balance - this.previous.balance;
   if (!dBalance) return;
   Proposals
     .find({ [`votes.${doc._id}`]: { $exists: true } })
-    .map(({ _id, votes, upVoteAmount, totalVoteAmount }) => {
+    .forEach(({
+      _id, votes, upVoteAmount, totalVoteAmount,
+    }) => {
       const { upVote } = votes[doc._id];
       Proposals.update(_id, {
         $inc: {
@@ -87,8 +89,10 @@ Accounts.after.update(function(unusedUserId, doc) {
 let proposalCounter = 0;
 
 Factory.define('proposal', Proposals, {
-  statement: () =>
-    `Some long statement to be agreed or disagreed #${proposalCounter += 1}`,
+  statement: () => {
+    proposalCounter += 1;
+    return `Some long statement to be agreed or disagreed #${proposalCounter}`;
+  },
   tags: () => _.sample(Proposals.tags, _.random(0, 3)),
   votes() {
     this.upVoteAmount = 0;
@@ -98,11 +102,14 @@ Factory.define('proposal', Proposals, {
       const { balance } = Factory.create('account', { _id: accountId });
       const upVote = Math.random() >= 0.5;
       this[upVote ? 'upVoteAmount' : 'downVoteAmount'] += balance;
-      return ({ ...p, [accountId]: {
-        signature: `0x${''.padStart(130, Math.random().toString(16).slice(2))}`,
-        upVote,
-        createdAt: new Date(),
-      }});
+      return ({
+        ...p,
+        [accountId]: {
+          signature: `0x${''.padStart(130, Math.random().toString(16).slice(2))}`,
+          upVote,
+          createdAt: new Date(),
+        },
+      });
     }, {});
     this.totalVoteAmount = this.upVoteAmount + this.downVoteAmount;
     this.upVoteRatio = this.upVoteAmount / this.totalVoteAmount;

@@ -97,8 +97,12 @@
       },
     },
     components: {
-      AeHeader, AeHeaderButton, AeHeaderAlert,
-      AeFilterList, AeFilterItem, AeFilterSeparator,
+      AeHeader,
+      AeHeaderButton,
+      AeHeaderAlert,
+      AeFilterList,
+      AeFilterItem,
+      AeFilterSeparator,
     },
     data() {
       return {
@@ -133,7 +137,7 @@
         return this.$route.params.tag || Proposals.defaultTag;
       },
     },
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

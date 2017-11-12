@@ -26,7 +26,7 @@
     data() {
       return {
         signature: '',
-      }
+      };
     },
     methods: {
       sign() {

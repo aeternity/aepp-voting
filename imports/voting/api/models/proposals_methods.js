@@ -4,25 +4,25 @@ import { check } from 'meteor/check';
 import { Proposals } from './proposals';
 
 Meteor.methods({
-  'proposals.remove'(proposalId) {
+  'proposals.remove': function proposalsRemove(proposalId) {
     check(proposalId, String);
     if (
       !this.userId ||
-      !Meteor.settings.adminsAddresses.includes(
-        Meteor.users.findOne(this.userId).services.ethereum.id)
+      !Meteor.settings.adminsAddresses
+        .includes(Meteor.users.findOne(this.userId).services.ethereum.id)
     ) {
       throw new Meteor.Error('not-allowed');
     }
 
     Proposals.remove(proposalId);
   },
-  'proposals.updateTags'(proposalId, tags) {
+  'proposals.updateTags': function proposalsUpdateTags(proposalId, tags) {
     check(proposalId, String);
     check(tags, [String]);
     if (
       !this.userId ||
-      !Meteor.settings.adminsAddresses.includes(
-        Meteor.users.findOne(this.userId).services.ethereum.id)
+      !Meteor.settings.adminsAddresses
+        .includes(Meteor.users.findOne(this.userId).services.ethereum.id)
     ) {
       throw new Meteor.Error('not-allowed');
     }
