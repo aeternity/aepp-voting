@@ -1,13 +1,13 @@
 # Æternity voting app
 
-### Overview
+## Overview
 
 
 The voting app is deployed at [vote.aepps.com](https://vote.aepps.com/). The voting app helps to get feedback from the community about ongoing topics.
 
 A user which holds AE tokens can up or down vote a statement by signing with his ETH account, where he holds his AE tokens. He can use myetherwallet or Metamask for signing. The voting weight is equal to his share in the total distributed AE tokens. 
 
-A user can also create a new statement (also with signature) and comment on statments (for this you login by signing a login message).
+A user can also create a new statement and comment on statments.
 
 The votes are constantly updated. So if a user sends his tokens to a different address, this is detetected and only the currently hold amount is counted.
 
@@ -17,8 +17,8 @@ Have fun voting!
 
 
 
-### Features wanted for the future:
-- Questions with several options to vote on (and even add your own). So the community can answer not only yes/no questions though also open questions like "what is the best option?"
+## Features wanted for the future:
+- Questions with several options to vote on (and even add your own). So the community can answer not only "yes/no" questions though also open questions like "what is the best option?"
 
 
 
