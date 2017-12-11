@@ -59,7 +59,7 @@ Proposals.sortTypes = {
 
 Proposals.defaultSort = 'popular';
 
-Proposals.tags = ['core tech', 'æpps', 'marketing', 'community'];
+Proposals.tags = ['core tech', 'æpps', 'marketing', 'community', 'hackathon'];
 
 Proposals.defaultTag = 'all';
 
