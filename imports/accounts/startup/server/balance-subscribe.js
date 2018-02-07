@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { onErc20ContractReceiving } from '/imports/ethereum';
 import { Accounts } from '../../api/models/accounts';
 

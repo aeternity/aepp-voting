@@ -1,25 +1,29 @@
 import { Meteor } from 'meteor/meteor';
+import { check, Match } from 'meteor/check';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import { Proposals } from './proposals';
 
-Meteor.publish('proposal', function proposal(id, accountId) {
+Meteor.publish('proposal', (id, accountId) => {
+  check(id, String);
+  check(accountId, String);
+
   return Proposals.find(
     id,
     {
       fields: {
-       ...Proposals.publicFields,
-       [`votes.${accountId}`]: 1,
+        ...Proposals.publicFields,
+        [`votes.${accountId}`]: 1,
       },
-    }
+    },
   );
 });
 
-Meteor.publish('proposals.list', function proposals(sort, tag, limit, accountId) {
-  if (!Proposals.sortTypes[sort]) throw new Meteor.Error('invalid-sort');
-  if (![Proposals.defaultTag, ...Proposals.tags].includes(tag)) {
-    throw new Meteor.Error('invalid-tag');
-  }
+Meteor.publish('proposals.list', (sort, tag, limit, accountId) => {
+  check(sort, Match.OneOf(...Object.keys(Proposals.sortTypes)));
+  check(tag, Match.OneOf(Proposals.defaultTag, ...Proposals.tags));
+  check(limit, Match.Integer);
+  check(accountId, String);
 
   return Proposals.find({
     ...tag === Proposals.defaultTag ? {} : { tags: tag },

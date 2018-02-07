@@ -10,8 +10,6 @@
 </template>
 
 <script>
-  import { mapState, mapMutations, mapActions } from 'vuex';
-
   import AeMain from '../../../components/AeMain.vue';
 
   import AppHeader from '../components/AppHeader.vue';
@@ -25,8 +23,9 @@
       AeMain,
       AppHeader,
       CreateProposalModal,
-      ExplanationBlock, YoutubeVideoModal,
+      ExplanationBlock,
+      YoutubeVideoModal,
       SignMessageModal,
     },
-  }
+  };
 </script>

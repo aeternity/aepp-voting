@@ -1,5 +1,6 @@
+import { Meteor } from 'meteor/meteor';
 import { describe, it } from 'meteor/practicalmeteor:mocha';
-import { assert, expect } from 'meteor/practicalmeteor:chai';
+import { expect } from 'meteor/practicalmeteor:chai';
 import { sinon } from 'meteor/practicalmeteor:sinon';
 import { Factory } from 'meteor/dburles:factory';
 import { Random } from 'meteor/random';

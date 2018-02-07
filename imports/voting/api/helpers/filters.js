@@ -1,3 +1,3 @@
 import moment from 'moment';
 
-export const dateFormat = (value) => moment(value).calendar();
+export const dateFormat = value => moment(value).calendar();

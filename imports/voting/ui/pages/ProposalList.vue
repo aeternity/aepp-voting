@@ -22,10 +22,9 @@
 </template>
 
 <script>
-  import Vue from 'vue';
   import { mapMutations } from 'vuex';
   import { Counts } from 'meteor/tmeasday:publish-counts';
-  import MugenScroll from 'vue-mugen-scroll'
+  import MugenScroll from 'vue-mugen-scroll';
 
   import { Proposals } from '../../api/models/proposals';
   import ProposalItem from '../particles/ProposalItem.vue';
@@ -41,7 +40,7 @@
     },
     computed: {
       gotMore() {
-        return this.proposals.length < this.proposalsCount
+        return this.proposals.length < this.proposalsCount;
       },
       loaded() {
         return this.proposalsCount;
@@ -52,7 +51,7 @@
     },
     meteor: {
       $subscribe: {
-        'proposals.list'() {
+        'proposals.list': function proposalsList() {
           return [
             this.sort,
             this.tag,
@@ -77,14 +76,14 @@
             }, { sort: Proposals.sortTypes[sort] })
             .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] })),
       },
-      proposalsCount () {
+      proposalsCount() {
         return Counts.get('proposals');
-      }
+      },
     },
     methods: mapMutations({
       loadMore: 'voting/incrementLimit',
     }),
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

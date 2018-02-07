@@ -28,3 +28,5 @@ arkham:comments-ui
 vuejs:blaze-integration
 aldeed:simple-schema
 aldeed:collection2
+practicalmeteor:chai
+practicalmeteor:sinon

@@ -42,14 +42,14 @@
 </template>
 
 <script>
-  import { mapState, mapMutations } from 'vuex';
+  import { Meteor } from 'meteor/meteor';
+  import { mapState } from 'vuex';
 
   import AePanel from '../../../components/AePanel.vue';
   import AeCloseButton from '../../../components/AeCloseButton.vue';
   import AeButton from '../../../components/AeButton.vue';
 
-  import { Accounts } from '/imports/accounts';
-  import web3 from '/imports/ethereum/ui/utils/web3';
+  import { Accounts } from '../../../accounts';
   import { Proposals } from '../../api/models/proposals';
   import SignStatement from '../particles/SignStatement.vue';
   import CopyButton from '../particles/CopyButton.vue';
@@ -71,14 +71,14 @@
     },
     meteor: {
       $subscribe: {
-        'proposal'() {
+        proposal() {
           return [
             this.id,
             this.$store.state.voting.accountId,
           ];
         },
-        'accounts.balance'() {
-          return [ this.$store.state.voting.accountId ];
+        'accounts.balance': function accountsBalance() {
+          return [this.$store.state.voting.accountId];
         },
       },
       proposal: {
@@ -92,7 +92,7 @@
             .find()
             .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] }))[0],
       },
-      balance () {
+      balance() {
         const account = Accounts.findOne(this.$store.state.voting.accountId);
         return account && account.balance;
       },
@@ -102,7 +102,7 @@
         admin: state => state.voting.admin,
       }),
       proposalUrl() {
-        return Meteor.absoluteUrl() + 'statements/' + this.$route.params.id;
+        return `${Meteor.absoluteUrl()}statements/${this.$route.params.id}`;
       },
       ratio() {
         return this.proposal.upVoteAmount / this.proposal.totalVoteAmount;
@@ -118,6 +118,7 @@
         });
       },
       removeProposal() {
+        // eslint-disable-next-line no-restricted-globals, no-alert
         if (confirm(`Are you sure want to remove "${this.proposal.statement}" statement?`)) {
           Meteor.call('proposals.remove', this.proposal._id);
         }

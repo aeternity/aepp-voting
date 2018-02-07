@@ -11,7 +11,7 @@
   export default {
     components: { AeCategory },
     props: ['proposal'],
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

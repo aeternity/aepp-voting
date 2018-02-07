@@ -1,21 +1,20 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { Proposals } from './proposals';
 import { Accounts } from '/imports/accounts/index';
 import { getEthereumAddress, onErc20ContractReceiving } from '/imports/ethereum/index';
 import { voteStatement } from '/imports/ethereum/api/utils/genStatement';
+import { Proposals } from './proposals';
 
 const UP_VOTE = Symbol('up-vote');
 const DOWN_VOTE = Symbol('down-vote');
 
-onErc20ContractReceiving(erc20contract => {
+onErc20ContractReceiving((erc20contract) => {
   const getAccountInfo = (statement, signature, upVote) => {
     let accountId;
     try {
       accountId = getEthereumAddress(voteStatement(upVote, statement), signature);
-    }
-    catch (e) {
+    } catch (e) {
       throw new Meteor.Error('invalid-signature');
     }
     const balance = +erc20contract.balanceOf(accountId).shift(erc20contract.decimals().neg());
@@ -29,7 +28,7 @@ onErc20ContractReceiving(erc20contract => {
   };
 
   Meteor.methods({
-    'proposals.add'(statement, signature, upVote, tags) {
+    'proposals.add': (statement, signature, upVote, tags) => {
       check(statement, String);
       check(signature, String);
       check(upVote, Boolean);
@@ -51,13 +50,13 @@ onErc20ContractReceiving(erc20contract => {
         }),
       };
     },
-    'proposals.vote'(proposalId, signature, upVote) {
+    'proposals.vote': (proposalId, signature, upVote) => {
       check(proposalId, String);
       check(signature, String);
       check(upVote, Boolean);
 
       const { statement } = Proposals.findOne(proposalId) ||
-        (() => { throw new Meteor.Error('proposal-not-found') })();
+        (() => { throw new Meteor.Error('proposal-not-found'); })();
 
       const { accountId, balance } = getAccountInfo(statement, signature, upVote);
       const proposal = Proposals.findOne(proposalId);
@@ -73,8 +72,8 @@ onErc20ContractReceiving(erc20contract => {
       }
 
       const { upVoteAmount: upVA, downVoteAmount: downVA } = proposal;
-      const dUpVA = upVote ? balance : (previousVote ? -balance : 0);
-      const dDownVA = !upVote ? balance : (previousVote ? -balance : 0);
+      const dUpVA = (upVote && balance) || (previousVote && -balance) || 0;
+      const dDownVA = (!upVote && balance) || (previousVote && -balance) || 0;
 
       Proposals.update(proposalId, {
         $inc: {

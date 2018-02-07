@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+
+import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import utf8 from 'utf8';
 
@@ -22,7 +25,7 @@ export default {
 
   mutations: {
     incrementLimit: (state) => {
-      state.limit = state.limit + 10;
+      state.limit += 10;
     },
     toggleCreateProposalModal: (state) => {
       state.createProposalModalShown = !state.createProposalModalShown;
@@ -91,6 +94,7 @@ export default {
               }[error.error];
               dispatch('setAlert', text
                 ? `${errorMessage} ${text}`
+                // eslint-disable-next-line no-console
                 : console.error(error) || `Something went wrong. ${errorMessage}`);
             } else {
               dispatch('setAlert', {
@@ -102,7 +106,9 @@ export default {
         });
       }
     },
-    createProposal({ dispatch, commit }, { statement, signature, upVote, tags }) {
+    createProposal({ dispatch, commit }, {
+      statement, signature, upVote, tags,
+    }) {
       return new Promise((resolve, reject) => {
         Meteor.call('proposals.add', statement, signature, upVote, tags, (error, result) => {
           if (error) {
@@ -130,8 +136,9 @@ export default {
         'already-voted': [
           'Invalid vote. You have already',
           upVote ? 'agreed to' : 'disagreed with',
-          'this statement in the past'
+          'this statement in the past',
         ].join(' '),
+        // eslint-disable-next-line no-console
       }[error.error] || console.error(error) || `Something went wrong. ${errorMessage}`;
       dispatch('setAlert', message);
     },
@@ -149,4 +156,4 @@ export default {
       });
     },
   },
-}
+};

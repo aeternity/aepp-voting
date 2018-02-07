@@ -47,18 +47,16 @@
         },
         [`${d}VoteProcent`]() {
           return this.proposal.totalVoteAmount
-            ? Math.round(
-              this.proposal[`${d}VoteAmount`]
-              / this.proposal.totalVoteAmount * 100
-            )
+            ? (Math.round(this.proposal[`${d}VoteAmount`]
+              / this.proposal.totalVoteAmount) * 100)
             : 0;
         },
       }), {
-      ratio() {
-        return this.proposal.upVoteAmount / this.proposal.totalVoteAmount;
-      },
+        ratio() {
+          return this.proposal.upVoteAmount / this.proposal.totalVoteAmount;
+        },
       }),
-  }
+  };
 </script>
 
 <style lang="scss" scoped>
