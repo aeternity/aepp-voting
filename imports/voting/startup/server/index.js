@@ -5,6 +5,7 @@ import '../../api/models/users_pubs';
 import '../../api/models/users_methods_server';
 import './test-data';
 import './dump-proposal-route';
+import './health-check';
 import './migrations';
 import './update-scores';
 import '../comments';
