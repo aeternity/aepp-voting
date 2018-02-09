@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "lint": "eslint --ext .js,.vue client server imports"
+    "lint": "eslint --ext .js,.vue client server imports",
+    "mocha": "meteor test --once --driver-package meteortesting:mocha",
+    "test": "npm run lint && npm run mocha"
   },
   "dependencies": {
     "autoprefixer": "^7.1.2",
