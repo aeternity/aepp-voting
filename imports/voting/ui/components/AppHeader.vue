@@ -1,9 +1,6 @@
 <template>
   <div class="app-header">
-    <ae-header-alert v-if="alert" @close="closeAlert">
-      {{alert}}
-    </ae-header-alert>
-    <ae-header v-else name="Voting">
+    <ae-header name="Voting">
       <ae-header-button
         icon
         @click="toggleExplanationBlock"
@@ -32,6 +29,13 @@
         <i class="fa fa-pencil" />
       </ae-header-button>
     </ae-header>
+
+    <ae-banner v-if="alert">
+      {{alert}}
+      <ae-button slot="right" plain size="small" @click="closeAlert">
+        <ae-icon slot="icon" name="close" />
+      </ae-button>
+    </ae-banner>
 
     <ae-filter-list class="desktop" v-if="proposalList">
       <ae-filter-item
@@ -79,10 +83,12 @@
 
 <script>
   import { mapState, mapMutations, mapActions } from 'vuex';
-  import { AeFilterList, AeFilterItem, AeFilterSeparator } from '@aeternity/aepp-components';
+  import {
+    AeBanner, AeButton, AeIcon,
+    AeFilterList, AeFilterItem, AeFilterSeparator,
+  } from '@aeternity/aepp-components';
 
   import AeHeader from '../../../components/AeHeader.vue';
-  import AeHeaderAlert from '../../../components/AeHeaderAlert.vue';
   import AeHeaderButton from '../../../components/AeHeaderButton.vue';
 
   import { Proposals } from '../../api/models/proposals';
@@ -97,7 +103,9 @@
     components: {
       AeHeader,
       AeHeaderButton,
-      AeHeaderAlert,
+      AeBanner,
+      AeButton,
+      AeIcon,
       AeFilterList,
       AeFilterItem,
       AeFilterSeparator,
@@ -141,16 +149,25 @@
 <style lang="scss" scoped>
   @import "../../../components/variables";
 
-  .app-header .ae-filter-list {
-    @media (max-width: $screen-phone) {
-      &.desktop {
-        display: none;
-      }
+  .app-header {
+    .ae-banner {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
     }
 
-    @media (min-width: $screen-phone + 1) {
-      &.mobile {
-        display: none;
+    .ae-filter-list {
+      @media (max-width: $screen-phone) {
+        &.desktop {
+          display: none;
+        }
+      }
+
+      @media (min-width: $screen-phone + 1) {
+        &.mobile {
+          display: none;
+        }
       }
     }
   }

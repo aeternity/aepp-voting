@@ -58,7 +58,6 @@ export default {
 
   actions: {
     setAlert({ commit }, options) {
-      window.scrollTo(0, 0);
       const { text, autoClose } = options.text ? options : { text: options };
       commit('setAlert', text);
       if (autoClose) setTimeout(() => commit('setAlert'), 3000);
