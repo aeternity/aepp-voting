@@ -1,33 +1,30 @@
 <template>
   <div class="app-header">
     <ae-header name="Voting">
-      <ae-header-button
-        icon
-        @click="toggleExplanationBlock"
-      >
-        <i class="fa fa-question" />
-      </ae-header-button>
-      <ae-header-button @click="toggleCreateProposalModal">
-        <i class="fa fa-pencil" /> Create New
-      </ae-header-button>
-      <ae-header-button @click="toggleAuth" secondary>
+      <ae-button type="dramatic" @click="toggleExplanationBlock">
+        <ae-icon slot="icon" invert type="dramatic" name="info" />
+      </ae-button>
+      <ae-button type="dramatic" @click="toggleCreateProposalModal">
+        <ae-icon slot="icon" invert type="dramatic" name="plus" /> Create New
+      </ae-button>
+      <ae-button @click="toggleAuth">
         {{loggedIn ? 'Log out' : 'Log in'}}
-      </ae-header-button>
+      </ae-button>
 
-      <ae-header-button
+      <ae-button
         slot="mobile-left"
-        icon
+        type="dramatic"
         @click="toggleExplanationBlock"
       >
-        <i class="fa fa-question" />
-      </ae-header-button>
-      <ae-header-button
+        <ae-icon slot="icon" invert type="dramatic" name="info" />
+      </ae-button>
+      <ae-button
         slot="mobile-right"
-        icon
+        type="dramatic"
         @click="toggleCreateProposalModal"
       >
-        <i class="fa fa-pencil" />
-      </ae-header-button>
+        <ae-icon slot="icon" invert type="dramatic" name="plus" />
+      </ae-button>
     </ae-header>
 
     <ae-banner v-if="alert">
@@ -84,12 +81,10 @@
 <script>
   import { mapState, mapMutations, mapActions } from 'vuex';
   import {
+    AeHeader,
     AeBanner, AeButton, AeIcon,
     AeFilterList, AeFilterItem, AeFilterSeparator,
   } from '@aeternity/aepp-components';
-
-  import AeHeader from '../../../components/AeHeader.vue';
-  import AeHeaderButton from '../../../components/AeHeaderButton.vue';
 
   import { Proposals } from '../../api/models/proposals';
 
@@ -102,7 +97,6 @@
     },
     components: {
       AeHeader,
-      AeHeaderButton,
       AeBanner,
       AeButton,
       AeIcon,
@@ -150,6 +144,19 @@
   @import "../../../components/variables";
 
   .app-header {
+    .ae-header .ae-button {
+      vertical-align: middle;
+      margin-left: 10px;
+
+      &._has-label_false .ae-icon {
+        margin: 4px;
+      }
+
+      &._type_normal {
+        color: $white;
+      }
+    }
+
     .ae-banner {
       position: fixed;
       top: 0;
