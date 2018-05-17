@@ -10,8 +10,7 @@
 </template>
 
 <script>
-  import AeMain from '../../../components/AeMain.vue';
-
+  import { AeMain } from '@aeternity/aepp-components';
   import AppHeader from '../components/AppHeader.vue';
   import CreateProposalModal from '../components/CreateProposalModal.vue';
   import ExplanationBlock from '../components/ExplanationBlock.vue';
