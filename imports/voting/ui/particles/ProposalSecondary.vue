@@ -1,15 +1,15 @@
 <template>
   <div class="proposal-secondary">
     <span>{{proposal.updatedAt | dateFormat}}</span><br/>
-    <ae-category v-for="t in proposal.tags" :key="t">{{t}}</ae-category>
+    <ae-badge v-for="t in proposal.tags" :key="t">{{t}}</ae-badge>
   </div>
 </template>
 
 <script>
-  import AeCategory from '../../../components/AeCategory.vue';
+  import { AeBadge } from '@aeternity/aepp-components';
 
   export default {
-    components: { AeCategory },
+    components: { AeBadge },
     props: ['proposal'],
   };
 </script>
@@ -23,7 +23,7 @@
     line-height: 25px;
     font-size: 14px;
 
-    .ae-category {
+    .ae-badge {
       margin-right: 10px;
     }
   }

@@ -7,20 +7,20 @@
         :value="t"
         v-model="checkedTags"
       />
-      <label :for="t"><ae-category>{{t}}</ae-category></label>
+      <label :for="t"><ae-badge>{{t}}</ae-badge></label>
     </span>
   </div>
 </template>
 
 <script>
+  import { AeBadge } from '@aeternity/aepp-components';
   import { Proposals } from '../../api/models/proposals';
-  import AeCategory from '../../../components/AeCategory.vue';
 
   export default {
     props: {
       value: { type: Array, default: () => [] },
     },
-    components: { AeCategory },
+    components: { AeBadge },
     data() {
       return {
         tags: Proposals.tags,
@@ -55,11 +55,11 @@
       cursor: pointer;
     }
 
-    input:not(:checked) + label > .ae-category {
+    input:not(:checked) + label > .ae-badge {
       background-color: $grey;
     }
 
-    .ae-category {
+    .ae-badge {
       height: 33px;
       line-height: 33px;
       font-size: 14px;

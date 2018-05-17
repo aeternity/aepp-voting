@@ -33,11 +33,10 @@
   import format from 'format-number';
 
   import AePanel from '../../../components/AePanel.vue';
-  import AeCategory from '../../../components/AeCategory.vue';
   import ProposalSecondary from './ProposalSecondary.vue';
 
   export default {
-    components: { AePanel, AeCategory, ProposalSecondary },
+    components: { AePanel, ProposalSecondary },
     props: ['proposal'],
     computed:
       ['up', 'down'].reduce((p, d) => ({
