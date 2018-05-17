@@ -79,13 +79,11 @@
 
 <script>
   import { mapState, mapMutations, mapActions } from 'vuex';
+  import { AeFilterList, AeFilterItem, AeFilterSeparator } from '@aeternity/aepp-components';
 
   import AeHeader from '../../../components/AeHeader.vue';
   import AeHeaderAlert from '../../../components/AeHeaderAlert.vue';
   import AeHeaderButton from '../../../components/AeHeaderButton.vue';
-  import AeFilterList from '../../../components/AeFilterList.vue';
-  import AeFilterItem from '../../../components/AeFilterItem.vue';
-  import AeFilterSeparator from '../../../components/AeFilterSeparator.vue';
 
   import { Proposals } from '../../api/models/proposals';
 
