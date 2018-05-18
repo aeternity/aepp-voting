@@ -28,7 +28,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../components/variables';
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .youtube-video-modal {
     margin-top: 20px;

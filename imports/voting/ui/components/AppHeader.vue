@@ -141,7 +141,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../components/variables";
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .app-header {
     .ae-header .ae-button {

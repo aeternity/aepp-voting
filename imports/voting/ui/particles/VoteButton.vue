@@ -22,7 +22,7 @@
 </script>
 
 <style lang="scss">
-  @import '../../../components/variables';
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .vote-button {
     button {

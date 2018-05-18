@@ -50,7 +50,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../components/variables";
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .ae-panel {
     overflow: hidden;

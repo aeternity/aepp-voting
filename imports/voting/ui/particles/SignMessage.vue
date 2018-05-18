@@ -37,7 +37,7 @@
 </script>
 
 <style lang="scss">
-  @import "../../../components/variables";
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .sign-message {
     text-align: center;

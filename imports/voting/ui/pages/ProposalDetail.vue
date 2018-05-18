@@ -133,7 +133,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../components/variables';
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .proposal-detail {
     clear: right;
@@ -201,7 +201,7 @@
 </style>
 
 <style lang="scss">
-  @import '../../../components/variables';
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .proposal-detail {
     .space-around {
