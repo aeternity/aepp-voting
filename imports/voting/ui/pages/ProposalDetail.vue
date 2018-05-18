@@ -25,8 +25,14 @@
         Admin
         <tags-select :value="proposal.tags" @input="updateTags" />
         <div>
-          <ae-button @click="removeProposal" class="remove" title="Remove this statement">
-            <i class="fa fa-trash" /> Delete
+          <ae-button
+            @click="removeProposal"
+            type="dramatic"
+            size="small"
+            uppercase
+            title="Remove this statement"
+          >
+            <ae-icon slot="icon" invert type="dramatic" name="close" /> Delete
           </ae-button>
         </div>
       </div>
@@ -44,10 +50,10 @@
 <script>
   import { Meteor } from 'meteor/meteor';
   import { mapState } from 'vuex';
+  import { AeButton, AeIcon } from '@aeternity/aepp-components';
 
   import AePanel from '../../../components/AePanel.vue';
   import AeCloseButton from '../../../components/AeCloseButton.vue';
-  import AeButton from '../../../components/AeButton.vue';
 
   import { Accounts } from '../../../accounts';
   import { Proposals } from '../../api/models/proposals';
@@ -63,6 +69,7 @@
       AePanel,
       AeCloseButton,
       AeButton,
+      AeIcon,
       SignStatement,
       CopyButton,
       Comments,

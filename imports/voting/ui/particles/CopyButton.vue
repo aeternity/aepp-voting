@@ -1,18 +1,19 @@
 <template>
   <ae-button
+    class="copy-button"
     v-clipboard="contentToCopy"
     :key="contentToCopy"
     @success="label = 'Copied!'"
     @error="label = 'Copy Error!'"
-    type="button"
-    secondary
+    size="small"
+    uppercase
   >
     {{label}}
   </ae-button>
 </template>
 
 <script>
-  import AeButton from '../../../components/AeButton.vue';
+  import { AeButton } from '@aeternity/aepp-components';
 
   export default {
     props: ['contentToCopy'],
@@ -22,5 +23,16 @@
         label: 'Copy',
       };
     },
+    mounted() {
+      this.$el.setAttribute('type', 'button');
+    },
   };
 </script>
+
+<style lang="scss" scoped>
+  @import '../../../components/variables';
+
+  .copy-button {
+    color: $white;
+  }
+</style>
