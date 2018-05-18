@@ -8,7 +8,7 @@
     "test": "npm run lint && npm run mocha"
   },
   "dependencies": {
-    "@aeternity/aepp-components": "^2.0.11",
+    "@aeternity/aepp-components": "git+https://github.com/aeternity/aepp-components.git#6ce15e7984b544f83a130b9d54145b42341d1d8f",
     "autoprefixer": "^7.1.2",
     "babel-runtime": "^6.25.0",
     "bignumber.js": "^4.0.4",

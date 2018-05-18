@@ -22,9 +22,7 @@
 <script>
   import { mapState, mapMutations } from 'vuex';
   import { focus } from 'vue-focus';
-
-  import AeModal from '../../../components/AeModal.vue';
-
+  import { AeModal } from '@aeternity/aepp-components';
   import SignStatement from '../particles/SignStatement.vue';
   import TagsSelect from '../particles/TagsSelect.vue';
 
