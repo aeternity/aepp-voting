@@ -1,7 +1,7 @@
 <template>
   <ae-panel
     :to="{ name: 'proposal', params: { id: this.proposal._id } }"
-    :ratio="ratio"
+    :ratioTop="ratio"
   >
     <div class="proposal-item">
       <div class="content">
@@ -31,8 +31,7 @@
 
 <script>
   import format from 'format-number';
-
-  import AePanel from '../../../components/AePanel.vue';
+  import { AePanel } from '@aeternity/aepp-components';
   import ProposalSecondary from './ProposalSecondary.vue';
 
   export default {

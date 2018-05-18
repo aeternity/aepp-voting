@@ -1,6 +1,6 @@
 <template>
   <ae-panel
-    :ratio="ratio"
+    :ratioTop="ratio"
     v-if="proposal"
     :closeHandler="close"
   >
@@ -50,11 +50,7 @@
 <script>
   import { Meteor } from 'meteor/meteor';
   import { mapState } from 'vuex';
-  import { AeButton, AeIcon } from '@aeternity/aepp-components';
-
-  import AePanel from '../../../components/AePanel.vue';
-  import AeCloseButton from '../../../components/AeCloseButton.vue';
-
+  import { AePanel, AeButton, AeIcon } from '@aeternity/aepp-components';
   import { Accounts } from '../../../accounts';
   import { Proposals } from '../../api/models/proposals';
   import SignStatement from '../particles/SignStatement.vue';
@@ -67,7 +63,6 @@
     props: ['id', 'vote'],
     components: {
       AePanel,
-      AeCloseButton,
       AeButton,
       AeIcon,
       SignStatement,

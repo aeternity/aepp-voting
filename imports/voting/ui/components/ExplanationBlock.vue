@@ -19,8 +19,7 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
-
-  import AePanel from '../../../components/AePanel.vue';
+  import { AePanel } from '@aeternity/aepp-components';
 
   export default {
     components: { AePanel },
