@@ -1,5 +1,7 @@
 <template>
-  <ae-modal v-if="show" @close="closeHandler">
+  <ae-modal
+    v-if="show"
+    @close="closeHandler">
     <sign-message
       :message="message"
       :signatureHandler="signatureHandler"

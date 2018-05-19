@@ -1,6 +1,9 @@
 <template>
   <div class="vote-button">
-    <button :class="{ active }" @click="click" :id="_uid">
+    <button
+      :class="{ active }"
+      @click="click"
+      :id="_uid">
       <slot />
     </button>
     <label :for="_uid">{{ label }}</label>

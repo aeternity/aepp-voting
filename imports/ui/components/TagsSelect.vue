@@ -1,6 +1,8 @@
 <template>
   <div class="tags-select">
-    <span v-for="t in tags" :key="t">
+    <span
+      v-for="t in tags"
+      :key="t">
       <input
         type="checkbox"
         :id="t"

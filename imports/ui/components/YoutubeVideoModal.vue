@@ -1,5 +1,7 @@
 <template>
-  <ae-modal v-if="videoId" @close="setYoutubeVideoId">
+  <ae-modal
+    v-if="videoId"
+    @close="setYoutubeVideoId">
     <div class="youtube-video-modal">
       <iframe
         :src="`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`"

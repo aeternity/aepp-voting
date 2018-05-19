@@ -1,11 +1,23 @@
 <template>
   <div class="app-header">
     <ae-header name="Voting">
-      <ae-button type="dramatic" @click="toggleExplanationBlock">
-        <ae-icon slot="icon" invert type="dramatic" name="info" />
+      <ae-button
+        type="dramatic"
+        @click="toggleExplanationBlock">
+        <ae-icon
+          slot="icon"
+          invert
+          type="dramatic"
+          name="info" />
       </ae-button>
-      <ae-button type="dramatic" @click="toggleCreateProposalModal">
-        <ae-icon slot="icon" invert type="dramatic" name="plus" /> Create New
+      <ae-button
+        type="dramatic"
+        @click="toggleCreateProposalModal">
+        <ae-icon
+          slot="icon"
+          invert
+          type="dramatic"
+          name="plus" /> Create New
       </ae-button>
       <ae-button @click="toggleAuth">
         {{ loggedIn ? 'Log out' : 'Log in' }}
@@ -16,25 +28,41 @@
         type="dramatic"
         @click="toggleExplanationBlock"
       >
-        <ae-icon slot="icon" invert type="dramatic" name="info" />
+        <ae-icon
+          slot="icon"
+          invert
+          type="dramatic"
+          name="info" />
       </ae-button>
       <ae-button
         slot="mobile-right"
         type="dramatic"
         @click="toggleCreateProposalModal"
       >
-        <ae-icon slot="icon" invert type="dramatic" name="plus" />
+        <ae-icon
+          slot="icon"
+          invert
+          type="dramatic"
+          name="plus" />
       </ae-button>
     </ae-header>
 
     <ae-banner v-if="alert">
       {{ alert }}
-      <ae-button slot="right" plain size="small" @click="closeAlert">
-        <ae-icon slot="icon" name="close" />
+      <ae-button
+        slot="right"
+        plain
+        size="small"
+        @click="closeAlert">
+        <ae-icon
+          slot="icon"
+          name="close" />
       </ae-button>
     </ae-banner>
 
-    <ae-filter-list class="desktop" v-if="proposalList">
+    <ae-filter-list
+      class="desktop"
+      v-if="proposalList">
       <ae-filter-item
         v-for="s in sorts"
         :key="s"
@@ -54,7 +82,9 @@
       </ae-filter-item>
     </ae-filter-list>
 
-    <ae-filter-list class="mobile" v-if="proposalList">
+    <ae-filter-list
+      class="mobile"
+      v-if="proposalList">
       <ae-filter-item
         v-for="s in sorts"
         :key="s"
@@ -65,7 +95,9 @@
       </ae-filter-item>
     </ae-filter-list>
 
-    <ae-filter-list class="mobile" v-if="proposalList">
+    <ae-filter-list
+      class="mobile"
+      v-if="proposalList">
       <ae-filter-item
         v-for="t in tags"
         :key="t"

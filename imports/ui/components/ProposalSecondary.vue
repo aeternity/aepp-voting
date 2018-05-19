@@ -1,7 +1,9 @@
 <template>
   <div class="proposal-secondary">
     <span>{{ proposal.updatedAt | dateFormat }}</span><br/>
-    <ae-badge v-for="t in proposal.tags" :key="t">{{ t }}</ae-badge>
+    <ae-badge
+      v-for="t in proposal.tags"
+      :key="t">{{ t }}</ae-badge>
   </div>
 </template>
 

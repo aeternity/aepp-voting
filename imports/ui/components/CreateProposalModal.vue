@@ -1,10 +1,15 @@
 <template>
-  <ae-modal v-if="visible" title="Create statement" @close="closeHandler">
+  <ae-modal
+    v-if="visible"
+    title="Create statement"
+    @close="closeHandler">
     <div class="create-proposal-modal">
       <label :for="_uid">Statement</label>
       <input
         placeholder="Enter a short statement text ..."
-        v-model="statement" :id="_uid" v-focus.lazy="true"
+        v-model="statement"
+        :id="_uid"
+        v-focus.lazy="true"
       />
 
       <p>Choose one or multiple categories</p>

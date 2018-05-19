@@ -1,5 +1,7 @@
 <template>
-  <form class="sign-message" @submit.prevent="sign">
+  <form
+    class="sign-message"
+    @submit.prevent="sign">
     <div>
       Copy this message and sign it with your Ethereum address
     </div>
@@ -8,8 +10,15 @@
     </div>
     <copy-button :contentToCopy="message" />
     <label for="signature">Then paste your signature here</label>
-    <input required id="signature" v-model="signature" autocomplete="off">
-    <ae-button type="dramatic" size="small" uppercase>Submit</ae-button>
+    <input
+      required
+      id="signature"
+      v-model="signature"
+      autocomplete="off">
+    <ae-button
+      type="dramatic"
+      size="small"
+      uppercase>Submit</ae-button>
   </form>
 </template>
 

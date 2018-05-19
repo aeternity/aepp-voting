@@ -14,16 +14,22 @@
         :selectedVote="vote"
         :signatureHandler="signatureHandler"
       />
-      <div class="current-status" v-if="proposal.vote">
+      <div
+        class="current-status"
+        v-if="proposal.vote">
         You {{ proposal.vote.upVote ? 'agreed to' : 'disagreed with' }} this statement on
         {{ proposal.vote.createdAt.toLocaleDateString('en-US', {
           year: 'numeric', month: 'short', day: 'numeric'
         }) }}
         with a voting weight of {{ balance }} Æ
       </div>
-      <div class="space-around admin-panel" v-if="admin">
+      <div
+        class="space-around admin-panel"
+        v-if="admin">
         Admin
-        <tags-select :value="proposal.tags" @input="updateTags" />
+        <tags-select
+          :value="proposal.tags"
+          @input="updateTags" />
         <div>
           <ae-button
             @click="removeProposal"
@@ -32,7 +38,11 @@
             uppercase
             title="Remove this statement"
           >
-            <ae-icon slot="icon" invert type="dramatic" name="close" /> Delete
+            <ae-icon
+              slot="icon"
+              invert
+              type="dramatic"
+              name="close" /> Delete
           </ae-button>
         </div>
       </div>
@@ -41,7 +51,9 @@
         <span>{{ proposalUrl }}</span>
         <copy-button :contentToCopy="proposalUrl" />
       </div>
-      <comments class="space-around" :id="proposal._id" />
+      <comments
+        class="space-around"
+        :id="proposal._id" />
     </div>
   </ae-panel>
   <p v-else-if="$subReady['proposal']">This statement seems to be missing.</p>

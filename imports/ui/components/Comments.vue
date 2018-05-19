@@ -1,5 +1,8 @@
 <template>
-  <blaze-template :key="id" template="commentsBox" :data="{ id }" />
+  <blaze-template
+    :key="id"
+    template="commentsBox"
+    :data="{ id }" />
 </template>
 
 <script>
