@@ -7,7 +7,7 @@
         :value="t"
         v-model="checkedTags"
       />
-      <label :for="t"><ae-badge>{{t}}</ae-badge></label>
+      <label :for="t"><ae-badge>{{ t }}</ae-badge></label>
     </span>
   </div>
 </template>

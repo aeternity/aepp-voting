@@ -3,7 +3,7 @@
     <button :class="{ active }" @click="click" :id="_uid">
       <slot />
     </button>
-    <label :for="_uid">{{label}}</label>
+    <label :for="_uid">{{ label }}</label>
   </div>
 </template>
 

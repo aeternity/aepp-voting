@@ -8,7 +8,7 @@
         <ae-icon slot="icon" invert type="dramatic" name="plus" /> Create New
       </ae-button>
       <ae-button @click="toggleAuth">
-        {{loggedIn ? 'Log out' : 'Log in'}}
+        {{ loggedIn ? 'Log out' : 'Log in' }}
       </ae-button>
 
       <ae-button
@@ -28,7 +28,7 @@
     </ae-header>
 
     <ae-banner v-if="alert">
-      {{alert}}
+      {{ alert }}
       <ae-button slot="right" plain size="small" @click="closeAlert">
         <ae-icon slot="icon" name="close" />
       </ae-button>
@@ -41,7 +41,7 @@
         :active="currentSort === s"
         :to="{ name: 'proposal-list', params: { sort: s, tag: currentTag } }"
       >
-        {{s}}
+        {{ s }}
       </ae-filter-item>
       <ae-filter-separator />
       <ae-filter-item
@@ -50,7 +50,7 @@
         :active="currentTag === t"
         :to="{ name: 'proposal-list', params: { sort: currentSort, tag: t } }"
       >
-        {{t}}
+        {{ t }}
       </ae-filter-item>
     </ae-filter-list>
 
@@ -61,7 +61,7 @@
         :active="currentSort === s"
         :to="{ name: 'proposal-list', params: { sort: s, tag: currentTag } }"
       >
-        {{s}}
+        {{ s }}
       </ae-filter-item>
     </ae-filter-list>
 
@@ -72,7 +72,7 @@
         :active="currentTag === t"
         :to="{ name: 'proposal-list', params: { sort: currentSort, tag: t } }"
       >
-        {{t}}
+        {{ t }}
       </ae-filter-item>
     </ae-filter-list>
   </div>

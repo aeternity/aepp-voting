@@ -4,7 +4,7 @@
       Copy this message and sign it with your Ethereum address
     </div>
     <div>
-      <strong>{{message}}</strong><br/>
+      <strong>{{ message }}</strong><br/>
     </div>
     <copy-button :contentToCopy="message" />
     <label for="signature">Then paste your signature here</label>

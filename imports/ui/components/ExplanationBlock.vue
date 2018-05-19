@@ -11,7 +11,7 @@
         :style="getVideoStyle(video.thumbnailUrl)"
         @click="setYoutubeVideoId(video.youtubeId)"
       >
-        <div>{{video.title}}</div>
+        <div>{{ video.title }}</div>
         <i class="fa fa-play" />
       </div>
     </div>

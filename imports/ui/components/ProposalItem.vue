@@ -5,20 +5,20 @@
   >
     <div class="proposal-item">
       <div class="content">
-        <h2>{{proposal.statement}}</h2>
+        <h2>{{ proposal.statement }}</h2>
         <proposal-secondary :proposal="proposal" />
         <table>
           <tr>
-            <td>{{upVoteProcent}}%</td>
+            <td>{{ upVoteProcent }}%</td>
             <td><i class="fa fa-thumbs-up" /></td>
             <td>Agreed</td>
-            <td>{{upVoteAmount}}&nbsp;Æ</td>
+            <td>{{ upVoteAmount }}&nbsp;Æ</td>
           </tr>
           <tr>
-            <td>{{downVoteProcent}}%</td>
+            <td>{{ downVoteProcent }}%</td>
             <td><i class="fa fa-thumbs-down" /></td>
             <td>Disagreed</td>
-            <td>{{downVoteAmount}}&nbsp;Æ</td>
+            <td>{{ downVoteAmount }}&nbsp;Æ</td>
           </tr>
         </table>
       </div>

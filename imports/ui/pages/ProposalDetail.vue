@@ -5,7 +5,7 @@
     :closeHandler="close"
   >
     <div class="proposal-detail">
-      <h2>{{proposal.statement}}</h2>
+      <h2>{{ proposal.statement }}</h2>
       <proposal-secondary :proposal="proposal" />
       <sign-statement
         :statement="proposal.statement"
@@ -15,11 +15,11 @@
         :signatureHandler="signatureHandler"
       />
       <div class="current-status" v-if="proposal.vote">
-        You {{proposal.vote.upVote ? 'agreed to' : 'disagreed with'}} this statement on
-        {{proposal.vote.createdAt.toLocaleDateString('en-US', {
-        year: 'numeric', month: 'short', day: 'numeric'
-      })}}
-        with a voting weight of {{balance}} Æ
+        You {{ proposal.vote.upVote ? 'agreed to' : 'disagreed with' }} this statement on
+        {{ proposal.vote.createdAt.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric'
+        }) }}
+        with a voting weight of {{ balance }} Æ
       </div>
       <div class="space-around admin-panel" v-if="admin">
         Admin
@@ -38,7 +38,7 @@
       </div>
       <div class="space-around share-link">
         <h3>Share this link</h3>
-        <span>{{proposalUrl}}</span>
+        <span>{{ proposalUrl }}</span>
         <copy-button :contentToCopy="proposalUrl" />
       </div>
       <comments class="space-around" :id="proposal._id" />

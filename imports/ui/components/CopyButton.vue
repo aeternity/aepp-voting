@@ -8,7 +8,7 @@
     size="small"
     uppercase
   >
-    {{label}}
+    {{ label }}
   </ae-button>
 </template>
 
