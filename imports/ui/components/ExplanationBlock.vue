@@ -7,6 +7,7 @@
     <div class="explanation-block">
       <div
         v-for="video in videos"
+        :key="video.youtubeId"
         :style="getVideoStyle(video.thumbnailUrl)"
         @click="setYoutubeVideoId(video.youtubeId)"
       >

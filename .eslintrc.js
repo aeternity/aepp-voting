@@ -11,7 +11,7 @@ module.exports = {
   extends: [
     'airbnb-base',
     'plugin:meteor/recommended',
-    'plugin:vue/base',
+    'plugin:vue/essential',
   ],
   plugins: [
     'meteor',
