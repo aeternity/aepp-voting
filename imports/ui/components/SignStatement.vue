@@ -19,7 +19,7 @@
     <sign-message
       v-if="!canSignByWeb3"
       :message="messageToSign"
-      :signature-handler="this.vote"
+      :signature-handler="vote"
     />
   </div>
 </template>

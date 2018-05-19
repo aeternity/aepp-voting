@@ -1,6 +1,6 @@
 <template>
   <ae-panel
-    :to="{ name: 'proposal', params: { id: this.proposal._id } }"
+    :to="{ name: 'proposal', params: { id: proposal._id } }"
     :ratio-top="ratio"
   >
     <div class="proposal-item">
