@@ -16,7 +16,9 @@
 import { AeButton } from '@aeternity/aepp-components';
 
 export default {
-  props: ['contentToCopy'],
+  props: {
+    contentToCopy: { type: String, required: true },
+  },
   components: { AeButton },
   data() {
     return {

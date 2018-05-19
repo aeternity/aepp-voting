@@ -37,8 +37,8 @@ export default {
   props: {
     currentVote: { type: Boolean, default: undefined },
     desiredVote: { type: Boolean, default: true },
-    signatureHandler: { type: Function },
-    statement: { type: String },
+    signatureHandler: { type: Function, required: true },
+    statement: { type: String, required: true },
   },
   data() {
     return {

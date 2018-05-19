@@ -72,7 +72,10 @@ import TagsSelect from '../components/TagsSelect.vue';
 import ProposalSecondary from '../components/ProposalSecondary.vue';
 
 export default {
-  props: ['id', 'vote'],
+  props: {
+    id: { type: String, required: true },
+    vote: { type: String, default: '' },
+  },
   components: {
     AePanel,
     AeButton,

@@ -11,7 +11,7 @@ module.exports = {
   extends: [
     'airbnb-base',
     'plugin:meteor/recommended',
-    'plugin:vue/essential',
+    'plugin:vue/strongly-recommended',
   ],
   plugins: [
     'meteor',
@@ -30,10 +30,5 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
     'import/prefer-default-export': 0,
-    'vue/html-indent': 2,
-    'vue/max-attributes-per-line': 2,
-    'vue/mustache-interpolation-spacing': 2,
-    'vue/attribute-hyphenation': 2,
-    'vue/html-self-closing': 2,
   }
 };

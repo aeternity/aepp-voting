@@ -14,7 +14,7 @@
 export default {
   props: {
     active: { type: Boolean, default: false },
-    label: String,
+    label: { type: String, required: true },
   },
   methods: {
     click(e) {

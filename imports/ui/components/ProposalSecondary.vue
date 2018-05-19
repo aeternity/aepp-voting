@@ -14,7 +14,9 @@ import { dateFormat } from '../utils/filters';
 export default {
   components: { AeBadge },
   filters: { dateFormat },
-  props: ['proposal'],
+  props: {
+    proposal: { type: Object, required: true },
+  },
 };
 </script>
 

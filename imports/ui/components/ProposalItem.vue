@@ -36,7 +36,9 @@ import ProposalSecondary from './ProposalSecondary.vue';
 
 export default {
   components: { AePanel, ProposalSecondary },
-  props: ['proposal'],
+  props: {
+    proposal: { type: Object, required: true },
+  },
   computed:
       ['up', 'down'].reduce((p, d) => ({
         ...p,

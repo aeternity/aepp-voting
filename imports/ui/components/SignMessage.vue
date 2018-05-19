@@ -29,8 +29,8 @@ import CopyButton from './CopyButton.vue';
 export default {
   components: { AeButton, CopyButton },
   props: {
-    signatureHandler: { type: Function },
-    message: { type: String },
+    signatureHandler: { type: Function, required: true },
+    message: { type: String, required: true },
   },
   data() {
     return {
