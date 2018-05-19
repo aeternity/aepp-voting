@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  parser: 'vue-eslint-parser',
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module'
   },
   env: {
@@ -10,9 +11,9 @@ module.exports = {
   extends: [
     'airbnb-base',
     'plugin:meteor/recommended',
+    'plugin:vue/base',
   ],
   plugins: [
-    'html',
     'meteor',
   ],
   settings: {
@@ -29,5 +30,6 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
     'import/prefer-default-export': 0,
+    indent: 0,
   }
 };
