@@ -11,9 +11,9 @@
     <copy-button :content-to-copy="message" />
     <label for="signature">Then paste your signature here</label>
     <input
-      required
       id="signature"
       v-model="signature"
+      required
       autocomplete="off">
     <ae-button
       type="dramatic"

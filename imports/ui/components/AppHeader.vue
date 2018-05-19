@@ -61,8 +61,8 @@
     </ae-banner>
 
     <ae-filter-list
-      class="desktop"
-      v-if="proposalList">
+      v-if="proposalList"
+      class="desktop">
       <ae-filter-item
         v-for="s in sorts"
         :key="s"
@@ -83,8 +83,8 @@
     </ae-filter-list>
 
     <ae-filter-list
-      class="mobile"
-      v-if="proposalList">
+      v-if="proposalList"
+      class="mobile">
       <ae-filter-item
         v-for="s in sorts"
         :key="s"
@@ -96,8 +96,8 @@
     </ae-filter-list>
 
     <ae-filter-list
-      class="mobile"
-      v-if="proposalList">
+      v-if="proposalList"
+      class="mobile">
       <ae-filter-item
         v-for="t in tags"
         :key="t"

@@ -4,10 +4,10 @@
       v-for="t in tags"
       :key="t">
       <input
-        type="checkbox"
         :id="t"
         :value="t"
         v-model="checkedTags"
+        type="checkbox"
       >
       <label :for="t"><ae-badge>{{ t }}</ae-badge></label>
     </span>

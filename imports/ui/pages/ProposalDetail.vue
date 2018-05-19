@@ -1,7 +1,7 @@
 <template>
   <ae-panel
-    :ratio-top="ratio"
     v-if="proposal"
+    :ratio-top="ratio"
     :close-handler="close"
   >
     <div class="proposal-detail">
@@ -15,8 +15,8 @@
         :signature-handler="signatureHandler"
       />
       <div
-        class="current-status"
-        v-if="proposal.vote">
+        v-if="proposal.vote"
+        class="current-status">
         You {{ proposal.vote.upVote ? 'agreed to' : 'disagreed with' }} this statement on
         {{ proposal.vote.createdAt.toLocaleDateString('en-US', {
           year: 'numeric', month: 'short', day: 'numeric'
@@ -24,19 +24,19 @@
         with a voting weight of {{ balance }} Æ
       </div>
       <div
-        class="space-around admin-panel"
-        v-if="admin">
+        v-if="admin"
+        class="space-around admin-panel">
         Admin
         <tags-select
           :value="proposal.tags"
           @input="updateTags" />
         <div>
           <ae-button
-            @click="removeProposal"
             type="dramatic"
             size="small"
             uppercase
             title="Remove this statement"
+            @click="removeProposal"
           >
             <ae-icon
               slot="icon"
@@ -52,8 +52,8 @@
         <copy-button :content-to-copy="proposalUrl" />
       </div>
       <comments
-        class="space-around"
-        :id="proposal._id" />
+        :id="proposal._id"
+        class="space-around" />
     </div>
   </ae-panel>
   <p v-else-if="$subReady['proposal']">This statement seems to be missing.</p>

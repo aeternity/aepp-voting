@@ -2,16 +2,16 @@
   <div class="sign-statement">
     <div class="buttons">
       <vote-button
+        :active="currentVote || !canSignByWeb3 && upVote"
         label="I agree"
         @click="setUpVote(true)"
-        :active="currentVote || !canSignByWeb3 && upVote"
       >
         <i class="fa fa-thumbs-up" />
       </vote-button>
       <vote-button
+        :active="currentVote === false || !canSignByWeb3 && !upVote"
         label="I disagree"
         @click="setUpVote(false)"
-        :active="currentVote === false || !canSignByWeb3 && !upVote"
       >
         <i class="fa fa-thumbs-down" />
       </vote-button>

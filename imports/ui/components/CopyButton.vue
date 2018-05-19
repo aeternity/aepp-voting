@@ -1,12 +1,12 @@
 <template>
   <ae-button
-    class="copy-button"
     v-clipboard="contentToCopy"
     :key="contentToCopy"
-    @success="label = 'Copied!'"
-    @error="label = 'Copy Error!'"
+    class="copy-button"
     size="small"
     uppercase
+    @success="label = 'Copied!'"
+    @error="label = 'Copy Error!'"
   >
     {{ label }}
   </ae-button>

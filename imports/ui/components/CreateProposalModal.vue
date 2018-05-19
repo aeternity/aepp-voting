@@ -6,10 +6,10 @@
     <div class="create-proposal-modal">
       <label :for="_uid">Statement</label>
       <input
-        placeholder="Enter a short statement text ..."
+        v-focus.lazy="true"
         v-model="statement"
         :id="_uid"
-        v-focus.lazy="true"
+        placeholder="Enter a short statement text ..."
       >
 
       <p>Choose one or multiple categories</p>
