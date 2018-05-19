@@ -1,21 +1,23 @@
 <template>
-  <ae-panel
-    :close-handler="closeHandler"
-    :class="{ hidden: !display }"
-    title="How to sign your vote"
-  >
-    <div class="explanation-block">
-      <div
-        v-for="video in videos"
-        :key="video.youtubeId"
-        :style="getVideoStyle(video.thumbnailUrl)"
-        @click="setYoutubeVideoId(video.youtubeId)"
-      >
-        <div>{{ video.title }}</div>
-        <i class="fa fa-play" />
+  <transition name="slide">
+    <ae-panel
+      v-if="!display"
+      :close-handler="closeHandler"
+      title="How to sign your vote"
+    >
+      <div class="explanation-block">
+        <div
+          v-for="video in videos"
+          :key="video.youtubeId"
+          :style="getVideoStyle(video.thumbnailUrl)"
+          @click="setYoutubeVideoId(video.youtubeId)"
+        >
+          <div>{{ video.title }}</div>
+          <i class="fa fa-play" />
+        </div>
       </div>
-    </div>
-  </ae-panel>
+    </ae-panel>
+  </transition>
 </template>
 
 <script>
@@ -54,15 +56,17 @@ export default {
   @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .ae-panel {
-    overflow: hidden;
-    transition: max-height .3s, opacity .5s, margin .5s;
-    max-height: 600px;
+    &.slide- {
+      &enter-active, &leave-active {
+        transition: max-height .3s, opacity .5s, margin-bottom .5s;
+        max-height: 600px;
+      }
 
-    &.hidden {
-      max-height: 0;
-      opacity: 0;
-      margin-top: 0;
-      margin-bottom: 0;
+      &enter, &leave-to {
+        max-height: 0;
+        opacity: 0;
+        margin-bottom: -20px;
+      }
     }
   }
 
@@ -124,14 +128,6 @@ export default {
         flex-shrink: 0;
         width: 100%;
       }
-    }
-  }
-</style>
-
-<style lang="scss">
-  .ae-panel.hidden {
-    & + *, & + * > :first-child {
-      margin-top: 0 !important;
     }
   }
 </style>
