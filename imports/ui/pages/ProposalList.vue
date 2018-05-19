@@ -4,7 +4,7 @@
       v-for="p in proposals"
       :key="p._id"
       :proposal="p"
-    ></proposal-item>
+    />
     <mugen-scroll
       v-if="gotMore"
       :handler="loadMore"

@@ -7,7 +7,7 @@
         :src="`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`"
         frameborder="0"
         allowfullscreen
-      ></iframe>
+      />
     </div>
   </ae-modal>
 </template>

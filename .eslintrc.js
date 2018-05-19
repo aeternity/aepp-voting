@@ -34,5 +34,6 @@ module.exports = {
     'vue/max-attributes-per-line': 2,
     'vue/mustache-interpolation-spacing': 2,
     'vue/attribute-hyphenation': 2,
+    'vue/html-self-closing': 2,
   }
 };

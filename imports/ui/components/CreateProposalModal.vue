@@ -10,7 +10,7 @@
         v-model="statement"
         :id="_uid"
         v-focus.lazy="true"
-      />
+      >
 
       <p>Choose one or multiple categories</p>
       <tags-select v-model="tags" />
