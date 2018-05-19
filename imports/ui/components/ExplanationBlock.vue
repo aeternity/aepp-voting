@@ -18,35 +18,35 @@
 </template>
 
 <script>
-  import { mapState, mapMutations } from 'vuex';
-  import { AePanel } from '@aeternity/aepp-components';
+import { mapState, mapMutations } from 'vuex';
+import { AePanel } from '@aeternity/aepp-components';
 
-  export default {
-    components: { AePanel },
-    data() {
-      return {
-        videos: [{
-          title: 'With your wallet',
-          youtubeId: 'a6cTTcUePAc',
-          thumbnailUrl: '/images/sign-with-wallet.jpg',
-        }, {
-          title: 'With Metamask',
-          youtubeId: 'bwaDtur-SI0',
-          thumbnailUrl: '/images/sign-with-metamask.jpg',
-        }],
-      };
-    },
-    computed: mapState({
-      display: state => state.voting.explanationBlockShown,
+export default {
+  components: { AePanel },
+  data() {
+    return {
+      videos: [{
+        title: 'With your wallet',
+        youtubeId: 'a6cTTcUePAc',
+        thumbnailUrl: '/images/sign-with-wallet.jpg',
+      }, {
+        title: 'With Metamask',
+        youtubeId: 'bwaDtur-SI0',
+        thumbnailUrl: '/images/sign-with-metamask.jpg',
+      }],
+    };
+  },
+  computed: mapState({
+    display: state => state.voting.explanationBlockShown,
+  }),
+  methods: {
+    ...mapMutations({
+      closeHandler: 'voting/toggleExplanationBlock',
+      setYoutubeVideoId: 'voting/setYoutubeVideoId',
     }),
-    methods: {
-      ...mapMutations({
-        closeHandler: 'voting/toggleExplanationBlock',
-        setYoutubeVideoId: 'voting/setYoutubeVideoId',
-      }),
-      getVideoStyle: url => ({ backgroundImage: `url(${url})` }),
-    },
-  };
+    getVideoStyle: url => ({ backgroundImage: `url(${url})` }),
+  },
+};
 </script>
 
 <style lang="scss" scoped>

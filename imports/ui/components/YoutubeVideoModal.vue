@@ -11,20 +11,20 @@
 </template>
 
 <script>
-  import { mapState, mapMutations } from 'vuex';
-  import { AeModal } from '@aeternity/aepp-components';
+import { mapState, mapMutations } from 'vuex';
+import { AeModal } from '@aeternity/aepp-components';
 
-  export default {
-    components: { AeModal },
-    computed: mapState({
-      videoId: state => state.voting.youtubeVideoId,
+export default {
+  components: { AeModal },
+  computed: mapState({
+    videoId: state => state.voting.youtubeVideoId,
+  }),
+  methods: {
+    ...mapMutations({
+      setYoutubeVideoId: 'voting/setYoutubeVideoId',
     }),
-    methods: {
-      ...mapMutations({
-        setYoutubeVideoId: 'voting/setYoutubeVideoId',
-      }),
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

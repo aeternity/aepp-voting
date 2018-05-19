@@ -20,46 +20,46 @@
 </template>
 
 <script>
-  import { mapState, mapMutations } from 'vuex';
-  import { focus } from 'vue-focus';
-  import { AeModal } from '@aeternity/aepp-components';
-  import SignStatement from './SignStatement.vue';
-  import TagsSelect from './TagsSelect.vue';
+import { mapState, mapMutations } from 'vuex';
+import { focus } from 'vue-focus';
+import { AeModal } from '@aeternity/aepp-components';
+import SignStatement from './SignStatement.vue';
+import TagsSelect from './TagsSelect.vue';
 
-  export default {
-    data() {
-      return {
-        statement: '',
-        tags: [],
-      };
-    },
-    components: {
-      AeModal,
-      SignStatement,
-      TagsSelect,
-    },
-    directives: { focus },
-    computed: mapState({
-      visible: state => state.voting.createProposalModalShown,
+export default {
+  data() {
+    return {
+      statement: '',
+      tags: [],
+    };
+  },
+  components: {
+    AeModal,
+    SignStatement,
+    TagsSelect,
+  },
+  directives: { focus },
+  computed: mapState({
+    visible: state => state.voting.createProposalModalShown,
+  }),
+  methods: {
+    ...mapMutations({
+      closeHandler: 'voting/toggleCreateProposalModal',
     }),
-    methods: {
-      ...mapMutations({
-        closeHandler: 'voting/toggleCreateProposalModal',
-      }),
-      async signatureHandler({ signature, upVote }) {
-        await this.$store.dispatch('voting/createProposal', {
-          statement: this.statement,
-          signature,
-          upVote,
-          tags: this.tags,
-        });
-        this.$router.push({
-          name: 'proposal-list',
-          params: { sort: 'newest' },
-        });
-      },
+    async signatureHandler({ signature, upVote }) {
+      await this.$store.dispatch('voting/createProposal', {
+        statement: this.statement,
+        signature,
+        upVote,
+        tags: this.tags,
+      });
+      this.$router.push({
+        name: 'proposal-list',
+        params: { sort: 'newest' },
+      });
     },
-  };
+  },
+};
 </script>
 
 <style lang="scss">

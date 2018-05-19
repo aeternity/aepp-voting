@@ -79,65 +79,65 @@
 </template>
 
 <script>
-  import { mapState, mapMutations, mapActions } from 'vuex';
-  import {
+import { mapState, mapMutations, mapActions } from 'vuex';
+import {
+  AeHeader,
+  AeBanner, AeButton, AeIcon,
+  AeFilterList, AeFilterItem, AeFilterSeparator,
+} from '@aeternity/aepp-components';
+
+import { Proposals } from '../../api/proposals/proposals';
+
+export default {
+  props: {
+    hidden: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  components: {
     AeHeader,
-    AeBanner, AeButton, AeIcon,
-    AeFilterList, AeFilterItem, AeFilterSeparator,
-  } from '@aeternity/aepp-components';
-
-  import { Proposals } from '../../api/proposals/proposals';
-
-  export default {
-    props: {
-      hidden: {
-        type: Boolean,
-        default: false,
-      },
+    AeBanner,
+    AeButton,
+    AeIcon,
+    AeFilterList,
+    AeFilterItem,
+    AeFilterSeparator,
+  },
+  data() {
+    return {
+      sorts: Object.keys(Proposals.sortTypes),
+      tags: [Proposals.defaultTag, ...Proposals.tags],
+    };
+  },
+  methods: {
+    ...mapMutations({
+      toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
+      toggleExplanationBlock: 'voting/toggleExplanationBlock',
+    }),
+    closeAlert() {
+      this.$store.commit('voting/setAlert');
     },
-    components: {
-      AeHeader,
-      AeBanner,
-      AeButton,
-      AeIcon,
-      AeFilterList,
-      AeFilterItem,
-      AeFilterSeparator,
+    ...mapActions({
+      toggleAuth: 'voting/toggleAuth',
+    }),
+  },
+  computed: {
+    ...mapState({
+      loggedIn: state => state.voting.loggedIn,
+      alert: state => state.voting.alert,
+    }),
+    proposalList() {
+      return this.$route.name === 'proposal-list';
     },
-    data() {
-      return {
-        sorts: Object.keys(Proposals.sortTypes),
-        tags: [Proposals.defaultTag, ...Proposals.tags],
-      };
+    currentSort() {
+      return this.$route.params.sort || Proposals.defaultSort;
     },
-    methods: {
-      ...mapMutations({
-        toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
-        toggleExplanationBlock: 'voting/toggleExplanationBlock',
-      }),
-      closeAlert() {
-        this.$store.commit('voting/setAlert');
-      },
-      ...mapActions({
-        toggleAuth: 'voting/toggleAuth',
-      }),
+    currentTag() {
+      return this.$route.params.tag || Proposals.defaultTag;
     },
-    computed: {
-      ...mapState({
-        loggedIn: state => state.voting.loggedIn,
-        alert: state => state.voting.alert,
-      }),
-      proposalList() {
-        return this.$route.name === 'proposal-list';
-      },
-      currentSort() {
-        return this.$route.params.sort || Proposals.defaultSort;
-      },
-      currentTag() {
-        return this.$route.params.tag || Proposals.defaultTag;
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -48,88 +48,88 @@
 </template>
 
 <script>
-  import { Meteor } from 'meteor/meteor';
-  import { mapState } from 'vuex';
-  import { AePanel, AeButton, AeIcon } from '@aeternity/aepp-components';
-  import { Accounts } from '../../api/accounts/accounts';
-  import { Proposals } from '../../api/proposals/proposals';
-  import SignStatement from '../components/SignStatement.vue';
-  import CopyButton from '../components/CopyButton.vue';
-  import Comments from '../components/Comments.vue';
-  import TagsSelect from '../components/TagsSelect.vue';
-  import ProposalSecondary from '../components/ProposalSecondary.vue';
+import { Meteor } from 'meteor/meteor';
+import { mapState } from 'vuex';
+import { AePanel, AeButton, AeIcon } from '@aeternity/aepp-components';
+import { Accounts } from '../../api/accounts/accounts';
+import { Proposals } from '../../api/proposals/proposals';
+import SignStatement from '../components/SignStatement.vue';
+import CopyButton from '../components/CopyButton.vue';
+import Comments from '../components/Comments.vue';
+import TagsSelect from '../components/TagsSelect.vue';
+import ProposalSecondary from '../components/ProposalSecondary.vue';
 
-  export default {
-    props: ['id', 'vote'],
-    components: {
-      AePanel,
-      AeButton,
-      AeIcon,
-      SignStatement,
-      CopyButton,
-      Comments,
-      TagsSelect,
-      ProposalSecondary,
-    },
-    meteor: {
-      $subscribe: {
-        proposal() {
-          return [
-            this.id,
-            this.$store.state.voting.accountId,
-          ];
-        },
-        'accounts.balance': function accountsBalance() {
-          return [this.$store.state.voting.accountId];
-        },
+export default {
+  props: ['id', 'vote'],
+  components: {
+    AePanel,
+    AeButton,
+    AeIcon,
+    SignStatement,
+    CopyButton,
+    Comments,
+    TagsSelect,
+    ProposalSecondary,
+  },
+  meteor: {
+    $subscribe: {
+      proposal() {
+        return [
+          this.id,
+          this.$store.state.voting.accountId,
+        ];
       },
-      proposal: {
-        params() {
-          return {
-            accountId: this.$store.state.voting.accountId,
-          };
-        },
-        update: ({ accountId }) =>
-          Proposals
-            .find()
-            .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] }))[0],
-      },
-      balance() {
-        const account = Accounts.findOne(this.$store.state.voting.accountId);
-        return account && account.balance;
+      'accounts.balance': function accountsBalance() {
+        return [this.$store.state.voting.accountId];
       },
     },
-    computed: {
-      ...mapState({
-        admin: state => state.voting.admin,
-      }),
-      proposalUrl() {
-        return `${Meteor.absoluteUrl()}statements/${this.$route.params.id}`;
+    proposal: {
+      params() {
+        return {
+          accountId: this.$store.state.voting.accountId,
+        };
       },
-      ratio() {
-        return this.proposal.upVoteAmount / this.proposal.totalVoteAmount;
-      },
+      update: ({ accountId }) =>
+        Proposals
+          .find()
+          .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] }))[0],
     },
-    methods: {
-      close() {
-        this.$router.push(this.$store.state.route.from.path);
-      },
-      signatureHandler({ signature, upVote }) {
-        this.$store.dispatch('voting/vote', {
-          proposalId: this.id, signature, upVote,
-        });
-      },
-      removeProposal() {
-        // eslint-disable-next-line no-restricted-globals, no-alert
-        if (confirm(`Are you sure want to remove "${this.proposal.statement}" statement?`)) {
-          Meteor.call('proposals.remove', this.proposal._id);
-        }
-      },
-      updateTags(tags) {
-        Meteor.call('proposals.updateTags', this.proposal._id, tags);
-      },
+    balance() {
+      const account = Accounts.findOne(this.$store.state.voting.accountId);
+      return account && account.balance;
     },
-  };
+  },
+  computed: {
+    ...mapState({
+      admin: state => state.voting.admin,
+    }),
+    proposalUrl() {
+      return `${Meteor.absoluteUrl()}statements/${this.$route.params.id}`;
+    },
+    ratio() {
+      return this.proposal.upVoteAmount / this.proposal.totalVoteAmount;
+    },
+  },
+  methods: {
+    close() {
+      this.$router.push(this.$store.state.route.from.path);
+    },
+    signatureHandler({ signature, upVote }) {
+      this.$store.dispatch('voting/vote', {
+        proposalId: this.id, signature, upVote,
+      });
+    },
+    removeProposal() {
+      // eslint-disable-next-line no-restricted-globals, no-alert
+      if (confirm(`Are you sure want to remove "${this.proposal.statement}" statement?`)) {
+        Meteor.call('proposals.remove', this.proposal._id);
+      }
+    },
+    updateTags(tags) {
+      Meteor.call('proposals.updateTags', this.proposal._id, tags);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

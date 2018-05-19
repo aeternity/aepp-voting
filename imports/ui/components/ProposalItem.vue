@@ -30,14 +30,14 @@
 </template>
 
 <script>
-  import format from 'format-number';
-  import { AePanel } from '@aeternity/aepp-components';
-  import ProposalSecondary from './ProposalSecondary.vue';
+import format from 'format-number';
+import { AePanel } from '@aeternity/aepp-components';
+import ProposalSecondary from './ProposalSecondary.vue';
 
-  export default {
-    components: { AePanel, ProposalSecondary },
-    props: ['proposal'],
-    computed:
+export default {
+  components: { AePanel, ProposalSecondary },
+  props: ['proposal'],
+  computed:
       ['up', 'down'].reduce((p, d) => ({
         ...p,
         [`${d}VoteAmount`]() {
@@ -54,7 +54,7 @@
           return this.proposal.upVoteAmount / this.proposal.totalVoteAmount;
         },
       }),
-  };
+};
 </script>
 
 <style lang="scss" scoped>

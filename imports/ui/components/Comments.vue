@@ -3,9 +3,9 @@
 </template>
 
 <script>
-  export default {
-    props: ['id'],
-  };
+export default {
+  props: ['id'],
+};
 </script>
 
 <style lang="scss">

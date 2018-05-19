@@ -22,67 +22,67 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
-  import { Counts } from 'meteor/tmeasday:publish-counts';
-  import MugenScroll from 'vue-mugen-scroll';
-  import { Proposals } from '../../api/proposals/proposals';
-  import ProposalItem from '../components/ProposalItem.vue';
+import { mapMutations } from 'vuex';
+import { Counts } from 'meteor/tmeasday:publish-counts';
+import MugenScroll from 'vue-mugen-scroll';
+import { Proposals } from '../../api/proposals/proposals';
+import ProposalItem from '../components/ProposalItem.vue';
 
-  export default {
-    components: {
-      ProposalItem,
-      MugenScroll,
+export default {
+  components: {
+    ProposalItem,
+    MugenScroll,
+  },
+  props: {
+    sort: { type: String, default: Proposals.defaultSort },
+    tag: { type: String, default: Proposals.defaultTag },
+  },
+  computed: {
+    gotMore() {
+      return this.proposals.length < this.proposalsCount;
     },
-    props: {
-      sort: { type: String, default: Proposals.defaultSort },
-      tag: { type: String, default: Proposals.defaultTag },
+    loaded() {
+      return this.proposalsCount;
     },
-    computed: {
-      gotMore() {
-        return this.proposals.length < this.proposalsCount;
-      },
-      loaded() {
-        return this.proposalsCount;
-      },
-      loading() {
-        return false;
-      },
+    loading() {
+      return false;
     },
-    meteor: {
-      $subscribe: {
-        'proposals.list': function proposalsList() {
-          return [
-            this.sort,
-            this.tag,
-            this.$store.state.voting.limit,
-            this.$store.state.voting.accountId,
-          ];
-        },
-        'proposals.count': [],
+  },
+  meteor: {
+    $subscribe: {
+      'proposals.list': function proposalsList() {
+        return [
+          this.sort,
+          this.tag,
+          this.$store.state.voting.limit,
+          this.$store.state.voting.accountId,
+        ];
       },
-      proposals: {
-        params() {
-          return {
-            sort: this.sort,
-            tag: this.tag,
-            accountId: this.$store.state.voting.accountId,
-          };
-        },
-        update: ({ sort, tag, accountId }) =>
-          Proposals
-            .find({
-              ...tag === Proposals.defaultTag ? {} : { tags: tag },
-            }, { sort: Proposals.sortTypes[sort] })
-            .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] })),
-      },
-      proposalsCount() {
-        return Counts.get('proposals');
-      },
+      'proposals.count': [],
     },
-    methods: mapMutations({
-      loadMore: 'voting/incrementLimit',
-    }),
-  };
+    proposals: {
+      params() {
+        return {
+          sort: this.sort,
+          tag: this.tag,
+          accountId: this.$store.state.voting.accountId,
+        };
+      },
+      update: ({ sort, tag, accountId }) =>
+        Proposals
+          .find({
+            ...tag === Proposals.defaultTag ? {} : { tags: tag },
+          }, { sort: Proposals.sortTypes[sort] })
+          .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] })),
+    },
+    proposalsCount() {
+      return Counts.get('proposals');
+    },
+  },
+  methods: mapMutations({
+    loadMore: 'voting/incrementLimit',
+  }),
+};
 </script>
 
 <style lang="scss" scoped>

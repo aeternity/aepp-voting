@@ -6,14 +6,14 @@
 </template>
 
 <script>
-  import { AeBadge } from '@aeternity/aepp-components';
-  import { dateFormat } from '../utils/filters';
+import { AeBadge } from '@aeternity/aepp-components';
+import { dateFormat } from '../utils/filters';
 
-  export default {
-    components: { AeBadge },
-    filters: { dateFormat },
-    props: ['proposal'],
-  };
+export default {
+  components: { AeBadge },
+  filters: { dateFormat },
+  props: ['proposal'],
+};
 </script>
 
 <style lang="scss" scoped>

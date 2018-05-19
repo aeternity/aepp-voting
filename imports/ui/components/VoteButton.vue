@@ -8,17 +8,17 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      active: { type: Boolean, default: false },
-      label: String,
+export default {
+  props: {
+    active: { type: Boolean, default: false },
+    label: String,
+  },
+  methods: {
+    click(e) {
+      this.$emit('click', e);
     },
-    methods: {
-      click(e) {
-        this.$emit('click', e);
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss">

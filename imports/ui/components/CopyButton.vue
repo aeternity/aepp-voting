@@ -13,20 +13,20 @@
 </template>
 
 <script>
-  import { AeButton } from '@aeternity/aepp-components';
+import { AeButton } from '@aeternity/aepp-components';
 
-  export default {
-    props: ['contentToCopy'],
-    components: { AeButton },
-    data() {
-      return {
-        label: 'Copy',
-      };
-    },
-    mounted() {
-      this.$el.setAttribute('type', 'button');
-    },
-  };
+export default {
+  props: ['contentToCopy'],
+  components: { AeButton },
+  data() {
+    return {
+      label: 'Copy',
+    };
+  },
+  mounted() {
+    this.$el.setAttribute('type', 'button');
+  },
+};
 </script>
 
 <style lang="scss" scoped>

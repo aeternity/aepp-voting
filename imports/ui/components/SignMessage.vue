@@ -14,26 +14,26 @@
 </template>
 
 <script>
-  import { AeButton } from '@aeternity/aepp-components';
-  import CopyButton from './CopyButton.vue';
+import { AeButton } from '@aeternity/aepp-components';
+import CopyButton from './CopyButton.vue';
 
-  export default {
-    components: { AeButton, CopyButton },
-    props: {
-      signatureHandler: { type: Function },
-      message: { type: String },
+export default {
+  components: { AeButton, CopyButton },
+  props: {
+    signatureHandler: { type: Function },
+    message: { type: String },
+  },
+  data() {
+    return {
+      signature: '',
+    };
+  },
+  methods: {
+    sign() {
+      this.signatureHandler(this.signature);
     },
-    data() {
-      return {
-        signature: '',
-      };
-    },
-    methods: {
-      sign() {
-        this.signatureHandler(this.signature);
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss">
