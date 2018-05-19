@@ -18,7 +18,7 @@
       <p>Agree or disagree and sign your vote</p>
       <sign-statement
         :statement="statement"
-        :signatureHandler="signatureHandler"
+        :signature-handler="signatureHandler"
       />
     </div>
   </ae-modal>

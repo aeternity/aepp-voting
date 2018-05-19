@@ -1,18 +1,18 @@
 <template>
   <ae-panel
-    :ratioTop="ratio"
+    :ratio-top="ratio"
     v-if="proposal"
-    :closeHandler="close"
+    :close-handler="close"
   >
     <div class="proposal-detail">
       <h2>{{ proposal.statement }}</h2>
       <proposal-secondary :proposal="proposal" />
       <sign-statement
         :statement="proposal.statement"
-        :currentVote="proposal.vote && proposal.vote.upVote"
-        :desiredVote="vote !== 'doubt'"
-        :selectedVote="vote"
-        :signatureHandler="signatureHandler"
+        :current-vote="proposal.vote && proposal.vote.upVote"
+        :desired-vote="vote !== 'doubt'"
+        :selected-vote="vote"
+        :signature-handler="signatureHandler"
       />
       <div
         class="current-status"
@@ -49,7 +49,7 @@
       <div class="space-around share-link">
         <h3>Share this link</h3>
         <span>{{ proposalUrl }}</span>
-        <copy-button :contentToCopy="proposalUrl" />
+        <copy-button :content-to-copy="proposalUrl" />
       </div>
       <comments
         class="space-around"

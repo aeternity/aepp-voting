@@ -8,7 +8,7 @@
     <div>
       <strong>{{ message }}</strong><br/>
     </div>
-    <copy-button :contentToCopy="message" />
+    <copy-button :content-to-copy="message" />
     <label for="signature">Then paste your signature here</label>
     <input
       required

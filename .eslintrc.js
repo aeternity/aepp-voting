@@ -33,5 +33,6 @@ module.exports = {
     'vue/html-indent': 2,
     'vue/max-attributes-per-line': 2,
     'vue/mustache-interpolation-spacing': 2,
+    'vue/attribute-hyphenation': 2,
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <ae-panel
     :to="{ name: 'proposal', params: { id: this.proposal._id } }"
-    :ratioTop="ratio"
+    :ratio-top="ratio"
   >
     <div class="proposal-item">
       <div class="content">

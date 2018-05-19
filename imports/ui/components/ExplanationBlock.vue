@@ -1,7 +1,7 @@
 <template>
   <ae-panel
     title="How to sign your vote"
-    :closeHandler="closeHandler"
+    :close-handler="closeHandler"
     :class="{ hidden: !display }"
   >
     <div class="explanation-block">

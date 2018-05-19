@@ -4,7 +4,7 @@
     @close="closeHandler">
     <sign-message
       :message="message"
-      :signatureHandler="signatureHandler"
+      :signature-handler="signatureHandler"
     />
   </ae-modal>
 </template>
