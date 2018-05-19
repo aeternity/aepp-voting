@@ -32,18 +32,18 @@ import SignStatement from './SignStatement.vue';
 import TagsSelect from './TagsSelect.vue';
 
 export default {
-  data() {
-    return {
-      statement: '',
-      tags: [],
-    };
-  },
   components: {
     AeModal,
     SignStatement,
     TagsSelect,
   },
   directives: { focus },
+  data() {
+    return {
+      statement: '',
+      tags: [],
+    };
+  },
   computed: mapState({
     visible: state => state.voting.createProposalModalShown,
   }),

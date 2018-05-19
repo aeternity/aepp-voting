@@ -19,10 +19,10 @@ import { AeBadge } from '@aeternity/aepp-components';
 import { Proposals } from '../../api/proposals/proposals';
 
 export default {
+  components: { AeBadge },
   props: {
     value: { type: Array, default: () => [] },
   },
-  components: { AeBadge },
   data() {
     return {
       tags: Proposals.tags,

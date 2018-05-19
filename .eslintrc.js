@@ -31,5 +31,6 @@ module.exports = {
     'import/extensions': 0,
     'import/prefer-default-export': 0,
     'vue/attributes-order': 2,
+    'vue/order-in-components': 2,
   }
 };

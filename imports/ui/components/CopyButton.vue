@@ -16,10 +16,10 @@
 import { AeButton } from '@aeternity/aepp-components';
 
 export default {
+  components: { AeButton },
   props: {
     contentToCopy: { type: String, required: true },
   },
-  components: { AeButton },
   data() {
     return {
       label: 'Copy',

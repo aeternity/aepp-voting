@@ -121,12 +121,6 @@ import {
 import { Proposals } from '../../api/proposals/proposals';
 
 export default {
-  props: {
-    hidden: {
-      type: Boolean,
-      default: false,
-    },
-  },
   components: {
     AeHeader,
     AeBanner,
@@ -136,23 +130,17 @@ export default {
     AeFilterItem,
     AeFilterSeparator,
   },
+  props: {
+    hidden: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       sorts: Object.keys(Proposals.sortTypes),
       tags: [Proposals.defaultTag, ...Proposals.tags],
     };
-  },
-  methods: {
-    ...mapMutations({
-      toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
-      toggleExplanationBlock: 'voting/toggleExplanationBlock',
-    }),
-    closeAlert() {
-      this.$store.commit('voting/setAlert');
-    },
-    ...mapActions({
-      toggleAuth: 'voting/toggleAuth',
-    }),
   },
   computed: {
     ...mapState({
@@ -168,6 +156,18 @@ export default {
     currentTag() {
       return this.$route.params.tag || Proposals.defaultTag;
     },
+  },
+  methods: {
+    ...mapMutations({
+      toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
+      toggleExplanationBlock: 'voting/toggleExplanationBlock',
+    }),
+    closeAlert() {
+      this.$store.commit('voting/setAlert');
+    },
+    ...mapActions({
+      toggleAuth: 'voting/toggleAuth',
+    }),
   },
 };
 </script>

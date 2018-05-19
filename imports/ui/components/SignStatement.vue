@@ -46,6 +46,15 @@ export default {
       upVote: this.desiredVote,
     };
   },
+  computed: {
+    ...mapState({
+      accountId: state => state.voting.accountId,
+      canSignByWeb3: state => state.voting.canSignByWeb3,
+    }),
+    messageToSign() {
+      return voteStatement(this.upVote, this.statement);
+    },
+  },
   methods: {
     async setUpVote(upVote) {
       this.upVote = upVote;
@@ -65,15 +74,6 @@ export default {
         signature,
         upVote: this.upVote,
       });
-    },
-  },
-  computed: {
-    ...mapState({
-      accountId: state => state.voting.accountId,
-      canSignByWeb3: state => state.voting.canSignByWeb3,
-    }),
-    messageToSign() {
-      return voteStatement(this.upVote, this.statement);
     },
   },
 };
