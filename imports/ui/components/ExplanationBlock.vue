@@ -72,6 +72,8 @@ export default {
   }
 }
 
+$lightGray: #d3d3d3;
+
 .explanation-block {
   display: flex;
   flex-direction: row;
@@ -85,7 +87,7 @@ export default {
     margin-left: 30px;
     font-size: 1.2em;
     cursor: pointer;
-    background: no-repeat center lightgray;
+    background: no-repeat center $lightGray;
     background-size: contain;
 
     &:nth-child(1) {
@@ -112,8 +114,8 @@ export default {
 
     div,
     i {
-      color: white;
-      text-shadow: 0 0 2px white;
+      color: $white;
+      text-shadow: 0 0 2px $white;
     }
 
     i {
@@ -131,8 +133,8 @@ export default {
     }
 
     &:hover i {
-      color: lightgray;
-      text-shadow: 0 0 2px black;
+      color: $lightGray;
+      text-shadow: 0 0 2px $black;
     }
 
     @media (max-width: $screen-phone) {

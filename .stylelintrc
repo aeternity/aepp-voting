@@ -7,6 +7,7 @@
   ],
   "rules": {
     "no-empty-source": null,
-    "string-quotes": "single"
+    "string-quotes": "single",
+    "color-named": "never"
   }
 }

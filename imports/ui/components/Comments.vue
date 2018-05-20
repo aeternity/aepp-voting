@@ -150,7 +150,7 @@ export default {
             cursor: pointer;
 
             &:hover {
-              color: black;
+              color: $black;
             }
           }
         }
