@@ -53,7 +53,7 @@
         slot="right"
         plain
         size="small"
-        @click="closeAlert">
+        @click="() => setAlert()">
         <ae-icon
           slot="icon"
           name="close" />
@@ -143,10 +143,7 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      loggedIn: state => state.voting.loggedIn,
-      alert: state => state.voting.alert,
-    }),
+    ...mapState(['loggedIn', 'alert']),
     proposalList() {
       return this.$route.name === 'proposal-list';
     },
@@ -158,16 +155,8 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({
-      toggleCreateProposalModal: 'voting/toggleCreateProposalModal',
-      toggleExplanationBlock: 'voting/toggleExplanationBlock',
-    }),
-    closeAlert() {
-      this.$store.commit('voting/setAlert');
-    },
-    ...mapActions({
-      toggleAuth: 'voting/toggleAuth',
-    }),
+    ...mapMutations(['toggleCreateProposalModal', 'toggleExplanationBlock', 'setAlert']),
+    ...mapActions(['toggleAuth']),
   },
 };
 </script>

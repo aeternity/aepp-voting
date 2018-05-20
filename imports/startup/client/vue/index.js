@@ -7,12 +7,9 @@ import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
 import { injectSupply } from 'vue-supply';
 import VueAutosize from 'vue-autosize';
-import createPersistedState from 'vuex-persistedstate';
 import App from '../../../ui/App.vue';
 import routes from './routes';
-import voting from '../../../api/store/voting';
-import web3SyncPlugin from '../../../api/store/web3SyncPlugin';
-import syncAuthState from '../../../api/store/syncAuthState';
+import storeOptions from '../../../api/store';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
@@ -21,18 +18,6 @@ Vue.use(Vuex);
 Vue.use(VueClipboards);
 
 const supplyCache = {};
-const storeOptions = {
-  modules: {
-    voting,
-  },
-  plugins: [
-    createPersistedState({
-      paths: ['voting.accountId', 'voting.explanationBlockShown'],
-    }),
-    web3SyncPlugin,
-    syncAuthState,
-  ],
-};
 const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);
 const store = new Vuex.Store(suppliedStoreOptions);
 

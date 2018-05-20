@@ -1,8 +1,8 @@
 <template>
   <ae-modal
-    v-if="visible"
+    v-if="createProposalModalShown"
     title="Create statement"
-    @close="closeHandler">
+    @close="toggleCreateProposalModal">
     <div class="create-proposal-modal">
       <label :for="_uid">Statement</label>
       <input
@@ -44,15 +44,11 @@ export default {
       tags: [],
     };
   },
-  computed: mapState({
-    visible: state => state.voting.createProposalModalShown,
-  }),
+  computed: mapState(['createProposalModalShown']),
   methods: {
-    ...mapMutations({
-      closeHandler: 'voting/toggleCreateProposalModal',
-    }),
+    ...mapMutations(['toggleCreateProposalModal']),
     async signatureHandler({ signature, upVote }) {
-      await this.$store.dispatch('voting/createProposal', {
+      await this.$store.dispatch('createProposal', {
         statement: this.statement,
         signature,
         upVote,

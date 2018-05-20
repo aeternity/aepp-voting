@@ -3,12 +3,20 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import utf8 from 'utf8';
-
+import createPersistedState from 'vuex-persistedstate';
 import web3 from './web3';
 import { adminLoginStatement } from '../utils/genStatement';
+import web3SyncPlugin from './web3SyncPlugin';
+import syncAuthState from './syncAuthState';
 
 export default {
-  namespaced: true,
+  plugins: [
+    createPersistedState({
+      paths: ['accountId', 'explanationBlockShown'],
+    }),
+    web3SyncPlugin,
+    syncAuthState,
+  ],
 
   state: () => ({
     limit: 10,
@@ -126,9 +134,9 @@ export default {
         });
       });
     },
-    handleError({ dispatch }, { error, upVote, voting = true }) {
-      const errorMessage = `Your ${voting ? 'vote' : 'statement'}
-      was not ${voting ? 'received' : 'published'}.`;
+    handleError({ dispatch }, { error, upVote, voting: index = true }) {
+      const errorMessage = `Your ${index ? 'vote' : 'statement'}
+      was not ${index ? 'received' : 'published'}.`;
       const message = {
         'invalid-signature': `${errorMessage} Something wrong with signature`,
         'no-tokens': `${errorMessage} You don't have Æternity tokens`,

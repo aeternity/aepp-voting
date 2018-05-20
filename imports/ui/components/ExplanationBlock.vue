@@ -1,8 +1,8 @@
 <template>
   <transition name="slide">
     <ae-panel
-      v-if="!display"
-      :close-handler="closeHandler"
+      v-if="!explanationBlockShown"
+      :close-handler="toggleExplanationBlock"
       title="How to sign your vote"
     >
       <div class="explanation-block">
@@ -39,14 +39,9 @@ export default {
       }],
     };
   },
-  computed: mapState({
-    display: state => state.voting.explanationBlockShown,
-  }),
+  computed: mapState(['explanationBlockShown']),
   methods: {
-    ...mapMutations({
-      closeHandler: 'voting/toggleExplanationBlock',
-      setYoutubeVideoId: 'voting/setYoutubeVideoId',
-    }),
+    ...mapMutations(['toggleExplanationBlock', 'setYoutubeVideoId']),
     getVideoStyle: url => ({ backgroundImage: `url(${url})` }),
   },
 };

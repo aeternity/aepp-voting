@@ -1,10 +1,10 @@
 <template>
   <ae-modal
-    v-if="videoId"
-    @close="setYoutubeVideoId">
+    v-if="youtubeVideoId"
+    @close="() => setYoutubeVideoId()">
     <div class="youtube-video-modal">
       <iframe
-        :src="`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`"
+        :src="`https://www.youtube.com/embed/${youtubeVideoId}?rel=0&autoplay=1`"
         frameborder="0"
         allowfullscreen
       />
@@ -18,14 +18,8 @@ import { AeModal } from '@aeternity/aepp-components';
 
 export default {
   components: { AeModal },
-  computed: mapState({
-    videoId: state => state.voting.youtubeVideoId,
-  }),
-  methods: {
-    ...mapMutations({
-      setYoutubeVideoId: 'voting/setYoutubeVideoId',
-    }),
-  },
+  computed: mapState(['youtubeVideoId']),
+  methods: mapMutations(['setYoutubeVideoId']),
 };
 </script>
 

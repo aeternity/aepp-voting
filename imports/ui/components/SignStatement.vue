@@ -47,10 +47,7 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      accountId: state => state.voting.accountId,
-      canSignByWeb3: state => state.voting.canSignByWeb3,
-    }),
+    ...mapState(['accountId', 'canSignByWeb3']),
     messageToSign() {
       return voteStatement(this.upVote, this.statement);
     },
@@ -61,11 +58,11 @@ export default {
       if (this.canSignByWeb3 && this.statement) {
         try {
           this.signatureHandler({
-            signature: await this.$store.dispatch('voting/signMessage', this.messageToSign),
+            signature: await this.$store.dispatch('signMessage', this.messageToSign),
             upVote,
           });
         } catch (error) {
-          this.$store.dispatch('voting/handleError', { error, upVote });
+          this.$store.dispatch('handleError', { error, upVote });
         }
       }
     },

@@ -91,17 +91,17 @@ export default {
       proposal() {
         return [
           this.id,
-          this.$store.state.voting.accountId,
+          this.$store.state.accountId,
         ];
       },
       'accounts.balance': function accountsBalance() {
-        return [this.$store.state.voting.accountId];
+        return [this.$store.state.accountId];
       },
     },
     proposal: {
       params() {
         return {
-          accountId: this.$store.state.voting.accountId,
+          accountId: this.$store.state.accountId,
         };
       },
       update: ({ accountId }) =>
@@ -110,14 +110,12 @@ export default {
           .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] }))[0],
     },
     balance() {
-      const account = Accounts.findOne(this.$store.state.voting.accountId);
+      const account = Accounts.findOne(this.$store.state.accountId);
       return account && account.balance;
     },
   },
   computed: {
-    ...mapState({
-      admin: state => state.voting.admin,
-    }),
+    ...mapState(['admin']),
     proposalUrl() {
       return `${Meteor.absoluteUrl()}statements/${this.$route.params.id}`;
     },
@@ -130,7 +128,7 @@ export default {
       this.$router.push(this.$store.state.route.from.path);
     },
     signatureHandler({ signature, upVote }) {
-      this.$store.dispatch('voting/vote', {
+      this.$store.dispatch('vote', {
         proposalId: this.id, signature, upVote,
       });
     },

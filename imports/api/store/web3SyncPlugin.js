@@ -2,14 +2,14 @@ import web3 from './web3';
 
 export default (store) => {
   const setAccountId = (accountId) => {
-    if (accountId !== store.state.voting.accountId) {
-      store.commit('voting/setAccountId', accountId);
+    if (accountId !== store.state.accountId) {
+      store.commit('setAccountId', accountId);
     }
   };
 
   const setCanSignByWeb3 = (canSignByWeb3) => {
-    if (canSignByWeb3 !== store.state.voting.canSignByWeb3) {
-      store.commit('voting/setCanSignByWeb3', canSignByWeb3);
+    if (canSignByWeb3 !== store.state.canSignByWeb3) {
+      store.commit('setCanSignByWeb3', canSignByWeb3);
     }
   };
 

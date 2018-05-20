@@ -7,7 +7,7 @@
     />
     <mugen-scroll
       v-if="gotMore"
-      :handler="loadMore"
+      :handler="incrementLimit"
       :should-handle="!loading"
     >
       <i class="fa fa-spinner fa-spin" /> Loading
@@ -54,8 +54,8 @@ export default {
         return [
           this.sort,
           this.tag,
-          this.$store.state.voting.limit,
-          this.$store.state.voting.accountId,
+          this.$store.state.limit,
+          this.$store.state.accountId,
         ];
       },
       'proposals.count': [],
@@ -65,7 +65,7 @@ export default {
         return {
           sort: this.sort,
           tag: this.tag,
-          accountId: this.$store.state.voting.accountId,
+          accountId: this.$store.state.accountId,
         };
       },
       update: ({ sort, tag, accountId }) =>
@@ -79,9 +79,7 @@ export default {
       return Counts.get('proposals');
     },
   },
-  methods: mapMutations({
-    loadMore: 'voting/incrementLimit',
-  }),
+  methods: mapMutations(['incrementLimit']),
 };
 </script>
 

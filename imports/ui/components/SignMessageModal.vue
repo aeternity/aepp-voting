@@ -20,18 +20,17 @@ export default {
     SignMessage,
   },
   computed: mapState({
-    show: state => !!state.voting.messageToSign,
-    message: state => state.voting.messageToSign &&
-        state.voting.messageToSign.message,
+    show: state => !!state.messageToSign,
+    message: state => state.messageToSign && state.messageToSign.message,
   }),
   methods: {
     closeHandler() {
-      this.$store.state.voting.messageToSign.handler(new Error('canceled-by-user'));
-      this.$store.commit('voting/setMessageToSign');
+      this.$store.state.messageToSign.handler(new Error('canceled-by-user'));
+      this.$store.commit('setMessageToSign');
     },
     signatureHandler(signature) {
-      this.$store.state.voting.messageToSign.handler(undefined, signature);
-      this.$store.commit('voting/setMessageToSign');
+      this.$store.state.messageToSign.handler(undefined, signature);
+      this.$store.commit('setMessageToSign');
     },
   },
 };
