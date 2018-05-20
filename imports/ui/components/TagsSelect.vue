@@ -45,8 +45,8 @@ export default {
 @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
 .tags-select {
-  text-align: center;
   margin: -10px;
+  text-align: center;
 
   input {
     display: none;
@@ -58,11 +58,11 @@ export default {
   }
 
   .ae-badge {
-    height: 33px;
-    line-height: 33px;
-    font-size: 14px;
     min-width: 90px;
+    height: 33px;
     margin: 10px;
+    font-size: 14px;
+    line-height: 33px;
   }
 
   input:not(:checked) + label > .ae-badge {

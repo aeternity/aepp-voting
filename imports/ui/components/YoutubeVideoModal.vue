@@ -33,33 +33,33 @@ export default {
 @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
 .youtube-video-modal {
-  margin-top: 20px;
   position: relative;
-  overflow: hidden;
   max-width: 700px;
+  margin-top: 20px;
+  overflow: hidden;
 
   @media (min-width: $screen-phone) {
     width: 70vw;
   }
 
   &::before {
-    content: "";
-    width: 1px;
-    margin-left: -1px;
     float: left;
+    width: 1px;
     height: 0;
     padding-top: percentage(9 / 16);
+    margin-left: -1px;
+    content: "";
   }
 
   &::after {
-    content: "";
     clear: left;
+    content: "";
   }
 
   iframe {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute;
   }
 }
 </style>

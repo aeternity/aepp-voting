@@ -90,8 +90,8 @@ export default {
 
 .mugen-scroll,
 .all-loaded {
-  text-align: center;
   padding-bottom: 10px;
   color: $grey;
+  text-align: center;
 }
 </style>

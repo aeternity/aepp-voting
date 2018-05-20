@@ -59,15 +59,15 @@ export default {
   &.slide- {
     &enter-active,
     &leave-active {
-      transition: max-height 0.3s, opacity 0.5s, margin-bottom 0.5s;
       max-height: 600px;
+      transition: max-height 0.3s, opacity 0.5s, margin-bottom 0.5s;
     }
 
     &enter,
     &leave-to {
       max-height: 0;
-      opacity: 0;
       margin-bottom: -20px;
+      opacity: 0;
     }
   }
 }
@@ -79,31 +79,31 @@ export default {
   justify-content: space-around;
 
   > * {
-    flex-grow: 1;
-    cursor: pointer;
     position: relative;
     box-sizing: border-box;
+    flex-grow: 1;
+    margin-left: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
     background: no-repeat center lightgray;
     background-size: contain;
-    font-size: 1.2em;
-    margin-left: 30px;
 
     &:nth-child(1) {
       margin: 0;
     }
 
     &::before {
-      content: "";
-      width: 1px;
-      margin-left: -1px;
       float: left;
+      width: 1px;
       height: 0;
       padding-top: percentage(9 / 16);
+      margin-left: -1px;
+      content: "";
     }
 
     &::after {
-      content: "";
       clear: left;
+      content: "";
     }
 
     div {
@@ -120,10 +120,10 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
+      display: flex;
       width: 100%;
       height: 100%;
       font-size: 30px;
-      display: flex;
 
       &::before {
         margin: auto;
@@ -136,9 +136,9 @@ export default {
     }
 
     @media (max-width: $screen-phone) {
-      margin: 30px 0 0 0;
       flex-shrink: 0;
       width: 100%;
+      margin: 30px 0 0 0;
     }
   }
 }

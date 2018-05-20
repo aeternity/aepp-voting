@@ -96,14 +96,14 @@ export default {
 
   > input,
   .sign-message > input {
+    box-sizing: border-box;
+    width: 100%;
     height: 44px;
     padding: 7px;
-    border-radius: 4px;
     font-size: 24px;
     border: solid 1px $grey;
+    border-radius: 4px;
     box-shadow: none;
-    width: 100%;
-    box-sizing: border-box;
   }
 }
 </style>

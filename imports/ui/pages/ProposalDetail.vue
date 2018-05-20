@@ -151,9 +151,9 @@ export default {
 @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
 .proposal-detail {
-  clear: right;
   padding: 0 110px;
   overflow: hidden;
+  clear: right;
 
   > * {
     margin: 12px 0;
@@ -162,15 +162,15 @@ export default {
   h2 {
     margin-top: 12px;
     margin-bottom: 16px;
-    text-align: center;
     font-size: 34px;
-    line-height: 50px;
     font-weight: 500;
+    line-height: 50px;
+    text-align: center;
   }
 
   .proposal-secondary {
-    text-align: center;
     margin-bottom: 46px;
+    text-align: center;
   }
 
   .current-status {
@@ -194,11 +194,11 @@ export default {
   }
 
   .admin-panel {
+    padding: 15px;
+    font-size: 14px;
+    color: $grey;
     border: 1px solid $grey;
     border-radius: 5px;
-    color: $grey;
-    font-size: 14px;
-    padding: 15px;
 
     .ae-button {
       margin: 0 auto;
@@ -214,8 +214,8 @@ export default {
     word-break: break-all;
 
     span {
-      line-height: 30px;
       margin-right: 30px;
+      line-height: 30px;
     }
   }
 

@@ -34,26 +34,26 @@ export default {
 
     .message,
     textarea {
-      border-radius: 10px;
-      border: solid 2px $smoke;
-      padding: 5px 50px;
-      width: 100%;
       box-sizing: border-box;
+      width: 100%;
+      padding: 5px 50px;
       font-size: 16px;
       line-height: 26px;
+      border: solid 2px $smoke;
+      border-radius: 10px;
     }
 
     .message {
-      background-color: #fffaf3;
-      color: #573a08;
-      border-color: #c9ba9b;
       margin: 15px 0;
+      color: #573a08;
+      background-color: #fffaf3;
+      border-color: #c9ba9b;
     }
 
     textarea {
-      resize: vertical;
       height: 50px;
       font-family: inherit;
+      resize: vertical;
 
       ::placeholder {
         color: $grey;
@@ -70,18 +70,18 @@ export default {
 
       button,
       .button {
-        margin-top: 15px;
-        min-width: 150px;
-        padding: 0 15px;
-        height: 30px;
-        line-height: 30px;
-        border-radius: 15px;
-        background-color: $maegenta;
-        text-transform: uppercase;
-        font-size: 14px;
-        color: $white;
         float: right;
+        min-width: 150px;
+        height: 30px;
+        padding: 0 15px;
+        margin-top: 15px;
+        font-size: 14px;
+        line-height: 30px;
+        color: $white;
+        text-transform: uppercase;
+        background-color: $maegenta;
         border: none;
+        border-radius: 15px;
       }
     }
 
@@ -104,15 +104,15 @@ export default {
 
       .content {
         .author {
-          color: $maegenta;
           font-size: 12px;
+          color: $maegenta;
           text-transform: uppercase;
         }
 
         .metadata,
         .actions {
-          color: $grey;
           font-size: 12px;
+          color: $grey;
         }
 
         .metadata {
@@ -122,8 +122,8 @@ export default {
 
         .comment-content {
           margin: 6px 0;
-          line-height: 26px;
           font-size: 16px;
+          line-height: 26px;
 
           a {
             color: #4183c4;
@@ -145,9 +145,9 @@ export default {
           }
 
           a {
-            cursor: pointer;
             display: inline-block;
             margin-right: 0.7em;
+            cursor: pointer;
 
             &:hover {
               color: black;

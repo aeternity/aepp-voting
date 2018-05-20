@@ -57,12 +57,12 @@ export default {
   }
 
   input {
-    height: 30px;
     width: 80%;
+    height: 30px;
     padding: 7px;
-    border-radius: 4px;
     font-size: 16px;
     border: solid 1px $grey;
+    border-radius: 4px;
     box-shadow: none;
   }
 }

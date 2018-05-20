@@ -31,12 +31,12 @@ export default {
   button {
     width: 80px;
     height: 80px;
-    line-height: 80px;
-    background-color: $silver;
-    border-radius: 40px;
-    border: none;
-    color: #f5b826;
     font-size: 30px;
+    line-height: 80px;
+    color: #f5b826;
+    background-color: $silver;
+    border: none;
+    border-radius: 40px;
 
     &.active,
     &:hover {
@@ -45,12 +45,12 @@ export default {
   }
 
   label {
-    cursor: pointer;
+    display: block;
     margin-top: 9px;
     font-size: 16px;
-    display: block;
-    text-align: center;
     color: $aubergine;
+    text-align: center;
+    cursor: pointer;
   }
 }
 </style>

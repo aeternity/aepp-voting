@@ -25,9 +25,9 @@ export default {
 
 .proposal-secondary {
   margin: 10px 0;
-  color: $grey;
-  line-height: 25px;
   font-size: 14px;
+  line-height: 25px;
+  color: $grey;
 
   .ae-badge {
     margin-right: 10px;

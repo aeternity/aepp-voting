@@ -87,8 +87,8 @@ export default {
   }
 
   button.vote {
-    font-size: 24px;
     padding: 12px 40px;
+    font-size: 24px;
   }
 
   .buttons {

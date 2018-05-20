@@ -177,8 +177,8 @@ export default {
 
 .app-header {
   .ae-header .ae-button {
-    vertical-align: middle;
     margin-left: 10px;
+    vertical-align: middle;
 
     &._has-label_false .ae-icon {
       margin: 4px;

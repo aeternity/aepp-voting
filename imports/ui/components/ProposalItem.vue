@@ -80,17 +80,17 @@ export default {
 
       tr {
         td {
-          font-size: 16px;
           padding: 5px;
+          font-size: 16px;
 
           &:first-child {
-            font-size: 18px;
             padding-left: 0;
+            font-size: 18px;
           }
 
           &:nth-child(2) {
-            color: #f5b826;
             font-size: 20px;
+            color: #f5b826;
           }
 
           &:nth-child(3) {
@@ -99,8 +99,8 @@ export default {
           }
 
           &:last-child {
-            color: $grey;
             padding-left: 80px;
+            color: $grey;
           }
         }
 
@@ -121,10 +121,10 @@ export default {
   }
 
   .arrow {
-    color: $dark;
-    font-size: 28px;
     display: flex;
     margin-left: 30px;
+    font-size: 28px;
+    color: $dark;
 
     i {
       margin: auto;

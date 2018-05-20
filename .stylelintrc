@@ -2,7 +2,8 @@
   "processors": ["@mapbox/stylelint-processor-arbitrary-tags"],
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-recommended-scss"
+    "stylelint-config-recommended-scss",
+    "stylelint-config-recess-order"
   ],
   "rules": {
     "no-empty-source": null
