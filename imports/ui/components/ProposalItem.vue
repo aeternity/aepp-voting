@@ -77,6 +77,7 @@ export default {
 
       table {
         margin-top: 25px;
+
         tr {
           td {
             font-size: 16px;
@@ -86,14 +87,17 @@ export default {
               font-size: 18px;
               padding-left: 0;
             }
+
             &:nth-child(2) {
               color: #f5b826;
               font-size: 20px;
             }
+
             &:nth-child(3) {
               font-weight: bold;
               color: $aubergine;
             }
+
             &:last-child {
               color: $grey;
               padding-left: 80px;
@@ -107,7 +111,8 @@ export default {
           &:first-child td {
             padding-top: 0;
 
-            &:nth-child(1), &:nth-child(3) {
+            &:nth-child(1),
+            &:nth-child(3) {
               color: $maegenta;
             }
           }

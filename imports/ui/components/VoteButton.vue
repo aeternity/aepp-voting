@@ -38,7 +38,8 @@ export default {
       color: #f5b826;
       font-size: 30px;
 
-      &.active, &:hover {
+      &.active,
+      &:hover {
         background-color: $maegenta;
       }
     }

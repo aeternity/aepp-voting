@@ -50,6 +50,7 @@ export default {
       height: 0;
       padding-top: percentage(9 / 16);
     }
+
     &::after {
       content: "";
       clear: left;

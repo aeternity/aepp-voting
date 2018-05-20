@@ -57,12 +57,14 @@ export default {
 
   .ae-panel {
     &.slide- {
-      &enter-active, &leave-active {
-        transition: max-height .3s, opacity .5s, margin-bottom .5s;
+      &enter-active,
+      &leave-active {
+        transition: max-height 0.3s, opacity 0.5s, margin-bottom 0.5s;
         max-height: 600px;
       }
 
-      &enter, &leave-to {
+      &enter,
+      &leave-to {
         max-height: 0;
         opacity: 0;
         margin-bottom: -20px;
@@ -85,9 +87,11 @@ export default {
       background-size: contain;
       font-size: 1.2em;
       margin-left: 30px;
+
       &:nth-child(1) {
         margin: 0;
       }
+
       &::before {
         content: "";
         width: 1px;
@@ -96,17 +100,22 @@ export default {
         height: 0;
         padding-top: percentage(9 / 16);
       }
+
       &::after {
         content: "";
         clear: left;
       }
+
       div {
         margin: 10px;
       }
-      div, i {
+
+      div,
+      i {
         color: white;
         text-shadow: 0 0 2px white;
       }
+
       i {
         position: absolute;
         top: 0;
@@ -115,15 +124,18 @@ export default {
         height: 100%;
         font-size: 30px;
         display: flex;
+
         &::before {
           margin: auto;
         }
       }
+
       &:hover i {
         color: lightgray;
         text-shadow: 0 0 2px black;
       }
-      @media (max-width: $screen-phone){
+
+      @media (max-width: $screen-phone) {
         margin: 30px 0 0 0;
         flex-shrink: 0;
         width: 100%;

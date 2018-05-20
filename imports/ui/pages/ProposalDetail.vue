@@ -158,6 +158,7 @@ export default {
     > * {
       margin: 12px 0;
     }
+
     h2 {
       margin-top: 12px;
       margin-bottom: 16px;
@@ -166,10 +167,12 @@ export default {
       line-height: 50px;
       font-weight: 500;
     }
+
     .proposal-secondary {
       text-align: center;
       margin-bottom: 46px;
     }
+
     .current-status {
       color: $grey;
       text-align: center;
@@ -178,10 +181,12 @@ export default {
     .space-around {
       margin-top: 60px;
       margin-bottom: 60px;
+
       /deep/ h3 {
         margin: 0;
         font-size: 25px;
         font-weight: 500;
+
         @media (max-width: $screen-phone) {
           font-size: 21px;
         }
@@ -207,6 +212,7 @@ export default {
 
     .share-link {
       word-break: break-all;
+
       span {
         line-height: 30px;
         margin-right: 30px;

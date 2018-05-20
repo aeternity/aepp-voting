@@ -75,20 +75,27 @@ export default {
       margin: 15px 0;
     }
 
-    > label, > input {
+    > label,
+    > input {
       display: block;
     }
 
-    label, p, .sign-message > div:first-child, .sign-message > label {
+    label,
+    p,
+    .sign-message > div:first-child,
+    .sign-message > label {
       font-weight: 500;
     }
 
-    p, .sign-message > div:first-child, .sign-message > label {
+    p,
+    .sign-message > div:first-child,
+    .sign-message > label {
       margin-top: 50px;
       text-align: left;
     }
 
-    > input, .sign-message > input {
+    > input,
+    .sign-message > input {
       height: 44px;
       padding: 7px;
       border-radius: 4px;

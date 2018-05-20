@@ -19,16 +19,21 @@ export default {
   .comments-box {
     max-width: none;
     padding: 0;
+
     .comments {
       padding-top: 0;
     }
+
     .comments.ui {
       display: flex;
       flex-direction: column;
+
       .sorting {
         display: none;
       }
-      .message, textarea {
+
+      .message,
+      textarea {
         border-radius: 10px;
         border: solid 2px $smoke;
         padding: 5px 50px;
@@ -37,12 +42,14 @@ export default {
         font-size: 16px;
         line-height: 26px;
       }
+
       .message {
         background-color: #fffaf3;
         color: #573a08;
         border-color: #c9ba9b;
         margin: 15px 0;
       }
+
       textarea {
         resize: vertical;
         height: 50px;
@@ -52,13 +59,17 @@ export default {
           color: $grey;
         }
       }
+
       form {
         overflow: hidden;
+
         &.comment-form {
           order: 1;
           margin-top: 20px;
         }
-        button, .button {
+
+        button,
+        .button {
           margin-top: 15px;
           min-width: 150px;
           padding: 0 15px;
@@ -73,41 +84,52 @@ export default {
           border: none;
         }
       }
+
       .comment {
-        margin-top: .5em;
-        margin-bottom: .5em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+
         .comments .comment {
           margin-top: 1em;
           margin-bottom: 1em;
+
           &:last-child {
             margin-bottom: 0;
           }
         }
+
         .avatar {
           display: none;
         }
+
         .content {
           .author {
             color: $maegenta;
             font-size: 12px;
             text-transform: uppercase;
           }
-          .metadata, .actions {
+
+          .metadata,
+          .actions {
             color: $grey;
             font-size: 12px;
           }
+
           .metadata {
             display: inline-block;
-            margin-left: .5em;
+            margin-left: 0.5em;
           }
+
           .comment-content {
             margin: 6px 0;
             line-height: 26px;
             font-size: 16px;
+
             a {
               color: #4183c4;
             }
           }
+
           .actions {
             .rating {
               .angle.up.icon {
@@ -115,23 +137,28 @@ export default {
                 font: normal normal normal 14px/1 FontAwesome, fantasy;
                 font-size: inherit;
                 text-rendering: auto;
-                &:before {
+
+                &::before {
                   content: '\f106';
                 }
               }
             }
+
             a {
               cursor: pointer;
               display: inline-block;
-              margin-right: .7em;
+              margin-right: 0.7em;
+
               &:hover {
                 color: black;
               }
             }
           }
+
           .create-reply .reply-form {
             margin-top: 12px;
           }
+
           .reply-wrapper {
             margin-left: 3em;
           }
