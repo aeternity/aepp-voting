@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import '/node_modules/@aeternity/aepp-components/dist/variables';
 
 .proposal-secondary {
   margin: 10px 0;

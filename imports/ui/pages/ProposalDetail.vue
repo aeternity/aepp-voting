@@ -148,7 +148,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import '/node_modules/@aeternity/aepp-components/dist/variables';
 
 .proposal-detail {
   padding: 0 110px;

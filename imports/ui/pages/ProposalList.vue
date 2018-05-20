@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import '/node_modules/@aeternity/aepp-components/dist/variables';
 
 .mugen-scroll,
 .all-loaded {

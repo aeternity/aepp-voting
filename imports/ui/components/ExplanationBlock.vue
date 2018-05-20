@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import '/node_modules/@aeternity/aepp-components/dist/variables';
 
 .ae-panel {
   &.slide- {
@@ -98,12 +98,12 @@ export default {
       height: 0;
       padding-top: percentage(9 / 16);
       margin-left: -1px;
-      content: "";
+      content: '';
     }
 
     &::after {
       clear: left;
-      content: "";
+      content: '';
     }
 
     div {

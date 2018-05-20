@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import '/node_modules/@aeternity/aepp-components/dist/variables';
 
 .sign-message {
   text-align: center;
