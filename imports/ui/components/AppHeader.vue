@@ -173,41 +173,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .app-header {
-    .ae-header .ae-button {
-      vertical-align: middle;
-      margin-left: 10px;
+.app-header {
+  .ae-header .ae-button {
+    vertical-align: middle;
+    margin-left: 10px;
 
-      &._has-label_false .ae-icon {
-        margin: 4px;
-      }
+    &._has-label_false .ae-icon {
+      margin: 4px;
+    }
 
-      &._type_normal {
-        color: $white;
+    &._type_normal {
+      color: $white;
+    }
+  }
+
+  .ae-banner {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+
+  .ae-filter-list {
+    @media (max-width: $screen-phone) {
+      &.desktop {
+        display: none;
       }
     }
 
-    .ae-banner {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-    }
-
-    .ae-filter-list {
-      @media (max-width: $screen-phone) {
-        &.desktop {
-          display: none;
-        }
-      }
-
-      @media (min-width: $screen-phone + 1) {
-        &.mobile {
-          display: none;
-        }
+    @media (min-width: $screen-phone + 1) {
+      &.mobile {
+        display: none;
       }
     }
   }
+}
 </style>

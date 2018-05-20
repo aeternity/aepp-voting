@@ -68,42 +68,42 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .create-proposal-modal {
-    > * {
-      margin: 15px 0;
-    }
-
-    > label,
-    > input {
-      display: block;
-    }
-
-    label,
-    p,
-    .sign-message > div:first-child,
-    .sign-message > label {
-      font-weight: 500;
-    }
-
-    p,
-    .sign-message > div:first-child,
-    .sign-message > label {
-      margin-top: 50px;
-      text-align: left;
-    }
-
-    > input,
-    .sign-message > input {
-      height: 44px;
-      padding: 7px;
-      border-radius: 4px;
-      font-size: 24px;
-      border: solid 1px $grey;
-      box-shadow: none;
-      width: 100%;
-      box-sizing: border-box;
-    }
+.create-proposal-modal {
+  > * {
+    margin: 15px 0;
   }
+
+  > label,
+  > input {
+    display: block;
+  }
+
+  label,
+  p,
+  .sign-message > div:first-child,
+  .sign-message > label {
+    font-weight: 500;
+  }
+
+  p,
+  .sign-message > div:first-child,
+  .sign-message > label {
+    margin-top: 50px;
+    text-align: left;
+  }
+
+  > input,
+  .sign-message > input {
+    height: 44px;
+    padding: 7px;
+    border-radius: 4px;
+    font-size: 24px;
+    border: solid 1px $grey;
+    box-shadow: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
 </style>

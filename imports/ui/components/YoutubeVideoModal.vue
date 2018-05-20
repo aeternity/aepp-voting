@@ -30,36 +30,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .youtube-video-modal {
-    margin-top: 20px;
-    position: relative;
-    overflow: hidden;
-    max-width: 700px;
+.youtube-video-modal {
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  max-width: 700px;
 
-    @media (min-width: $screen-phone) {
-      width: 70vw;
-    }
-
-    &::before {
-      content: "";
-      width: 1px;
-      margin-left: -1px;
-      float: left;
-      height: 0;
-      padding-top: percentage(9 / 16);
-    }
-
-    &::after {
-      content: "";
-      clear: left;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-    }
+  @media (min-width: $screen-phone) {
+    width: 70vw;
   }
+
+  &::before {
+    content: "";
+    width: 1px;
+    margin-left: -1px;
+    float: left;
+    height: 0;
+    padding-top: percentage(9 / 16);
+  }
+
+  &::after {
+    content: "";
+    clear: left;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+}
 </style>

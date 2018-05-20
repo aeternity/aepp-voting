@@ -25,32 +25,32 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .vote-button {
-    button {
-      width: 80px;
-      height: 80px;
-      line-height: 80px;
-      background-color: $silver;
-      border-radius: 40px;
-      border: none;
-      color: #f5b826;
-      font-size: 30px;
+.vote-button {
+  button {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    background-color: $silver;
+    border-radius: 40px;
+    border: none;
+    color: #f5b826;
+    font-size: 30px;
 
-      &.active,
-      &:hover {
-        background-color: $maegenta;
-      }
-    }
-
-    label {
-      cursor: pointer;
-      margin-top: 9px;
-      font-size: 16px;
-      display: block;
-      text-align: center;
-      color: $aubergine;
+    &.active,
+    &:hover {
+      background-color: $maegenta;
     }
   }
+
+  label {
+    cursor: pointer;
+    margin-top: 9px;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    color: $aubergine;
+  }
+}
 </style>

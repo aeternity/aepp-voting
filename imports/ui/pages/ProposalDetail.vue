@@ -148,88 +148,88 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .proposal-detail {
-    clear: right;
-    padding: 0 110px;
-    overflow: hidden;
+.proposal-detail {
+  clear: right;
+  padding: 0 110px;
+  overflow: hidden;
 
-    > * {
-      margin: 12px 0;
-    }
+  > * {
+    margin: 12px 0;
+  }
 
-    h2 {
-      margin-top: 12px;
-      margin-bottom: 16px;
-      text-align: center;
-      font-size: 34px;
-      line-height: 50px;
+  h2 {
+    margin-top: 12px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 34px;
+    line-height: 50px;
+    font-weight: 500;
+  }
+
+  .proposal-secondary {
+    text-align: center;
+    margin-bottom: 46px;
+  }
+
+  .current-status {
+    color: $grey;
+    text-align: center;
+  }
+
+  .space-around {
+    margin-top: 60px;
+    margin-bottom: 60px;
+
+    /deep/ h3 {
+      margin: 0;
+      font-size: 25px;
       font-weight: 500;
-    }
 
-    .proposal-secondary {
-      text-align: center;
-      margin-bottom: 46px;
-    }
-
-    .current-status {
-      color: $grey;
-      text-align: center;
-    }
-
-    .space-around {
-      margin-top: 60px;
-      margin-bottom: 60px;
-
-      /deep/ h3 {
-        margin: 0;
-        font-size: 25px;
-        font-weight: 500;
-
-        @media (max-width: $screen-phone) {
-          font-size: 21px;
-        }
-      }
-    }
-
-    .admin-panel {
-      border: 1px solid $grey;
-      border-radius: 5px;
-      color: $grey;
-      font-size: 14px;
-      padding: 15px;
-
-      .ae-button {
-        margin: 0 auto;
-      }
-
-      > div {
-        margin: 10px;
-        text-align: center;
-      }
-    }
-
-    .share-link {
-      word-break: break-all;
-
-      span {
-        line-height: 30px;
-        margin-right: 30px;
-      }
-    }
-
-    @media (max-width: $container-width) {
-      padding: 0 55px;
-    }
-
-    @media (max-width: $screen-phone) {
-      padding: 0;
-
-      h2 {
-        font-size: 28px;
-        line-height: normal;
+      @media (max-width: $screen-phone) {
+        font-size: 21px;
       }
     }
   }
+
+  .admin-panel {
+    border: 1px solid $grey;
+    border-radius: 5px;
+    color: $grey;
+    font-size: 14px;
+    padding: 15px;
+
+    .ae-button {
+      margin: 0 auto;
+    }
+
+    > div {
+      margin: 10px;
+      text-align: center;
+    }
+  }
+
+  .share-link {
+    word-break: break-all;
+
+    span {
+      line-height: 30px;
+      margin-right: 30px;
+    }
+  }
+
+  @media (max-width: $container-width) {
+    padding: 0 55px;
+  }
+
+  @media (max-width: $screen-phone) {
+    padding: 0;
+
+    h2 {
+      font-size: 28px;
+      line-height: normal;
+    }
+  }
+}
 </style>

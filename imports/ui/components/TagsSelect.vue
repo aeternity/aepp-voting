@@ -42,31 +42,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .tags-select {
-    text-align: center;
-    margin: -10px;
+.tags-select {
+  text-align: center;
+  margin: -10px;
 
-    input {
-      display: none;
-    }
-
-    label {
-      display: inline-block;
-      cursor: pointer;
-    }
-
-    .ae-badge {
-      height: 33px;
-      line-height: 33px;
-      font-size: 14px;
-      min-width: 90px;
-      margin: 10px;
-    }
-
-    input:not(:checked) + label > .ae-badge {
-      background-color: $grey;
-    }
+  input {
+    display: none;
   }
+
+  label {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .ae-badge {
+    height: 33px;
+    line-height: 33px;
+    font-size: 14px;
+    min-width: 90px;
+    margin: 10px;
+  }
+
+  input:not(:checked) + label > .ae-badge {
+    background-color: $grey;
+  }
+}
 </style>

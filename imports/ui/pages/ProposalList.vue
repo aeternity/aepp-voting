@@ -86,12 +86,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .mugen-scroll,
-  .all-loaded {
-    text-align: center;
-    padding-bottom: 10px;
-    color: $grey;
-  }
+.mugen-scroll,
+.all-loaded {
+  text-align: center;
+  padding-bottom: 10px;
+  color: $grey;
+}
 </style>

@@ -80,29 +80,29 @@ export default {
 </script>
 
 <style lang="scss">
-  .sign-statement {
-    > * {
-      display: block;
-      margin: 12px auto;
-    }
+.sign-statement {
+  > * {
+    display: block;
+    margin: 12px auto;
+  }
 
-    button.vote {
-      font-size: 24px;
-      padding: 12px 40px;
-    }
+  button.vote {
+    font-size: 24px;
+    padding: 12px 40px;
+  }
 
-    .buttons {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
-      .vote-button {
-        margin: 0 22px;
-      }
-    }
-
-    .sign-message {
-      margin-top: 60px;
+    .vote-button {
+      margin: 0 22px;
     }
   }
+
+  .sign-message {
+    margin-top: 60px;
+  }
+}
 </style>

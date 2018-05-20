@@ -46,24 +46,24 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .sign-message {
-    text-align: center;
+.sign-message {
+  text-align: center;
 
-    > * {
-      display: block;
-      margin: 12px auto;
-    }
-
-    input {
-      height: 30px;
-      width: 80%;
-      padding: 7px;
-      border-radius: 4px;
-      font-size: 16px;
-      border: solid 1px $grey;
-      box-shadow: none;
-    }
+  > * {
+    display: block;
+    margin: 12px auto;
   }
+
+  input {
+    height: 30px;
+    width: 80%;
+    padding: 7px;
+    border-radius: 4px;
+    font-size: 16px;
+    border: solid 1px $grey;
+    box-shadow: none;
+  }
+}
 </style>

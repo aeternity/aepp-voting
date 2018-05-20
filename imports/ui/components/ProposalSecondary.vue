@@ -21,16 +21,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .proposal-secondary {
-    margin: 10px 0;
-    color: $grey;
-    line-height: 25px;
-    font-size: 14px;
+.proposal-secondary {
+  margin: 10px 0;
+  color: $grey;
+  line-height: 25px;
+  font-size: 14px;
 
-    .ae-badge {
-      margin-right: 10px;
-    }
+  .ae-badge {
+    margin-right: 10px;
   }
+}
 </style>

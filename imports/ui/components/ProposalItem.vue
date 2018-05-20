@@ -60,75 +60,75 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+@import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .proposal-item {
-    display: flex;
-    flex-direction: row;
+.proposal-item {
+  display: flex;
+  flex-direction: row;
 
-    .content {
-      flex-grow: 1;
+  .content {
+    flex-grow: 1;
 
-      h2 {
-        margin: 0;
-        font-size: 27px;
-        font-weight: 500;
-      }
+    h2 {
+      margin: 0;
+      font-size: 27px;
+      font-weight: 500;
+    }
 
-      table {
-        margin-top: 25px;
+    table {
+      margin-top: 25px;
 
-        tr {
-          td {
-            font-size: 16px;
-            padding: 5px;
+      tr {
+        td {
+          font-size: 16px;
+          padding: 5px;
 
-            &:first-child {
-              font-size: 18px;
-              padding-left: 0;
-            }
-
-            &:nth-child(2) {
-              color: #f5b826;
-              font-size: 20px;
-            }
-
-            &:nth-child(3) {
-              font-weight: bold;
-              color: $aubergine;
-            }
-
-            &:last-child {
-              color: $grey;
-              padding-left: 80px;
-            }
+          &:first-child {
+            font-size: 18px;
+            padding-left: 0;
           }
 
-          &:last-child td {
-            padding-bottom: 0;
+          &:nth-child(2) {
+            color: #f5b826;
+            font-size: 20px;
           }
 
-          &:first-child td {
-            padding-top: 0;
+          &:nth-child(3) {
+            font-weight: bold;
+            color: $aubergine;
+          }
 
-            &:nth-child(1),
-            &:nth-child(3) {
-              color: $maegenta;
-            }
+          &:last-child {
+            color: $grey;
+            padding-left: 80px;
+          }
+        }
+
+        &:last-child td {
+          padding-bottom: 0;
+        }
+
+        &:first-child td {
+          padding-top: 0;
+
+          &:nth-child(1),
+          &:nth-child(3) {
+            color: $maegenta;
           }
         }
       }
     }
+  }
 
-    .arrow {
-      color: $dark;
-      font-size: 28px;
-      display: flex;
-      margin-left: 30px;
+  .arrow {
+    color: $dark;
+    font-size: 28px;
+    display: flex;
+    margin-left: 30px;
 
-      i {
-        margin: auto;
-      }
+    i {
+      margin: auto;
     }
   }
+}
 </style>
