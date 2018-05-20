@@ -7,7 +7,6 @@ import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
 import { injectSupply } from 'vue-supply';
 import VueAutosize from 'vue-autosize';
-// eslint-disable-next-line import/no-unresolved
 import createPersistedState from 'vuex-persistedstate';
 import App from '../../../ui/App.vue';
 import routes from './routes';
