@@ -4,8 +4,9 @@
   "scripts": {
     "start": "meteor run",
     "lint": "eslint --ext .js,.vue client server imports",
+    "lint:styles": "stylelint '{client,server,imports}/**/*.{vue,css,scss}'",
     "mocha": "meteor test --once --driver-package meteortesting:mocha",
-    "test": "npm run lint && npm run mocha"
+    "test": "npm run lint && npm run lint:styles && npm run mocha"
   },
   "dependencies": {
     "@aeternity/aepp-components": "git+https://github.com/aeternity/aepp-components.git#6ce15e7984b544f83a130b9d54145b42341d1d8f",
@@ -38,6 +39,7 @@
     "web3": "^0.20.2"
   },
   "devDependencies": {
+    "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
     "babel-eslint": "^8.0.2",
     "babel-runtime": "^6.26.0",
     "eslint": "^4.19.1",
@@ -47,6 +49,9 @@
     "eslint-plugin-meteor": "^4.2.2",
     "eslint-plugin-vue": "^4.5.0",
     "postcss-easy-import": "^3.0.0",
+    "stylelint": "^9.2.1",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-scss": "^3.1.0",
     "vue-eslint-parser": "^2.0.3"
   },
   "postcss": {

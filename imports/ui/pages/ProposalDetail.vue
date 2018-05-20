@@ -175,6 +175,19 @@ export default {
       text-align: center;
     }
 
+    .space-around {
+      margin-top: 60px;
+      margin-bottom: 60px;
+      /deep/ h3 {
+        margin: 0;
+        font-size: 25px;
+        font-weight: 500;
+        @media (max-width: $screen-phone) {
+          font-size: 21px;
+        }
+      }
+    }
+
     .admin-panel {
       border: 1px solid $grey;
       border-radius: 5px;
@@ -210,25 +223,6 @@ export default {
       h2 {
         font-size: 28px;
         line-height: normal;
-      }
-    }
-  }
-</style>
-
-<style lang="scss">
-  @import "/node_modules/@aeternity/aepp-components/dist/variables";
-
-  .proposal-detail {
-    .space-around {
-      margin-top: 60px;
-      margin-bottom: 60px;
-      h3 {
-        margin: 0;
-        font-size: 25px;
-        font-weight: 500;
-        @media (max-width: $screen-phone) {
-          font-size: 21px;
-        }
       }
     }
   }

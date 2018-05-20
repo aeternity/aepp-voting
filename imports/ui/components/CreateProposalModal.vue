@@ -75,6 +75,10 @@ export default {
       margin: 15px 0;
     }
 
+    > label, > input {
+      display: block;
+    }
+
     label, p, .sign-message > div:first-child, .sign-message > label {
       font-weight: 500;
     }
@@ -84,9 +88,6 @@ export default {
       text-align: left;
     }
 
-    > label, > input {
-      display: block;
-    }
     > input, .sign-message > input {
       height: 44px;
       padding: 7px;

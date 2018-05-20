@@ -112,7 +112,7 @@ export default {
             .rating {
               .angle.up.icon {
                 display: inline-block;
-                font: normal normal normal 14px/1 FontAwesome;
+                font: normal normal normal 14px/1 FontAwesome, fantasy;
                 font-size: inherit;
                 text-rendering: auto;
                 &:before {

@@ -78,19 +78,6 @@ export default {
       table {
         margin-top: 25px;
         tr {
-          &:first-child {
-            td {
-              padding-top: 0;
-            }
-            td:nth-child(1), td:nth-child(3) {
-              color: $maegenta;
-            }
-          }
-          &:last-child {
-            td {
-              padding-bottom: 0;
-            }
-          }
           td {
             font-size: 16px;
             padding: 5px;
@@ -110,6 +97,18 @@ export default {
             &:last-child {
               color: $grey;
               padding-left: 80px;
+            }
+          }
+
+          &:last-child td {
+            padding-bottom: 0;
+          }
+
+          &:first-child td {
+            padding-top: 0;
+
+            &:nth-child(1), &:nth-child(3) {
+              color: $maegenta;
             }
           }
         }

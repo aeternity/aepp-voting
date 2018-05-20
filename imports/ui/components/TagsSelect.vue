@@ -57,16 +57,16 @@ export default {
       cursor: pointer;
     }
 
-    input:not(:checked) + label > .ae-badge {
-      background-color: $grey;
-    }
-
     .ae-badge {
       height: 33px;
       line-height: 33px;
       font-size: 14px;
       min-width: 90px;
       margin: 10px;
+    }
+
+    input:not(:checked) + label > .ae-badge {
+      background-color: $grey;
     }
   }
 </style>
