@@ -140,7 +140,7 @@ $lightGray: #d3d3d3;
     @media (max-width: $screen-phone) {
       flex-shrink: 0;
       width: 100%;
-      margin: 30px 0 0 0;
+      margin: 30px 0 0;
     }
   }
 }
