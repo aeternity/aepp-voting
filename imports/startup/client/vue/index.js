@@ -6,14 +6,12 @@ import VueClipboards from 'vue-clipboards';
 import { sync } from 'vuex-router-sync';
 import VueMeteorTracker from 'vue-meteor-tracker';
 import { injectSupply } from 'vue-supply';
-import VueAutosize from 'vue-autosize';
 import App from '../../../ui/App.vue';
 import routes from './routes';
 import storeOptions from '../../../api/store';
 
 Vue.use(VueMeteorTracker);
 Vue.use(VueRouter);
-Vue.use(VueAutosize);
 Vue.use(Vuex);
 Vue.use(VueClipboards);
 
