@@ -14,7 +14,6 @@
     "@babel/runtime": "^7.0.0-beta.47",
     "bignumber.js": "^4.0.4",
     "decay": "^1.0.12",
-    "es6-promisify": "^5.0.0",
     "ethereumjs-util": "^5.1.2",
     "format-number": "^3.0.0",
     "meteor-node-stubs": "~0.2.4",
