@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Accounts } from '../../accounts/accounts';
 import { getEthereumAddress } from '../../utils/signature';
-import erc20contract from '../../../startup/server/tokenContract';
+import erc20contract, { decimals } from '../../../startup/server/tokenContract';
 import { voteStatement } from '../../utils/genStatement';
 import { Proposals } from '../proposals';
 
@@ -16,7 +16,7 @@ const getAccountInfo = (statement, signature, upVote) => {
   } catch (e) {
     throw new Meteor.Error('invalid-signature');
   }
-  const balance = +erc20contract.balanceOf(accountId).shift(erc20contract.decimals().neg());
+  const balance = +erc20contract.balanceOf(accountId).shift(decimals.neg());
   if (!balance) throw new Meteor.Error('no-tokens');
 
   const account = Accounts.findOne(accountId);

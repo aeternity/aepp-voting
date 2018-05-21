@@ -13,6 +13,8 @@ export const init = async () => {
     throw new Error(`ERC20 token is not deployed on network with id ${networkId}`);
   }
   const contract = web3.eth.contract(abi).at(networks[networkId].address);
+  const decimals = contract.decimals();
 
   module.exports.default = contract;
+  module.exports.decimals = decimals;
 };
