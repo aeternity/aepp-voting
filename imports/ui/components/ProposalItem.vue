@@ -9,13 +9,13 @@
         <proposal-secondary :proposal="proposal" />
         <table>
           <tr>
-            <td>{{ upVoteProcent }}%</td>
+            <td>{{ upVotePercent }}%</td>
             <td><i class="fa fa-thumbs-up" /></td>
             <td>Agreed</td>
             <td>{{ upVoteAmount }}&nbsp;Æ</td>
           </tr>
           <tr>
-            <td>{{ downVoteProcent }}%</td>
+            <td>{{ downVotePercent }}%</td>
             <td><i class="fa fa-thumbs-down" /></td>
             <td>Disagreed</td>
             <td>{{ downVoteAmount }}&nbsp;Æ</td>
@@ -45,7 +45,7 @@ export default {
         [`${d}VoteAmount`]() {
           return format()(this.proposal[`${d}VoteAmount`].toFixed(0));
         },
-        [`${d}VoteProcent`]() {
+        [`${d}VotePercent`]() {
           return this.proposal.totalVoteAmount
             ? (Math.round(this.proposal[`${d}VoteAmount`]
               / this.proposal.totalVoteAmount) * 100)
