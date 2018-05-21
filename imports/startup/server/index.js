@@ -1,8 +1,8 @@
-import './balance-subscribe';
-import './dump-proposal-route';
-import './health-check-route';
-import './migrations';
-import './register-api';
-import './register-ethereum-login-handler';
-import './test-data';
-import './update-scores';
+import { init } from './tokenContract';
+
+init()
+  .then(() => import('./register'))
+  .catch((error) => {
+    console.error(error); // eslint-disable-line no-console
+    process.exit(1);
+  });

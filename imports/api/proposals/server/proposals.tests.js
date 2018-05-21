@@ -5,7 +5,7 @@ import { sinon } from 'meteor/practicalmeteor:sinon';
 import { Factory } from 'meteor/dburles:factory';
 import { Random } from 'meteor/random';
 import BigNumber from 'bignumber.js';
-import { onErc20ContractReceiving } from '../../../startup/server/tokenContract';
+import contract from '../../../startup/server/tokenContract';
 import { Accounts } from '../../accounts/accounts';
 import { Proposals } from '../proposals';
 import './methods';
@@ -14,9 +14,6 @@ const message = 'test';
 const address = '0xfa491df8780761853d127a9f7b2772d688a0e3b5';
 const upVoteSignature = '0xede222564b846a123ed16446fc0bb9e59e8c3df98ac4883870c1ec5ab3220e6a3d98b4cbbbf4009145260966d8944d0514cf2425e2124e6fd5ebdfc3bb777dd01b';
 const downVoteSignature = '0x60c105f35e9e7acf17c1da2b1f87882c137736eaf79909e125c954265c0c58165c972e8151371504e130d7114c95ccb7abeba956e6d695d17f8b544a1843b37c1b';
-
-let contract;
-onErc20ContractReceiving((c) => { contract = c; });
 
 const stubContract = ({ balanceOf, decimals = 18 }) => {
   sinon.stub(contract, 'balanceOf', () => new BigNumber(balanceOf).shift(decimals));

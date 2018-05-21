@@ -1,6 +1,5 @@
 {
   "web3ProviderUrl": "https://kovan.infura.io",
-  "erc20ContractAddress": "0x35d8830ea35e6Df033eEdb6d5045334A4e34f9f9",
   "adminsAddresses": [
     "0xfa491df8780761853d127a9f7b2772d688a0e3b5"
   ]

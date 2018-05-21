@@ -1,4 +1,4 @@
-import { onErc20ContractReceiving } from '../../../startup/server/tokenContract';
+import erc20contract from '../../../startup/server/tokenContract';
 import { Accounts } from '../../accounts/accounts';
 import { Proposals } from '../proposals';
 
@@ -10,18 +10,14 @@ export const reComputeProposalsUpdatedAt = () =>
       },
     }, { getAutoValues: false }));
 
-onErc20ContractReceiving((erc20contract) => {
-  const decimals = erc20contract.decimals().neg();
+const decimals = erc20contract.decimals().neg();
 
-  const reFetchAccountsBalances = () =>
-    Accounts.find({}).forEach(({ _id, balance: oldBalance }) => {
-      const balance = +erc20contract.balanceOf(_id).shift(decimals);
-      if (balance === oldBalance) return;
-      Accounts.update(_id, { $set: { balance } });
-    });
-
-  Object.assign(module.exports, { reFetchAccountsBalances });
-});
+export const reFetchAccountsBalances = () =>
+  Accounts.find({}).forEach(({ _id, balance: oldBalance }) => {
+    const balance = +erc20contract.balanceOf(_id).shift(decimals);
+    if (balance === oldBalance) return;
+    Accounts.update(_id, { $set: { balance } });
+  });
 
 export const reComputeProposalsAmounts = () =>
   Proposals.find({}).forEach(({ _id, votes }) => {
