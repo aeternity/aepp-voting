@@ -14,7 +14,6 @@
     "@babel/runtime": "^7.0.0-beta.47",
     "autoprefixer": "^7.1.2",
     "bignumber.js": "^4.0.4",
-    "buffer": "^5.0.6",
     "core-js": "^2.5.3",
     "decay": "^1.0.12",
     "es6-promisify": "^5.0.0",
