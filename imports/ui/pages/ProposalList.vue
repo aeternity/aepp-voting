@@ -8,7 +8,6 @@
     <mugen-scroll
       v-if="gotMore"
       :handler="incrementLimit"
-      :should-handle="!loading"
     >
       <i class="fa fa-spinner fa-spin" /> Loading
     </mugen-scroll>
@@ -40,12 +39,6 @@ export default {
   computed: {
     gotMore() {
       return this.proposals.length < this.proposalsCount;
-    },
-    loaded() {
-      return this.proposalsCount;
-    },
-    loading() {
-      return false;
     },
   },
   meteor: {
