@@ -12,7 +12,6 @@
   "dependencies": {
     "@aeternity/aepp-components": "git+https://github.com/aeternity/aepp-components.git#6ce15e7984b544f83a130b9d54145b42341d1d8f",
     "@babel/runtime": "^7.0.0-beta.47",
-    "autoprefixer": "^7.1.2",
     "bignumber.js": "^4.0.4",
     "decay": "^1.0.12",
     "es6-promisify": "^5.0.0",
@@ -37,6 +36,7 @@
   },
   "devDependencies": {
     "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
+    "autoprefixer": "^7.2.6",
     "babel-eslint": "^8.0.2",
     "babel-runtime": "^6.26.0",
     "eslint": "^4.19.1",
