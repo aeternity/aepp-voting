@@ -1,9 +1,7 @@
-import ethereumjs from 'ethereumjs-util';
+import { sha3, ecrecover, pubToAddress } from 'ethereumjs-util';
 import utf8 from 'utf8';
 
-export const getEthereumAddress = (message, signature) => {
-  const { sha3, ecrecover, pubToAddress } = ethereumjs;
-
+export default (message, signature) => {
   const r = Buffer.from(signature.slice(2, 64 + 2), 'hex');
   const s = Buffer.from(signature.slice(64 + 2, 128 + 2), 'hex');
   const v = parseInt(signature.slice(128 + 2), 16);

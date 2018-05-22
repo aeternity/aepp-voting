@@ -1,10 +1,10 @@
 import { describe, it } from 'meteor/practicalmeteor:mocha';
 import { expect } from 'meteor/practicalmeteor:chai';
 
-import { getEthereumAddress } from '../signature';
+import getAddressBySignature from '../getAddressBySignature';
 import { voteStatement } from '../genStatement';
 
-describe('getEthereumAddress', () => {
+describe('getAddressBySignature', () => {
   const address = '0xfa491df8780761853d127a9f7b2772d688a0e3b5';
 
   [{
@@ -20,9 +20,9 @@ describe('getEthereumAddress', () => {
     statement, upVoteSignature, downVoteSignature, type,
   }) =>
     it(`correct process signatures ${type}`, () => {
-      expect(getEthereumAddress(voteStatement(true, statement), upVoteSignature))
+      expect(getAddressBySignature(voteStatement(true, statement), upVoteSignature))
         .to.equal(address);
-      expect(getEthereumAddress(voteStatement(false, statement), downVoteSignature))
+      expect(getAddressBySignature(voteStatement(false, statement), downVoteSignature))
         .to.equal(address);
     }));
 });

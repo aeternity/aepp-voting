@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Accounts } from '../../accounts/accounts';
-import { getEthereumAddress } from '../../utils/signature';
+import getAddressBySignature from '../../utils/getAddressBySignature';
 import erc20contract, { decimals } from '../../../startup/server/tokenContract';
 import { voteStatement } from '../../utils/genStatement';
 import { Proposals } from '../proposals';
@@ -12,7 +12,7 @@ const DOWN_VOTE = Symbol('down-vote');
 const getAccountInfo = (statement, signature, upVote) => {
   let accountId;
   try {
-    accountId = getEthereumAddress(voteStatement(upVote, statement), signature);
+    accountId = getAddressBySignature(voteStatement(upVote, statement), signature);
   } catch (e) {
     throw new Meteor.Error('invalid-signature');
   }

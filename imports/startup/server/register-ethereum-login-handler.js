@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { getEthereumAddress } from '../../api/utils/signature';
+import getAddressBySignature from '../../api/utils/getAddressBySignature';
 import { adminLoginStatement } from '../../api/utils/genStatement';
 import erc20contract, { decimals } from './tokenContract';
 
@@ -10,7 +10,7 @@ const prefix = adminLoginStatement().slice(0, -suffixLength);
 Accounts.registerLoginHandler('ethereum', ({ message, signature }) => {
   let address;
   try {
-    address = getEthereumAddress(message, signature);
+    address = getAddressBySignature(message, signature);
   } catch (e) {
     throw new Meteor.Error('invalid-signature');
   }
