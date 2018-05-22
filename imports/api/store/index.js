@@ -6,16 +6,16 @@ import utf8 from 'utf8';
 import createPersistedState from 'vuex-persistedstate';
 import web3 from './web3';
 import { adminLoginStatement } from '../utils/genStatement';
-import web3SyncPlugin from './web3SyncPlugin';
-import syncAuthState from './syncAuthState';
+import syncAuthState from './plugins/syncAuthState';
+import web3Sync from './plugins/web3Sync';
 
 export default {
   plugins: [
     createPersistedState({
       paths: ['accountId', 'explanationBlockShown'],
     }),
-    web3SyncPlugin,
     syncAuthState,
+    web3Sync,
   ],
 
   state: () => ({
