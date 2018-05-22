@@ -28,7 +28,7 @@ export default {
     admin: false,
     loggedIn: false,
     messageToSign: false,
-    alert: '',
+    notification: '',
   }),
 
   mutations: {
@@ -59,16 +59,16 @@ export default {
     setMessageToSign: (state, options) => {
       state.messageToSign = options;
     },
-    setAlert: (state, alert) => {
-      state.alert = alert;
+    setNotification: (state, notification) => {
+      state.notification = notification;
     },
   },
 
   actions: {
-    setAlert({ commit }, options) {
+    notify({ commit }, options) {
       const { text, autoClose } = options.text ? options : { text: options };
-      commit('setAlert', text);
-      if (autoClose) setTimeout(() => commit('setAlert'), 3000);
+      commit('setNotification', text);
+      if (autoClose) setTimeout(() => commit('setNotification'), 3000);
     },
     signMessage: async ({ state, commit }, message) => new Promise((resolve, reject) => {
       const handler = (error, signature) => {
@@ -99,12 +99,12 @@ export default {
                 'invalid-message': 'Message that you signed is different',
                 timeout: 'Signed message has expired, please try again',
               }[error.error];
-              dispatch('setAlert', text
+              dispatch('notify', text
                 ? `${errorMessage} ${text}`
                 // eslint-disable-next-line no-console
                 : console.error(error) || `Something went wrong. ${errorMessage}`);
             } else {
-              dispatch('setAlert', {
+              dispatch('notify', {
                 text: 'You have successfully logged in',
                 autoClose: true,
               });
@@ -126,7 +126,7 @@ export default {
             commit('toggleCreateProposalModal');
             commit('setAccountId', accountId);
             resolve(proposalId);
-            dispatch('setAlert', {
+            dispatch('notify', {
               text: 'Thank you! Your statement was published',
               autoClose: true,
             });
@@ -147,14 +147,14 @@ export default {
         ].join(' '),
         // eslint-disable-next-line no-console
       }[error.error] || console.error(error) || `Something went wrong. ${errorMessage}`;
-      dispatch('setAlert', message);
+      dispatch('notify', message);
     },
     vote({ commit, dispatch }, { proposalId, signature, upVote }) {
       Meteor.call('proposals.vote', proposalId, signature, upVote, (error, result) => {
         if (error) dispatch('handleError', { error, upVote });
         else {
           const { accountId } = result;
-          dispatch('setAlert', {
+          dispatch('notify', {
             text: 'Thank you! Your vote was received',
             autoClose: true,
           });

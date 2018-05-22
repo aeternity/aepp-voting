@@ -47,13 +47,13 @@
       </ae-button>
     </ae-header>
 
-    <ae-banner v-if="alert">
-      {{ alert }}
+    <ae-banner v-if="notification">
+      {{ notification }}
       <ae-button
         slot="right"
         plain
         size="small"
-        @click="() => setAlert()">
+        @click="() => setNotification()">
         <ae-icon
           slot="icon"
           name="close" />
@@ -81,9 +81,9 @@ export default {
       tags: [Proposals.defaultTag, ...Proposals.tags],
     };
   },
-  computed: mapState(['loggedIn', 'alert']),
+  computed: mapState(['loggedIn', 'notification']),
   methods: {
-    ...mapMutations(['toggleCreateProposalModal', 'toggleExplanationBlock', 'setAlert']),
+    ...mapMutations(['toggleCreateProposalModal', 'toggleExplanationBlock', 'setNotification']),
     ...mapActions(['toggleAuth']),
   },
 };
