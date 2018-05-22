@@ -17,7 +17,6 @@ ecmascript@0.10.6              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.3.1            # Server-side component of the `meteor shell` command
 akryum:vue-component
 akryum:vue-sass
-tmeasday:publish-counts
 matb33:collection-hooks
 dburles:factory
 practicalmeteor:mocha

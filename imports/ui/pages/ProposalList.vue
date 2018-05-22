@@ -6,22 +6,19 @@
       :proposal="p"
     />
     <mugen-scroll
-      v-if="gotMore"
       :handler="() => limit += 10"
+      :should-handle="canLoadMore"
     >
-      <i class="fa fa-spinner fa-spin" /> Loading
+      <i
+        v-if="!allLoaded"
+        class="fa fa-spinner fa-spin"
+      />
+      {{ allLoaded ? 'All loaded' : 'Loading' }}
     </mugen-scroll>
-    <div
-      v-if="!gotMore"
-      class="all-loaded"
-    >
-      All loaded
-    </div>
   </div>
 </template>
 
 <script>
-import { Counts } from 'meteor/tmeasday:publish-counts';
 import MugenScroll from 'vue-mugen-scroll';
 import { Proposals } from '../../api/proposals/proposals';
 import ProposalItem from '../components/ProposalItem.vue';
@@ -39,8 +36,11 @@ export default {
     limit: 10,
   }),
   computed: {
-    gotMore() {
-      return this.proposals.length < this.proposalsCount;
+    canLoadMore() {
+      return this.$subReady['proposals.list'] && this.proposals.length === this.limit;
+    },
+    allLoaded() {
+      return this.$subReady['proposals.list'] && this.proposals.length !== this.limit;
     },
   },
   meteor: {
@@ -53,7 +53,6 @@ export default {
           this.$store.state.accountId,
         ];
       },
-      'proposals.count': [],
     },
     proposals: {
       params() {
@@ -70,9 +69,6 @@ export default {
           }, { sort: Proposals.sortTypes[sort] })
           .map(proposal => ({ ...proposal, vote: proposal.votes[accountId] })),
     },
-    proposalsCount() {
-      return Counts.get('proposals');
-    },
   },
 };
 </script>
@@ -80,8 +76,7 @@ export default {
 <style lang="scss" scoped>
 @import '/node_modules/@aeternity/aepp-components/dist/variables';
 
-.mugen-scroll,
-.all-loaded {
+.mugen-scroll {
   padding-bottom: 10px;
   color: $grey;
   text-align: center;

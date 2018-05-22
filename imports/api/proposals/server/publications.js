@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
-import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Proposals } from '../proposals';
 
 Meteor.publish('proposal', (id, accountId) => {
@@ -34,8 +33,4 @@ Meteor.publish('proposals.list', (sort, tag, limit, accountId) => {
       [`votes.${accountId}`]: 1,
     },
   });
-});
-
-Meteor.publish('proposals.count', function proposalsCount() {
-  Counts.publish(this, 'proposals', Proposals.find());
 });
