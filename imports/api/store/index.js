@@ -19,7 +19,6 @@ export default {
   ],
 
   state: () => ({
-    limit: 10,
     createProposalModalShown: false,
     explanationBlockShown: true,
     youtubeVideoId: '',
@@ -32,9 +31,6 @@ export default {
   }),
 
   mutations: {
-    incrementLimit: (state) => {
-      state.limit += 10;
-    },
     toggleCreateProposalModal: (state) => {
       state.createProposalModalShown = !state.createProposalModalShown;
     },

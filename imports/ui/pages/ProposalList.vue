@@ -7,7 +7,7 @@
     />
     <mugen-scroll
       v-if="gotMore"
-      :handler="incrementLimit"
+      :handler="() => limit += 10"
     >
       <i class="fa fa-spinner fa-spin" /> Loading
     </mugen-scroll>
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import MugenScroll from 'vue-mugen-scroll';
 import { Proposals } from '../../api/proposals/proposals';
@@ -36,6 +35,9 @@ export default {
     sort: { type: String, default: Proposals.defaultSort },
     tag: { type: String, default: Proposals.defaultTag },
   },
+  data: () => ({
+    limit: 10,
+  }),
   computed: {
     gotMore() {
       return this.proposals.length < this.proposalsCount;
@@ -47,7 +49,7 @@ export default {
         return [
           this.sort,
           this.tag,
-          this.$store.state.limit,
+          this.limit,
           this.$store.state.accountId,
         ];
       },
@@ -72,7 +74,6 @@ export default {
       return Counts.get('proposals');
     },
   },
-  methods: mapMutations(['incrementLimit']),
 };
 </script>
 
