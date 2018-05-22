@@ -5,7 +5,7 @@ import { sinon } from 'meteor/practicalmeteor:sinon';
 import { Factory } from 'meteor/dburles:factory';
 import { Random } from 'meteor/random';
 import BigNumber from 'bignumber.js';
-import contract from '../../../startup/server/tokenContract';
+import contract, { decimals } from '../../../startup/server/tokenContract';
 import { Accounts } from '../../accounts/accounts';
 import { Proposals } from '../proposals';
 import './methods';
@@ -15,14 +15,12 @@ const address = '0xfa491df8780761853d127a9f7b2772d688a0e3b5';
 const upVoteSignature = '0xede222564b846a123ed16446fc0bb9e59e8c3df98ac4883870c1ec5ab3220e6a3d98b4cbbbf4009145260966d8944d0514cf2425e2124e6fd5ebdfc3bb777dd01b';
 const downVoteSignature = '0x60c105f35e9e7acf17c1da2b1f87882c137736eaf79909e125c954265c0c58165c972e8151371504e130d7114c95ccb7abeba956e6d695d17f8b544a1843b37c1b';
 
-const stubContract = ({ balanceOf, decimals = 18 }) => {
+const setBalanceOfValue = (balanceOf) => {
   sinon.stub(contract, 'balanceOf', () => new BigNumber(balanceOf).shift(decimals));
-  sinon.stub(contract, 'decimals', () => new BigNumber(decimals));
 };
 
 const restoreContract = () => {
   contract.balanceOf.restore();
-  contract.decimals.restore();
 };
 
 describe('proposals', () => {
@@ -60,14 +58,14 @@ describe('proposals', () => {
       });
 
       it('throws exception if no tokens associated with account', () => {
-        stubContract({ balanceOf: 0 });
+        setBalanceOfValue(0);
         expect(() => Meteor.call('proposals.add', message, upVoteSignature, true, []))
           .to.throw('no-tokens');
         restoreContract();
       });
 
       it('allows to create proposal', () => {
-        stubContract({ balanceOf: 5 });
+        setBalanceOfValue(5);
         const { accountId, proposalId } =
           Meteor.call('proposals.add', message, upVoteSignature, true, [Proposals.tags[0]]);
         restoreContract();
@@ -100,7 +98,7 @@ describe('proposals', () => {
 
       it('throws exception if no tokens associated with account', () => {
         const { _id: proposalId } = Factory.create('proposal', { statement: message });
-        stubContract({ balanceOf: 0 });
+        setBalanceOfValue(0);
         expect(() => Meteor.call('proposals.vote', proposalId, upVoteSignature, true))
           .to.throw('no-tokens');
         restoreContract();
@@ -108,7 +106,7 @@ describe('proposals', () => {
 
       it('throws exception if already voted with the same vote', () => {
         const { _id: proposalId } = Factory.create('proposal', { statement: message });
-        stubContract({ balanceOf: 5 });
+        setBalanceOfValue(5);
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         expect(() => Meteor.call('proposals.vote', proposalId, upVoteSignature, true))
           .to.throw('already-voted');
@@ -118,7 +116,7 @@ describe('proposals', () => {
       it('allows to vote', () => {
         const { _id: proposalId, upVoteAmount } =
           Factory.create('proposal', { statement: message });
-        stubContract({ balanceOf: 5 });
+        setBalanceOfValue(5);
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         restoreContract();
         const proposal = Proposals.findOne(proposalId);
@@ -131,7 +129,7 @@ describe('proposals', () => {
       it('allows to change the decision', () => {
         const { _id: proposalId, upVoteAmount, downVoteAmount } =
           Factory.create('proposal', { statement: message });
-        stubContract({ balanceOf: 5 });
+        setBalanceOfValue(5);
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         Meteor.call('proposals.vote', proposalId, downVoteSignature, false);
         restoreContract();
@@ -145,10 +143,10 @@ describe('proposals', () => {
       it('change the decision with balance change', () => {
         const { _id: proposalId, upVoteAmount, downVoteAmount } =
           Factory.create('proposal', { statement: message });
-        stubContract({ balanceOf: 5 });
+        setBalanceOfValue(5);
         Meteor.call('proposals.vote', proposalId, downVoteSignature, false);
         restoreContract();
-        stubContract({ balanceOf: 10 });
+        setBalanceOfValue(10);
         Meteor.call('proposals.vote', proposalId, upVoteSignature, true);
         restoreContract();
         const proposal = Proposals.findOne(proposalId);
