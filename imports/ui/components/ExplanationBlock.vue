@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '/node_modules/@aeternity/aepp-components/dist/variables';
+@import '/node_modules/@aeternity/aepp-components/dist/mixins';
 
 .ae-panel {
   &.slide- {
@@ -132,7 +133,7 @@ $lightGray: #d3d3d3;
       text-shadow: 0 0 2px $black;
     }
 
-    @media (max-width: $screen-phone) {
+    @include phone {
       flex-shrink: 0;
       width: 100%;
       margin: 30px 0 0;

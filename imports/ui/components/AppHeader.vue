@@ -163,6 +163,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '/node_modules/@aeternity/aepp-components/dist/variables';
+@import '/node_modules/@aeternity/aepp-components/dist/mixins';
 
 .app-header {
   .ae-header .ae-button {
@@ -186,13 +187,13 @@ export default {
   }
 
   .ae-filter-list {
-    @media (max-width: $screen-phone) {
+    @include phone {
       &.desktop {
         display: none;
       }
     }
 
-    @media (min-width: $screen-phone + 1) {
+    @include abovePhone {
       &.mobile {
         display: none;
       }

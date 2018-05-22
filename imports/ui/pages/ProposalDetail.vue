@@ -147,6 +147,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '/node_modules/@aeternity/aepp-components/dist/variables';
+@import '/node_modules/@aeternity/aepp-components/dist/mixins';
 
 .proposal-detail {
   padding: 0 110px;
@@ -185,7 +186,7 @@ export default {
       font-size: 25px;
       font-weight: 500;
 
-      @media (max-width: $screen-phone) {
+      @include phone {
         font-size: 21px;
       }
     }
@@ -217,11 +218,11 @@ export default {
     }
   }
 
-  @media (max-width: $container-width) {
+  @include belowDesktop {
     padding: 0 55px;
   }
 
-  @media (max-width: $screen-phone) {
+  @include phone {
     padding: 0;
 
     h2 {

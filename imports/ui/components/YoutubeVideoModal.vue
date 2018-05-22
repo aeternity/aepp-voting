@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '/node_modules/@aeternity/aepp-components/dist/variables';
+@import '/node_modules/@aeternity/aepp-components/dist/mixins';
 
 .youtube-video-modal {
   position: relative;
@@ -32,7 +32,7 @@ export default {
   margin-top: 20px;
   overflow: hidden;
 
-  @media (min-width: $screen-phone) {
+  @include abovePhone {
     width: 70vw;
   }
 
