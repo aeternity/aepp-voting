@@ -59,64 +59,12 @@
           name="close" />
       </ae-button>
     </ae-banner>
-
-    <ae-filter-list
-      v-if="proposalList"
-      class="desktop">
-      <ae-filter-item
-        v-for="s in sorts"
-        :key="s"
-        :active="currentSort === s"
-        :to="{ name: 'proposal-list', params: { sort: s, tag: currentTag } }"
-      >
-        {{ s }}
-      </ae-filter-item>
-      <ae-filter-separator />
-      <ae-filter-item
-        v-for="t in tags"
-        :key="t"
-        :active="currentTag === t"
-        :to="{ name: 'proposal-list', params: { sort: currentSort, tag: t } }"
-      >
-        {{ t }}
-      </ae-filter-item>
-    </ae-filter-list>
-
-    <ae-filter-list
-      v-if="proposalList"
-      class="mobile">
-      <ae-filter-item
-        v-for="s in sorts"
-        :key="s"
-        :active="currentSort === s"
-        :to="{ name: 'proposal-list', params: { sort: s, tag: currentTag } }"
-      >
-        {{ s }}
-      </ae-filter-item>
-    </ae-filter-list>
-
-    <ae-filter-list
-      v-if="proposalList"
-      class="mobile">
-      <ae-filter-item
-        v-for="t in tags"
-        :key="t"
-        :active="currentTag === t"
-        :to="{ name: 'proposal-list', params: { sort: currentSort, tag: t } }"
-      >
-        {{ t }}
-      </ae-filter-item>
-    </ae-filter-list>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import {
-  AeHeader,
-  AeBanner, AeButton, AeIcon,
-  AeFilterList, AeFilterItem, AeFilterSeparator,
-} from '@aeternity/aepp-components';
+import { AeHeader, AeBanner, AeButton, AeIcon } from '@aeternity/aepp-components';
 
 import { Proposals } from '../../api/proposals/proposals';
 
@@ -126,9 +74,6 @@ export default {
     AeBanner,
     AeButton,
     AeIcon,
-    AeFilterList,
-    AeFilterItem,
-    AeFilterSeparator,
   },
   data() {
     return {
@@ -136,18 +81,7 @@ export default {
       tags: [Proposals.defaultTag, ...Proposals.tags],
     };
   },
-  computed: {
-    ...mapState(['loggedIn', 'alert']),
-    proposalList() {
-      return this.$route.name === 'proposal-list';
-    },
-    currentSort() {
-      return this.$route.params.sort || Proposals.defaultSort;
-    },
-    currentTag() {
-      return this.$route.params.tag || Proposals.defaultTag;
-    },
-  },
+  computed: mapState(['loggedIn', 'alert']),
   methods: {
     ...mapMutations(['toggleCreateProposalModal', 'toggleExplanationBlock', 'setAlert']),
     ...mapActions(['toggleAuth']),
@@ -157,7 +91,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '/node_modules/@aeternity/aepp-components/dist/variables';
-@import '/node_modules/@aeternity/aepp-components/dist/mixins';
 
 .app-header {
   .ae-header .ae-button {
@@ -178,20 +111,6 @@ export default {
     top: 0;
     right: 0;
     left: 0;
-  }
-
-  .ae-filter-list {
-    @include phone {
-      &.desktop {
-        display: none;
-      }
-    }
-
-    @include abovePhone {
-      &.mobile {
-        display: none;
-      }
-    }
   }
 }
 </style>
