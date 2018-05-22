@@ -130,12 +130,6 @@ export default {
     AeFilterItem,
     AeFilterSeparator,
   },
-  props: {
-    hidden: {
-      type: Boolean,
-      default: false,
-    },
-  },
   data() {
     return {
       sorts: Object.keys(Proposals.sortTypes),
