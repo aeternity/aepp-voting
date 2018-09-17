@@ -1,15 +1,6 @@
 {
-    "galaxy.meteor.com": {
-        "env": {
-            "MONGO_URL": "",
-            "MAIL_URL": "",
-            "ROOT_URL": ""
-        }
-    },
-    "web3ProviderUrl": "",
-    "erc20ContractAddress": "",
-    "showGethOutput": false,
-    "adminsAddresses": [
-      "0xfa491df8780761853d127a9f7b2772d688a0e3b5"
-    ]
+  "web3ProviderUrl": "https://kovan.infura.io",
+  "adminsAddresses": [
+    "0xfa491df8780761853d127a9f7b2772d688a0e3b5"
+  ]
 }

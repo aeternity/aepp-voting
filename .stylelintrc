@@ -1,0 +1,14 @@
+{
+  "processors": ["@mapbox/stylelint-processor-arbitrary-tags"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-recess-order"
+  ],
+  "rules": {
+    "no-empty-source": null,
+    "string-quotes": "single",
+    "color-named": "never",
+    "shorthand-property-no-redundant-values": true
+  }
+}

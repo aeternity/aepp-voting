@@ -2,31 +2,26 @@
   "name": "aepp-voting",
   "private": true,
   "scripts": {
-    "start": "meteor run",
+    "truffle-migrate": "cd private/truffle && truffle migrate",
+    "start": "ganache-cli & npm run truffle-migrate && meteor",
     "lint": "eslint --ext .js,.vue client server imports",
+    "lint:styles": "stylelint '{client,server,imports}/**/*.{vue,css,scss}'",
     "mocha": "meteor test --once --driver-package meteortesting:mocha",
-    "test": "npm run lint && npm run mocha"
+    "test": "npm run lint && npm run lint:styles && npm run mocha"
   },
   "dependencies": {
-    "@aeternity/aepp-components": "git+https://github.com/aeternity/aepp-components.git#6ce15e7984b544f83a130b9d54145b42341d1d8f",
-    "autoprefixer": "^7.1.2",
-    "babel-runtime": "^6.25.0",
+    "@aeternity/aepp-components": "2.0.12",
+    "@babel/runtime": "^7.0.0-beta.47",
     "bignumber.js": "^4.0.4",
-    "buffer": "^5.0.6",
-    "core-js": "^2.5.3",
     "decay": "^1.0.12",
-    "es6-promisify": "^5.0.0",
     "ethereumjs-util": "^5.1.2",
     "format-number": "^3.0.0",
     "meteor-node-stubs": "~0.2.4",
     "moment": "^2.18.1",
-    "normalize.css": "^7.0.0",
     "underscore": "^1.8.3",
     "utf8": "^2.1.2",
     "vue": "^2.4.2",
-    "vue-autosize": "^1.0.2",
     "vue-clipboards": "^1.1.0",
-    "vue-disqus": "^2.0.3",
     "vue-focus": "^2.1.0",
     "vue-meteor-tracker": "^1.2.3",
     "vue-mugen-scroll": "^0.2.5",
@@ -38,14 +33,24 @@
     "web3": "^0.20.2"
   },
   "devDependencies": {
+    "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
+    "autoprefixer": "^7.2.6",
     "babel-eslint": "^8.0.2",
-    "eslint": "^4.11.0",
+    "babel-runtime": "^6.26.0",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-import-resolver-meteor": "^0.4.0",
-    "eslint-plugin-html": "^4.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-meteor": "^4.1.4",
-    "postcss-easy-import": "^3.0.0"
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-meteor": "^4.2.2",
+    "eslint-plugin-vue": "^4.5.0",
+    "ganache-cli": "^6.1.0",
+    "stylelint": "^9.2.1",
+    "stylelint-config-recess-order": "^2.0.0",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-scss": "^3.1.0",
+    "truffle": "^4.1.8",
+    "vue-eslint-parser": "^2.0.3"
   },
   "postcss": {
     "plugins": {
@@ -53,8 +58,7 @@
         "browsers": [
           "last 2 versions"
         ]
-      },
-      "postcss-easy-import": {}
+      }
     }
   }
 }
