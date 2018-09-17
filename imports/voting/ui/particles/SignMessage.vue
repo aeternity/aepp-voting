@@ -9,12 +9,12 @@
     <copy-button :contentToCopy="message" />
     <label for="signature">Then paste your signature here</label>
     <input required id="signature" v-model="signature" autocomplete="off">
-    <ae-button>Submit</ae-button>
+    <ae-button type="dramatic" size="small" uppercase>Submit</ae-button>
   </form>
 </template>
 
 <script>
-  import AeButton from '../../../components/AeButton.vue';
+  import { AeButton } from '@aeternity/aepp-components';
   import CopyButton from '../particles/CopyButton.vue';
 
   export default {
@@ -37,7 +37,7 @@
 </script>
 
 <style lang="scss">
-  @import "../../../components/variables";
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .sign-message {
     text-align: center;

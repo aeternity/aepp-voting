@@ -19,8 +19,7 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
-
-  import AePanel from '../../../components/AePanel.vue';
+  import { AePanel } from '@aeternity/aepp-components';
 
   export default {
     components: { AePanel },
@@ -51,7 +50,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../components/variables";
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .ae-panel {
     overflow: hidden;

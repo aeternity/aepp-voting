@@ -9,7 +9,7 @@
 </script>
 
 <style lang="scss">
-  @import '../../../components/variables';
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .comments-box {
     max-width: none;

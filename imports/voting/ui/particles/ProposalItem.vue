@@ -1,7 +1,7 @@
 <template>
   <ae-panel
     :to="{ name: 'proposal', params: { id: this.proposal._id } }"
-    :ratio="ratio"
+    :ratioTop="ratio"
   >
     <div class="proposal-item">
       <div class="content">
@@ -31,13 +31,11 @@
 
 <script>
   import format from 'format-number';
-
-  import AePanel from '../../../components/AePanel.vue';
-  import AeCategory from '../../../components/AeCategory.vue';
+  import { AePanel } from '@aeternity/aepp-components';
   import ProposalSecondary from './ProposalSecondary.vue';
 
   export default {
-    components: { AePanel, AeCategory, ProposalSecondary },
+    components: { AePanel, ProposalSecondary },
     props: ['proposal'],
     computed:
       ['up', 'down'].reduce((p, d) => ({
@@ -60,7 +58,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../components/variables';
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .proposal-item {
     display: flex;

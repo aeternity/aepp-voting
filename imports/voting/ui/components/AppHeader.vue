@@ -1,37 +1,38 @@
 <template>
   <div class="app-header">
-    <ae-header-alert v-if="alert" @close="closeAlert">
-      {{alert}}
-    </ae-header-alert>
-    <ae-header v-else name="Voting">
-      <ae-header-button
-        icon
-        @click="toggleExplanationBlock"
-      >
-        <i class="fa fa-question" />
-      </ae-header-button>
-      <ae-header-button @click="toggleCreateProposalModal">
-        <i class="fa fa-pencil" /> Create New
-      </ae-header-button>
-      <ae-header-button @click="toggleAuth" secondary>
+    <ae-header name="Voting">
+      <ae-button type="dramatic" @click="toggleExplanationBlock">
+        <ae-icon slot="icon" invert type="dramatic" name="info" />
+      </ae-button>
+      <ae-button type="dramatic" @click="toggleCreateProposalModal">
+        <ae-icon slot="icon" invert type="dramatic" name="plus" /> Create New
+      </ae-button>
+      <ae-button @click="toggleAuth">
         {{loggedIn ? 'Log out' : 'Log in'}}
-      </ae-header-button>
+      </ae-button>
 
-      <ae-header-button
+      <ae-button
         slot="mobile-left"
-        icon
+        type="dramatic"
         @click="toggleExplanationBlock"
       >
-        <i class="fa fa-question" />
-      </ae-header-button>
-      <ae-header-button
+        <ae-icon slot="icon" invert type="dramatic" name="info" />
+      </ae-button>
+      <ae-button
         slot="mobile-right"
-        icon
+        type="dramatic"
         @click="toggleCreateProposalModal"
       >
-        <i class="fa fa-pencil" />
-      </ae-header-button>
+        <ae-icon slot="icon" invert type="dramatic" name="plus" />
+      </ae-button>
     </ae-header>
+
+    <ae-banner v-if="alert">
+      {{alert}}
+      <ae-button slot="right" plain size="small" @click="closeAlert">
+        <ae-icon slot="icon" name="close" />
+      </ae-button>
+    </ae-banner>
 
     <ae-filter-list class="desktop" v-if="proposalList">
       <ae-filter-item
@@ -79,13 +80,11 @@
 
 <script>
   import { mapState, mapMutations, mapActions } from 'vuex';
-
-  import AeHeader from '../../../components/AeHeader.vue';
-  import AeHeaderAlert from '../../../components/AeHeaderAlert.vue';
-  import AeHeaderButton from '../../../components/AeHeaderButton.vue';
-  import AeFilterList from '../../../components/AeFilterList.vue';
-  import AeFilterItem from '../../../components/AeFilterItem.vue';
-  import AeFilterSeparator from '../../../components/AeFilterSeparator.vue';
+  import {
+    AeHeader,
+    AeBanner, AeButton, AeIcon,
+    AeFilterList, AeFilterItem, AeFilterSeparator,
+  } from '@aeternity/aepp-components';
 
   import { Proposals } from '../../api/models/proposals';
 
@@ -98,8 +97,9 @@
     },
     components: {
       AeHeader,
-      AeHeaderButton,
-      AeHeaderAlert,
+      AeBanner,
+      AeButton,
+      AeIcon,
       AeFilterList,
       AeFilterItem,
       AeFilterSeparator,
@@ -141,18 +141,40 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../components/variables";
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
-  .app-header .ae-filter-list {
-    @media (max-width: $screen-phone) {
-      &.desktop {
-        display: none;
+  .app-header {
+    .ae-header .ae-button {
+      vertical-align: middle;
+      margin-left: 10px;
+
+      &._has-label_false .ae-icon {
+        margin: 4px;
+      }
+
+      &._type_normal {
+        color: $white;
       }
     }
 
-    @media (min-width: $screen-phone + 1) {
-      &.mobile {
-        display: none;
+    .ae-banner {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+    }
+
+    .ae-filter-list {
+      @media (max-width: $screen-phone) {
+        &.desktop {
+          display: none;
+        }
+      }
+
+      @media (min-width: $screen-phone + 1) {
+        &.mobile {
+          display: none;
+        }
       }
     }
   }

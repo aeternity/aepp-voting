@@ -1,6 +1,6 @@
 <template>
   <ae-panel
-    :ratio="ratio"
+    :ratioTop="ratio"
     v-if="proposal"
     :closeHandler="close"
   >
@@ -25,8 +25,14 @@
         Admin
         <tags-select :value="proposal.tags" @input="updateTags" />
         <div>
-          <ae-button @click="removeProposal" class="remove" title="Remove this statement">
-            <i class="fa fa-trash" /> Delete
+          <ae-button
+            @click="removeProposal"
+            type="dramatic"
+            size="small"
+            uppercase
+            title="Remove this statement"
+          >
+            <ae-icon slot="icon" invert type="dramatic" name="close" /> Delete
           </ae-button>
         </div>
       </div>
@@ -44,11 +50,7 @@
 <script>
   import { Meteor } from 'meteor/meteor';
   import { mapState } from 'vuex';
-
-  import AePanel from '../../../components/AePanel.vue';
-  import AeCloseButton from '../../../components/AeCloseButton.vue';
-  import AeButton from '../../../components/AeButton.vue';
-
+  import { AePanel, AeButton, AeIcon } from '@aeternity/aepp-components';
   import { Accounts } from '../../../accounts';
   import { Proposals } from '../../api/models/proposals';
   import SignStatement from '../particles/SignStatement.vue';
@@ -61,8 +63,8 @@
     props: ['id', 'vote'],
     components: {
       AePanel,
-      AeCloseButton,
       AeButton,
+      AeIcon,
       SignStatement,
       CopyButton,
       Comments,
@@ -131,7 +133,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../components/variables';
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .proposal-detail {
     clear: right;
@@ -199,7 +201,7 @@
 </style>
 
 <style lang="scss">
-  @import '../../../components/variables';
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
 
   .proposal-detail {
     .space-around {

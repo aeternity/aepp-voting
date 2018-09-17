@@ -9,8 +9,7 @@
 
 <script>
   import { mapState } from 'vuex';
-
-  import AeModal from '../../../components/AeModal.vue';
+  import { AeModal } from '@aeternity/aepp-components';
   import SignMessage from '../particles/SignMessage.vue';
 
   export default {

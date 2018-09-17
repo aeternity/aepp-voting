@@ -12,8 +12,7 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
-
-  import AeModal from '../../../components/AeModal.vue';
+  import { AeModal } from '@aeternity/aepp-components';
 
   export default {
     components: { AeModal },
@@ -29,12 +28,17 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "/node_modules/@aeternity/aepp-components/dist/variables";
+
   .youtube-video-modal {
     margin-top: 20px;
     position: relative;
     overflow: hidden;
-    width: 70vw;
     max-width: 700px;
+
+    @media (min-width: $screen-phone) {
+      width: 70vw;
+    }
 
     &::before {
       content: "";
